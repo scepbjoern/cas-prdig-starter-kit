@@ -7,6 +7,8 @@ export const antragCreateSchema = z.object({
 
 export const antragUpdateSchema = antragCreateSchema
 
+export const antragIdSchema = z.string().cuid()
+
 export const antragStatusSchema = z.object({
   status: z.enum(['ENTWURF', 'EINGEREICHT', 'GENEHMIGT', 'ABGELEHNT']),
 })

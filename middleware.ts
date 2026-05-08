@@ -2,7 +2,7 @@ import { betterFetch } from '@better-fetch/fetch'
 import type { Session } from 'better-auth/types'
 import { NextRequest, NextResponse } from 'next/server'
 
-const PUBLIC_PATHS = ['/login', '/api/auth']
+const PUBLIC_PATHS = ['/login', '/api/auth', '/api/antraege']
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
