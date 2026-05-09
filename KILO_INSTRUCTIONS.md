@@ -1,0 +1,143 @@
+# KILO_INSTRUCTIONS.md – Coding-Guide für cas-prdig-starter-kit
+
+> Diese Datei steuert, wie Kilo Code in diesem Projekt arbeitet.
+> Projektkontext (Was/Warum) → siehe AGENTS.md
+
+## Tech-Stack (nicht verhandelbar)
+
+| Bereich | Technologie |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Styling | Tailwind CSS + shadcn/ui (Radix, Nova) |
+| Icons | lucide-react |
+| Formulare | React Hook Form + Zod (zodResolver) |
+| ORM | Prisma 7 – SQLite lokal (Singleton: `src/lib/prisma.ts`) |
+| Auth | Better Auth (Prisma-Adapter, 3 Rollen: `admin`/`user_applicant`/`user_reviewer`) |
+| REST API | Native Next.js Route Handlers + Zod (Pizzeria-Analogie: URL = Speisekarte, Handler = Kellner, Zod = Bestellprüfung) |
+| LLM | OpenAI SDK oder together.ai (`src/lib/ai.ts`, kein LangChain, kein RAG) |
+| E-Mail | Resend + HTML-Template-Strings (`src/lib/services/emailService.ts`, kein React Email) |
+| File Upload | `public/uploads/` + Node.js `fs` (lokal), optional UploadThing |
+| Testing | Vitest (Unit) + Playwright (E2E) |
+| Deployment | Lokal via VS Code Port Forwarding |
+
+**Verboten:** Supabase, DaisyUI, Redux, Axios, LangChain, ts-rest, tRPC, Raw-SQL, `new PrismaClient()` ohne Adapter.
+
+## Sprache und Stil
+
+- UI-Texte: **Deutsch**
+- Code: **TypeScript strict** (kein `any`, kein unbegründetes `as`)
+- Kommentare: **Deutsch**, laienverständlich; jede neue Datei mit 1–2 Sätzen Kopf-Kommentar
+- Namen: ausführlich und selbsterklärend (`createAntragAction`, `validateFormData`)
+- Keine Emojis, ausser explizit gewünscht
+
+## Projektstruktur (src/-Layout)
+
+```
+src/
+├── app/
+│   ├── (app)/          # Geschützte Seiten (Route Group)
+│   ├── login/          # Öffentlich
+│   └── api/            # Route Handlers
+├── components/
+│   └── ui/             # shadcn-Komponenten (via CLI)
+├── generated/prisma/   # Auto-generiert (.gitignore)
+└── lib/
+    ├── auth.ts
+    ├── auth-client.ts
+    ├── auth-helpers.ts
+    ├── prisma.ts
+    ├── ai.ts
+    ├── schemas/
+    ├── services/
+    └── emails/
+```
+
+## Next.js Konventionen
+
+- **Server Components** als Standard; `'use client'` nur für Formulare, Browser-Hooks, shadcn-interaktive Komponenten
+- **Server Actions** (`'use server'`) für alle DB-Operationen aus Formularen
+- **Route Handlers** (`app/api/.../route.ts`) für externe Clients / REST API
+- Fehlerbehandlung: `try/catch` in Server Actions; Fehlermeldungen auf Deutsch
+- In Route Handlern: `getSession()` statt `requireSession()` verwenden (kein HTML-Redirect)
+
+# This is NOT the Next.js you know
+This version (16) has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+
+
+## Datenbankzugriff (Prisma 7)
+
+- Import immer: `import { prisma } from '@/lib/prisma'`
+- **NIE** `new PrismaClient()` direkt aufrufen – immer den Singleton verwenden
+- Prisma 7: PrismaClient benötigt Adapter (bereits in `lib/prisma.ts` konfiguriert)
+- Nach Schema-Änderungen **Benutzer auffordern** (nicht selbst ausführen):
+  ```
+  npx prisma db push --force-reset
+  npx prisma db seed
+  ```
+
+## Auth (Better Auth)
+
+- Middleware schützt alle Routen ausser `/login` und `/api/...`
+- Server-seitig (Server Components): `getSession()` aus `@/lib/auth-helpers`
+- Client-seitig: `useSession()` aus `@/lib/auth-client`
+- Rollenprüfung: `session.user.role === 'admin'` / `'user_applicant'` / `'user_reviewer'`
+- `requireSession()` nur in Server Components/Actions (leitet HTML-seitig um)
+- `getSession()` in Route Handlern (gibt JSON zurück)
+
+## REST API (native Route Handlers)
+
+- Route Handlers in `src/app/api/[ressource]/route.ts`
+- Zod-Schema für Body: `const result = schema.safeParse(await req.json())`
+- Antwort: `NextResponse.json(data)` oder `NextResponse.json({ error }, { status: 400 })`
+- Next.js 16: `params` ist ein Promise → `const { id } = await params`
+- Erklärung für Studierende: URL = Speisekarte, Handler = Kellner, Zod = Bestellprüfung, Prisma = Küche
+
+## LLM Integration (OpenAI / together.ai)
+
+- Alle LLM-Calls über `src/lib/ai.ts` (nie direkt `new OpenAI()` in Komponenten)
+- Provider via ENV: `LLM_PROVIDER=openai` oder `LLM_PROVIDER=together`
+- Kein RAG (keine Embeddings, keine Vektordatenbank, kein LangChain)
+
+## E-Mail (Resend)
+
+- Alle E-Mails über `src/lib/services/emailService.ts`
+- Templates als TypeScript-Funktionen die HTML-Strings zurückgeben (kein React Email)
+- `EMAIL_DEBUG_MODE=true` → alle E-Mails an `EMAIL_TEST_ADDRESS`
+
+## Testing (Vitest + Playwright)
+
+**Pflicht:** Bei jedem neuen Feature automatisch den zugehörigen Unit-Test schreiben.
+
+### Vitest (Unit Tests) – `__tests__/unit/`
+- **Was:** Zod-Schemas, Status-Mappings, Utility-Funktionen
+- **Befehl:** `npm run test`
+
+### Playwright (E2E Tests) – `e2e/`
+- **Was:** Login-Flow, CRUD-Flows, rollenbasierte Sichtbarkeit
+- **Befehl:** `npm run test:e2e` / `npm run test:e2e:ui` (visuell)
+
+### PIV-Loop (vollständig)
+1. **Plan** – Task in `TASKS.md` definieren + Akzeptanzkriterien
+2. **Implement** – Code + Unit-Test schreiben
+3. **Validate** – `npm run test` grün? → `npm run dev` fehlerfrei? → committen
+
+## shadcn/ui
+
+- Komponenten aus `@/components/ui/` importieren
+- Neu installieren: `npx shadcn@latest add [komponente]`
+- Formulare: Fehler direkt am Feld (nicht als globaler Alert)
+
+## Wann stoppen und fragen?
+
+Stoppe und frage **vor**:
+- Prisma-Schema-Änderungen
+- Installation neuer npm-Pakete (ausser shadcn-Komponenten)
+- Löschen/Umbenennen bestehender Seiten
+- Kritischen Architekturentscheidungen
+- Unklarheiten über den zu digitalisierenden Prozess
+
+## Commit-Konventionen
+
+- Format: `feat:`, `fix:`, `docs:`, `test:`
+- Kein Commit ohne grüne Tests und laufenden Dev-Server
+- Kleine, fokussierte Commits pro Feature

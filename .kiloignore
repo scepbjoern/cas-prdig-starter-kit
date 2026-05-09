@@ -1,0 +1,28 @@
+# Auto-generierte Dateien
+src/generated/
+.next/
+node_modules/
+
+# Hochgeladene Dateien (gross, nicht relevant für Code-Kontext)
+public/uploads/
+
+# Build-Artefakte
+out/
+dist/
+
+# Datenbank-Dateien
+prisma/dev.db
+prisma/dev.db-journal
+
+# Test-Reports
+playwright-report/
+test-results/
+coverage/
+
+# Lock-Dateien (gross, kein Mehrwert im Kontext)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Dokumentation der Starter-Kit-Erstellung
+docs/starter-kit-erstellung/
