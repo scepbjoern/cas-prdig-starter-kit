@@ -99,6 +99,8 @@ model Antrag {
   dateiPfad   String?
   dateiName   String?
 
+  notizen     String?
+
   @@map("antraege")
 }
 

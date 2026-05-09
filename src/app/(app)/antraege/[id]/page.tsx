@@ -84,6 +84,17 @@ export default async function AntragDetailPage({ params }: { params: Promise<{ i
         </CardContent>
       </Card>
 
+      {antrag.notizen && (
+        <Card>
+          <CardHeader><CardTitle>Kommunikationsverlauf</CardTitle></CardHeader>
+          <CardContent>
+            <pre className="text-sm whitespace-pre-wrap font-mono bg-muted p-4 rounded">
+              {antrag.notizen}
+            </pre>
+          </CardContent>
+        </Card>
+      )}
+
       <div className="flex flex-wrap gap-2">
         {/* Einreichen – Ersteller bei ENTWURF */}
         {status === 'ENTWURF' && (isOwner || isAdmin) && (

@@ -6,6 +6,8 @@ import { prisma } from '@/lib/prisma'
 import { requireSession, requireRole } from '@/lib/auth-helpers'
 import { antragCreateSchema, antragUpdateSchema, antragStatusSchema, antragUploadSchema } from '@/lib/schemas/antrag'
 import { ANTRAG_STATUS_TRANSITIONS } from '@/lib/antrag-status'
+import { sendEmail } from '@/lib/services/emailService'
+import { antragEingereichtHtml, antragEntschiedenHtml } from '@/lib/emails/templates'
 import type { AntragStatus } from '@/generated/prisma/enums'
 
 export async function createAntrag(formData: FormData) {
@@ -60,14 +62,28 @@ export async function submitAntrag(id: string) {
   }
   if (antrag.status !== 'ENTWURF') throw new Error('Antrag ist nicht im Entwurfsstatus')
 
-  await prisma.antrag.update({ where: { id }, data: { status: 'EINGEREICHT' } })
+  const updated = await prisma.antrag.update({
+    where: { id },
+    data: { status: 'EINGEREICHT' },
+    include: { ersteller: true },
+  })
+
+  await sendEmail({
+    to: updated.ersteller.email,
+    subject: `Antrag eingereicht: ${updated.titel}`,
+    html: antragEingereichtHtml({
+      antragTitel: updated.titel,
+      antragstellerName: updated.ersteller.name,
+      antragId: updated.id,
+    }),
+  })
 
   revalidatePath('/antraege')
   revalidatePath(`/antraege/${id}`)
 }
 
 export async function decideAntrag(id: string, newStatus: AntragStatus) {
-  const session = await requireRole(['user_reviewer', 'admin'])
+  await requireRole(['user_reviewer', 'admin'])
 
   const parsed = antragStatusSchema.safeParse({ status: newStatus })
   if (!parsed.success) throw new Error('Ungültiger Status')
@@ -78,7 +94,24 @@ export async function decideAntrag(id: string, newStatus: AntragStatus) {
     throw new Error(`Statuswechsel von ${antrag.status} zu ${newStatus} nicht erlaubt`)
   }
 
-  await prisma.antrag.update({ where: { id }, data: { status: newStatus } })
+  const updated = await prisma.antrag.update({
+    where: { id },
+    data: { status: newStatus },
+    include: { ersteller: true },
+  })
+
+  if (newStatus === 'GENEHMIGT' || newStatus === 'ABGELEHNT') {
+    await sendEmail({
+      to: updated.ersteller.email,
+      subject: `Antrag ${newStatus === 'GENEHMIGT' ? 'genehmigt' : 'abgelehnt'}: ${updated.titel}`,
+      html: antragEntschiedenHtml({
+        antragTitel: updated.titel,
+        antragstellerName: updated.ersteller.name,
+        entscheidung: newStatus,
+        antragId: updated.id,
+      }),
+    })
+  }
 
   revalidatePath('/antraege')
   revalidatePath(`/antraege/${id}`)
