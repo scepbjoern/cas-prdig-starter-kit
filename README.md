@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# cas-prdig-starter-kit
 
-## Getting Started
+Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 
-First, run the development server:
+**Stack:** Next.js 16 · shadcn/ui · Better Auth · Prisma 7 + SQLite · OpenAI/Together.ai · Resend
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup (5 Schritte)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Repository klonen:**
+   ```bash
+   git clone https://github.com/[user]/cas-prdig-starter-kit.git
+   cd cas-prdig-starter-kit
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Dependencies installieren:**
+   ```bash
+   npm install
+   npx playwright install chromium
+   ```
 
-## Learn More
+3. **Umgebungsvariablen einrichten:**
+   ```bash
+   cp .env.example .env.local
+   # .env.local öffnen und Werte eintragen (BETTER_AUTH_SECRET, API-Keys)
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Datenbank einrichten:**
+   ```bash
+   npm run db:reset
+   ```
+   → Erstellt die SQLite-Datenbank und lädt Demo-Daten
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. **App starten:**
+   ```bash
+   npm run dev
+   ```
+   → http://localhost:3000
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Testlogins
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Rolle | E-Mail | Passwort |
+|---|---|---|
+| Admin | `admin@example.com` | `admin123` |
+| Antragsteller | `applicant@example.com` | `applicant123` |
+| Prüfer | `reviewer@example.com` | `reviewer123` |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Hilfreiche Befehle
+
+| Befehl | Zweck |
+|---|---|
+| `npm run db:push` | Schema in DB übernehmen (ohne Reset) |
+| `npm run db:seed` | Testdaten laden |
+| `npm run db:reset` | DB zurücksetzen + Testdaten laden |
+| `npm run db:studio` | Prisma Studio (DB-Browser) |
+| `npm run test` | Unit Tests (Vitest) |
+| `npm run test:watch` | Unit Tests im Watch-Modus |
+| `npm run test:e2e` | E2E Tests (Playwright, headless) |
+| `npm run test:e2e:ui` | E2E Tests visuell |
+
+---
+
+## Dokumentation
+
+- [`docs/starter-kit-usage/INDEX.md`](docs/starter-kit-usage/INDEX.md) – Dokumentations-Einstieg (alle Guides)
+- [`docs/starter-kit-usage/GETTING_STARTED.md`](docs/starter-kit-usage/GETTING_STARTED.md) – Starter Kit für eigenes Projekt anpassen
+- [`KILO_INSTRUCTIONS.md`](KILO_INSTRUCTIONS.md) – Coding-Guide für Kilo Code
+- [`AGENTS.md`](AGENTS.md) – Projektkontext (TODO: anpassen)
+
+---
+
+## Nächste Schritte nach dem Setup
+
+1. [`docs/starter-kit-usage/GETTING_STARTED.md`](docs/starter-kit-usage/GETTING_STARTED.md) lesen: Starter Kit für euren Prozess anpassen
+2. `AGENTS.md` öffnen und alle `[TODO]`-Einträge ausfüllen
+3. Mit Kilo Code Features implementieren (PIV-Loop: Plan → Implement → Validate)
