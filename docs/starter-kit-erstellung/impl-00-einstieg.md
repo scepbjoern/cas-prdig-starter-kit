@@ -88,7 +88,7 @@ Begründung:
 **Optional (Cloud-Variante, eingebaut aber dokumentiert/auskommentiert):**
 - Neon PostgreSQL (auskommentierter datasource-Block in schema.prisma)
 - UploadThing (anstelle von lokalem `public/uploads/`)
-- Vercel Deployment (`docs/VERCEL_DEPLOYMENT.md`)
+- Vercel Deployment (`VERCEL_DEPLOYMENT.md`)
 
 ---
 
@@ -105,7 +105,7 @@ Begründung:
 - `app/components/Topbar.tsx` – Konzept (User-Menü, Logout-Button)
 - `middleware.ts` – Route-Protection-Muster (Auth-Library ändert sich)
 - `prisma/seed.ts` – Struktur (Inhalt wird für neue Entitäten ersetzt)
-- `docs/` – Struktur: neue Docs ersetzen die alten
+- `` – Struktur: neue Docs ersetzen die alten
 - `scripts/` – check on case-by-case basis
 
 #### Anpassen
@@ -132,7 +132,7 @@ Begründung:
 - `app/rest-api-test/` – CRM-spezifische OpenAPI Testseite (ts-rest selbst bleibt)
 - `app/lib/services/contactEmailService.ts`, `app/lib/services/eventEmailService.ts` – CRM-spezifische E-Mail-Services
 - `app/emails/` – CRM-spezifische React Email Templates (generisches Template wird neu erstellt)
-- `docs/SUPABASE_AUTH_SETUP.md`, `docs/WORKING_DATABASE_CONFIGURATION.md`, `docs/DATAVERSE_INTEGRATION.md`, `docs/RAG_CHATBOT_IMPLEMENTATION_GUIDE.md`, `docs/CONNECTION_MANAGEMENT.md` – nicht mehr relevante Docs
+- `SUPABASE_AUTH_SETUP.md`, `WORKING_DATABASE_CONFIGURATION.md`, `DATAVERSE_INTEGRATION.md`, `RAG_CHATBOT_IMPLEMENTATION_GUIDE.md`, `CONNECTION_MANAGEMENT.md` – nicht mehr relevante Docs
 - `openapi.json` – CRM-spezifische OpenAPI-Spec (wird für neue Entities neu generiert)
 - Prisma-Migrations-Verzeichnis falls vorhanden
 
@@ -143,12 +143,12 @@ Begründung:
 - Generische Route Handlers (`app/api/antraege/route.ts`, `app/api/personen/route.ts`) mit Zod-Validation
 - `KILO_INSTRUCTIONS.md` im Root
 - `AGENTS.md` (vorbereitetes Spec Kit Template)
-- `docs/VSCODE_PORT_FORWARDING.md`
-- `docs/SCHEMA_RESET_WORKFLOW.md` (SQLite-Version)
-- `docs/LLM_INTEGRATION.md` (einfacher Guide für OpenAI/together.ai)
-- `docs/EMAIL_INTEGRATION.md` (einfacher Guide für Resend)
-- `docs/REST_API_GUIDE.md` (einfacher Guide für ts-rest)
-- `docs/VERCEL_DEPLOYMENT.md` (Cloud-Variante)
+- `VSCODE_PORT_FORWARDING.md`
+- `SCHEMA_RESET_WORKFLOW.md` (SQLite-Version)
+- `LLM_INTEGRATION.md` (einfacher Guide für OpenAI/together.ai)
+- `EMAIL_INTEGRATION.md` (einfacher Guide für Resend)
+- `REST_API_GUIDE.md` (einfacher Guide für ts-rest)
+- `VERCEL_DEPLOYMENT.md` (Cloud-Variante)
 - `app/antraege/` – CRUD-Demo-Seiten
 - `app/personen/` – CRUD-Demo-Seiten
 - `components/ui/` (shadcn-Komponenten)
@@ -180,16 +180,16 @@ Begründung:
 - [x] `KILO_INSTRUCTIONS.md` (Rules-Datei für Kilo Code – fokussiert auf operationale Regeln)
 - [x] `AGENTS.md` (Spec Kit Constitution – fokussiert auf strategischen Kontext/Scope)
 - [x] `README.md` mit Setup in 5 Schritten
-- [x] `docs/VSCODE_PORT_FORWARDING.md`
-- [x] `docs/SCHEMA_RESET_WORKFLOW.md` (SQLite-Version)
-- [x] `docs/LLM_INTEGRATION.md`
-- [x] `docs/EMAIL_INTEGRATION.md`
-- [x] `docs/REST_API_GUIDE.md` (erklärt Pizzeria-Analogie + native Route Handler + Zod)
+- [x] `VSCODE_PORT_FORWARDING.md`
+- [x] `SCHEMA_RESET_WORKFLOW.md` (SQLite-Version)
+- [x] `LLM_INTEGRATION.md`
+- [x] `EMAIL_INTEGRATION.md`
+- [x] `REST_API_GUIDE.md` (erklärt Pizzeria-Analogie + native Route Handler + Zod)
 
 #### Optional (Cloud-Variante, im Repo vorbereitet/auskommentiert)
-- [x] Neon PostgreSQL: auskommentierter `datasource`-Block in `prisma/schema.prisma` + Anleitung in `docs/NEON_SETUP.md`
-- [x] UploadThing: Stub-File `lib/storage.ts` (auskommentiert) + `docs/UPLOADTHING_SETUP.md`
-- [x] Vercel: `docs/VERCEL_DEPLOYMENT.md`
+- [x] Neon PostgreSQL: auskommentierter `datasource`-Block in `prisma/schema.prisma` + Anleitung in `NEON_SETUP.md`
+- [x] UploadThing: Stub-File `lib/storage.ts` (auskommentiert) + `UPLOADTHING_SETUP.md`
+- [x] Vercel: `VERCEL_DEPLOYMENT.md`
 
 #### Explizit NICHT im Starter-Repo
 - Keine CRM-spezifischen Entitäten (Customer, Contact, Event, Registration)
@@ -493,555 +493,57 @@ Demo-Entitäten im Starter-Kit (als Muster, anpassen/ersetzen):
 
 ---
 
-### B4: Migrations-Plan (cas-crm-mock → Starter-Repo)
+### B4: Implementierungsanleitungen
 
-> **Empfehlung:** Neues Repository erstellen (nicht Fork), da der neue Stack zu weit vom alten abweicht. Ein Fork würde viele gelöschte Dateien und eine verwirrende Git-History hinterlassen.
+> **Aufbau:** Der Implementierungsplan ist in 8 separate Dokumente aufgeteilt, die jeweils in `cas-prdig-starter-kit/` liegen.  
+> Jedes Dokument verweist zurück auf dieses Hauptdokument und auf relevante Abschnitte des Tech-Stack-Reviews (`cas-crm-mock/subagent_04_tech_stack_review_result1_v2.md`).
 
-#### Phase 0: Neues Repository vorbereiten
+#### Tech-Stack-Review – Referenz-Abschnitte
 
-**Schritt 0.1 – Neues GitHub-Repo anlegen**
-- Neues GitHub-Repo: `cas-prdig-starter-kit` (leer, ohne README)
-- Lokal klonen: `git clone https://github.com/[user]/cas-prdig-starter-kit.git`
-- Erwartetes Resultat: Leerer Ordner auf lokalem Rechner
+| Abschnitt | Inhalt | Relevant für |
+|---|---|---|
+| Abschnitt 1 | Datenbankstrategie (SQLite / Neon) | Teil 1, Teil 5 |
+| Abschnitt 2 | ORM (Prisma 7, `db push`) | Teil 1 |
+| Abschnitt 3 | Deployment (lokal + Port Forwarding) | Teil 8 |
+| Abschnitt 4 | Auth (Better Auth vs. Auth.js) | Teil 1 |
+| Abschnitt 5 | File Storage (lokal / UploadThing) | Teil 5 |
+| Abschnitt 6 | Stack-Komponenten (Next.js, shadcn/ui, RHF+Zod) | Teil 1, Teil 2 |
+| Abschnitt 7 | Stack-Varianten (Lokal / Cloud) | Teil 6, Teil 8 |
+| Abschnitt 8 | Migrations-Hinweise (cas-crm-mock) | alle |
 
-**Schritt 0.2 – Next.js 16 initialisieren**
-```bash
-npx create-next-app@16 . --typescript --tailwind --app --src-dir no --import-alias "@/*"
+#### Teildokumente
+
+| # | Datei | Inhalt | Status |
+|---|---|---|---|
+| 1 | [`impl-01-basics.md`](../Documents/repos/cas-prdig-starter-kit/impl-01-basics.md) | Phase 0–4: Repo, Setup, Datenbank, Auth, UI | ✅ Umgesetzt |
+| 2 | [`impl-02-rest-api.md`](../Documents/repos/cas-prdig-starter-kit/impl-02-rest-api.md) | Route Handlers + Zod (Phase 5.1) | ✅ Umgesetzt |
+| 3 | [`impl-03-testing.md`](../Documents/repos/cas-prdig-starter-kit/impl-03-testing.md) | Vitest + Playwright, ausführlich (Phase 7) | ✅ Umgesetzt |
+| 4 | [`impl-04-ai-coding-instructions.md`](../Documents/repos/cas-prdig-starter-kit/impl-04-ai-coding-instructions.md) | KILO_INSTRUCTIONS, AGENTS, .kiloignore (Phase 6.1–6.2) | ✅ Umgesetzt |
+| 5 | [`impl-05-file-upload.md`](../Documents/repos/cas-prdig-starter-kit/impl-05-file-upload.md) | PDF-Upload + react-pdf Viewer | ⬜ Ausstehend |
+| 6 | [`impl-06-email.md`](../Documents/repos/cas-prdig-starter-kit/impl-06-email.md) | Resend Outbound + Inbound-Webhooks (Phase 5.3) | ⬜ Ausstehend |
+| 7 | [`impl-07-ai.md`](../Documents/repos/cas-prdig-starter-kit/impl-07-ai.md) | LLM-Chat + Dokumentenanalyse (Phase 5.2) | ⬜ Ausstehend |
+| 8 | [`impl-08-documentation.md`](../Documents/repos/cas-prdig-starter-kit/impl-08-documentation.md) | README, INDEX.md, GETTING_STARTED (Phase 6.3–6.4) | ⬜ Ausstehend |
+
+#### Abhängigkeiten
+
 ```
-Optionen: TypeScript ✓, Tailwind ✓, App Router ✓, kein src-Verzeichnis, Import-Alias `@/*`
-- Erwartetes Resultat: `npm run dev` startet ohne Fehler, Seite lädt auf `localhost:3000`
-
----
-
-#### Phase 1: Basis-Konfiguration
-
-**Schritt 1.1 – Package.json bereinigen und erweitern**
-- Entfernen (aus create-next-app Standard): nichts nötig, alles ist sauber
-- Hinzufügen:
-  ```bash
-  npm install prisma @prisma/client better-auth react-hook-form @hookform/resolvers zod lucide-react date-fns openai together-ai resend @prisma/adapter-better-sqlite3 better-sqlite3
-  npm install -D tsx dotenv @types/better-sqlite3 @playwright/test vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom jsdom
-  ```
-- Scripts in `package.json` ergänzen:
-  ```json
-  "db:push": "prisma db push && prisma generate",
-  "db:seed": "tsx prisma/seed.ts",
-  "db:reset": "prisma db push --force-reset && prisma generate && tsx prisma/seed.ts",
-  "db:studio": "prisma studio",
-  "test": "vitest run",
-  "test:watch": "vitest",
-  "test:e2e": "playwright test",
-  "test:e2e:ui": "playwright test --ui"
-  ```
-- Prisma-Seed-Config:
-  ```json
-  "prisma": { "seed": "tsx prisma/seed.ts" }
-  ```
-- Playwright installieren (einmalig, Chromium): `npx playwright install chromium`
-- Erwartetes Resultat: `npm install` läuft fehlerfrei
-
-**Schritt 1.2 – `tsconfig.json` anpassen**
-- `"exclude"` von `["node_modules"]` auf `["node_modules", "prisma"]` erweitern
-- Grund: `prisma/seed.ts` ist ein Standalone-Skript, kein App-Code; Next.js würde es sonst beim Build kompilieren (Fehler)
-- Erwartetes Resultat: `npm run build` kompiliert `prisma/` nicht mehr
-
-**Schritt 1.3 – shadcn/ui initialisieren**
-
-Standardmässig:
-```bash
-npx shadcn@latest init
-```
-Antworten: **Radix**, **Nova** ✓ (Farben: Neutral als Base, Sky als Theme)
-
-Oder mit eigenem Dozenten-Preset (empfohlen, spart Klicks):
-```bash
-npx shadcn@latest init --preset b5J4txmj2 --template next
-```
-Antworten: Radix, Nova ✓ – Farben bereits vorkonfiguriert (Neutral / Sky)
-
-Danach Basis-Komponenten installieren:
-```bash
-npx shadcn@latest add button input label card table badge select dropdown-menu avatar separator sheet
-```
-- Betroffene Dateien: `components/ui/`, `components.json`, `app/globals.css`
-- Erwartetes Resultat: `import { Button } from '@/components/ui/button'` funktioniert
-
----
-
-#### Phase 2: Datenbank (Prisma + SQLite)
-
-**Schritt 2.1 – Prisma initialisieren**
-```bash
-npx prisma init --datasource-provider sqlite
-```
-- Betroffene Dateien: `prisma/schema.prisma`, `.env`
-- Erwartetes Resultat: `prisma/schema.prisma` mit `provider = "sqlite"`
-
-**Schritt 2.2 – Schema definieren (Better Auth + generische Entitäten)**
-
-Inhalt von `prisma/schema.prisma`:
-```prisma
-generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"  // src/-Layout: @/ zeigt auf src/
-}
-
-datasource db {
-  provider = "sqlite"
-  // Kein url hier! Prisma 7: URL wird in prisma.config.ts konfiguriert
-}
-
-// ========== BETTER AUTH MODELS ==========
-// Diese Models werden von Better Auth benötigt (nicht manuell ändern)
-
-model User {
-  id            String   @id
-  name          String
-  email         String   @unique
-  emailVerified Boolean  @default(false)
-  image         String?
-  role          String   @default("user_applicant") // "admin" | "user_applicant" | "user_reviewer"
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  sessions Session[]
-  accounts Account[]
-  antraege Antrag[]  // Demo-Relation
-
-  @@map("users")
-}
-
-model Session {
-  id        String   @id
-  expiresAt DateTime
-  token     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  ipAddress String?
-  userAgent String?
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("sessions")
-}
-
-model Account {
-  id                    String    @id
-  accountId             String
-  providerId            String
-  userId                String
-  accessToken           String?
-  refreshToken          String?
-  idToken               String?
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("accounts")
-}
-
-model Verification {
-  id         String    @id
-  identifier String
-  value      String
-  expiresAt  DateTime
-  createdAt  DateTime? @default(now())
-  updatedAt  DateTime? @updatedAt
-
-  @@map("verifications")
-}
-
-// ========== DEMO-ENTITÄTEN (als Muster – durch eigene Entitäten ersetzen/ergänzen) ==========
-
-enum AntragStatus {
-  ENTWURF     // Noch nicht eingereicht
-  EINGEREICHT // Wartet auf Prüfung
-  GENEHMIGT   // Genehmigt
-  ABGELEHNT   // Abgelehnt
-}
-
-// Demo-Entität 1: Antrag (generisches Prozessobjekt mit Status-Workflow)
-model Antrag {
-  id          String       @id @default(cuid())
-  titel       String
-  beschreibung String?
-  status      AntragStatus @default(ENTWURF)
-  erstellerId String
-  ersteller   User         @relation(fields: [erstellerId], references: [id], onDelete: Cascade)
-  erstelltAm  DateTime     @default(now())
-  aktualisiertAm DateTime  @updatedAt
-
-  @@map("antraege")
-}
-
-// Demo-Entität 2: Person (generisches Stammdaten-Objekt)
-model Person {
-  id        String   @id @default(cuid())
-  vorname   String
-  nachname  String
-  email     String   @unique
-  telefon   String?
-  adresse   String?
-  erstelltAm DateTime @default(now())
-  aktualisiertAm DateTime @updatedAt
-
-  @@map("personen")
-}
+Teil 1 (Basics) ──→ Teil 2 (REST) ──→ Teil 3 (Testing)
+Teil 1 ──→ Teil 5 (Dateiupload) ──→ Teil 7 (AI, Use Case 2)
+Teil 1 ──→ Teil 6 (E-Mail)
+Teil 4 (Instructions) – unabhängig, früh anlegen
+Teil 8 (Doku) – zuletzt (referenziert alle anderen)
 ```
 
-**Schritt 2.3 – `.env` und `.env.example`**
-```env
-DATABASE_URL="file:./dev.db"
-BETTER_AUTH_SECRET="[zufälliger-32-zeichen-string]"
-BETTER_AUTH_URL="http://localhost:3000"
-```
-- `src/generated/` in `.gitignore` einfügen (wird nach `db:push` neu generiert, nicht committen)
-- Hinweis: `prisma.config.ts` wird von `npx prisma init` automatisch erstellt mit `datasource: { url: process.env['DATABASE_URL'] }` – diese Datei **nicht manuell ändern**
-- Hinweis: `prisma.config.ts` importiert `dotenv/config` – deshalb `dotenv` als devDependency nötig
-- Hinweis: Das Projekt hat ein `src/`-Verzeichnis (durch shadcn-Preset). Der `@/`-Alias zeigt auf `src/`. Deshalb liegt der generierte Client in `src/generated/prisma/` (nicht im Root)
-- Erwartetes Resultat: `npm run db:push` erstellt `prisma/dev.db` und `src/generated/prisma/` fehlerfrei
-- **Wichtig:** `npm run db:seed` erst nach Phase 3 ausführen (Seed-Datei importiert `lib/auth.ts`)
-
-**Schritt 2.4 – Seed-Datei**
-
-`prisma/seed.ts`:
-```typescript
-// Seed-Datei: Erstellt Demo-Nutzer und Testdaten
-// Pfade relativ zu prisma/ => src/ liegt eine Ebene höher
-// Hinweis: seed.ts kann erst nach Phase 3 (lib/auth.ts) ausgeführt werden!
-import { PrismaClient } from '../src/generated/prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
-import { auth } from '../src/lib/auth'
-
-const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || 'file:./dev.db' })
-const prisma = new PrismaClient({ adapter })
-
-async function main() {
-  console.log('Lösche bestehende Daten...')
-  await prisma.antrag.deleteMany()
-  await prisma.person.deleteMany()
-  await prisma.session.deleteMany()
-  await prisma.account.deleteMany()
-  await prisma.user.deleteMany()
-
-  console.log('Erstelle Benutzer...')
-  // Admin-Benutzer
-  await auth.api.signUpEmail({
-    body: { email: 'admin@example.com', password: 'admin123', name: 'Admin Benutzer' }
-  })
-  await prisma.user.update({
-    where: { email: 'admin@example.com' },
-    data: { role: 'admin' }
-  })
-
-  // Antragsteller
-  await auth.api.signUpEmail({
-    body: { email: 'applicant@example.com', password: 'applicant123', name: 'Test Antragsteller' }
-  })
-  // role bleibt 'user_applicant' (Default)
-
-  // Prüfer
-  await auth.api.signUpEmail({
-    body: { email: 'reviewer@example.com', password: 'reviewer123', name: 'Test Prüfer' }
-  })
-  await prisma.user.update({
-    where: { email: 'reviewer@example.com' },
-    data: { role: 'user_reviewer' }
-  })
-
-  const applicant = await prisma.user.findUniqueOrThrow({ where: { email: 'applicant@example.com' } })
-  const admin = await prisma.user.findUniqueOrThrow({ where: { email: 'admin@example.com' } })
-
-  console.log('Erstelle Demo-Anträge...')
-  await prisma.antrag.createMany({
-    data: [
-      { titel: 'Urlaubsantrag Juli', beschreibung: 'Urlaub vom 1.–14. Juli', status: 'EINGEREICHT', erstellerId: applicant.id },
-      { titel: 'Weiterbildungsantrag', beschreibung: 'CAS Kurs ZHAW', status: 'GENEHMIGT', erstellerId: applicant.id },
-      { titel: 'Materialbestellung', status: 'ENTWURF', erstellerId: applicant.id },
-    ]
-  })
-
-  console.log('Erstelle Demo-Personen...')
-  await prisma.person.createMany({
-    data: [
-      { vorname: 'Maria', nachname: 'Muster', email: 'maria.muster@example.com', telefon: '+41 79 123 45 67' },
-      { vorname: 'Hans', nachname: 'Beispiel', email: 'hans.beispiel@example.com' },
-      { vorname: 'Anna', nachname: 'Test', email: 'anna.test@example.com', adresse: 'Musterstrasse 1, 8000 Zürich' },
-    ]
-  })
-
-  console.log('✓ Seed abgeschlossen')
-  console.log('  Admin:      admin@example.com / admin123')
-  console.log('  Applicant:  applicant@example.com / applicant123')
-  console.log('  Reviewer:   reviewer@example.com / reviewer123')
-}
-
-main()
-  .catch(console.error)
-  .finally(() => prisma.$disconnect())
-```
-- Erwartetes Resultat: `npm run db:seed` läuft fehlerfrei, 3 Nutzer und 6 Datensätze in DB
-
----
-
-#### Phase 3: Better Auth Setup
-
-**Schritt 3.1 – Auth-Konfiguration**
-
-`src/lib/auth.ts`:
-```typescript
-// Zentrale Better Auth Konfiguration
-// Definiert welche Login-Methoden erlaubt sind und welche Datenbank verwendet wird
-import { betterAuth } from 'better-auth'
-import { prismaAdapter } from 'better-auth/adapters/prisma'
-import { prisma } from './prisma'
-export const auth = betterAuth({
-  database: prismaAdapter(prisma, { provider: 'sqlite' }),
-  emailAndPassword: { enabled: true },
-  user: {
-    additionalFields: {
-      // Muss dem Prisma-Schema-Default entsprechen: @default("user_applicant")
-      role: { type: 'string', defaultValue: 'user_applicant' }
-    }
-  }
-})
-```
-
-**Schritt 3.2 – Auth Route Handler**
-
-`src/app/api/auth/[...all]/route.ts`:
-- Verzeichnis `src/app/api/auth/[...all]/` zuerst anlegen (existiert noch nicht nach create-next-app)
-```typescript
-// Dieser Route Handler leitet alle Auth-Anfragen an Better Auth weiter
-import { auth } from '@/lib/auth'
-import { toNextJsHandler } from 'better-auth/next-js'
-
-export const { GET, POST } = toNextJsHandler(auth)
-```
-
-**Schritt 3.3 – Client-seitiger Auth Hook**
-
-`src/lib/auth-client.ts`:
-```typescript
-// Client-seitiger Better Auth Hook für React-Komponenten
-import { createAuthClient } from 'better-auth/react'
-
-export const authClient = createAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'
-})
-
-export const { signIn, signOut, signUp, useSession } = authClient
-```
-
-**Schritt 3.4 – Prisma-Singleton**
-
-`src/lib/prisma.ts`:
-```typescript
-// Prisma-Client als Singleton (verhindert zu viele DB-Verbindungen im Development)
-// Prisma 7: PrismaClient benötigt zwingend einen Datenbank-Adapter (Breaking Change v7)
-import { PrismaClient } from '@/generated/prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
-
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
-
-function createPrismaClient() {
-  const adapter = new PrismaBetterSqlite3({
-    url: process.env.DATABASE_URL || 'file:./dev.db'
-  })
-  return new PrismaClient({ adapter })
-}
-
-export const prisma = globalForPrisma.prisma ?? createPrismaClient()
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
-```
-
-**Schritt 3.5 – Middleware**
-
-`src/middleware.ts` (Next.js erkennt middleware.ts auch in src/):
-```typescript
-// Schützt alle Routen ausser /login – leitet unangemeldete Benutzer weiter
-import { betterFetch } from '@better-fetch/fetch'
-import type { Session } from 'better-auth/types'
-import { NextRequest, NextResponse } from 'next/server'
-
-const PUBLIC_PATHS = ['/login', '/api/auth']
-
-export async function middleware(request: NextRequest) {
-  const pathname = request.nextUrl.pathname
-  if (PUBLIC_PATHS.some(p => pathname.startsWith(p))) return NextResponse.next()
-
-  const { data: session } = await betterFetch<Session>('/api/auth/get-session', {
-    baseURL: request.nextUrl.origin,
-    headers: { cookie: request.headers.get('cookie') ?? '' }
-  })
-
-  if (!session) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-  return NextResponse.next()
-}
-
-export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)']
-}
-```
-
-- Erwartetes Resultat: `npm run dev` → Login-Seite erscheint, nach Login Dashboard sichtbar
-
----
-
-#### Phase 4: UI-Aufbau (Layout + shadcn/ui + CRUD)
-
-Geschützte Seiten unter Route Group `src/app/(app)/...`; `/login` bleibt ausserhalb. Forms via RHF + Zod + shadcn `<Form>`; Submit via Server Action mit identischem Zod-Schema serverseitig. Toast-Feedback via `sonner`.
-
-**Schritt 4.0 – Fundament**
-- Zusätzliche shadcn-Komponenten: `npx shadcn@latest add form textarea dialog sonner skeleton`
-- `src/lib/auth-helpers.ts` – `getSession()` (wraps `auth.api.getSession({ headers: await headers() })`), `requireSession()` (redirect → `/login`), `requireRole(roles[])` (forbidden/redirect), Type `Role`
-- `src/lib/antrag-status.ts` – Label-, Variant- und Transitions-Mapping pro Status
-- `src/lib/navigation.ts` – zentrale Nav-Liste `{ href, label, icon, roles[] }` (von Sidebar konsumiert)
-- `src/app/layout.tsx` – `<Toaster />` ergänzen
-
-**Schritt 4.1 – Login-Seite refactorn**
-- `src/lib/schemas/auth.ts` – `loginSchema = z.object({ email, password })`
-- `src/app/login/page.tsx` – shadcn Card + RHF Form; `signIn.email(...)` aus `@/lib/auth-client`; Fehler → Toast + Inline; Erfolg → `router.replace('/')`
-
-**Schritt 4.2 – App-Shell**
-- `src/app/(app)/layout.tsx` – Server Component: `requireSession()` → `<AppShell session={...}>`
-- `src/components/app-shell.tsx` – Two-Column-Layout (Sidebar Desktop + Sheet Mobile)
-- `src/components/sidebar.tsx` – filtert NAV_ITEMS nach Rolle, hebt aktive Route hervor
-- `src/components/topbar.tsx` – Rollen-Badge, Avatar, DropdownMenu (Logout via Server Action)
-- `src/app/(app)/actions.ts` – `logoutAction()` → `auth.api.signOut(...)` + `redirect('/login')`
-- `src/app/page.tsx` → verschieben nach `src/app/(app)/page.tsx`
-
-**Schritt 4.3 – Dashboard**
-- `src/app/(app)/page.tsx` – Server Component; rollenabhängige KPI-Cards via `Promise.all` (Antrag-Counts, Personen-Count, User-Count); `loading.tsx` mit Skeleton
-
-**Schritt 4.4 – Demo-Entität: Anträge**
-- `src/lib/schemas/antrag.ts` – `antragCreateSchema`, `antragUpdateSchema`, `antragStatusSchema`
-- `src/app/(app)/antraege/actions.ts` – `createAntrag`, `updateAntrag`, `submitAntrag`, `decideAntrag`, `deleteAntrag`; alle mit `requireSession()` + Zod-Parse + Authz + `revalidatePath`
-- `src/app/(app)/antraege/page.tsx` – rollenbasierte Query; Table + Status-Badge + Aktionen
-- `src/components/antraege/antrag-form.tsx` – RHF + Zod, mode="create"|"edit"
-- `src/app/(app)/antraege/neu/page.tsx` – `requireRole(['user_applicant', 'admin'])`
-- `src/app/(app)/antraege/[id]/page.tsx` – Stammdaten + Status-Block (Buttons je Rolle + Confirm-Dialog) + Edit-Modus
-- `loading.tsx` + `error.tsx` für `/antraege` und `/antraege/[id]`
-
-**Schritt 4.5 – Demo-Entität: Personen** (kein Status-Workflow)
-- `src/lib/schemas/person.ts`, `src/app/(app)/personen/actions.ts` – CRUD; Schreiben nur admin/reviewer
-- Liste, Neu, Detail analog zu Anträgen; `<PersonForm />` wiederverwendbar
-
-**Schritt 4.6 – Aufräumen**
-- `npm run lint` → 0 Fehler; `npm run build` → alle Routen kompilieren
-
-- Erwartetes Resultat: 3 Rollen melden sich an, sehen Rolle-spezifische Nav + KPIs; Antrag-Workflow (ENTWURF→EINGEREICHT→GENEHMIGT/ABGELEHNT) funktioniert; Personen-CRUD funktioniert
-
----
-
-#### Phase 5: Route Handlers / LLM / E-Mail Infrastruktur
-
-**Schritt 5.1 – Native Route Handlers**
-- `lib/schemas/antrag.ts` – Zod-Schemas für AntragCreateInput, AntragUpdateInput (server- und clientseitig wiederverwendet)
-- `app/api/antraege/route.ts` – GET (Liste) + POST (erstellen) mit Zod-Validation
-- `app/api/antraege/[id]/route.ts` – GET (Detail) + PUT (aktualisieren) + DELETE
-- Erwartetes Resultat: `GET /api/antraege` liefert JSON-Liste, POST mit ungültigem Body gibt 400 zurück
-
-**Schritt 5.2 – LLM-Wrapper**
-- `lib/ai.ts` – einfacher Chat-Completion-Wrapper; konfigurierbar für OpenAI oder together.ai
-- Demo: eine Seite mit Textarea + «Zusammenfassen»-Button, der LLM aufruft
-- Erwartetes Resultat: LLM-Response erscheint auf der Demo-Seite
-
-**Schritt 5.3 – E-Mail-Service**
-- `lib/services/emailService.ts` – `sendEmail({ to, subject, html })` Funktion via Resend
-- `lib/emails/templates.ts` – einfache TypeScript-Funktionen, die HTML-Strings zurückgeben (kein React, kein JSX)
-- Demo: Server Action sendet nach Antrag-Erstellen eine Bestätigungsmail
-- Erwartetes Resultat: E-Mail erscheint im Resend Dashboard
-
----
-
-#### Phase 6: Dokumentation und Instructions
-
-**Schritt 6.1 – `KILO_INSTRUCTIONS.md`** (Inhalt aus B2, ins Root-Verzeichnis)
-
-**Schritt 6.2 – `AGENTS.md`** (Inhalt aus B3, teilweise ausgefüllt)
-
-**Schritt 6.3 – `README.md`**
-```markdown
-# cas-prdig-starter-kit
-
-Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
-Enthält: Next.js 15 · shadcn/ui · Better Auth · Prisma + SQLite · ts-rest · OpenAI · Resend
-
-## Setup (5 Schritte)
-
-1. Repository klonen: `git clone https://github.com/[user]/cas-prdig-starter-kit.git`
-2. Dependencies installieren: `npm install`
-3. Playwright installieren: `npx playwright install chromium`
-4. `.env.local` erstellen (Vorlage: `.env.example`) und API-Keys einfügen
-5. Datenbank einrichten: `npm run db:reset` → dann `npm run dev` → http://localhost:3000
-
-**Testlogins:** admin@example.com / admin123 | applicant@example.com / applicant123 | reviewer@example.com / reviewer123
-
-## Hilfreiche Befehle
-
-| Befehl | Zweck |
-|---|---|
-| `npm run db:push` | Schema in DB übernehmen |
-| `npm run db:seed` | Testdaten laden |
-| `npm run db:reset` | DB zurücksetzen + Testdaten |
-| `npm run db:studio` | Prisma Studio (DB-Browser) |
-| `npm run test` | Unit Tests (Vitest) |
-| `npm run test:e2e:ui` | E2E Tests visuell (Playwright) |
-
-## Docs
-
-- `docs/SCHEMA_RESET_WORKFLOW.md` – Schema ändern
-- `docs/VSCODE_PORT_FORWARDING.md` – Demo teilen
-- `docs/LLM_INTEGRATION.md` – OpenAI/together.ai nutzen
-- `docs/EMAIL_INTEGRATION.md` – Resend nutzen
-- `docs/REST_API_GUIDE.md` – REST API mit nativen Route Handlers + Zod (inkl. Pizzeria-Analogie)
-```
-
-**Schritt 6.4 –** `docs/SCHEMA_RESET_WORKFLOW.md`, `docs/VSCODE_PORT_FORWARDING.md`, `docs/LLM_INTEGRATION.md`, `docs/EMAIL_INTEGRATION.md`, `docs/REST_API_GUIDE.md`, `docs/NEON_SETUP.md`, `docs/UPLOADTHING_SETUP.md`, `docs/VERCEL_DEPLOYMENT.md`
-
----
-
-#### Phase 7: Testing-Setup + Beispiel-Tests
-
-**Schritt 7.1 – Vitest konfigurieren**
-- `vitest.config.ts` – jsdom environment, `@/` import alias
-- `vitest.setup.ts` – `@testing-library/jest-dom` importieren
-- `__tests__/unit/validators.test.ts` – Beispiel: Zod-Schema für `AntragCreateInput` testen
-- Erwartetes Resultat: `npm run test` – 1 Test grün
-
-**Schritt 7.2 – Playwright konfigurieren**
-- `playwright.config.ts` – baseURL localhost:3000, Chromium
-- `e2e/login.spec.ts` – Beispiel: Login-Flow (E-Mail eingeben, Passwort, Submit, Dashboard sichtbar)
-- Erwartetes Resultat: `npm run test:e2e` – 1 Test grün (Dev-Server muss laufen)
-
----
-
-#### Phase 8: Finale Validierung
-
-**Checkliste vor erstem Commit:**
-- [ ] `npm install` – fehlerfrei
-- [ ] `npm run db:reset` – fehlerfrei, 3 Nutzer + 6 Datensätze
-- [ ] `npm run dev` – startet ohne Fehler
-- [ ] Login mit admin@example.com – alle Menüpunkte sichtbar
-- [ ] Login mit applicant@example.com – nur Antragsteller-Menü sichtbar
-- [ ] Login mit reviewer@example.com – nur Prüfer-Menü sichtbar
-- [ ] Antrag erstellen (als applicant) – funktioniert
-- [ ] Antrag-Status ändern (als reviewer) – funktioniert
-- [ ] Person erstellen – funktioniert
-- [ ] E-Mail wird nach Antrag-Erstellen gesendet (Resend Dashboard)
-- [ ] LLM-Demo-Seite gibt Antwort zurück
-- [ ] `GET /api/antraege` liefert JSON
-- [ ] `npm run test` – alle Unit Tests grün
-- [ ] `npm run test:e2e` – Login-E2E-Test grün
-- [ ] `npm run build` – fehlerfrei
+#### Stack-Erweiterungen durch Teile 5–7
+
+> Diese Teile erweitern das Prisma-Schema. Jedes Mal ist `npm run db:reset` nötig.  
+> Reihenfolge: Teil 5 → Teil 6 → Teil 7 (additive Schema-Änderungen).
+
+| Teil | Schema-Erweiterung | Neue Dependencies |
+|---|---|---|
+| Teil 5 | `Antrag.dateiPfad`, `Antrag.dateiName` | `react-pdf`, `pdfjs-dist` |
+| Teil 6 | `Antrag.notizen` | – |
+| Teil 7 | `Antrag.kiAnalyse` | `openai`, `together-ai` |
 
 ---
 
@@ -1136,7 +638,7 @@ cas-prdig-starter-kit/
 ├── .env.example
 ├── vitest.config.ts
 ├── playwright.config.ts
-└── docs/
+└── 
     ├── SCHEMA_RESET_WORKFLOW.md
     ├── VSCODE_PORT_FORWARDING.md
     ├── LLM_INTEGRATION.md
