@@ -10,6 +10,8 @@ import { format } from 'date-fns'
 import { de } from 'date-fns/locale'
 import { ANTRAG_STATUS_LABEL, ANTRAG_STATUS_VARIANT } from '@/lib/antrag-status'
 import { SubmitButton, DecideButton, DeleteButton } from './antrag-actions'
+import { AntragUpload } from '@/components/antraege/antrag-upload'
+import { PdfViewer } from '@/components/pdf-viewer'
 import type { Role } from '@/lib/auth-helpers'
 import type { AntragStatus } from '@/generated/prisma/enums'
 
@@ -63,6 +65,22 @@ export default async function AntragDetailPage({ params }: { params: Promise<{ i
             <span>Aktualisiert</span>
             <span>{format(new Date(antrag.aktualisiertAm), 'dd.MM.yyyy HH:mm', { locale: de })}</span>
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Begleitdokument</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {antrag.dateiPfad ? (
+            <PdfViewer url={antrag.dateiPfad} dateiName={antrag.dateiName ?? undefined} />
+          ) : (
+            <div className="text-muted-foreground text-sm">Kein Dokument hochgeladen.</div>
+          )}
+          {(isAdmin || isOwner) && status === 'ENTWURF' && (
+            <AntragUpload antragId={antrag.id} />
+          )}
         </CardContent>
       </Card>
 

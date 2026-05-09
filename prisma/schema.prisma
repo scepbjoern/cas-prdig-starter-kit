@@ -96,6 +96,9 @@ model Antrag {
   erstelltAm  DateTime     @default(now())
   aktualisiertAm DateTime  @updatedAt
 
+  dateiPfad   String?
+  dateiName   String?
+
   @@map("antraege")
 }
 

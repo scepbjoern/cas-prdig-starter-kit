@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
 import { requireSession, requireRole } from '@/lib/auth-helpers'
-import { antragCreateSchema, antragUpdateSchema, antragStatusSchema } from '@/lib/schemas/antrag'
+import { antragCreateSchema, antragUpdateSchema, antragStatusSchema, antragUploadSchema } from '@/lib/schemas/antrag'
 import { ANTRAG_STATUS_TRANSITIONS } from '@/lib/antrag-status'
 import type { AntragStatus } from '@/generated/prisma/enums'
 
@@ -99,4 +99,23 @@ export async function deleteAntrag(id: string) {
 
   revalidatePath('/antraege')
   redirect('/antraege')
+}
+
+export async function uploadAntragDokument(antragId: string, dateiPfad: string, dateiName: string) {
+  const session = await requireSession()
+
+  const parsed = antragUploadSchema.safeParse({ dateiPfad, dateiName })
+  if (!parsed.success) throw new Error('Ungültige Upload-Daten')
+
+  const antrag = await prisma.antrag.findUniqueOrThrow({ where: { id: antragId } })
+  if (session.user.role !== 'admin' && antrag.erstellerId !== session.user.id) {
+    throw new Error('Keine Berechtigung')
+  }
+
+  await prisma.antrag.update({
+    where: { id: antragId },
+    data: { dateiPfad, dateiName },
+  })
+
+  revalidatePath(`/antraege/${antragId}`)
 }

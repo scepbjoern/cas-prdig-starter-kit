@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+/test-results/
+/playwright-report/
 
 # next.js
 /.next/
@@ -30,6 +32,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+
 # env files
 .env*
 !.env.example
@@ -41,4 +44,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Datenbank
+*.db
+
 /src/generated/prisma
+
+# Hochgeladene Dateien (lokal, nicht committen)
+public/uploads/*
+!public/uploads/.gitkeep
