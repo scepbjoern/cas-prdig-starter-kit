@@ -12,19 +12,19 @@
 |---|---|
 | `README.md` | Einstieg für neue Nutzer (Setup in 5 Schritten) |
 
-### `/docs`-Verzeichnis
+### `/docs/starter-kit-usage`-Verzeichnis
 | Datei | Zweck |
 |---|---|
-| `docs/INDEX.md` | Dokumentations-Einstieg: Links auf alle Unterdokumente |
-| `docs/GETTING_STARTED.md` | Wie passe ich den Starter Kit für mein Projekt an? |
-| `docs/SCHEMA_RESET_WORKFLOW.md` | Schema ändern + DB zurücksetzen |
-| `docs/VSCODE_PORT_FORWARDING.md` | Demo mit VS Code Port Forwarding teilen |
-| `docs/REST_API_GUIDE.md` | REST API erklärt (Pizzeria-Analogie, für Studierende) |
-| `docs/LLM_INTEGRATION.md` | OpenAI/Together.ai nutzen |
-| `docs/EMAIL_INTEGRATION.md` | Resend nutzen (Outbound + Inbound) |
-| `docs/NEON_SETUP.md` | Optionale Cloud-Datenbank (Neon) |
-| `docs/UPLOADTHING_SETUP.md` | Optionaler Cloud-Upload (UploadThing) |
-| `docs/VERCEL_DEPLOYMENT.md` | Optionales Deployment auf Vercel |
+| `docs/starter-kit-usage/INDEX.md` | Dokumentations-Einstieg: Links auf alle Unterdokumente |
+| `docs/starter-kit-usage/GETTING_STARTED.md` | Wie passe ich den Starter Kit für mein Projekt an? |
+| `docs/starter-kit-usage/SCHEMA_RESET_WORKFLOW.md` | Schema ändern + DB zurücksetzen |
+| `docs/starter-kit-usage/VSCODE_PORT_FORWARDING.md` | Demo mit VS Code Port Forwarding teilen |
+| `docs/starter-kit-usage/REST_API_GUIDE.md` | REST API erklärt (Pizzeria-Analogie, für Studierende) |
+| `docs/starter-kit-usage/LLM_INTEGRATION.md` | OpenAI/Together.ai nutzen |
+| `docs/starter-kit-usage/EMAIL_INTEGRATION.md` | Resend nutzen (Outbound + Inbound) |
+| `docs/starter-kit-usage/NEON_SETUP.md` | Optionale Cloud-Datenbank (Neon) |
+| `docs/starter-kit-usage/UPLOADTHING_SETUP.md` | Optionaler Cloud-Upload (UploadThing) |
+| `docs/starter-kit-usage/VERCEL_DEPLOYMENT.md` | Optionales Deployment auf Vercel |
 
 ---
 
@@ -99,6 +99,7 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 ---
 
 ## Dokumentation
+Ab hier steht jeweils docs/..., aber eigentlich ist es docs/starter-kit-usage
 
 - [`docs/INDEX.md`](docs/INDEX.md) – Dokumentations-Einstieg (alle Guides)
 - [`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md) – Starter Kit für eigenes Projekt anpassen

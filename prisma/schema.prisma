@@ -101,6 +101,8 @@ model Antrag {
 
   notizen     String?
 
+  kiAnalyse   String?
+
   @@map("antraege")
 }
 

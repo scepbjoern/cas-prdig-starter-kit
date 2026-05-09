@@ -1,4 +1,4 @@
-import { LayoutDashboard, FileText, Users, type LucideIcon } from 'lucide-react'
+import { LayoutDashboard, FileText, Users, Sparkles, type LucideIcon } from 'lucide-react'
 import type { Role } from './auth-helpers'
 
 export type NavItem = {
@@ -26,5 +26,11 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'Personen',
     icon: Users,
     roles: ['admin', 'user_reviewer', 'user_applicant'],
+  },
+  {
+    href: '/ai-demo',
+    label: 'KI-Assistent',
+    icon: Sparkles,
+    roles: ['admin', 'user_applicant', 'user_reviewer'],
   },
 ]
