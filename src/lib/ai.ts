@@ -6,6 +6,8 @@ export interface ChatOptions {
   systemPrompt?: string
   maxTokens?: number
   temperature?: number
+  fileBase64?: string
+  fileName?: string
 }
 
 function getOpenAIClient(): OpenAI {
@@ -71,11 +73,25 @@ async function chatOpenRouter(options: ChatOptions): Promise<string> {
   const client = getOpenRouterClient()
   const model = process.env.OPENROUTER_CHAT_MODEL ?? 'deepseek/deepseek-v4-flash'
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const userContent: any = options.fileBase64
+    ? [
+        { type: 'text', text: options.prompt },
+        {
+          type: 'file',
+          file: {
+            filename: options.fileName ?? 'document.pdf',
+            file_data: `data:application/pdf;base64,${options.fileBase64}`,
+          },
+        },
+      ]
+    : options.prompt
+
   const response = await client.chat.completions.create({
     model,
     messages: [
       ...(options.systemPrompt ? [{ role: 'system' as const, content: options.systemPrompt }] : []),
-      { role: 'user', content: options.prompt },
+      { role: 'user' as const, content: userContent },
     ],
     max_completion_tokens: options.maxTokens ?? 1024,
     temperature: options.temperature ?? 0.7,

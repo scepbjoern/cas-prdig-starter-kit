@@ -77,6 +77,8 @@ npm run dev
 
 **Voraussetzung:** Ein PDF-Dokument muss zum Antrag hochgeladen sein (Teil 5: Dateiupload).
 
+> **Modell-Anforderung:** Use Case 2 sendet das PDF als echtes Datei-Attachment an das Modell. Es muss zwingend ein Modell gewählt werden, das File-Inputs (multimodal) unterstützt. Bei OpenRouter z. B. `mistralai/mistral-medium-3.1`, `google/gemini-2.0-flash-001` oder `anthropic/claude-3.5-sonnet`. Modelle ohne File-Support ignorieren das Dokument und analysieren nur den Antragstitel.
+
 **Ort im UI:** Antrag-Detailseite → Karte «KI-Dokumentenanalyse» (nur sichtbar für Admin und Reviewer, wenn ein Dokument vorhanden ist)
 
 1. Als `admin@example.com` oder `reviewer@example.com` einloggen
