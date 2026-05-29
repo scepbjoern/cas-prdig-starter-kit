@@ -20,6 +20,19 @@ function getTogetherClient(): Together {
   return new Together({ apiKey: key })
 }
 
+function getOpenRouterClient(): OpenAI {
+  const key = process.env.OPENROUTER_API_KEY
+  if (!key) throw new Error('OPENROUTER_API_KEY fehlt in .env.local')
+  return new OpenAI({
+    apiKey: key,
+    baseURL: 'https://openrouter.ai/api/v1',
+    defaultHeaders: {
+      'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
+      'X-Title': 'CAS PRDIG Starter Kit',
+    },
+  })
+}
+
 async function chatOpenAI(options: ChatOptions): Promise<string> {
   const client = getOpenAIClient()
   const model = process.env.OPENAI_CHAT_MODEL ?? 'gpt-4o-mini'
@@ -54,9 +67,27 @@ async function chatTogether(options: ChatOptions): Promise<string> {
   return response.choices[0]?.message?.content ?? ''
 }
 
+async function chatOpenRouter(options: ChatOptions): Promise<string> {
+  const client = getOpenRouterClient()
+  const model = process.env.OPENROUTER_CHAT_MODEL ?? 'openai/gpt-4o-mini'
+
+  const response = await client.chat.completions.create({
+    model,
+    messages: [
+      ...(options.systemPrompt ? [{ role: 'system' as const, content: options.systemPrompt }] : []),
+      { role: 'user', content: options.prompt },
+    ],
+    max_completion_tokens: options.maxTokens ?? 1024,
+    temperature: options.temperature ?? 0.7,
+  })
+
+  return response.choices[0]?.message?.content ?? ''
+}
+
 export async function askLLM(options: ChatOptions): Promise<string> {
-  const provider = process.env.LLM_PROVIDER ?? 'together'
+  const provider = process.env.LLM_PROVIDER ?? 'openrouter'
   if (provider === 'openai') return chatOpenAI(options)
+  if (provider === 'openrouter') return chatOpenRouter(options)
   return chatTogether(options)
 }
 

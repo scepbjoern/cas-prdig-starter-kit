@@ -1,6 +1,6 @@
-# LLM-Integration – OpenAI / Together.ai
+# LLM-Integration – OpenRouter / OpenAI / Together.ai
 
-Das Starter Kit enthält zwei KI-Features, die über einen gemeinsamen Service Layer (`src/lib/ai.ts`) wahlweise OpenAI oder Together.ai als LLM-Provider nutzen.
+Das Starter Kit enthält zwei KI-Features, die über einen gemeinsamen Service Layer (`src/lib/ai.ts`) einen von drei LLM-Providern nutzen – austauschbar via ENV-Variable.
 
 ---
 
@@ -17,19 +17,29 @@ Das Starter Kit enthält zwei KI-Features, die über einen gemeinsamen Service L
 
 ### 1. API-Key besorgen
 
-**Option A – Together.ai (empfohlen für den Kurs):**
+**Option A – OpenRouter (empfohlen für Studierende):**
+- Zugang über bestehende Kurs-Accounts
+- API-Keys: https://openrouter.ai/keys
+- Breite Modellauswahl (OpenAI, Anthropic, Llama, Gemini, …)
+- Kein eigenes npm-Package nötig — nutzt das bereits installierte `openai`-Package
+
+**Option B – Together.ai:**
 - Kostenloser Free Tier ($5 Guthaben, kein Zahlungsmittel nötig)
 - Registrierung: https://api.together.ai → API Keys
 
-**Option B – OpenAI:**
+**Option C – OpenAI:**
 - Pay-per-use, Zahlungsdaten erforderlich
 - Registrierung: https://platform.openai.com → API Keys
 
 ### 2. `.env.local` konfigurieren
 
 ```env
-# Provider auswählen: 'together' oder 'openai'
-LLM_PROVIDER=together
+# Provider auswählen: 'openrouter', 'together' oder 'openai'
+LLM_PROVIDER=openrouter
+
+# OpenRouter (empfohlen)
+OPENROUTER_API_KEY=sk-or-...
+OPENROUTER_CHAT_MODEL=openai/gpt-4o-mini
 
 # Together.ai (Free Tier)
 TOGETHERAI_API_KEY=...
@@ -40,7 +50,7 @@ OPENAI_API_KEY=sk-proj-...
 OPENAI_CHAT_MODEL=gpt-4o-mini
 ```
 
-> Nur der jeweils gewählte Provider (`LLM_PROVIDER`) wird initialisiert – der andere Key kann leer bleiben.
+> Nur der jeweils gewählte Provider (`LLM_PROVIDER`) wird initialisiert – die Keys der anderen Provider können leer bleiben.
 
 ### 3. App neu starten
 
@@ -84,13 +94,15 @@ npm run dev
 
 ## Anbieter im Vergleich
 
-| | Together.ai | OpenAI |
-|---|---|---|
-| Kosten | Free Tier ($5 Guthaben) | Pay-per-use |
-| Registrierung | https://api.together.ai | https://platform.openai.com |
-| Standardmodell | Llama 3.3 70B Instruct Turbo | GPT-4o-mini |
-| Qualität | Gut für Prototypen | Höchste |
-| Empfehlung | Für Kursprojekte | Für Produktion |
+| | OpenRouter | Together.ai | OpenAI |
+|---|---|---|---|
+| `LLM_PROVIDER`-Wert | `openrouter` | `together` | `openai` |
+| Kosten | Kurs-Account | Free Tier ($5) | Pay-per-use |
+| Registrierung | https://openrouter.ai | https://api.together.ai | https://platform.openai.com |
+| Standardmodell | `openai/gpt-4o-mini` | Llama 3.3 70B | GPT-4o-mini |
+| Modellauswahl | Sehr gross (OpenAI, Anthropic, Llama, …) | Mittel (Open-Source) | OpenAI-Modelle |
+| Empfehlung | Für Kurs | Fallback | Für Produktion |
+| npm-Package | `openai` (bereits vorhanden) | `together-ai` | `openai` |
 
 ---
 
@@ -101,8 +113,10 @@ src/lib/ai.ts          # Service Layer: Provider-Auswahl via LLM_PROVIDER
 src/app/api/ai/
   chat/route.ts              # Use Case 1: Text verbessern
   analyze-document/route.ts  # Use Case 2: PDF analysieren
-src/app/(app)/ai-demo/page.tsx            # UI Use Case 1
+src/app/(app)/ai-demo/page.tsx                     # UI Use Case 1
 src/components/antraege/antrag-analyse-button.tsx  # UI Use Case 2
 ```
 
-`src/lib/ai.ts` exportiert `askLLM(options)` und `readPdfAsBase64(dateiPfad)`. Der Provider wird zur Laufzeit via `LLM_PROVIDER`-Env ausgewählt – kein Code-Wechsel nötig beim Wechsel zwischen OpenAI und Together.ai.
+`src/lib/ai.ts` exportiert `askLLM(options)` und `readPdfAsBase64(dateiPfad)`. Der Provider wird zur Laufzeit via `LLM_PROVIDER` ausgewählt – kein Code-Wechsel nötig beim Wechsel zwischen den Providern.
+
+OpenRouter nutzt das bereits installierte `openai`-Package mit der `baseURL: 'https://openrouter.ai/api/v1'` — es ist kein zusätzliches npm-Package erforderlich.

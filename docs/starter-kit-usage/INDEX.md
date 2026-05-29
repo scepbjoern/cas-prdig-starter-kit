@@ -42,4 +42,4 @@ Diese Anleitungen sind primär für die AI Agents spannend, damit sie besser ver
 | [`../starter-kit-erstellung/impl-04-ai-coding-instructions.md`](../starter-kit-erstellung/impl-04-ai-coding-instructions.md) | KILO_INSTRUCTIONS, AGENTS, .kiloignore | ✅ Umgesetzt |
 | [`../starter-kit-erstellung/impl-05-file-upload.md`](../starter-kit-erstellung/impl-05-file-upload.md) | Dateiupload + PDF-Anzeige | ✅ Umgesetzt |
 | [`../starter-kit-erstellung/impl-06-email.md`](../starter-kit-erstellung/impl-06-email.md) | E-Mail Outbound + Inbound (Resend) | ✅ Umgesetzt |
-| [`../starter-kit-erstellung/impl-07-ai.md`](../starter-kit-erstellung/impl-07-ai.md) | LLM-Chat + Dokumentenanalyse | ⬜ Ausstehend |
+| [`../starter-kit-erstellung/impl-07-ai.md`](../starter-kit-erstellung/impl-07-ai.md) | LLM-Chat + Dokumentenanalyse | ✅ Umgesetzt |
