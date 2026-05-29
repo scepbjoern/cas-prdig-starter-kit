@@ -663,9 +663,9 @@ cas-prdig-starter-kit/
 - user_applicant: eigene Anträge erstellen/lesen, Personen-Liste
 
 ### Seed-Daten (3 Nutzer)
-- admin@example.com / admin123 (role: admin)
-- applicant@example.com / applicant123 (role: user_applicant, Default)
-- reviewer@example.com / reviewer123 (role: user_reviewer)
+- admin@example.com / a (role: admin)
+- applicant@example.com / a (role: user_applicant, Default)
+- reviewer@example.com / a (role: user_reviewer)
 - Je 3 Demo-Datensätze für Antrag und Person
 
 ### npm Scripts

@@ -264,7 +264,7 @@ async function main() {
 
   console.log('Erstelle Benutzer...')
   await auth.api.signUpEmail({
-    body: { email: 'admin@example.com', password: 'admin123', name: 'Admin Benutzer' }
+    body: { email: 'admin@example.com', password: 'a', name: 'Admin Benutzer' }
   })
   await prisma.user.update({
     where: { email: 'admin@example.com' },
@@ -272,12 +272,12 @@ async function main() {
   })
 
   await auth.api.signUpEmail({
-    body: { email: 'applicant@example.com', password: 'applicant123', name: 'Test Antragsteller' }
+    body: { email: 'applicant@example.com', password: 'a', name: 'Test Antragsteller' }
   })
   // role bleibt 'user_applicant' (Default)
 
   await auth.api.signUpEmail({
-    body: { email: 'reviewer@example.com', password: 'reviewer123', name: 'Test Prüfer' }
+    body: { email: 'reviewer@example.com', password: 'a', name: 'Test Prüfer' }
   })
   await prisma.user.update({
     where: { email: 'reviewer@example.com' },
@@ -305,9 +305,9 @@ async function main() {
   })
 
   console.log('✓ Seed abgeschlossen')
-  console.log('  Admin:      admin@example.com / admin123')
-  console.log('  Applicant:  applicant@example.com / applicant123')
-  console.log('  Reviewer:   reviewer@example.com / reviewer123')
+  console.log('  Admin:      admin@example.com / a')
+  console.log('  Applicant:  applicant@example.com / a')
+  console.log('  Reviewer:   reviewer@example.com / a')
 }
 
 main()

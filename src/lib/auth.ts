@@ -4,7 +4,7 @@ import { prisma } from './prisma'
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, { provider: 'sqlite' }),
-  emailAndPassword: { enabled: true },
+  emailAndPassword: { enabled: true, minPasswordLength: 1 },
   user: {
     additionalFields: {
       role: { type: 'string', defaultValue: 'user_applicant' }

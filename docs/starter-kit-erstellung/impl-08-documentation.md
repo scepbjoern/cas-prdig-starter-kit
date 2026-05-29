@@ -77,9 +77,9 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 
 | Rolle | E-Mail | Passwort |
 |---|---|---|
-| Admin | `admin@example.com` | `admin123` |
-| Antragsteller | `applicant@example.com` | `applicant123` |
-| Prüfer | `reviewer@example.com` | `reviewer123` |
+| Admin | `admin@example.com` | `a` |
+| Antragsteller | `applicant@example.com` | `a` |
+| Prüfer | `reviewer@example.com` | `a` |
 
 ---
 

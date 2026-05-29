@@ -289,7 +289,7 @@ test.describe('Login', () => {
     await expect(page).toHaveTitle(/login/i)
 
     await page.fill('input[type="email"]', 'admin@example.com')
-    await page.fill('input[type="password"]', 'admin123')
+    await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
 
     // Nach Login: Dashboard sichtbar
@@ -328,7 +328,7 @@ import { test, expect } from '@playwright/test'
 async function loginAsApplicant(page: any) {
   await page.goto('/login')
   await page.fill('input[type="email"]', 'applicant@example.com')
-  await page.fill('input[type="password"]', 'applicant123')
+  await page.fill('input[type="password"]', 'a')
   await page.click('button[type="submit"]')
   await expect(page).toHaveURL('/')
 }
@@ -336,7 +336,7 @@ async function loginAsApplicant(page: any) {
 async function loginAsReviewer(page: any) {
   await page.goto('/login')
   await page.fill('input[type="email"]', 'reviewer@example.com')
-  await page.fill('input[type="password"]', 'reviewer123')
+  await page.fill('input[type="password"]', 'a')
   await page.click('button[type="submit"]')
   await expect(page).toHaveURL('/')
 }
@@ -375,7 +375,7 @@ test.describe('Rollenbasierte Sichtbarkeit', () => {
   test('Admin sieht alle Navigations-Links', async ({ page }) => {
     await page.goto('/login')
     await page.fill('input[type="email"]', 'admin@example.com')
-    await page.fill('input[type="password"]', 'admin123')
+    await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
 
     await expect(page.locator('nav >> text=Anträge')).toBeVisible()
@@ -385,7 +385,7 @@ test.describe('Rollenbasierte Sichtbarkeit', () => {
   test('Applicant sieht keinen Personen-Verwaltungs-Button für Löschen', async ({ page }) => {
     await page.goto('/login')
     await page.fill('input[type="email"]', 'applicant@example.com')
-    await page.fill('input[type="password"]', 'applicant123')
+    await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
     await page.goto('/personen')
 

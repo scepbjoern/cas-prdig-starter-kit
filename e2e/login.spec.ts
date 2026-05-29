@@ -6,7 +6,7 @@ test.describe('Login', () => {
     await expect(page.getByPlaceholder('name@beispiel.ch')).toBeVisible()
 
     await page.fill('input[type="email"]', 'admin@example.com')
-    await page.fill('input[type="password"]', 'admin123')
+    await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
 
     await page.waitForURL('/')

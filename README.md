@@ -22,8 +22,8 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 
 3. **Umgebungsvariablen einrichten:**
    ```bash
-   cp .env.example .env.local
-   # .env.local öffnen und Werte eintragen (BETTER_AUTH_SECRET, API-Keys)
+   cp .env.example .env
+   # .env öffnen und Werte eintragen (BETTER_AUTH_SECRET, API-Keys, usw.)
    ```
 
 4. **Datenbank einrichten:**
@@ -44,9 +44,9 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 
 | Rolle | E-Mail | Passwort |
 |---|---|---|
-| Admin | `admin@example.com` | `admin123` |
-| Antragsteller | `applicant@example.com` | `applicant123` |
-| Prüfer | `reviewer@example.com` | `reviewer123` |
+| Admin | `admin@example.com` | `a` |
+| Antragsteller | `applicant@example.com` | `a` |
+| Prüfer | `reviewer@example.com` | `a` |
 
 ---
 
