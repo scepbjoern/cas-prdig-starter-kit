@@ -10,19 +10,19 @@ export interface ChatOptions {
 
 function getOpenAIClient(): OpenAI {
   const key = process.env.OPENAI_API_KEY
-  if (!key) throw new Error('OPENAI_API_KEY fehlt in .env.local')
+  if (!key) throw new Error('OPENAI_API_KEY fehlt in .env')
   return new OpenAI({ apiKey: key })
 }
 
 function getTogetherClient(): Together {
   const key = process.env.TOGETHERAI_API_KEY
-  if (!key) throw new Error('TOGETHERAI_API_KEY fehlt in .env.local')
+  if (!key) throw new Error('TOGETHERAI_API_KEY fehlt in .env')
   return new Together({ apiKey: key })
 }
 
 function getOpenRouterClient(): OpenAI {
   const key = process.env.OPENROUTER_API_KEY
-  if (!key) throw new Error('OPENROUTER_API_KEY fehlt in .env.local')
+  if (!key) throw new Error('OPENROUTER_API_KEY fehlt in .env')
   return new OpenAI({
     apiKey: key,
     baseURL: 'https://openrouter.ai/api/v1',

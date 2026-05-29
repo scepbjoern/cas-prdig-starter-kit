@@ -20,7 +20,7 @@ Optionale Umstellung auf [UploadThing](https://uploadthing.com) für Cloud-Datei
 1. UploadThing-Account erstellen: https://uploadthing.com
 2. API-Key generieren (Dashboard → API Keys)
 3. `npm install uploadthing` (falls noch nicht installiert)
-4. `.env.local` mit UploadThing-Keys befüllen (siehe unten)
+4. `.env` mit UploadThing-Keys befüllen (siehe unten)
 5. Upload-Route erstellen: `src/app/api/uploadthing/core.ts`
 6. Komponente anpassen: Lokalen Upload → UploadThing-Komponente
 7. `npm run dev` testen

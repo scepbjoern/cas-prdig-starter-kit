@@ -31,7 +31,7 @@ Das Starter Kit enthält zwei KI-Features, die über einen gemeinsamen Service L
 - Pay-per-use, Zahlungsdaten erforderlich
 - Registrierung: https://platform.openai.com → API Keys
 
-### 2. `.env.local` konfigurieren
+### 2. `.env` konfigurieren
 
 ```env
 # Provider auswählen: 'openrouter', 'together' oder 'openai'

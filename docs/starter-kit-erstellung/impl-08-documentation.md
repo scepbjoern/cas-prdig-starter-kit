@@ -55,8 +55,8 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 
 3. **Umgebungsvariablen einrichten:**
    ```bash
-   cp .env.example .env.local
-   # .env.local öffnen und Werte eintragen (BETTER_AUTH_SECRET, API-Keys)
+   cp .env.example .env
+   # .env öffnen und Werte eintragen (BETTER_AUTH_SECRET, API-Keys)
    ```
 
 4. **Datenbank einrichten:**
@@ -260,7 +260,7 @@ Alle UI-Texte sind auf Deutsch. Suchen und Ersetzen in `src/` für Textanpassung
 
 ## 6. Umgebungsvariablen setzen
 
-`.env.local` befüllen:
+`.env` befüllen:
 ```env
 BETTER_AUTH_SECRET="zufälliger-32-zeichen-string"  # openssl rand -hex 16
 RESEND_API_KEY="re_..."                              # https://resend.com

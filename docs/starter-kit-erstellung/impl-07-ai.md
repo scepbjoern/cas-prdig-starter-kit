@@ -24,7 +24,7 @@ npm install openai together-ai
 
 > **OpenRouter** benötigt kein eigenes Package – es verwendet das bereits installierte `openai`-Package mit einer anderen `baseURL`.
 
-`.env.local` ergänzen:
+`.env` ergänzen:
 ```env
 # LLM-Provider: 'openrouter', 'together' oder 'openai'
 LLM_PROVIDER=openrouter
@@ -68,20 +68,20 @@ interface ChatOptions {
 // OpenAI-Client nur bei Bedarf erstellen (spart Initialisierungszeit)
 function getOpenAIClient(): OpenAI {
   const key = process.env.OPENAI_API_KEY
-  if (!key) throw new Error('OPENAI_API_KEY fehlt in .env.local')
+  if (!key) throw new Error('OPENAI_API_KEY fehlt in .env')
   return new OpenAI({ apiKey: key })
 }
 
 function getTogetherClient(): Together {
   const key = process.env.TOGETHERAI_API_KEY
-  if (!key) throw new Error('TOGETHERAI_API_KEY fehlt in .env.local')
+  if (!key) throw new Error('TOGETHERAI_API_KEY fehlt in .env')
   return new Together({ apiKey: key })
 }
 
 // OpenRouter nutzt das openai-Package mit eigener baseURL – kein eigenes Package nötig
 function getOpenRouterClient(): OpenAI {
   const key = process.env.OPENROUTER_API_KEY
-  if (!key) throw new Error('OPENROUTER_API_KEY fehlt in .env.local')
+  if (!key) throw new Error('OPENROUTER_API_KEY fehlt in .env')
   return new OpenAI({
     apiKey: key,
     baseURL: 'https://openrouter.ai/api/v1',
