@@ -280,21 +280,19 @@ export default defineConfig({
 
 **`e2e/login.spec.ts`:**
 ```typescript
-// E2E Test: Login-Flow mit korrekten und falschen Credentials
 import { test, expect } from '@playwright/test'
 
 test.describe('Login', () => {
   test('Login mit Admin-Credentials erfolgreich', async ({ page }) => {
     await page.goto('/login')
-    await expect(page).toHaveTitle(/login/i)
+    await expect(page.getByPlaceholder('name@beispiel.ch')).toBeVisible()
 
     await page.fill('input[type="email"]', 'admin@example.com')
     await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
 
-    // Nach Login: Dashboard sichtbar
-    await expect(page).toHaveURL('/')
-    await expect(page.locator('text=Dashboard')).toBeVisible()
+    await page.waitForURL('/')
+    await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible()
   })
 
   test('Login mit falschem Passwort zeigt Fehler', async ({ page }) => {
@@ -304,9 +302,8 @@ test.describe('Login', () => {
     await page.fill('input[type="password"]', 'falsches-passwort')
     await page.click('button[type="submit"]')
 
-    // Fehlermeldung erscheint (Toast oder Inline)
-    await expect(page.locator('[role="alert"]').or(page.locator('.text-destructive'))).toBeVisible()
-    // Bleibt auf Login-Seite
+    // Sonner-Toast rendert als [data-sonner-toast][data-type="error"] – kein role="alert"
+    await expect(page.locator('[data-sonner-toast][data-type="error"]')).toBeVisible()
     await expect(page).toHaveURL('/login')
   })
 
@@ -319,13 +316,24 @@ test.describe('Login', () => {
 
 ### Schritt 7.2.3 – E2E Tests: Antrag-Workflow
 
+> **Wichtig – `antrag-form.tsx` anpassen:** Next.js `redirect()` wirft intern einen speziellen
+> `NEXT_REDIRECT`-Fehler. Damit dieser nicht vom `try/catch` im Formular verschluckt wird
+> (was die Navigation verhindert), muss er explizit re-geworfen werden:
+>
+> ```typescript
+> // In src/components/antraege/antrag-form.tsx, im catch-Block:
+> } catch (err: unknown) {
+>   // Next.js redirect() must propagate to the router
+>   if ((err as { digest?: string }).digest?.startsWith('NEXT_REDIRECT')) throw err
+>   toast.error(err instanceof Error ? err.message : 'Fehler beim Speichern')
+> }
+> ```
+
 **`e2e/antraege.spec.ts`:**
 ```typescript
-// E2E Test: Antrag erstellen und Status-Workflow
 import { test, expect } from '@playwright/test'
 
-// Hilfsfunktion: Als Applicant einloggen
-async function loginAsApplicant(page: any) {
+async function loginAsApplicant(page: import('@playwright/test').Page) {
   await page.goto('/login')
   await page.fill('input[type="email"]', 'applicant@example.com')
   await page.fill('input[type="password"]', 'a')
@@ -333,7 +341,7 @@ async function loginAsApplicant(page: any) {
   await expect(page).toHaveURL('/')
 }
 
-async function loginAsReviewer(page: any) {
+async function loginAsReviewer(page: import('@playwright/test').Page) {
   await page.goto('/login')
   await page.fill('input[type="email"]', 'reviewer@example.com')
   await page.fill('input[type="password"]', 'a')
@@ -350,8 +358,9 @@ test.describe('Antrag CRUD', () => {
     await page.fill('textarea[name="beschreibung"]', 'Automatisch erstellt')
     await page.click('button[type="submit"]')
 
-    // Nach Erstellen: Weiterleitung zur Liste oder Detail
-    await expect(page.locator('text=Test-Antrag E2E')).toBeVisible()
+    // Server Action ruft redirect() auf → auf Detailseiten-URL warten
+    await page.waitForURL(/\/antraege\/[^/]+$/)
+    await expect(page.getByRole('heading', { name: 'Test-Antrag E2E' })).toBeVisible()
   })
 
   test('Reviewer sieht eingereichte Anträge', async ({ page }) => {
@@ -359,7 +368,7 @@ test.describe('Antrag CRUD', () => {
     await page.goto('/antraege')
 
     // Mindestens ein eingereichten Antrag sehen (aus Seed-Daten)
-    await expect(page.locator('text=EINGEREICHT').first()).toBeVisible()
+    await expect(page.locator('text=Eingereicht').first()).toBeVisible()
   })
 })
 ```
@@ -368,7 +377,6 @@ test.describe('Antrag CRUD', () => {
 
 **`e2e/roles.spec.ts`:**
 ```typescript
-// E2E Test: Rolle-spezifische Navigation und Sichtbarkeit
 import { test, expect } from '@playwright/test'
 
 test.describe('Rollenbasierte Sichtbarkeit', () => {
@@ -378,8 +386,8 @@ test.describe('Rollenbasierte Sichtbarkeit', () => {
     await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
 
-    await expect(page.locator('nav >> text=Anträge')).toBeVisible()
-    await expect(page.locator('nav >> text=Personen')).toBeVisible()
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Anträge' })).toBeVisible()
+    await expect(page.getByRole('navigation').getByRole('link', { name: 'Personen' })).toBeVisible()
   })
 
   test('Applicant sieht keinen Personen-Verwaltungs-Button für Löschen', async ({ page }) => {
@@ -387,9 +395,10 @@ test.describe('Rollenbasierte Sichtbarkeit', () => {
     await page.fill('input[type="email"]', 'applicant@example.com')
     await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
+    // Warten bis Session-Cookie gesetzt ist, bevor weiternavigiert wird
+    await page.waitForURL('/')
     await page.goto('/personen')
 
-    // Applicant sieht keine Bearbeiten/Löschen-Buttons bei Personen
     await expect(page.locator('button:has-text("Löschen")')).not.toBeVisible()
   })
 })
