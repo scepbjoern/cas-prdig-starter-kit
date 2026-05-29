@@ -1,7 +1,7 @@
 # Testing-Guide – Automatisierte Tests im Starter Kit
 
-> **Für wen ist dieses Dokument?**  
-> Für Studierende ohne tiefes Testing-Vorwissen, die verstehen möchten, welche Tests im Projekt vorhanden sind, wie man sie ausführt, und warum sie überhaupt existieren.
+> **Für wen ist dieses Dokument?**
+> Für Studierende ohne tiefes Testing-Vorwissen, die verstehen möchten, welche Tests im Projekt vorhanden sind, wer sie ausführt, und warum sie überhaupt existieren.
 
 ---
 
@@ -21,9 +21,9 @@ Plan  →  Implement  →  Validate  →  Commit
 
 - **Plan**: Was soll gebaut werden? Akzeptanzkriterien definieren.
 - **Implement**: Code schreiben – gemeinsam mit dem AI Agent.
-- **Validate**: Tests laufen lassen (`npm run test`). Alles grün? → Committen.
+- **Validate**: **Der AI Agent** führt `npm run test` aus, prüft das Ergebnis und behebt Fehler – automatisch, ohne dass ihr etwas tun müsst. Erst wenn alle Tests grün sind → Committen.
 
-Tests sind also kein optionales Extra, sondern der «V»-Schritt, der euch absichert, bevor ihr Änderungen festschreibt. Der AI Agent ist angewiesen, bei jedem neuen Feature automatisch einen passenden Test zu schreiben.
+Tests sind also kein optionales Extra, sondern der «V»-Schritt, der euch absichert, bevor Änderungen festgeschrieben werden. Der AI Agent ist angewiesen, bei jedem neuen Feature automatisch einen passenden Test zu schreiben **und** danach die Tests auszuführen.
 
 ---
 
@@ -46,8 +46,10 @@ Im Starter Kit testen Unit Tests hauptsächlich die **Zod-Validierungsschemas** 
 
 ### Unit Tests ausführen
 
+Unit Tests laufen im PIV-Loop **automatisch durch den AI Agent**. Falls ihr sie selbst starten möchtet (z. B. zur Kontrolle):
+
 ```bash
-# Einmalig ausführen (für den PIV-Loop)
+# Einmalig ausführen
 npm run test
 
 # Im Watch-Modus: Tests laufen bei jeder Datei-Speicherung automatisch neu
@@ -85,6 +87,8 @@ npm run dev
 ```
 
 Erst dann in einem zweiten Terminal die Tests ausführen.
+
+> **Warum nicht automatisch durch den AI Agent?** E2E Tests benötigen einen laufenden Dev-Server und sind deutlich langsamer als Unit Tests (mehrere Sekunden pro Test). Deshalb führt der AI Agent sie **nur auf explizite Anfrage** aus – zum Beispiel wenn ihr fragt: «Führe alle E2E Tests aus und zeig mir das Ergebnis.»
 
 ### E2E Tests ausführen
 
@@ -145,17 +149,16 @@ Wenn ein Test rot markiert ist:
 
 ---
 
-## Wann laufen Tests automatisch?
+## Wann laufen Tests – und wer führt sie aus?
 
-Tests laufen **nicht** automatisch beim Speichern oder Committen (ausser ihr richtet CI/CD ein, was im Scope dieses Projekts nicht vorgesehen ist). Ihr müsst sie bewusst starten:
-
-| Zeitpunkt | Empfohlener Befehl |
-|---|---|
-| Nach jeder grösseren Code-Änderung | `npm run test` (Unit Tests) |
-| Vor jedem Commit | `npm run test` |
-| Beim Entwickeln eines neuen Features | `npm run test:watch` |
-| Beim Testen eines kompletten Flows | `npm run test:e2e:ui` |
-| Vor einer Präsentation / Abgabe | `npm run test && npm run test:e2e` |
+| Situation | Wer | Befehl |
+|---|---|---|
+| Nach jeder Feature-Implementierung | **AI Agent** (automatisch) | `npm run test` |
+| Vor jedem Commit | **AI Agent** (automatisch) | `npm run test` |
+| Vollständiger E2E-Flow testen | Ihr (oder AI Agent auf Anfrage) | `npm run test:e2e` |
+| E2E Test einzeln debuggen | Ihr | `npm run test:e2e:ui` |
+| Eigene Kontrolle nach manuellen Änderungen | Ihr | `npm run test` |
+| Vor einer Präsentation / Abgabe | Ihr | `npm run test && npm run test:e2e` |
 
 ---
 
@@ -175,17 +178,17 @@ Manche Dinge müssen weiterhin **manuell** geprüft werden:
 
 ## Häufige Probleme
 
-**«Tests schlagen alle fehl, obwohl die App funktioniert»**  
+**«E2E Tests schlagen alle fehl, obwohl die App funktioniert»**
 → Läuft der Dev-Server? E2E Tests brauchen `npm run dev` in einem separaten Terminal.
 
-**«Unit Tests schlagen fehl nach Schema-Änderung»**  
+**«Unit Tests schlagen fehl nach Schema-Änderung»**
 → Unit Tests prüfen eure Zod-Schemas. Wenn ihr das Datenmodell ändert, müssen die Tests angepasst werden – bittet den AI Agent darum.
 
-**«Playwright findet keine Browser-Installation»**  
+**«Playwright findet keine Browser-Installation»**
 → Browser einmalig installieren:
 ```bash
 npx playwright install chromium
 ```
 
-**«Test schlägt fehl: Element not found»**  
+**«Test schlägt fehl: Element not found»**
 → Öffnet `npm run test:e2e:ui`, klickt den Test an und schaut den Screenshot beim fehlgeschlagenen Schritt an. Oft ist der UI-Text oder eine CSS-Klasse leicht anders als erwartet.
