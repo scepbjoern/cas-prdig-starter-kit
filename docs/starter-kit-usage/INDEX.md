@@ -19,6 +19,7 @@ Willkommen! Diese Seite führt zu allen Dokumenten des Starter Kits.
 |---|---|
 | [`REST_API_GUIDE.md`](REST_API_GUIDE.md) | REST API erklärt mit Pizzeria-Analogie |
 | [`SCHEMA_RESET_WORKFLOW.md`](SCHEMA_RESET_WORKFLOW.md) | Datenbank-Schema ändern |
+| [`TESTING.md`](TESTING.md) | Unit Tests + E2E Tests: was, warum, wie ausführen |
 | [`VSCODE_PORT_FORWARDING.md`](VSCODE_PORT_FORWARDING.md) | App für Demos öffentlich zugänglich machen |
 | [`LLM_INTEGRATION.md`](LLM_INTEGRATION.md) | KI-Features nutzen (OpenAI/Together.ai) |
 | [`EMAIL_INTEGRATION.md`](EMAIL_INTEGRATION.md) | E-Mails senden und empfangen (Resend) |
