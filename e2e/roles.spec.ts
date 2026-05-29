@@ -16,6 +16,7 @@ test.describe('Rollenbasierte Sichtbarkeit', () => {
     await page.fill('input[type="email"]', 'applicant@example.com')
     await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
+    await page.waitForURL('/')
     await page.goto('/personen')
 
     await expect(page.locator('button:has-text("Löschen")')).not.toBeVisible()

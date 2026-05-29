@@ -25,7 +25,9 @@ test.describe('Antrag CRUD', () => {
     await page.fill('textarea[name="beschreibung"]', 'Automatisch erstellt')
     await page.click('button[type="submit"]')
 
-    await expect(page.locator('text=Test-Antrag E2E')).toBeVisible()
+    // Nach Erstellen: Weiterleitung zur Detailseite abwarten
+    await page.waitForURL(/\/antraege\/[^/]+$/)
+    await expect(page.getByRole('heading', { name: 'Test-Antrag E2E' })).toBeVisible()
   })
 
   test('Reviewer sieht eingereichte Anträge', async ({ page }) => {
