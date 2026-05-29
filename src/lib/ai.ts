@@ -69,7 +69,7 @@ async function chatTogether(options: ChatOptions): Promise<string> {
 
 async function chatOpenRouter(options: ChatOptions): Promise<string> {
   const client = getOpenRouterClient()
-  const model = process.env.OPENROUTER_CHAT_MODEL ?? 'openai/gpt-4o-mini'
+  const model = process.env.OPENROUTER_CHAT_MODEL ?? 'deepseek/deepseek-v4-flash'
 
   const response = await client.chat.completions.create({
     model,

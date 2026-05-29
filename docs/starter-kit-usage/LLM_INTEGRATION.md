@@ -39,7 +39,7 @@ LLM_PROVIDER=openrouter
 
 # OpenRouter (empfohlen)
 OPENROUTER_API_KEY=sk-or-...
-OPENROUTER_CHAT_MODEL=openai/gpt-4o-mini
+OPENROUTER_CHAT_MODEL=deepseek/deepseek-v4-flash
 
 # Together.ai (Free Tier)
 TOGETHERAI_API_KEY=...
@@ -99,7 +99,7 @@ npm run dev
 | `LLM_PROVIDER`-Wert | `openrouter` | `together` | `openai` |
 | Kosten | Kurs-Account | Free Tier ($5) | Pay-per-use |
 | Registrierung | https://openrouter.ai | https://api.together.ai | https://platform.openai.com |
-| Standardmodell | `openai/gpt-4o-mini` | Llama 3.3 70B | GPT-4o-mini |
+| Standardmodell | `deepseek/deepseek-v4-flash` | Llama 3.3 70B | GPT-4o-mini |
 | Modellauswahl | Sehr gross (OpenAI, Anthropic, Llama, …) | Mittel (Open-Source) | OpenAI-Modelle |
 | Empfehlung | Für Kurs | Fallback | Für Produktion |
 | npm-Package | `openai` (bereits vorhanden) | `together-ai` | `openai` |
