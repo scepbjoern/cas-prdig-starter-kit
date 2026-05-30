@@ -27,6 +27,16 @@ Schreibe in dieser Phase keinen Produktivcode. Ziel ist ein bestätigbarer, kont
 
 Qualitätsziel: Der Plan soll so vollständig sein, dass ein Umsetzungsagent das Feature mit minimalen Rückfragen taskweise implementieren kann. Context is King: Der Plan muss relevante Patterns, Pflichtlektüre, Dokumentation, Gotchas, Validierungsbefehle und Akzeptanzkriterien enthalten.
 
+## Mehrpersonen-Fall
+
+Wenn mehrere Personen im selben Repository arbeiten:
+
+- Plane weiterhin genau ein vertikales Feature pro Durchlauf, das eine Person durch den Stack verantwortet.
+- Kläre oder leite ab, welche Person das Feature verantwortet und welcher Feature-Branch verwendet wird.
+- Trage Verantwortliche Person und Branch im Root-`TASKS.md` ein, falls die Datei diese Spalten enthält.
+- Plane keine parallele Schicht-Aufteilung wie nur Frontend oder nur Backend.
+- Prüfe aktive Einträge in `TASKS.md`, damit keine Person ein bereits aktives Feature oder fremden Branch überschreibt.
+
 ## Phase 1: Initiales Feature-Verständnis
 
 Verstehe zuerst grob, was gebaut werden soll. Stelle in dieser frühen Phase nur Fragen, wenn ohne Antwort keine sinnvolle Recherche starten kann.
@@ -145,6 +155,8 @@ Dokumentiere im Plan:
 
 Bei Prisma-Schema-Änderungen: ausdrücklich markieren, dass der Nutzer nach Umsetzung `npm run db:reset` ausführen muss. Keine Prisma Migrations verwenden.
 
+Im Mehrpersonen-Fall zusätzlich prüfen, ob andere aktive Features laut `TASKS.md` ebenfalls `prisma/schema.prisma` betreffen. Wenn ja, Schema-Änderungen als Koordinationsrisiko dokumentieren und eine klare Reihenfolge oder ein vorgelagertes Foundation-Feature für das gemeinsame Datenmodell vorschlagen.
+
 ## Phase 7: Plan-Datei Erstellen
 
 Erstelle eine Markdown-Datei unter:
@@ -192,6 +204,9 @@ Nach Erstellung der Plan-Datei aktualisiere `TASKS.md` als Feature-Index:
 
 - Feature-Name
 - Status `planned`
+- Verantwortliche Person, falls im Mehrpersonen-Fall bekannt oder in `TASKS.md` vorgesehen
+- Branch, falls im Mehrpersonen-Fall bekannt oder in `TASKS.md` vorgesehen
+- Schema-Hinweis `nein`, `geplant` oder `ja`, falls in `TASKS.md` vorgesehen
 - Link zur Plan-Datei
 - Datum
 

@@ -33,9 +33,11 @@ Bewerte:
 - Ob Änderungen zu einer einzigen logischen Einheit gehören
 - Ob mehrere Atomic Commits nötig sind
 - Ob sensible Dateien wie `.env` oder Credentials betroffen sind
+- Im Mehrpersonen-Fall: ob die Änderungen zum eigenen Feature, zur eigenen Plan-Datei und zum vorgesehenen Branch laut `TASKS.md` gehören
 
 Committe keine Secrets.
 Commite keine unabhängigen Änderungen in einem gemeinsamen Commit.
+Commite im Mehrpersonen-Fall keine fremden parallelen Änderungen, auch wenn sie im Arbeitsbaum liegen.
 
 ## Schritt 2: Logical Units Bilden
 
@@ -97,6 +99,7 @@ Warte auf menschliche Bestätigung, bevor du commitest.
 ## Schritt 5: Committen
 
 Stage nur die Dateien der bestätigten logischen Einheit und erstelle den Commit.
+Im Mehrpersonen-Fall stage nur Dateien, die zum eigenen Feature gehören; lasse fremde uncommitted Änderungen unangetastet.
 
 Nach jedem Commit:
 

@@ -36,6 +36,8 @@ Ermittle zusätzlich:
 - Letzte Änderungen mit `git log --oneline -10`
 - Aktuellen Branch, Arbeitsbaumstatus und uncommitted changes mit `git status`
 
+Wenn im Team mehrere Personen im selben Repository arbeiten, weise neutral darauf hin, dass der lokale Stand vor Planung oder Umsetzung gemäß Git-/GitHub-Material aktualisiert werden sollte. Erkläre keine Git-Grundlagen.
+
 ## Analysefokus
 
 Ermittle:
@@ -48,6 +50,8 @@ Ermittle:
 - Prisma-Modelle, Rollenmodell und Statusworkflows
 - Teststrategie mit Vitest und Playwright
 - Aktive und abgeschlossene Features laut `TASKS.md`
+- Im Mehrpersonen-Fall: Verantwortliche Personen, Branches und mögliche parallele Arbeit laut `TASKS.md`
+- Im Mehrpersonen-Fall: aktive Features mit möglicher Änderung an `prisma/schema.prisma`
 - Relevante TODOs, Risiken und offene Entscheidungen
 - Sofortige Auffälligkeiten, Inkonsistenzen oder Risiken, die vor Planung oder Umsetzung bekannt sein sollten
 
@@ -62,6 +66,7 @@ Gib eine kompakte, gut scannbare Zusammenfassung mit diesen Abschnitten aus:
 5. Package Manager, npm-Scripts und Validierungsbefehle
 6. Aktueller Branch, Arbeitsbaumstatus und letzte Änderungen aus Git
 7. Auffälligkeiten, Risiken oder offene Entscheidungen
-8. Mögliche nächste Planning- oder Implementation-Tasks
+8. Kollaborationsstatus, falls `TASKS.md` Verantwortliche, Branches oder Schema-Hinweise enthält
+9. Mögliche nächste Planning- oder Implementation-Tasks
 
 Halte die Zusammenfassung kurz. Keine Dateien schreiben, keine Verzeichnisse erstellen, keine Commits ausführen.

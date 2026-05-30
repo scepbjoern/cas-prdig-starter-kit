@@ -19,6 +19,8 @@ Die Gesamtarchitektur ist für `create-prd` hilfreich, aber nicht verpflichtend.
 
 Datenschutz: Gesamtarchitekturen können Unternehmensnamen, interne Systeme, Personenrollen oder vertrauliche Prozessdetails enthalten. Anonymisiert die Unterlagen vor dem Einfügen oder Hochladen, wenn daraus ein reales Unternehmen, reale Personen oder sensible Informationen erkennbar sind.
 
+Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeiten, gilt weiterhin dieser PIV-Ablauf. Beachtet zusätzlich die Koordinationsregeln in [`COLLABORATION.md`](COLLABORATION.md), insbesondere zu gemeinsamem PRD, Feature-Aufteilung, `TASKS.md`, Branches und `prisma/schema.prisma`.
+
 | Skill | Wann nutzen? | Typische Eingabe |
 |---|---|---|
 | `prime` | Zu Beginn einer Session, um Projektkontext zu laden | `/prime` |

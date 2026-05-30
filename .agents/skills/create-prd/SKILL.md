@@ -42,6 +42,14 @@ Kläre oder leite aus dem Kontext ab, ob das PRD für Brownfield- oder Greenfiel
 - Bei Greenfield-Projekten muss das PRD den technischen Stack und die zentralen technischen Leitplanken selbst definieren.
 - Im Brownfield-/Starter-Kit-Kontext können vorhandene Komponenten wie UI, Auth, E-Mail, Datenbank oder Demo-Strukturen ungenutzt bleiben, wenn sie für das konkrete System nicht gebraucht werden. Sie sollen nicht nur deshalb gelöscht werden, weil das gewählte System sie nicht verwendet. Entfernen lohnt sich im Prototyp nur, wenn sie stören oder zu falschem Verhalten führen.
 
+## Mehrpersonen-Fall
+
+Wenn mehrere Personen im selben Repository am gleichen IT-System arbeiten, gilt:
+
+- Erstelle weiterhin genau ein gemeinsames PRD für dieses IT-System oder diese Komponente.
+- Weise darauf hin, dass alle beteiligten Personen das PRD fachlich bestätigen müssen, bevor Features aufgeteilt werden.
+- Die Aufteilung erfolgt erst nach PRD-Bestätigung auf Feature-Ebene über `TASKS.md`, nicht über konkurrierende Sub-PRDs.
+
 ## Referenzen
 
 - Verwende `references/prd-template.md` für Aufbau und Qualitätskriterien des PRD.
@@ -121,7 +129,8 @@ Nach dem Schreiben des PRD:
 2. Fasse den Inhalt kurz zusammen.
 3. Liste offene Annahmen oder ungeklärte Punkte auf.
 4. Weise darauf hin, dass das PRD vor `plan-feature` fachlich geprüft werden muss.
-5. Im Kurskontext: Empfiehl, Umfang und Ausbaustufen bei Bedarf mit dem Dozenten zu besprechen.
+5. Im Mehrpersonen-Fall: Weise darauf hin, dass alle beteiligten Personen das gemeinsame PRD bestätigen sollen, bevor einzelne Features in `TASKS.md` Personen und Branches zugewiesen werden.
+6. Im Kurskontext: Empfiehl, Umfang und Ausbaustufen bei Bedarf mit dem Dozenten zu besprechen.
 
 Abschlussfrage:
 

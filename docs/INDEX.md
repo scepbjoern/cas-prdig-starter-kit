@@ -23,6 +23,7 @@ Die Ordner unter `docs/project/` enthalten teilweise `.gitkeep`-Platzhalter. Die
 | [`../README.md`](../README.md) | Setup in 5 Schritten |
 | [`starter-kit-usage/GETTING_STARTED.md`](starter-kit-usage/GETTING_STARTED.md) | Starter Kit für eigenes Projekt anpassen |
 | [`starter-kit-usage/PIV-WORKFLOW.md`](starter-kit-usage/PIV-WORKFLOW.md) | Plan -> Implement -> Validate mit Agent Skills |
+| [`starter-kit-usage/COLLABORATION.md`](starter-kit-usage/COLLABORATION.md) | Zusammenarbeit mehrerer Personen im selben Repository |
 | [`../KILO_INSTRUCTIONS.md`](../KILO_INSTRUCTIONS.md) | Coding-Guide für Kilo Code |
 | [`../AGENTS.md`](../AGENTS.md) | Projektkontext |
 

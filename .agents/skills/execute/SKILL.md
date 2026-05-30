@@ -30,6 +30,7 @@ Beispiel:
 - Ändere keine Dateien, die nicht zum aktuellen Task gehören.
 - Lösche keine Dateien ohne explizite Bestätigung.
 - Setze einen Task nie auf `done`, ohne Validierung in der Plan-Datei zu dokumentieren.
+- Im Mehrpersonen-Fall: Arbeite nur am eigenen bestätigten Feature und überschreibe keine Änderungen anderer Personen oder Branches.
 
 ## Pflichtlektüre vor Umsetzung
 
@@ -40,6 +41,7 @@ Lies vollständig:
 - Plan-Datei aus `$ARGUMENTS`
 - `KILO_INSTRUCTIONS.md` oder `CLAUDE.md`
 - `AGENTS.md`
+- `TASKS.md`, besonders bei geteiltem Repository für Verantwortliche, Branches und parallele Features
 - `prisma/schema.prisma`, wenn Datenmodell, Rollen oder Status betroffen sind
 - Alle im aktuellen Task referenzierten Dateien
 
@@ -144,6 +146,7 @@ Bei Änderungen an `prisma/schema.prisma`:
 - Informiere den Nutzer, dass `npm run db:reset` ausgeführt werden muss.
 - Verwende keine Prisma Migrations.
 - Setze betroffene Tasks erst auf `done`, wenn die notwendige DB-Validierung dokumentiert ist.
+- Im Mehrpersonen-Fall: Prüfe vor der Änderung `TASKS.md` auf andere aktive Schema-Features. Wenn ein paralleles Schema-Feature existiert oder die Reihenfolge unklar ist, setze den Task auf `needs_human` und stoppe zur Abstimmung.
 
 ## Abschluss
 
