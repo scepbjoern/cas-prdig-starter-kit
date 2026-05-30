@@ -33,6 +33,9 @@ export function AntragForm({ mode, defaultValues, action, onCancel }: AntragForm
         await action(fd)
         toast.success(mode === 'create' ? 'Antrag erstellt' : 'Antrag gespeichert')
       } catch (err: unknown) {
+        // Next.js redirect() throws a special NEXT_REDIRECT error that must reach
+        // the React router — re-throw it so navigation works correctly
+        if ((err as { digest?: string }).digest?.startsWith('NEXT_REDIRECT')) throw err
         toast.error(err instanceof Error ? err.message : 'Fehler beim Speichern')
       }
     })

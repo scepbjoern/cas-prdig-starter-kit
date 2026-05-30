@@ -72,7 +72,7 @@ npx prisma db seed
 
 ### Umgebungsvariablen
 
-`.env.local`:
+`.env`:
 ```env
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxx
 EMAIL_FROM_ADDRESS=onboarding@resend.dev
@@ -274,7 +274,7 @@ Ein Reviewer sendet eine E-Mail an `antrag@yourdomain.com` mit dem Betreff `[Ant
 2. In Resend: **Webhooks → Create Webhook**
    - URL: `https://<deine-forwarding-url>.devtunnels.ms/api/webhooks/resend`
    - Events: `email.received` aktivieren
-3. **Webhook Secret** kopieren → in `.env.local` als `RESEND_WEBHOOK_SECRET=whsec_...` setzen
+3. **Webhook Secret** kopieren → in `.env` als `RESEND_WEBHOOK_SECRET=whsec_...` setzen
 
 ### Inbound E-Mail Service
 
@@ -422,7 +422,7 @@ const PUBLIC_PATHS = ['/login', '/api/auth', '/api/antraege', '/api/webhooks']
 ## Testing-Anleitung (manuell)
 
 ### Outbound testen
-1. `.env.local`: `EMAIL_DEBUG_MODE=true`, `EMAIL_TEST_ADDRESS=deine@email.com`
+1. `.env`: `EMAIL_DEBUG_MODE=true`, `EMAIL_TEST_ADDRESS=deine@email.com`
 2. Als `applicant@example.com` anmelden → Antrag einreichen
 3. Resend Dashboard → E-Mail erscheint unter Logs
 4. Posteingang prüfen (kommt an `EMAIL_TEST_ADDRESS`)

@@ -14,6 +14,16 @@ async function verifyWebhookSignature(request: NextRequest): Promise<boolean> {
   return true
 }
 
+// Resend-Webhook-Payload enthält keinen E-Mail-Body – separater API-Aufruf nötig
+async function fetchEmailBody(emailId: string): Promise<string> {
+  const response = await fetch(`https://api.resend.com/emails/receiving/${emailId}`, {
+    headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}` },
+  })
+  if (!response.ok) return ''
+  const email = await response.json()
+  return email.text ?? email.html ?? ''
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text()
@@ -26,10 +36,12 @@ export async function POST(request: NextRequest) {
     const { type, data } = payload
 
     if (type === 'email.received') {
+      const emailText = await fetchEmailBody(data.email_id)
+
       const result = await processIncomingEmail({
         from: data.from,
         subject: data.subject,
-        text: data.text ?? data.html ?? '',
+        text: emailText,
         receivedAt: new Date(data.created_at),
       })
 

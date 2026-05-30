@@ -8,8 +8,8 @@ um es für euren eigenen Digitalisierungsprozess zu nutzen.
 ## 1. Projektkontext definieren
 
 ### `AGENTS.md` anpassen
-Öffne `AGENTS.md` und ersetze alle `[TODO]`-Einträge:
-- Projektbeschreibung: Was digitalisiert ihr? Welcher Prozess?
+Öffne `AGENTS.md` im Wurzelverzeichnis und ersetze alle `[TODO]`-Einträge:
+- Projektbeschreibung: Was digitalisiert dieses Projekt? Welcher Prozess? Welches System wird gemockt?, usw.
 - Rollen anpassen: Eigene Rollenbezeichnungen eintragen (oder bei `admin`/`user_applicant`/`user_reviewer` bleiben)
 - Scope definieren: Was ist im / ausserhalb des Scope?
 - Team-Info ergänzen
@@ -18,7 +18,7 @@ um es für euren eigenen Digitalisierungsprozess zu nutzen.
 
 ## 2. Datenmodell anpassen
 
-Die Demo-Entitäten `Antrag` und `Person` sind Platzhalter. Ihr könnt:
+Die Demo-Entitäten `Antrag` und `Person` sind Platzhalter. Ihr könnt euren AI Agent bitten, eine der folgenden Optionen durchzuführen (D ist für die meisten empfohlen):
 
 ### Option A: Bestehende Entitäten umbenennen
 Beispiel: `Antrag` → `Bestellung`, `Person` → `Lieferant`
@@ -41,6 +41,9 @@ Neue Felder zu `Antrag` oder `Person` hinzufügen:
 3. Formular-Komponente anpassen
 4. `npm run db:reset`
 
+### Option D: Bestehende Entitäten löschen
+Damit es zu keiner Verwirrung kommt, lässt ihr die KI sowohl die Entitäten als auch zugehörigen Schemas, Server Actions, Seiten und Navigation löschen. In diesem Fall müssen auch die Status-Workflows gelöscht werden (siehe nächstes Kapitel).
+
 ---
 
 ## 3. Status-Workflow anpassen
@@ -49,6 +52,8 @@ Der `AntragStatus`-Enum definiert die möglichen Zustände:
 - Standard: `ENTWURF → EINGEREICHT → GENEHMIGT/ABGELEHNT`
 - Anpassen in `prisma/schema.prisma` (Enum `AntragStatus`)
 - Übergänge anpassen in `src/lib/antrag-status.ts`
+
+Auch hier ist es vermutlich sinnvoll den Enum ganz zu löschen.
 
 ---
 
@@ -81,7 +86,7 @@ Alle UI-Texte sind auf Deutsch. Suchen und Ersetzen in `src/` für Textanpassung
 
 ## 6. Umgebungsvariablen setzen
 
-`.env.local` befüllen:
+`.env` befüllen:
 ```env
 BETTER_AUTH_SECRET="zufälliger-32-zeichen-string"  # openssl rand -hex 16
 RESEND_API_KEY="re_..."                              # https://resend.com
@@ -91,10 +96,10 @@ TOGETHERAI_API_KEY="..."                             # optional: https://api.tog
 
 ---
 
-## 7. Erstes Feature bauen (Kilo Code)
-
+## 7. Erstes Feature bauen (Kilo Code, Codex, Antigravity, usw.)
+@ToDo: Diese Anleitung ist noch unvollständig und zu einfach
 1. `TASKS.md` öffnen → neue Task anlegen
-2. Kilo Code öffnen → Architect-Modus
+2. Kilo Code öffnen → Plan-Modus
 3. Task beschreiben: «Implementiere [Feature] gemäss TASKS.md»
 4. Kilo Code erstellt Plan → bestätigen → implementieren
 5. `npm run test` → grün?

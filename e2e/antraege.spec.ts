@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 async function loginAsApplicant(page: import('@playwright/test').Page) {
   await page.goto('/login')
   await page.fill('input[type="email"]', 'applicant@example.com')
-  await page.fill('input[type="password"]', 'applicant123')
+  await page.fill('input[type="password"]', 'a')
   await page.click('button[type="submit"]')
   await expect(page).toHaveURL('/')
 }
@@ -11,7 +11,7 @@ async function loginAsApplicant(page: import('@playwright/test').Page) {
 async function loginAsReviewer(page: import('@playwright/test').Page) {
   await page.goto('/login')
   await page.fill('input[type="email"]', 'reviewer@example.com')
-  await page.fill('input[type="password"]', 'reviewer123')
+  await page.fill('input[type="password"]', 'a')
   await page.click('button[type="submit"]')
   await expect(page).toHaveURL('/')
 }
@@ -25,7 +25,9 @@ test.describe('Antrag CRUD', () => {
     await page.fill('textarea[name="beschreibung"]', 'Automatisch erstellt')
     await page.click('button[type="submit"]')
 
-    await expect(page.locator('text=Test-Antrag E2E')).toBeVisible()
+    // Nach Erstellen: Weiterleitung zur Detailseite abwarten
+    await page.waitForURL(/\/antraege\/[^/]+$/)
+    await expect(page.getByRole('heading', { name: 'Test-Antrag E2E' })).toBeVisible()
   })
 
   test('Reviewer sieht eingereichte Anträge', async ({ page }) => {

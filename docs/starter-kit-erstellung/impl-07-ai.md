@@ -22,21 +22,28 @@
 npm install openai together-ai
 ```
 
-`.env.local` ergänzen:
-```env
-# LLM-Provider: 'openai' oder 'together'
-LLM_PROVIDER=together
+> **OpenRouter** benötigt kein eigenes Package – es verwendet das bereits installierte `openai`-Package mit einer anderen `baseURL`.
 
-# OpenAI (kostenpflichtig, sofort; https://platform.openai.com/api-keys)
-OPENAI_API_KEY=sk-proj-...
-OPENAI_CHAT_MODEL=gpt-4o-mini
+`.env` ergänzen:
+```env
+# LLM-Provider: 'openrouter', 'together' oder 'openai'
+LLM_PROVIDER=openrouter
+
+# OpenRouter (empfohlen für Studierende; https://openrouter.ai/keys)
+OPENROUTER_API_KEY=sk-or-...
+OPENROUTER_CHAT_MODEL=deepseek/deepseek-v4-flash
 
 # Together.ai (Free Credits; https://api.together.ai/settings/api-keys)
 TOGETHERAI_API_KEY=...
 TOGETHERAI_CHAT_MODEL=meta-llama/Llama-3.3-70B-Instruct-Turbo
+
+# OpenAI (kostenpflichtig, sofort; https://platform.openai.com/api-keys)
+OPENAI_API_KEY=sk-proj-...
+OPENAI_CHAT_MODEL=gpt-4o-mini
 ```
 
-> **Together.ai Free Tier:** $5 Gratis-Guthaben, kein Zahlungsmittel nötig → ideal für Kursprojekte.  
+> **OpenRouter:** Zugang über bestehende Kurs-Accounts, breite Modellauswahl (OpenAI, Anthropic, Llama, Gemini, …) – ideal für Kursprojekte.  
+> **Together.ai Free Tier:** $5 Gratis-Guthaben, kein Zahlungsmittel nötig.  
 > **OpenAI:** Sofort verfügbar, aber Zahlungsinformationen nötig.
 
 ---
@@ -47,7 +54,7 @@ TOGETHERAI_CHAT_MODEL=meta-llama/Llama-3.3-70B-Instruct-Turbo
 
 ```typescript
 // Zentraler LLM-Service-Layer
-// Unterstützt OpenAI und Together.ai – austauschbar via ENV-Variable LLM_PROVIDER
+// Unterstützt OpenRouter, OpenAI und Together.ai – austauschbar via ENV-Variable LLM_PROVIDER
 import OpenAI from 'openai'
 import Together from 'together-ai'
 
@@ -61,14 +68,28 @@ interface ChatOptions {
 // OpenAI-Client nur bei Bedarf erstellen (spart Initialisierungszeit)
 function getOpenAIClient(): OpenAI {
   const key = process.env.OPENAI_API_KEY
-  if (!key) throw new Error('OPENAI_API_KEY fehlt in .env.local')
+  if (!key) throw new Error('OPENAI_API_KEY fehlt in .env')
   return new OpenAI({ apiKey: key })
 }
 
 function getTogetherClient(): Together {
   const key = process.env.TOGETHERAI_API_KEY
-  if (!key) throw new Error('TOGETHERAI_API_KEY fehlt in .env.local')
+  if (!key) throw new Error('TOGETHERAI_API_KEY fehlt in .env')
   return new Together({ apiKey: key })
+}
+
+// OpenRouter nutzt das openai-Package mit eigener baseURL – kein eigenes Package nötig
+function getOpenRouterClient(): OpenAI {
+  const key = process.env.OPENROUTER_API_KEY
+  if (!key) throw new Error('OPENROUTER_API_KEY fehlt in .env')
+  return new OpenAI({
+    apiKey: key,
+    baseURL: 'https://openrouter.ai/api/v1',
+    defaultHeaders: {
+      'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
+      'X-Title': 'CAS PRDIG Starter Kit',
+    },
+  })
 }
 
 async function chatOpenAI(options: ChatOptions): Promise<string> {
@@ -105,10 +126,28 @@ async function chatTogether(options: ChatOptions): Promise<string> {
   return response.choices[0]?.message?.content ?? ''
 }
 
+async function chatOpenRouter(options: ChatOptions): Promise<string> {
+  const client = getOpenRouterClient()
+  const model = process.env.OPENROUTER_CHAT_MODEL ?? 'deepseek/deepseek-v4-flash'
+
+  const response = await client.chat.completions.create({
+    model,
+    messages: [
+      ...(options.systemPrompt ? [{ role: 'system' as const, content: options.systemPrompt }] : []),
+      { role: 'user', content: options.prompt },
+    ],
+    max_completion_tokens: options.maxTokens ?? 1024,
+    temperature: options.temperature ?? 0.7,
+  })
+
+  return response.choices[0]?.message?.content ?? ''
+}
+
 // Hauptfunktion: Provider-Auswahl via ENV
 export async function askLLM(options: ChatOptions): Promise<string> {
-  const provider = process.env.LLM_PROVIDER ?? 'together'
+  const provider = process.env.LLM_PROVIDER ?? 'openrouter'
   if (provider === 'openai') return chatOpenAI(options)
+  if (provider === 'openrouter') return chatOpenRouter(options)
   return chatTogether(options)
 }
 ```

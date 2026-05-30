@@ -232,6 +232,8 @@ describe('POST /api/ai/analyze-document', () => {
         prompt: expect.stringContaining('Urlaubsantrag'),
         temperature: 0.3,
         maxTokens: 1024,
+        fileBase64: 'ZmFrZS1wZGYtY29udGVudA==',
+        fileName: 'document.pdf',
       })
     )
     const callArgs = mockAskLLM.mock.calls[0][0]

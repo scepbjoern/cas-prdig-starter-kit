@@ -119,7 +119,7 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 ### PIV-Loop (vollständig)
 1. **Plan** – Task in `TASKS.md` definieren + Akzeptanzkriterien
 2. **Implement** – Code + Unit-Test schreiben
-3. **Validate** – `npm run test` grün? → `npm run dev` fehlerfrei? → committen
+3. **Validate** – **du** führst `npm run test` aus, wertest das Ergebnis aus und behebst Fehler; erst wenn alle Tests grün sind und `npm run dev` fehlerfrei läuft → committen
 
 ## shadcn/ui
 

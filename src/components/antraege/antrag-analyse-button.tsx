@@ -1,6 +1,7 @@
 'use client'
 
 import { useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Loader2, Brain } from 'lucide-react'
 import { toast } from 'sonner'
@@ -12,6 +13,7 @@ interface AntragAnalyseButtonProps {
 
 export function AntragAnalyseButton({ antragId, onAnalyseComplete }: AntragAnalyseButtonProps) {
   const [isPending, startTransition] = useTransition()
+  const router = useRouter()
 
   function handleAnalyse() {
     startTransition(async () => {
@@ -23,6 +25,7 @@ export function AntragAnalyseButton({ antragId, onAnalyseComplete }: AntragAnaly
 
       if (response.ok) {
         toast.success('Dokument erfolgreich analysiert')
+        router.refresh()
         onAnalyseComplete?.()
       } else {
         const data = await response.json()

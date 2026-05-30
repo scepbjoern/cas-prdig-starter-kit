@@ -19,7 +19,7 @@ Optionale Umstellung auf [Neon](https://neon.tech) als Cloud-Datenbank für Depl
 1. Neon-Account erstellen: https://neon.tech
 2. Neues Projekt anlegen (Region: Frankfurt für CH)
 3. Connection String kopieren (aus dem Dashboard)
-4. `.env.local` aktualisieren: `DATABASE_URL` auf Neon Connection String setzen
+4. `.env` aktualisieren: `DATABASE_URL` auf Neon Connection String setzen
 5. Prisma-Adapter anpassen: `@prisma/adapter-better-sqlite3` → `@prisma/adapter-neon`
 6. `prisma/schema.prisma` – Provider auf `postgresql` ändern
 7. `npm run db:reset` ausführen (Schema + Seed auf Neon)

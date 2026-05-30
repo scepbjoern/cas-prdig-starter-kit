@@ -13,12 +13,6 @@
 
 RESTful API-Endpunkte für die Entität `Antrag` mit Zod-Validation als Lernmuster für Studierende.
 
-**Pizzeria-Analogie** (für Erklärungen im Unterricht):
-- **URL** (`/api/antraege`) = Speisekarte
-- **Route Handler** = Kellner (nimmt Bestellung entgegen)
-- **Zod** = Bestellprüfung (ist die Bestellung gültig?)
-- **Prisma** = Küche (verarbeitet die Bestellung)
-
 ## Abgrenzung
 
 Route Handler sind **ergänzend** zu den bestehenden Server Actions (`actions.ts`). Sie dienen als Muster für externe Clients. Die UI bleibt auf Server Actions aufgebaut.

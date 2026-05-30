@@ -6,7 +6,7 @@ test.describe('Login', () => {
     await expect(page.getByPlaceholder('name@beispiel.ch')).toBeVisible()
 
     await page.fill('input[type="email"]', 'admin@example.com')
-    await page.fill('input[type="password"]', 'admin123')
+    await page.fill('input[type="password"]', 'a')
     await page.click('button[type="submit"]')
 
     await page.waitForURL('/')
@@ -20,9 +20,7 @@ test.describe('Login', () => {
     await page.fill('input[type="password"]', 'falsches-passwort')
     await page.click('button[type="submit"]')
 
-    await expect(
-      page.locator('[role="alert"]').or(page.locator('.text-destructive'))
-    ).toBeVisible()
+    await expect(page.locator('[data-sonner-toast][data-type="error"]')).toBeVisible()
     await expect(page).toHaveURL('/login')
   })
 

@@ -37,17 +37,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Kein Dokument hochgeladen' }, { status: 400 })
     }
 
-    const { base64: pdfBase64, sizeKb } = await readPdfAsBase64(antrag.dateiPfad)
+    const { base64: pdfBase64 } = await readPdfAsBase64(antrag.dateiPfad)
 
     const analyseText = await askLLM({
       systemPrompt: `Du bist ein Experte für die Analyse von Antragsunterlagen in Verwaltungsprozessen.
 Deine Aufgabe ist es, hochgeladene Begleitdokumente zu prüfen und strukturiert zusammenzufassen.
 Antworte ausschliesslich mit einem validen JSON-Objekt.`,
-      prompt: `Analysiere das folgende Antragsdokument.
+      prompt: `Analysiere das beigefügte Antragsdokument.
 Antrag: "${antrag.titel}"
 Beschreibung: "${antrag.beschreibung ?? 'keine Beschreibung'}"
 Eingereicht von: ${antrag.ersteller.name}
-Dokument (Base64-PDF, ${sizeKb} KB): ${pdfBase64.substring(0, 500)}...
 
 Erstelle eine Analyse im folgenden JSON-Format:
 {
@@ -57,6 +56,8 @@ Erstelle eine Analyse im folgenden JSON-Format:
   "kernpunkte": ["Kernpunkt 1", "Kernpunkt 2", "Kernpunkt 3"],
   "empfehlung": "Genehmigen / Ablehnen / Nachfordern"
 }`,
+      fileBase64: pdfBase64,
+      fileName: antrag.dateiName ?? 'document.pdf',
       maxTokens: 1024,
       temperature: 0.3,
     })

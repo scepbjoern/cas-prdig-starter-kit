@@ -44,7 +44,7 @@ describe('askLLM', () => {
     delete process.env.OPENAI_API_KEY
     process.env.LLM_PROVIDER = 'openai'
 
-    await expect(askLLM({ prompt: 'test' })).rejects.toThrow('OPENAI_API_KEY fehlt in .env.local')
+    await expect(askLLM({ prompt: 'test' })).rejects.toThrow('OPENAI_API_KEY fehlt in .env')
 
     process.env.OPENAI_API_KEY = original
     delete process.env.LLM_PROVIDER
@@ -55,7 +55,7 @@ describe('askLLM', () => {
     delete process.env.TOGETHERAI_API_KEY
     process.env.LLM_PROVIDER = 'together'
 
-    await expect(askLLM({ prompt: 'test' })).rejects.toThrow('TOGETHERAI_API_KEY fehlt in .env.local')
+    await expect(askLLM({ prompt: 'test' })).rejects.toThrow('TOGETHERAI_API_KEY fehlt in .env')
 
     process.env.TOGETHERAI_API_KEY = original
     delete process.env.LLM_PROVIDER
@@ -99,15 +99,61 @@ describe('askLLM', () => {
     delete process.env.OPENAI_API_KEY
   })
 
-  it('should default to together provider', async () => {
+  it('should default to openrouter provider', async () => {
     delete process.env.LLM_PROVIDER
-    process.env.TOGETHERAI_API_KEY = 'test-key'
+    process.env.OPENROUTER_API_KEY = 'test-key'
 
     const result = await askLLM({ prompt: 'Hello' })
-    expect(result).toBe('Verbesserter Text von Together')
-    expect(mockTogetherCreate).toHaveBeenCalled()
+    expect(result).toBe('Verbesserter Text von OpenAI')
+    expect(mockOpenAICreate).toHaveBeenCalled()
 
-    delete process.env.TOGETHERAI_API_KEY
+    delete process.env.OPENROUTER_API_KEY
+  })
+
+  it('should throw if OPENROUTER_API_KEY is missing when provider is openrouter', async () => {
+    const original = process.env.OPENROUTER_API_KEY
+    delete process.env.OPENROUTER_API_KEY
+    process.env.LLM_PROVIDER = 'openrouter'
+
+    await expect(askLLM({ prompt: 'test' })).rejects.toThrow('OPENROUTER_API_KEY fehlt in .env')
+
+    if (original) process.env.OPENROUTER_API_KEY = original
+    delete process.env.LLM_PROVIDER
+  })
+
+  it('should call OpenRouter client when LLM_PROVIDER is openrouter', async () => {
+    process.env.LLM_PROVIDER = 'openrouter'
+    process.env.OPENROUTER_API_KEY = 'test-key'
+
+    const result = await askLLM({ prompt: 'Hello' })
+
+    expect(result).toBe('Verbesserter Text von OpenAI')
+    expect(mockOpenAICreate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        messages: expect.arrayContaining([
+          expect.objectContaining({ role: 'user', content: 'Hello' }),
+        ]),
+      })
+    )
+
+    delete process.env.LLM_PROVIDER
+    delete process.env.OPENROUTER_API_KEY
+  })
+
+  it('should use max_completion_tokens for openrouter provider', async () => {
+    process.env.LLM_PROVIDER = 'openrouter'
+    process.env.OPENROUTER_API_KEY = 'test-key'
+
+    await askLLM({ prompt: 'Hello', maxTokens: 512 })
+
+    expect(mockOpenAICreate).toHaveBeenCalledWith(
+      expect.objectContaining({
+        max_completion_tokens: 512,
+      })
+    )
+
+    delete process.env.LLM_PROVIDER
+    delete process.env.OPENROUTER_API_KEY
   })
 
   it('should pass systemPrompt when provided', async () => {
