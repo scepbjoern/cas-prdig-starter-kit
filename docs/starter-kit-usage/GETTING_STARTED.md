@@ -96,12 +96,17 @@ TOGETHERAI_API_KEY="..."                             # optional: https://api.tog
 
 ---
 
-## 7. Erstes Feature bauen (Kilo Code, Codex, Antigravity, usw.)
-@ToDo: Diese Anleitung ist noch unvollständig und zu einfach
-1. `TASKS.md` öffnen → neue Task anlegen
-2. Kilo Code öffnen → Plan-Modus
-3. Task beschreiben: «Implementiere [Feature] gemäss TASKS.md»
-4. Kilo Code erstellt Plan → bestätigen → implementieren
-5. `npm run test` → grün?
-6. `npm run dev` → manuell testen?
-7. Committen: `git commit -m "feat: [Feature]"`
+## 7. Erstes Feature mit PIV bauen
+
+Nutze für neue Features den PIV-Ablauf: Plan → Implement → Validate. Die ausführliche Anleitung steht in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md).
+
+Kurzablauf:
+
+1. `/prime` ausführen, um Projektkontext zu laden.
+2. `/plan-feature "[Feature-Beschreibung]"` ausführen.
+3. Die erzeugte Datei `docs/plan-[feature-name].md` prüfen und bestätigen.
+4. In einer neuen Agent-Session erneut  `/prime` ausführen, dann `/execute docs/plan-[feature-name].md` ausführen.
+5. Nach jedem Task validieren: `npm run test` und manuelle Prüfung mit `npm run dev`.
+6. Wenn alle Tasks `done` sind: `/commit` verwenden.
+
+`TASKS.md` ist nur ein Feature-Index. Detailtasks und Validierung liegen immer in der jeweiligen Datei `docs/plan-[feature-name].md`.

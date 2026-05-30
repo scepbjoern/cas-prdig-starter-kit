@@ -1,6 +1,5 @@
-# AGENTS.md – Projekt-Constitution
+# AGENTS.md – Projektkontext
 
-> Spec Kit Constitution für dieses Projekt.
 > Angepasst von: [Gruppenname], [Datum]
 > Coding-Regeln und Stack-Details: siehe KILO_INSTRUCTIONS.md
 
@@ -16,7 +15,7 @@ genehmigen oder ablehnen; Admins verwalten Benutzer und Einstellungen.»
 
 > Vollständige Stack-Tabelle und Coding-Konventionen: `KILO_INSTRUCTIONS.md`
 
-Kerntechnologien: Next.js 16 · shadcn/ui · Prisma 7 + SQLite · Better Auth · OpenAI/together.ai · Resend
+Kerntechnologien: Next.js 16 · shadcn/ui · Prisma 7 + SQLite · Better Auth · OpenAI/OpenRouter/together.ai · Resend
 
 **Verboten:** Supabase, DaisyUI, LangChain, Prisma Migrations.
 
@@ -63,7 +62,7 @@ Demo-Entitäten im Starter-Kit (als Muster, anpassen/ersetzen):
 
 ## Entwicklungsstand
 
-[TODO: Wird via TASKS.md verwaltet]
+siehe `TASKS.md`
 
 ## Team
 

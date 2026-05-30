@@ -1,45 +1,22 @@
-# TASKS.md – Feature-Tasks
+# TASKS.md – Feature-Index
 
-> Aktuelle und abgeschlossene Feature-Tasks für dieses Projekt.
-> Format: Jede Task mit Ziel, Akzeptanzkriterien und Status.
+> Übersicht aller aktiven und abgeschlossenen Features dieses Projekts.
+> Details und Tasks zu jedem Feature liegen in der verlinkten Datei unter docs/.
+> Neue Einträge werden automatisch vom /plan-feature-Skill angelegt.
 
----
+## Regeln
 
-## Vorlage für neue Tasks
+- Keine Tasks direkt hier eintragen – Details immer in docs/plan-[feature-name].md
+- Kein Feature gilt als done ohne dokumentierte Validierung in der Feature-Datei
+- Status-Werte: planned | in_progress | needs_human | validating | done
 
-Kopiere diesen Block und fülle ihn aus:
+## Aktive Features
 
-```
-## Task: [Feature-Name]
+| Feature | Status | Datei | Erstellt |
+|---|---|---|---|
+| _(Beispiel: Antrag-Formular)_ | planned | [plan-antrag-formular](docs/plan-antrag-formular.md) | 2026-05-30 |
 
-**Status:** [ ] Offen / [x] Abgeschlossen
-**Erstellt:** [Datum]
+## Abgeschlossene Features
 
-**Ziel:** [Was soll nach Abschluss funktionieren? 1–2 Sätze]
-
-**Akzeptanzkriterien:**
-- [ ] Unit-Test in `__tests__/unit/[datei].test.ts` grün
-- [ ] `npm run dev` startet fehlerfrei
-- [ ] Manueller Test: [Schritt-für-Schritt]
-- [ ] `npm run build` fehlerfrei
-
-**Betroffene Dateien:**
-- `src/app/(app)/...`
-- `src/lib/...`
-```
-
----
-
-## Task: Demo-Setup (Starter-Kit Grundgerüst)
-
-**Status:** [x] Abgeschlossen
-
-**Ziel:** Funktionierende Next.js-App mit Auth, Prisma, shadcn/ui und 3 Testnutzern.
-
-**Akzeptanzkriterien:**
-- [x] `npm run db:reset` läuft fehlerfrei
-- [x] Login mit allen 3 Rollen funktioniert
-- [x] Dashboard zeigt rollenspezifische KPIs
-- [x] Antrag-Workflow (ENTWURF → EINGEREICHT → GENEHMIGT/ABGELEHNT) funktioniert
-- [x] `npm run build` fehlerfrei
-```
+| Feature | Datei | Abgeschlossen |
+|---|---|---|

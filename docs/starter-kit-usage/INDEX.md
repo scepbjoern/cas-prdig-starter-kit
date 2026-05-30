@@ -10,6 +10,7 @@ Willkommen! Diese Seite führt zu allen Dokumenten des Starter Kits.
 |---|---|
 | [`../../README.md`](../../README.md) | Setup in 5 Schritten |
 | [`GETTING_STARTED.md`](GETTING_STARTED.md) | Starter Kit für eigenes Projekt anpassen |
+| [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md) | Plan → Implement → Validate mit Agent Skills |
 | [`../../KILO_INSTRUCTIONS.md`](../../KILO_INSTRUCTIONS.md) | Coding-Guide für Kilo Code |
 | [`../../AGENTS.md`](../../AGENTS.md) | Projektkontext |
 
