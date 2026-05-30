@@ -2,7 +2,7 @@
 
 Diese Anleitung beschreibt den Mehrpersonen-Fall im PIV-Workflow: Mehrere Personen arbeiten im selben Repository an einem gemeinsamen IT-System. Sie ergänzt `PIV-WORKFLOW.md` und erklärt nur die PIV- und Repository-Konventionen. Git-Grundlagen werden hier nicht wiederholt.
 
-> Für die Git-Grundlagen (Branching, Merging, Merge-Konflikte) siehe [Git-/GitHub-Material – LINK]
+> Für die Git-Grundlagen (Branching, Merging, Merge-Konflikte) siehe Github-Materialien auf Moodle
 
 ## 1. Grundprinzip
 
