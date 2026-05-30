@@ -104,9 +104,9 @@ Kurzablauf:
 
 1. `/prime` ausführen, um Projektkontext zu laden.
 2. `/plan-feature "[Feature-Beschreibung]"` ausführen.
-3. Die erzeugte Datei `docs/plan-[feature-name].md` prüfen und bestätigen.
-4. In einer neuen Agent-Session erneut  `/prime` ausführen, dann `/execute docs/plan-[feature-name].md` ausführen.
+3. Die erzeugte Datei `docs/project/features/[feature-name]/plan.md` prüfen und bestätigen.
+4. In einer neuen Agent-Session erneut  `/prime` ausführen, dann `/execute docs/project/features/[feature-name]/plan.md` ausführen.
 5. Nach jedem Task validieren: `npm run test` und manuelle Prüfung mit `npm run dev`.
 6. Wenn alle Tasks `done` sind: `/commit` verwenden.
 
-`TASKS.md` ist nur ein Feature-Index. Detailtasks und Validierung liegen immer in der jeweiligen Datei `docs/plan-[feature-name].md`.
+`TASKS.md` ist nur ein Feature-Index. Detailtasks und Validierung liegen immer in der jeweiligen Datei `docs/project/features/[feature-name]/plan.md`.

@@ -108,7 +108,7 @@ Erwartung:
 - Bei Prisma-Schema-Änderungen immer `npm run db:reset` ausführen.
 - Nie Prisma Migrations verwenden.
 - Neue Features mit `/plan-feature` planen, Plan prüfen, dann mit `/execute` umsetzen.
-- Root-`TASKS.md` bleibt Feature-Index; Detailtasks liegen in `docs/plan-[feature-name].md`.
+- Root-`TASKS.md` bleibt Feature-Index; Detailtasks liegen in `docs/project/features/[feature-name]/plan.md`.
 
 ## Output
 

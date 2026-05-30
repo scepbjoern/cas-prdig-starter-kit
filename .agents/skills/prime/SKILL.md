@@ -22,7 +22,7 @@ Lies, falls vorhanden, diese Dateien in sinnvoller Reihenfolge:
 - `CLAUDE.md` oder `KILO_INSTRUCTIONS.md`
 - `AGENTS.md`
 - `README.md` und weitere relevante README-Dateien in wichtigen Unterordnern
-- `docs/Gesamtarchitektur.md`
+- `docs/project/architecture/Gesamtarchitektur.md`
 - PRDs und Konzeptdateien unter `docs/`
 - `TASKS.md`
 - `package.json`

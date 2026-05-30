@@ -67,7 +67,7 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 
 ## Dokumentation
 
-- [`docs/starter-kit-usage/INDEX.md`](docs/starter-kit-usage/INDEX.md) – Dokumentations-Einstieg (alle Guides)
+- [`docs/INDEX.md`](docs/INDEX.md) – Dokumentations-Einstieg (alle Guides und Projektordner)
 - [`docs/starter-kit-usage/GETTING_STARTED.md`](docs/starter-kit-usage/GETTING_STARTED.md) – Starter Kit für eigenes Projekt anpassen
 - [`KILO_INSTRUCTIONS.md`](KILO_INSTRUCTIONS.md) – Coding-Guide für Kilo Code
 - [`AGENTS.md`](AGENTS.md) – Projektkontext (TODO: anpassen)
@@ -76,6 +76,6 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 
 ## Nächste Schritte nach dem Setup
 
-1. [`docs/starter-kit-usage/GETTING_STARTED.md`](docs/starter-kit-usage/GETTING_STARTED.md) lesen: Starter Kit für euren Prozess anpassen
+1. [`docs/INDEX.md`](docs/INDEX.md) lesen: Dokumentationsstruktur und Starter-Kit-Anleitungen verstehen
 2. `AGENTS.md` öffnen und alle `[TODO]`-Einträge ausfüllen
 3. Mit Kilo Code Features implementieren (PIV-Loop: Plan → Implement → Validate)

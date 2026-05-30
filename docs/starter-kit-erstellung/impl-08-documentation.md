@@ -15,7 +15,7 @@
 ### `/docs/starter-kit-usage`-Verzeichnis
 | Datei | Zweck |
 |---|---|
-| `docs/starter-kit-usage/INDEX.md` | Dokumentations-Einstieg: Links auf alle Unterdokumente |
+| `docs/INDEX.md` | Zentraler Dokumentations-Einstieg: Links auf Starter-Kit-Guides und projektspezifische Dokumentationsordner |
 | `docs/starter-kit-usage/GETTING_STARTED.md` | Wie passe ich den Starter Kit für mein Projekt an? |
 | `docs/starter-kit-usage/SCHEMA_RESET_WORKFLOW.md` | Schema ändern + DB zurücksetzen |
 | `docs/starter-kit-usage/VSCODE_PORT_FORWARDING.md` | Demo mit VS Code Port Forwarding teilen |
@@ -99,10 +99,10 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 ---
 
 ## Dokumentation
-Ab hier steht jeweils docs/..., aber eigentlich ist es docs/starter-kit-usage
+Aktueller zentraler Einstieg ist `docs/INDEX.md`; Starter-Kit-Anleitungen liegen unter `docs/starter-kit-usage/`.
 
-- [`docs/INDEX.md`](docs/INDEX.md) – Dokumentations-Einstieg (alle Guides)
-- [`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md) – Starter Kit für eigenes Projekt anpassen
+- [`docs/INDEX.md`](docs/INDEX.md) – Dokumentations-Einstieg (alle Guides und Projektordner)
+- [`docs/starter-kit-usage/GETTING_STARTED.md`](docs/starter-kit-usage/GETTING_STARTED.md) – Starter Kit für eigenes Projekt anpassen
 - [`KILO_INSTRUCTIONS.md`](KILO_INSTRUCTIONS.md) – Coding-Guide für Kilo Code
 - [`AGENTS.md`](AGENTS.md) – Projektkontext (TODO: anpassen)
 
@@ -110,7 +110,7 @@ Ab hier steht jeweils docs/..., aber eigentlich ist es docs/starter-kit-usage
 
 ## Nächste Schritte nach dem Setup
 
-1. [`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md) lesen: Starter Kit für euren Prozess anpassen
+1. [`docs/INDEX.md`](docs/INDEX.md) lesen: Dokumentationsstruktur und Starter-Kit-Anleitungen verstehen
 2. `AGENTS.md` öffnen und alle `[TODO]`-Einträge ausfüllen
 3. Mit Kilo Code Features implementieren (PIV-Loop: Plan → Implement → Validate)
 ```
@@ -174,7 +174,7 @@ Willkommen! Diese Seite führt zu allen Dokumenten des Starter Kits.
 
 ---
 
-## Schritt 6.4b – `docs/GETTING_STARTED.md`
+## Schritt 6.4b – `docs/starter-kit-usage/GETTING_STARTED.md`
 
 ```markdown
 # Getting Started – Starter Kit für eigenes Projekt anpassen
@@ -283,7 +283,7 @@ TOGETHERAI_API_KEY="..."                             # optional: https://api.tog
 
 ---
 
-## Schritt 6.4c – `docs/SCHEMA_RESET_WORKFLOW.md`
+## Schritt 6.4c – `docs/starter-kit-usage/SCHEMA_RESET_WORKFLOW.md`
 
 ```markdown
 # Schema-Reset-Workflow
@@ -381,7 +381,7 @@ Kein Download, kein Account nötig. Weniger stabil, aber ausreichend für kurze 
 
 ---
 
-## Schritt 6.4e – `docs/REST_API_GUIDE.md`
+## Schritt 6.4e – `docs/starter-kit-usage/REST_API_GUIDE.md`
 
 ```markdown
 # REST API – Erklärung und Nutzung
@@ -447,11 +447,11 @@ Session-Token herausfinden: Browser → DevTools → Application → Cookies →
 
 Die verbleibenden Guides `LLM_INTEGRATION.md`, `EMAIL_INTEGRATION.md`, `NEON_SETUP.md`, `UPLOADTHING_SETUP.md` und `VERCEL_DEPLOYMENT.md` verweisen jeweils auf die zugehörigen `impl-0X.md`-Dokumente und die Tech-Stack-Review-Datei.
 
-**`docs/LLM_INTEGRATION.md`** → verweist auf `docs/impl-07-ai.md`  
-**`docs/EMAIL_INTEGRATION.md`** → verweist auf `docs/impl-06-email.md`  
-**`docs/NEON_SETUP.md`** → verweist auf Tech-Stack-Review Abschnitt 1 (Option B: Neon) + Prisma-Adapter-Anpassung  
-**`docs/UPLOADTHING_SETUP.md`** → verweist auf Tech-Stack-Review Abschnitt 5 (Cloud-Variante) + `impl-05-file-upload.md`  
-**`docs/VERCEL_DEPLOYMENT.md`** → verweist auf Tech-Stack-Review Abschnitt 3 + 7 (Variante 2)
+- **`docs/starter-kit-usage/LLM_INTEGRATION.md`** → verweist auf `docs/starter-kit-erstellung/impl-07-ai.md`
+- **`docs/starter-kit-usage/EMAIL_INTEGRATION.md`** → verweist auf `docs/starter-kit-erstellung/impl-06-email.md`
+- **`docs/starter-kit-usage/NEON_SETUP.md`** → verweist auf Tech-Stack-Review Abschnitt 1 (Option B: Neon) + Prisma-Adapter-Anpassung
+- **`docs/starter-kit-usage/UPLOADTHING_SETUP.md`** → verweist auf Tech-Stack-Review Abschnitt 5 (Cloud-Variante) + `impl-05-file-upload.md`
+- **`docs/starter-kit-usage/VERCEL_DEPLOYMENT.md`** → verweist auf Tech-Stack-Review Abschnitt 3 + 7 (Variante 2)
 
 Diese Guides enthalten je:
 - Link auf die ausführliche Implementierungsanleitung
@@ -464,6 +464,6 @@ Diese Guides enthalten je:
 
 - [ ] `README.md` enthält Setup in 5 Schritten, Testlogins, Befehle-Tabelle
 - [ ] `docs/INDEX.md` listet alle Dokumente mit Status
-- [ ] `docs/GETTING_STARTED.md` erklärt alle Anpassungspunkte
-- [ ] `docs/SCHEMA_RESET_WORKFLOW.md` enthält klaren Schritt-für-Schritt-Ablauf
+- [ ] `docs/starter-kit-usage/GETTING_STARTED.md` erklärt alle Anpassungspunkte
+- [ ] `docs/starter-kit-usage/SCHEMA_RESET_WORKFLOW.md` enthält klaren Schritt-für-Schritt-Ablauf
 - [ ] `docs/VSCODE_PORT_FORWARDING.md` erklärt Port Forwarding für Demos

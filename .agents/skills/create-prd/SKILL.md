@@ -108,10 +108,10 @@ Erzeuge das PRD gemäß `references/prd-template.md`.
 Wenn ein Zielpfad als Argument genannt wurde, speichere dorthin. Wenn kein Zielpfad genannt wurde, verwende:
 
 ```text
-docs/prd-[systemname].md
+docs/project/prds/[systemname].md
 ```
 
-Normalisiere den Dateinamen kleingeschrieben und mit Bindestrichen, zum Beispiel `docs/prd-prozessportal.md`.
+Normalisiere den Dateinamen kleingeschrieben und mit Bindestrichen, zum Beispiel `docs/project/prds/prozessportal.md`.
 
 ### 6. Abschluss
 

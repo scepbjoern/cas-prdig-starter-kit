@@ -117,8 +117,8 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 - **Befehl:** `npm run test:e2e` / `npm run test:e2e:ui` (visuell)
 
 ### PIV-Loop (vollständig)
-1. **Plan** – Feature mit `/plan-feature [Feature]` planen. Root-`TASKS.md` bleibt nur Feature-Index; Details, Tasks und Akzeptanzkriterien liegen in `docs/plan-[feature-name].md`.
-2. **Implement** – Mit `/execute docs/plan-[feature-name].md` genau einen Task nach dem anderen umsetzen. Task-Status und Validierung werden in der Plan-Datei dokumentiert.
+1. **Plan** – Feature mit `/plan-feature [Feature]` planen. Root-`TASKS.md` bleibt nur Feature-Index; Details, Tasks und Akzeptanzkriterien liegen in `docs/project/features/[feature-name]/plan.md`.
+2. **Implement** – Mit `/execute docs/project/features/[feature-name]/plan.md` genau einen Task nach dem anderen umsetzen. Task-Status und Validierung werden in der Plan-Datei dokumentiert.
 3. **Validate** – `npm run test` ausführen, Ergebnis auswerten und Fehler beheben. Bei grösseren Änderungen `npm run build`; E2E nur wenn relevant oder explizit angefragt. `npm run dev` wird vom Nutzer zur manuellen Prüfung gestartet.
 4. **Commit** – Erst nach bestätigter Validierung mit `/commit` einen fokussierten Conventional Commit erstellen.
 

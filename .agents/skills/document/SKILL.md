@@ -10,4 +10,4 @@ disable-model-invocation: true
 argument-hint: "[path-to-plan]"
 ---
 
-<!-- TODO: Inhalt wird später ergänzt. Ziel: Feature-Dokumentation für Endanwender und Entwickler in einem noch zu definierenden Unterordner von docs/ erstellen. -->
+<!-- TODO: Inhalt wird später ergänzt. Ziel: Feature-Dokumentation für Endanwender und Entwickler im jeweiligen Feature-Ordner unter docs/project/features/[feature-name]/ erstellen, z.B. user-guide.md und developer-notes.md. -->

@@ -47,7 +47,7 @@ model Antrag {
 Auch `prisma/seed.ts` anpassen: Die vorhandenen `createMany`-Einträge bleiben unverändert (neue Felder sind optional).
 
 ```
-Bitte befolge den Workflow in docs/SCHEMA_RESET_WORKFLOW.md:
+Bitte befolge den Workflow in docs/starter-kit-usage/SCHEMA_RESET_WORKFLOW.md:
 npx prisma db push --force-reset
 npx prisma db seed
 ```
@@ -415,7 +415,7 @@ export function PdfViewer({ url, dateiName }: PdfViewerProps) {
 
 > Für Deployment auf Vercel: `public/uploads/` ist ephemeral. UploadThing ersetzt den lokalen Upload.
 >
-> Für weitere Details: `docs/UPLOADTHING_SETUP.md`
+> Für weitere Details: `docs/starter-kit-usage/UPLOADTHING_SETUP.md`
 
 ```typescript
 // Auskommentierte UploadThing-Alternative:

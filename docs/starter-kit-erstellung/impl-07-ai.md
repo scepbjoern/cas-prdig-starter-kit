@@ -312,7 +312,7 @@ model Antrag {
 ```
 
 ```
-Bitte befolge den Workflow in docs/SCHEMA_RESET_WORKFLOW.md:
+Bitte befolge den Workflow in docs/starter-kit-usage/SCHEMA_RESET_WORKFLOW.md:
 npx prisma db push --force-reset
 npx prisma db seed
 ```

@@ -1,7 +1,7 @@
 ---
 name: execute
 description: >
-  Implements a confirmed feature plan one task at a time while updating task status and validation evidence in the plan file. Use it only after a docs/plan-[feature-name].md file has been reviewed and approved. ONLY activate when the user explicitly runs /execute or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
+  Implements a confirmed feature plan one task at a time while updating task status and validation evidence in the plan file. Use it only after a docs/project/features/[feature-name]/plan.md file has been reviewed and approved. ONLY activate when the user explicitly runs /execute or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: implement
@@ -19,7 +19,7 @@ Pfad zur bestätigten Plan-Datei: `$ARGUMENTS`
 Beispiel:
 
 ```text
-/execute docs/plan-antrag-formular.md
+/execute docs/project/features/antrag-formular/plan.md
 ```
 
 ## Grundregeln
@@ -121,7 +121,7 @@ Nach jedem Task soll der Nutzer `npm run dev` prüfen, falls ein UI- oder Laufze
 Wenn sich während der Implementierung ergibt, dass der bestätigte Plan oder ein zugrunde liegendes PRD nicht mehr korrekt ist:
 
 - Setze den betroffenen Task auf `needs_human`, wenn die Abweichung eine fachliche oder architektonische Entscheidung erfordert.
-- Erstelle einen konkreten Vorschlag, wie `docs/plan-[feature-name].md` aktualisiert werden soll.
+- Erstelle einen konkreten Vorschlag, wie `docs/project/features/[feature-name]/plan.md` aktualisiert werden soll.
 - Erstelle, falls ein PRD betroffen ist, einen konkreten Vorschlag, wie das PRD aktualisiert werden soll.
 - Zeige beide Vorschläge zur Genehmigung, bevor du Plan oder PRD inhaltlich änderst.
 - Dokumentiere nach Genehmigung in der Plan-Datei, welche Abweichung beschlossen wurde und warum.
@@ -131,10 +131,10 @@ Wenn sich während der Implementierung ergibt, dass der bestätigte Plan oder ei
 Am Ende der Umsetzung soll ein später zu erstellender Dokumentations-Skill aufgerufen werden. Platzhalter bis dieser Skill existiert:
 
 ```text
-/document docs/plan-[feature-name].md
+/document docs/project/features/[feature-name]/plan.md
 ```
 
-Der Skill soll später Endanwender- und Entwicklerdokumentation zum implementierten Feature erstellen. Der Ziel-Unterordner unter `docs/` wird noch definiert.
+Der Skill soll später Endanwender- und Entwicklerdokumentation im selben Feature-Unterordner erstellen, z.B. `docs/project/features/[feature-name]/user-guide.md` und `docs/project/features/[feature-name]/developer-notes.md`.
 
 ## Prisma-Regel
 
@@ -154,7 +154,7 @@ Wenn alle Tasks `done` sind:
 - Dateien mit Änderungen auflisten.
 - Validierungsergebnisse zusammenfassen.
 - Manuelle Test-Anleitung geben.
-- Dokumentationsvorschlag und Hinweis auf den Platzhalter `/document docs/plan-[feature-name].md` ausgeben.
+- Dokumentationsvorschlag und Hinweis auf den Platzhalter `/document docs/project/features/[feature-name]/plan.md` ausgeben.
 - Ready-for-Commit-Abschnitt ausgeben: Änderungen vollständig, Validierungen erfolgreich oder dokumentiert, offene Risiken genannt.
 - Auf `/commit` als nächsten optionalen Workflow hinweisen, ohne selbst zu committen.
 

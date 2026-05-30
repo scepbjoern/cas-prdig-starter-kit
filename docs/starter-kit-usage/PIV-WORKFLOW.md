@@ -22,10 +22,10 @@ Datenschutz: Gesamtarchitekturen können Unternehmensnamen, interne Systeme, Per
 | Skill | Wann nutzen? | Typische Eingabe |
 |---|---|---|
 | `prime` | Zu Beginn einer Session, um Projektkontext zu laden | `/prime` |
-| `create-prd` | Am Anfang eines Starter-Kit-Projekts, um das konkrete IT-System, seine Ausbaustufen und dessen MVP-Scope zu beschreiben | `/create-prd docs/prd-antragssystem.md` plus Gesamtarchitektur-Markdown und `architecture.dsl`, falls vorhanden |
+| `create-prd` | Am Anfang eines Starter-Kit-Projekts, um das konkrete IT-System, seine Ausbaustufen und dessen MVP-Scope zu beschreiben | `/create-prd docs/project/prds/antragssystem.md` plus Gesamtarchitektur-Markdown und `architecture.dsl`, falls vorhanden |
 | `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird | `/plan-feature "PRD Kapitel Antrag einreichen"` |
-| `execute` | Wenn ein Feature-Plan geprüft und bestätigt wurde | `/execute docs/plan-antrag-formular.md` |
-| `document` | Nach Umsetzung, um Dokumentation vorzubereiten | `/document docs/plan-antrag-formular.md` |
+| `execute` | Wenn ein Feature-Plan geprüft und bestätigt wurde | `/execute docs/project/features/antrag-formular/plan.md` |
+| `document` | Nach Umsetzung, um Dokumentation vorzubereiten | `/document docs/project/features/antrag-formular/plan.md` |
 | `commit` | Wenn validierte Änderungen committed werden sollen | `/commit` |
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
@@ -39,7 +39,7 @@ Einmal pro Starter-Kit-Projekt / IT-System:
        /prime
           |
           v
-     /create-prd  --> docs/prd-[system].md
+     /create-prd  --> docs/project/prds/[system].md
           |              optional: Gesamtarchitektur.md + architecture.dsl
           |
           v
@@ -55,7 +55,7 @@ Danach pro Feature aus dem PRD wiederholen:
           |
           v
      /plan-feature  --> ein Feature aus PRD auswählen
-          |              --> docs/plan-[feature-name].md
+          |              --> docs/project/features/[feature-name]/plan.md
           |              --> TASKS.md Eintrag
           v
      Mensch prüft und bestätigt Feature-Plan
@@ -107,7 +107,7 @@ Der Agent liest Projektregeln, `AGENTS.md`, `TASKS.md`, `package.json`, Prisma-S
 ### Schritt 2: PRD erstellen
 
 ```text
-/create-prd docs/prd-antragssystem.md
+/create-prd docs/project/prds/antragssystem.md
 ```
 
 Der Skill fragt zuerst, ob eine Gesamtarchitektur vorliegt. Wenn ja, gib die Gesamtarchitektur-Markdown-Datei und, falls vorhanden, die zugehörige `architecture.dsl` als Kontext mit. SVG- oder PNG-Exporte des Architekturdiagramms dienen höchstens als visuelle Referenz und werden nicht inhaltlich analysiert.
@@ -142,12 +142,12 @@ Beende nach dem bestätigten PRD die PRD-Session oder starte mindestens einen ne
 ### Schritt 4: Einzelnes Feature aus dem PRD planen
 
 ```text
-/plan-feature "Aus docs/prd-antragssystem.md das Feature Antrag-Formular mit Statusänderung planen"
+/plan-feature "Aus docs/project/prds/antragssystem.md das Feature Antrag-Formular mit Statusänderung planen"
 ```
 
 Der Agent recherchiert im PRD und im Repo, stellt gezielte Rückfragen und erstellt danach:
 
-- `docs/plan-antrag-formular.md`
+- `docs/project/features/antrag-formular/plan.md`
 - einen Eintrag in `TASKS.md`
 
 ### Schritt 5: Feature-Plan prüfen
@@ -166,7 +166,7 @@ Bestätige den Feature-Plan erst, wenn er fachlich und technisch zum PRD passt.
 ### Schritt 6: Feature-Plan ausführen
 
 ```text
-/execute docs/plan-antrag-formular.md
+/execute docs/project/features/antrag-formular/plan.md
 ```
 
 Der Agent arbeitet Task für Task. Nach jedem Task stoppt er, zeigt das Ergebnis und wartet auf Bestätigung. Der Status wird direkt in der Plan-Datei aktualisiert.
@@ -203,7 +203,7 @@ Wenn das nächste Feature aus dem PRD umgesetzt werden soll, starte wieder eine 
 
 ```text
 /prime
-/plan-feature "Aus docs/prd-antragssystem.md das nächste Feature <Name> planen"
+/plan-feature "Aus docs/project/prds/antragssystem.md das nächste Feature <Name> planen"
 ```
 
 Danach wiederholst du denselben Zyklus: Plan prüfen, `/execute`, validieren, `/document`, `/commit`.
@@ -230,7 +230,7 @@ Wenn etwas unklar ist:
 planned -> in_progress -> needs_human
 ```
 
-Du siehst den detaillierten Status in `docs/plan-[feature-name].md`. Im Root-`TASKS.md` steht nur der grobe Feature-Status als Index.
+Du siehst den detaillierten Status in `docs/project/features/[feature-name]/plan.md`. Im Root-`TASKS.md` steht nur der grobe Feature-Status als Index.
 
 ## 6. Was tue ich, wenn der Agent vom Plan abweicht?
 
@@ -239,7 +239,7 @@ Stoppe die Umsetzung sofort, wenn der Agent fachlich oder technisch vom bestäti
 Konkretes Vorgehen:
 
 1. Schreibe dem Agenten: `Stopp. Lies den Plan erneut und erkläre die Abweichung.`
-2. Verlange einen Vorschlag, wie `docs/plan-[feature-name].md` angepasst werden müsste.
+2. Verlange einen Vorschlag, wie `docs/project/features/[feature-name]/plan.md` angepasst werden müsste.
 3. Genehmige Planänderungen erst, wenn du sie verstanden hast.
 4. Starte `/execute` erst wieder, wenn der Plan aktualisiert oder die ursprüngliche Umsetzung bestätigt ist.
 

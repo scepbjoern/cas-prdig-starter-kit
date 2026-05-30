@@ -56,7 +56,7 @@ Diese Datei ist der ausführliche Coding-Guide. Sie soll enthalten:
 - Prisma- und Better-Auth-Regeln
 - REST API, LLM, E-Mail und Upload-Konventionen, falls im Projekt vorhanden
 - Testing mit Vitest und Playwright
-- PIV-Loop mit `TASKS.md` als Feature-Index und `docs/plan-[feature-name].md` als Arbeitsgrundlage
+- PIV-Loop mit `TASKS.md` als Feature-Index und `docs/project/features/[feature-name]/plan.md` als Arbeitsgrundlage
 - Verfügbare PIV-Skills aus `.agents/skills/`
 - Stop-and-ask-Regeln
 - Commit-Konventionen

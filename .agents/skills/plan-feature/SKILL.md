@@ -19,7 +19,7 @@ Feature-Beschreibung oder Referenz auf bestehende Datei: `$ARGUMENTS`
 Beispiele:
 
 - `/plan-feature Antrag-Formular mit Statusänderung`
-- `/plan-feature docs/prd-antrag-workflow.md Kapitel Einreichung`
+- `/plan-feature docs/project/prds/antrag-workflow.md Kapitel Einreichung`
 
 ## Grundregel
 
@@ -150,10 +150,10 @@ Bei Prisma-Schema-Änderungen: ausdrücklich markieren, dass der Nutzer nach Ums
 Erstelle eine Markdown-Datei unter:
 
 ```text
-docs/plan-[feature-name].md
+docs/project/features/[feature-name]/plan.md
 ```
 
-Nutze kebab-case für `[feature-name]`, z.B. `docs/plan-antrag-formular.md`.
+Nutze kebab-case für `[feature-name]`, z.B. `docs/project/features/antrag-formular/plan.md`.
 
 Die Datei ist kombinierter Spec+Plan+Tasks-Container. Verwende `references/plan-template.md` als Ausgangspunkt und fülle alle relevanten Abschnitte konkret aus. Entferne keine Qualitätsabschnitte nur deshalb, weil sie Arbeit machen; schreibe stattdessen `Nicht relevant` mit kurzer Begründung.
 
