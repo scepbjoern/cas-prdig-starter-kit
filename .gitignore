@@ -44,6 +44,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Agent skill bridges (lokal via npm run setup:skills erzeugt)
+.claude/skills
+.kilo/skills
+
 # Datenbank
 *.db
 
