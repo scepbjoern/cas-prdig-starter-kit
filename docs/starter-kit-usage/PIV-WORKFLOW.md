@@ -15,10 +15,14 @@ Inspiration für diesen Workflow waren unter anderem diese Videos:
 
 Im CAS Prozessdigitalisierung gibt es typischerweise zuerst eine Gesamtarchitektur als Markdown-Datei. Diese Gesamtarchitektur beschreibt den End-to-End-Prozess und alle beteiligten IT-Systeme oder Komponenten. Dieses Starter Kit wird danach für genau ein solches IT-System oder eine Komponente verwendet. Das PRD in diesem Repo beschreibt deshalb nicht den ganzen Prozess, sondern das konkrete IT-System, das neu gebaut oder als Mock eines bestehenden Systems umgesetzt wird.
 
+Die Gesamtarchitektur ist für `create-prd` hilfreich, aber nicht verpflichtend. Wenn ihr eine Gesamtarchitektur verwendet, gebt neben dem Markdown-Dokument immer auch die zugehörige `architecture.dsl` mit, falls sie existiert. Die DSL-Datei ist die maschinenlesbare Quelle für Architekturdiagramm-Informationen; SVG- oder PNG-Exporte werden nicht inhaltlich analysiert.
+
+Datenschutz: Gesamtarchitekturen können Unternehmensnamen, interne Systeme, Personenrollen oder vertrauliche Prozessdetails enthalten. Anonymisiert die Unterlagen vor dem Einfügen oder Hochladen, wenn daraus ein reales Unternehmen, reale Personen oder sensible Informationen erkennbar sind.
+
 | Skill | Wann nutzen? | Typische Eingabe |
 |---|---|---|
 | `prime` | Zu Beginn einer Session, um Projektkontext zu laden | `/prime` |
-| `create-prd` | Am Anfang eines Starter-Kit-Projekts, um das konkrete IT-System und dessen MVP-Scope zu beschreiben | `/create-prd docs/prd-antragssystem.md` |
+| `create-prd` | Am Anfang eines Starter-Kit-Projekts, um das konkrete IT-System, seine Ausbaustufen und dessen MVP-Scope zu beschreiben | `/create-prd docs/prd-antragssystem.md` plus Gesamtarchitektur-Markdown und `architecture.dsl`, falls vorhanden |
 | `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird | `/plan-feature "PRD Kapitel Antrag einreichen"` |
 | `execute` | Wenn ein Feature-Plan geprüft und bestätigt wurde | `/execute docs/plan-antrag-formular.md` |
 | `document` | Nach Umsetzung, um Dokumentation vorzubereiten | `/document docs/plan-antrag-formular.md` |
@@ -36,9 +40,10 @@ Einmal pro Starter-Kit-Projekt / IT-System:
           |
           v
      /create-prd  --> docs/prd-[system].md
+          |              optional: Gesamtarchitektur.md + architecture.dsl
           |
           v
-     Mensch prüft und bestätigt PRD
+      Mensch prüft und bestätigt PRD
 
 
 Danach pro Feature aus dem PRD wiederholen:
@@ -83,6 +88,10 @@ Danach pro Feature aus dem PRD wiederholen:
 
 Beispiel: Eure Gesamtarchitektur beschreibt einen Antragsprozess mit mehreren beteiligten IT-Systemen. In diesem Starter-Kit-Projekt baust oder mockst du eines dieser Systeme, zum Beispiel ein Antragssystem. Dafür erstellst du zuerst ein PRD für genau dieses IT-System. Danach planst und implementierst du einzelne Features aus diesem PRD Schritt für Schritt.
 
+Falls keine Gesamtarchitektur vorhanden ist, funktioniert `create-prd` trotzdem. Der Skill fragt dann Rollen, Umsysteme, Schnittstellen, Scope und Ausbaustufen direkt im Dialog ab.
+
+Im CAS-Kontext ist das Starter-Kit-Projekt Brownfield: Der technische Stack ist bereits durch das Starter Kit und die Projektregeln vorgegeben. Das PRD soll deshalb keine neuen Stack-Entscheide erfinden, sondern auf vorhandene Vorgaben wie `AGENTS.md`, `KILO_INSTRUCTIONS.md`, `package.json`, Prisma-Schema und bestehende Starter-Kit-Konventionen referenzieren. Wenn euer konkretes System keine Benutzeroberfläche, keine E-Mail-Funktion oder andere vorhandene Starter-Kit-Bausteine benötigt, ist das im Prototyp akzeptabel. Solche Bausteine müssen nicht gelöscht werden, solange sie nicht stören.
+
 Wichtig: Der Feature-Zyklus wird mehrfach durchlaufen. Für jedes neue Feature startest du bewusst eine neue Agent- oder Chat-Session, lädst mit `/prime` den aktuellen Kontext neu und planst dann genau ein Feature aus dem PRD. Dadurch arbeitet der Agent mit frischem Kontext und vermischt nicht alte Umsetzungsdetails mit dem nächsten Feature.
 
 Der Grund dafür ist sogenannter Context Rod. Je länger ein Chat wird, desto mehr alte Zwischenentscheidungen, Fehlversuche, verworfene Ideen und irrelevante Details bleiben im Kontext. Der Agent kann dadurch schlechter priorisieren oder alte Informationen fälschlicherweise auf das nächste Feature übertragen. Eine neue Session wirkt wie ein sauberer Neustart: Der Agent liest mit `/prime` wieder die aktuellen Projektdateien, das bestätigte PRD und den aktuellen Stand, statt sich auf einen überladenen Chatverlauf zu verlassen.
@@ -101,15 +110,24 @@ Der Agent liest Projektregeln, `AGENTS.md`, `TASKS.md`, `package.json`, Prisma-S
 /create-prd docs/prd-antragssystem.md
 ```
 
-Das PRD beschreibt das konkrete IT-System oder die Komponente in diesem Repo: Zielgruppen, Scope, Rollen, Datenmodell, wichtigste User Stories, Schnittstellen zu anderen Systemen und MVP-Grenzen. Es ist noch kein Implementierungsplan für einzelne Dateien, sondern die fachliche Grundlage für mehrere spätere Features.
+Der Skill fragt zuerst, ob eine Gesamtarchitektur vorliegt. Wenn ja, gib die Gesamtarchitektur-Markdown-Datei und, falls vorhanden, die zugehörige `architecture.dsl` als Kontext mit. SVG- oder PNG-Exporte des Architekturdiagramms dienen höchstens als visuelle Referenz und werden nicht inhaltlich analysiert.
+
+Prüfe vor dem Teilen der Architekturunterlagen, ob sie anonymisiert werden müssen. Entferne oder ersetze Unternehmensnamen, reale Personennamen, interne Systemnamen oder vertrauliche Prozessdetails, wenn diese nicht in den Agent-Dialog gehören.
+
+Das PRD beschreibt das konkrete IT-System oder die Komponente in diesem Repo: Zielgruppen, Scope, Rollen, Datenmodell, wichtigste User Stories, Schnittstellen zu anderen Systemen und MVP-Grenzen. Zusätzlich hält es mögliche Ausbaustufen fest: MVP / Minimalversion, Medium-Version und Extended-/Luxus-Version. Es ist noch kein Implementierungsplan für einzelne Dateien, sondern die fachliche Grundlage für mehrere spätere Features.
+
+Die Ausbaustufen helfen, Unsicherheit über den Projektumfang sichtbar zu machen. Die KI entscheidet nicht, ob der Umfang für ein Kursprojekt zu gross oder zu klein ist. Diese Einschätzung bleibt Aufgabe der Studierenden und sollte bei Bedarf mit dem Dozenten validiert werden.
 
 Prüfe das PRD sorgfältig:
 
-- Passt das PRD zur Gesamtarchitektur?
+- Falls vorhanden: Passt das PRD zur Gesamtarchitektur und wurde die `architecture.dsl` berücksichtigt?
 - Ist klar, welches IT-System hier gebaut oder gemockt wird?
 - Sind Rollen und Berechtigungen korrekt beschrieben?
-- Ist klar, was im MVP enthalten ist und was nicht?
+- Ist klar, was in MVP / Minimalversion, Medium-Version, Extended-/Luxus-Version und Out of Scope gehört?
 - Sind die wichtigsten Features und User Stories enthalten?
+- Verweisen User Stories und Demo-Szenarien nachvollziehbar aufeinander?
+- Referenziert das PRD im Brownfield-/Starter-Kit-Kontext die bestehenden technischen Vorgaben statt neue Stack-Entscheide zu erfinden?
+- Sind Architekturunterlagen anonymisiert, falls sie vertrauliche Informationen enthalten?
 
 Bestätige das PRD erst, wenn es als Grundlage für die Feature-Planung taugt.
 
@@ -137,6 +155,7 @@ Der Agent recherchiert im PRD und im Repo, stellt gezielte Rückfragen und erste
 Lies den Plan. Achte besonders auf:
 
 - Scope und Non-Scope
+- Etappe: MVP / Minimalversion, Medium-Version oder Extended-/Luxus-Version
 - betroffene Dateien
 - Rollen und Berechtigungen
 - Tasks und Akzeptanzkriterien
