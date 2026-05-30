@@ -7,20 +7,20 @@
 
 | Bereich | Technologie |
 |---|---|
-| Framework | Next.js 16 (App Router) |
-| Styling | Tailwind CSS + shadcn/ui (Radix, Nova) |
+| Framework | Next.js 16.2.6 (App Router, TypeScript strict) |
+| Styling | Tailwind CSS 4 + shadcn/ui (Radix) |
 | Icons | lucide-react |
 | Formulare | React Hook Form + Zod (zodResolver) |
-| ORM | Prisma 7 – SQLite lokal (Singleton: `src/lib/prisma.ts`) |
-| Auth | Better Auth (Prisma-Adapter, 3 Rollen: `admin`/`user_applicant`/`user_reviewer`) |
+| ORM | Prisma 7.8 + SQLite lokal (Singleton: `src/lib/prisma.ts`) |
+| Auth | Better Auth 1.6 (Prisma-Adapter, 3 Rollen: `admin`/`user_applicant`/`user_reviewer`) |
 | REST API | Native Next.js Route Handlers + Zod (Pizzeria-Analogie: URL = Speisekarte, Handler = Kellner, Zod = Bestellprüfung) |
-| LLM | OpenAI SDK oder together.ai (`src/lib/ai.ts`, kein LangChain, kein RAG) |
+| LLM | OpenAI SDK, OpenRouter oder together.ai (`src/lib/ai.ts`, kein LangChain, kein RAG) |
 | E-Mail | Resend + HTML-Template-Strings (`src/lib/services/emailService.ts`, kein React Email) |
 | File Upload | `public/uploads/` + Node.js `fs` (lokal), optional UploadThing |
 | Testing | Vitest (Unit) + Playwright (E2E) |
 | Deployment | Lokal via VS Code Port Forwarding |
 
-**Verboten:** Supabase, DaisyUI, Redux, Axios, LangChain, ts-rest, tRPC, Raw-SQL, `new PrismaClient()` ohne Adapter.
+**Verboten:** Supabase, DaisyUI, Redux, Axios, LangChain, ts-rest, tRPC, Prisma Migrations, Raw-SQL, `new PrismaClient()` ohne Adapter.
 
 ## Sprache und Stil
 
@@ -69,11 +69,11 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 - Import immer: `import { prisma } from '@/lib/prisma'`
 - **NIE** `new PrismaClient()` direkt aufrufen – immer den Singleton verwenden
 - Prisma 7: PrismaClient benötigt Adapter (bereits in `lib/prisma.ts` konfiguriert)
-- Nach Schema-Änderungen **Benutzer auffordern** (nicht selbst ausführen):
+- Nach Schema-Änderungen **Benutzer auffordern**, den Reset auszuführen:
   ```
-  npx prisma db push --force-reset
-  npx prisma db seed
+  npm run db:reset
   ```
+- Keine Prisma Migrations verwenden.
 
 ## Auth (Better Auth)
 
@@ -92,7 +92,7 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 - Next.js 16: `params` ist ein Promise → `const { id } = await params`
 - Erklärung für Studierende: URL = Speisekarte, Handler = Kellner, Zod = Bestellprüfung, Prisma = Küche
 
-## LLM Integration (OpenAI / together.ai)
+## LLM Integration (OpenAI / OpenRouter / together.ai)
 
 - Alle LLM-Calls über `src/lib/ai.ts` (nie direkt `new OpenAI()` in Komponenten)
 - Provider via ENV: `LLM_PROVIDER=openai` oder `LLM_PROVIDER=together`
@@ -117,9 +117,25 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 - **Befehl:** `npm run test:e2e` / `npm run test:e2e:ui` (visuell)
 
 ### PIV-Loop (vollständig)
-1. **Plan** – Task in `TASKS.md` definieren + Akzeptanzkriterien
-2. **Implement** – Code + Unit-Test schreiben
-3. **Validate** – **du** führst `npm run test` aus, wertest das Ergebnis aus und behebst Fehler; erst wenn alle Tests grün sind und `npm run dev` fehlerfrei läuft → committen
+1. **Plan** – Feature mit `/plan-feature [Feature]` planen. Root-`TASKS.md` bleibt nur Feature-Index; Details, Tasks und Akzeptanzkriterien liegen in `docs/plan-[feature-name].md`.
+2. **Implement** – Mit `/execute docs/plan-[feature-name].md` genau einen Task nach dem anderen umsetzen. Task-Status und Validierung werden in der Plan-Datei dokumentiert.
+3. **Validate** – `npm run test` ausführen, Ergebnis auswerten und Fehler beheben. Bei grösseren Änderungen `npm run build`; E2E nur wenn relevant oder explizit angefragt. `npm run dev` wird vom Nutzer zur manuellen Prüfung gestartet.
+4. **Commit** – Erst nach bestätigter Validierung mit `/commit` einen fokussierten Conventional Commit erstellen.
+
+## Verfügbare PIV-Skills
+
+Skills liegen in `.agents/skills/`. Aufruf per `/skill-name` im Chat, sofern das Tool diesen Pfad unterstützt. Nie automatisch aktivieren – immer nur auf expliziten Aufruf.
+
+| Skill | Aufruf | PIV-Phase |
+|---|---|---|
+| prime | `/prime` | Session-Start: Projekt-Kontext laden |
+| plan-feature | `/plan-feature [Feature]` | Plan: Granularen Feature-Plan erstellen |
+| execute | `/execute [Pfad-zum-Plan]` | Implement: Task-by-Task umsetzen |
+| document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen (Platzhalter) |
+| commit | `/commit` | Commit: Konventionellen Commit erstellen |
+| create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD generieren (Skeleton) |
+| create-rules | `/create-rules` | Setup: Instructions-Dateien aktualisieren |
+| init-project | `/init-project` | Setup: Projekt initialisieren |
 
 ## shadcn/ui
 
