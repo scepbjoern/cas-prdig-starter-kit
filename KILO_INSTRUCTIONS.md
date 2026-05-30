@@ -120,7 +120,7 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 1. **Plan** – Feature mit `/plan-feature [Feature]` planen. Root-`TASKS.md` bleibt nur Feature-Index; Details, Tasks und Akzeptanzkriterien liegen in `docs/project/features/[feature-name]/plan.md`.
 2. **Implement** – Mit `/execute docs/project/features/[feature-name]/plan.md` genau einen Task nach dem anderen umsetzen. Task-Status und Validierung werden in der Plan-Datei dokumentiert.
 3. **Validate** – `npm run test` ausführen, Ergebnis auswerten und Fehler beheben. Bei grösseren Änderungen `npm run build`; E2E nur wenn relevant oder explizit angefragt. `npm run dev` wird vom Nutzer zur manuellen Prüfung gestartet.
-4. **Commit** – Erst nach bestätigter Validierung mit `/commit` einen fokussierten Conventional Commit erstellen.
+4. **Commit** – Nach validierten Tasks oder Phasen darf mit `/commit` ein fokussierter Zwischencommit erstellt werden. Nach `/document` folgt der finale Feature-Commit.
 
 ## Verfügbare PIV-Skills
 
@@ -131,7 +131,7 @@ Skills liegen in `.agents/skills/`. Aufruf per `/skill-name` im Chat, sofern das
 | prime | `/prime` | Session-Start: Projekt-Kontext laden |
 | plan-feature | `/plan-feature [Feature]` | Plan: Granularen Feature-Plan erstellen |
 | execute | `/execute [Pfad-zum-Plan]` | Implement: Task-by-Task umsetzen |
-| document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen (Platzhalter) |
+| document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen |
 | commit | `/commit` | Commit: Konventionellen Commit erstellen |
 | create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD generieren (Skeleton) |
 | create-rules | `/create-rules` | Setup: Instructions-Dateien aktualisieren |
@@ -155,5 +155,6 @@ Stoppe und frage **vor**:
 ## Commit-Konventionen
 
 - Format: `feat:`, `fix:`, `docs:`, `test:`
-- Kein Commit ohne grüne Tests und laufenden Dev-Server
-- Kleine, fokussierte Commits pro Feature
+- Kein Commit ohne erfolgreiche oder begründet dokumentierte Validierung
+- Kleine, fokussierte Zwischencommits nach validierten Tasks oder Phasen sind erlaubt
+- Finaler Feature-Commit erst nach `/document`, wenn das Feature abgeschlossen wird

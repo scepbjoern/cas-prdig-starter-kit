@@ -17,6 +17,23 @@ Erstelle einen oder mehrere kleine, nachvollziehbare Git-Commits nach Convention
 
 Referenz: https://www.conventionalcommits.org/en/v1.0.0/
 
+Der Skill darf sowohl für validierte Zwischenstände während eines Features als auch für den finalen Feature-Abschluss verwendet werden.
+
+## Commit-Zeitpunkte im PIV-Workflow
+
+Erlaubte Zeitpunkte:
+
+- Nach einem einzelnen Task, wenn der Task validiert ist und der Status im Plan auf `done` steht.
+- Nach einer kohärenten Phase, wenn alle enthaltenen Tasks validiert und dokumentiert sind.
+- Nach `/document`, um den finalen Feature-Abschluss inklusive `user-guide.md`, `developer-notes.md`, Plan-Nachführung und letzter Cleanup-Änderungen festzuhalten.
+
+Nicht committen:
+
+- bekannte fehlgeschlagene Tests ohne dokumentierte Ausnahme
+- Code, der nicht zum bestätigten Feature oder zur bestätigten logischen Einheit gehört
+- undokumentierte Plan-/PRD-Abweichungen
+- fremde parallele Änderungen im Mehrpersonen-Fall
+
 ## Schritt 1: Änderungen Prüfen
 
 Führe aus:
@@ -32,6 +49,8 @@ Bewerte:
 - Welche Dateien geändert wurden
 - Ob Änderungen zu einer einzigen logischen Einheit gehören
 - Ob mehrere Atomic Commits nötig sind
+- Ob es sich um einen Zwischencommit oder den finalen Feature-Abschluss handelt
+- Ob der zugehörige Task oder die zugehörige Phase im Plan validiert und dokumentiert ist
 - Ob sensible Dateien wie `.env` oder Credentials betroffen sind
 - Im Mehrpersonen-Fall: ob die Änderungen zum eigenen Feature, zur eigenen Plan-Datei und zum vorgesehenen Branch laut `TASKS.md` gehören
 
@@ -50,6 +69,8 @@ Beispiele:
 - `docs: describe PIV workflow`
 
 Mische nicht Refactoring, Feature-Implementation und Dokumentation, wenn sie unabhängig sind.
+
+Bei Zwischencommits dürfen Plan-Datei und Implementierung gemeinsam committed werden, wenn die Plan-Datei genau die Validierung oder Statusänderung dieses Tasks dokumentiert. Die finale Feature-Dokumentation aus `/document` gehört typischerweise in einen eigenen abschliessenden Commit oder zusammen mit kleinem finalem Cleanup.
 
 ## Schritt 3: Commit-Message Vorschlagen
 
@@ -124,3 +145,5 @@ Führe den Push nur nach expliziter Bestätigung aus.
 - Keine destruktiven Git-Kommandos verwenden.
 - Nicht amendieren, ausser der Nutzer fordert es ausdrücklich.
 - Repository soll nach jedem Commit funktionsfähig bleiben.
+- Zwischencommits sind erlaubt und erwünscht, wenn sie klein, validiert und nachvollziehbar sind.
+- Der letzte Feature-Commit soll erst nach `/document` erfolgen, sofern das Feature vollständig abgeschlossen wird.

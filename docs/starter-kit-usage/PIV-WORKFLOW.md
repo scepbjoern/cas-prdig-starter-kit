@@ -27,8 +27,8 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `create-prd` | Am Anfang eines Starter-Kit-Projekts, um das konkrete IT-System, seine Ausbaustufen und dessen MVP-Scope zu beschreiben | `/create-prd docs/project/prds/antragssystem.md` plus Gesamtarchitektur-Markdown und `architecture.dsl`, falls vorhanden |
 | `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird | `/plan-feature "PRD Kapitel Antrag einreichen"` |
 | `execute` | Wenn ein Feature-Plan geprüft und bestätigt wurde | `/execute docs/project/features/antrag-formular/plan.md` |
-| `document` | Nach Umsetzung, um Dokumentation vorzubereiten | `/document docs/project/features/antrag-formular/plan.md` |
-| `commit` | Wenn validierte Änderungen committed werden sollen | `/commit` |
+| `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan.md` |
+| `commit` | Nach einem validierten Task, einer kohärenten Phase oder am finalen Feature-Abschluss | `/commit` |
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
 
@@ -63,15 +63,15 @@ Danach pro Feature aus dem PRD wiederholen:
      Mensch prüft und bestätigt Feature-Plan
           |
           v
-       /execute  --> Task 1 --> Validierung --> Stopp --> Bestätigung
+     /execute  --> Task 1 --> Validierung --> Stopp --> optional /commit
           |             |
           |             v
-          |          Task 2 --> Validierung --> Stopp --> Bestätigung
+          |          Task 2 --> Validierung --> Stopp --> optional /commit
           v
-       /document
+       /document  --> finale Feature-Dokumentation
           |
           v
-       /commit
+       /commit  --> finaler Feature-Abschluss
           |
           v
      Für nächstes Feature: neue Agent-Session starten
@@ -189,17 +189,30 @@ npm run dev
 
 Prüfe im Browser, ob das Feature für die vorgesehenen Rollen funktioniert. Bei grösseren Änderungen wird zusätzlich `npm run build` verwendet. E2E-Tests laufen mit `npm run test:e2e`, wenn der Plan es verlangt oder du es ausdrücklich willst.
 
-### Schritt 8: Commit erstellen
+### Schritt 8: Optionalen Zwischencommit erstellen
 
-Wenn alle Tasks `done` sind:
+Wenn ein Task oder eine kohärente Phase validiert ist, darfst du einen Zwischencommit erstellen:
 
 ```text
 /commit
 ```
 
-Der Agent prüft die Änderungen, schlägt eine Conventional-Commit-Message vor und committed erst nach deiner Bestätigung.
+Der Agent prüft die Änderungen, schlägt eine Conventional-Commit-Message vor und committed erst nach deiner Bestätigung. Ein Zwischencommit soll nur einen logisch zusammengehörenden, geprüften Stand enthalten. Committe keine bekannten roten Tests, keine undokumentierten Planabweichungen und keine fremden parallelen Änderungen.
 
-### Schritt 9: Für das nächste Feature neu starten
+Zwischencommits sind besonders sinnvoll bei längeren Features, Schema-Änderungen, abgeschlossenen UI-/Backend-Phasen oder bevor du den Branch mit anderen teilst. Sie ersetzen aber nicht den Feature-Abschluss: Erst wenn alle Tasks `done` sind, die Validierung dokumentiert ist und `/document` gelaufen ist, gilt das Feature als fertig.
+
+### Schritt 9: Feature dokumentieren und final committen
+
+Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
+
+```text
+/document docs/project/features/antrag-formular/plan.md
+/commit
+```
+
+`/document` erstellt `user-guide.md` und `developer-notes.md` im Feature-Ordner. Der anschliessende finale Commit enthält typischerweise die Dokumentation, Plan-Nachführung und letzte Cleanup-Änderungen.
+
+### Schritt 10: Für das nächste Feature neu starten
 
 Wenn das nächste Feature aus dem PRD umgesetzt werden soll, starte wieder eine neue Agent- oder Chat-Session:
 
@@ -208,7 +221,7 @@ Wenn das nächste Feature aus dem PRD umgesetzt werden soll, starte wieder eine 
 /plan-feature "Aus docs/project/prds/antragssystem.md das nächste Feature <Name> planen"
 ```
 
-Danach wiederholst du denselben Zyklus: Plan prüfen, `/execute`, validieren, `/document`, `/commit`.
+Danach wiederholst du denselben Zyklus: Plan prüfen, `/execute`, pro Task oder Phase validieren, bei Bedarf Zwischencommits erstellen, am Ende `/document` und final `/commit`.
 
 ## 5. Task-Status verstehen
 

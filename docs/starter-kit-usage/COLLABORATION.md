@@ -58,7 +58,7 @@ Danach pro Feature und Person:
   /execute
     |
     v
-  validieren, dokumentieren, committen
+  validieren, optional Zwischencommits, dokumentieren, final committen
 ```
 
 Wichtig: Jede Person plant und implementiert ihr Feature auf Basis des gemeinsamen PRD und der aktuellen `TASKS.md`.
@@ -173,7 +173,7 @@ Vor Planung oder Umsetzung im geteilten Repository prüft ihr:
 
 ## 7. Commit-Regel
 
-Commits bleiben klein und featurebezogen.
+Commits bleiben klein und featurebezogen. Bei längeren Features sind Zwischencommits ausdrücklich sinnvoll, sobald ein Task oder eine kohärente Phase validiert und in der Plan-Datei dokumentiert ist.
 
 Vor `/commit` prüft ihr:
 
@@ -183,3 +183,11 @@ Vor `/commit` prüft ihr:
 - Enthält der Arbeitsbaum fremde Änderungen, die nicht in meinen Commit gehören?
 
 Der Agent soll nur Dateien stagen, die zur bestätigten logischen Einheit gehören. Fremde parallele Änderungen bleiben unangetastet.
+
+Typische Commit-Zeitpunkte:
+
+- nach einem validierten Task als Zwischencommit
+- nach einer abgeschlossenen validierten Phase, z.B. Datenmodell oder UI-Grundgerüst
+- nach `/document` als finaler Feature-Commit
+
+Ein Feature gilt trotz Zwischencommits erst als abgeschlossen, wenn alle Tasks `done` sind, die Validierung dokumentiert ist, die Feature-Dokumentation erstellt wurde und der finale Commit erfolgt ist.

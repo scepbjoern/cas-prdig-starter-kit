@@ -30,6 +30,8 @@ Beispiel:
 - Ändere keine Dateien, die nicht zum aktuellen Task gehören.
 - Lösche keine Dateien ohne explizite Bestätigung.
 - Setze einen Task nie auf `done`, ohne Validierung in der Plan-Datei zu dokumentieren.
+- Nach einem validierten Task oder einer kohärenten validierten Phase darf ein optionaler Zwischencommit über `/commit` vorgeschlagen werden.
+- Ein Feature gilt erst nach allen `done`-Tasks, vollständiger Validierung und `/document` als abgeschlossen, auch wenn es bereits Zwischencommits gibt.
 - Im Mehrpersonen-Fall: Arbeite nur am eigenen bestätigten Feature und überschreibe keine Änderungen anderer Personen oder Branches.
 
 ## Pflichtlektüre vor Umsetzung
@@ -87,7 +89,7 @@ Für jeden Task:
 14. Validierung durchführen oder, falls der Nutzer sie ausführen muss, genaue Anleitung dokumentieren.
 15. Validierungsergebnis in der Plan-Datei festhalten.
 16. Bei erfolgreicher Validierung Status auf `done` setzen.
-17. Stoppen und Ergebnis zeigen.
+17. Stoppen, Ergebnis zeigen und bei sinnvoller logischer Einheit optional auf `/commit` als Zwischencommit hinweisen.
 
 ## Validierung
 
@@ -130,13 +132,15 @@ Wenn sich während der Implementierung ergibt, dass der bestätigte Plan oder ei
 
 ## Dokumentation nach Umsetzung
 
-Am Ende der Umsetzung soll ein später zu erstellender Dokumentations-Skill aufgerufen werden. Platzhalter bis dieser Skill existiert:
+Am Ende der Umsetzung soll nach vollständiger Validierung der Dokumentations-Skill aufgerufen werden:
 
 ```text
 /document docs/project/features/[feature-name]/plan.md
 ```
 
-Der Skill soll später Endanwender- und Entwicklerdokumentation im selben Feature-Unterordner erstellen, z.B. `docs/project/features/[feature-name]/user-guide.md` und `docs/project/features/[feature-name]/developer-notes.md`.
+Der Skill erstellt Endanwender- und Entwicklerdokumentation im selben Feature-Unterordner, z.B. `docs/project/features/[feature-name]/user-guide.md` und `docs/project/features/[feature-name]/developer-notes.md`.
+
+Zwischencommits vor `/document` sind erlaubt, wenn der jeweilige Stand validiert und plan-konform ist. `/document` bleibt die finale Abschlussstufe für das gesamte Feature und wird danach normalerweise mit einem finalen `/commit` festgehalten.
 
 ## Prisma-Regel
 
@@ -157,9 +161,9 @@ Wenn alle Tasks `done` sind:
 - Dateien mit Änderungen auflisten.
 - Validierungsergebnisse zusammenfassen.
 - Manuelle Test-Anleitung geben.
-- Dokumentationsvorschlag und Hinweis auf den Platzhalter `/document docs/project/features/[feature-name]/plan.md` ausgeben.
-- Ready-for-Commit-Abschnitt ausgeben: Änderungen vollständig, Validierungen erfolgreich oder dokumentiert, offene Risiken genannt.
-- Auf `/commit` als nächsten optionalen Workflow hinweisen, ohne selbst zu committen.
+- Hinweis auf den nächsten Workflow `/document docs/project/features/[feature-name]/plan.md` ausgeben.
+- Ready-for-Feature-Abschluss-Abschnitt ausgeben: Änderungen vollständig, Validierungen erfolgreich oder dokumentiert, offene Risiken genannt.
+- Auf `/document` und danach einen finalen `/commit` als nächste Workflows hinweisen, ohne selbst zu committen.
 
 ## Unerwartete Issues und Planabweichungen
 
