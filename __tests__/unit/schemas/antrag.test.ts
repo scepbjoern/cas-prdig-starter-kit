@@ -15,6 +15,20 @@ describe('antragCreateSchema', () => {
     expect(result.success).toBe(true)
   })
 
+  it('akzeptiert Antrag mit PLZ-Ort und Kanton', () => {
+    const result = antragCreateSchema.safeParse({
+      titel: 'Antrag mit Ort',
+      plzOrt: 'Zürich',
+      kanton: 'ZH',
+    })
+    expect(result.success).toBe(true)
+  })
+
+  it('akzeptiert Antrag ohne PLZ-Ort (optionales Feld)', () => {
+    const result = antragCreateSchema.safeParse({ titel: 'Antrag ohne Ort' })
+    expect(result.success).toBe(true)
+  })
+
   it('lehnt leeren Titel ab', () => {
     const result = antragCreateSchema.safeParse({ titel: '' })
     expect(result.success).toBe(false)
@@ -34,6 +48,11 @@ describe('antragUpdateSchema', () => {
 
   it('akzeptiert vollständige Aktualisierung mit Titel', () => {
     const result = antragUpdateSchema.safeParse({ titel: 'Aktualisierter Titel' })
+    expect(result.success).toBe(true)
+  })
+
+  it('akzeptiert Aktualisierung mit neuem Ort', () => {
+    const result = antragUpdateSchema.safeParse({ titel: 'Titel', plzOrt: 'Bern', kanton: 'BE' })
     expect(result.success).toBe(true)
   })
 

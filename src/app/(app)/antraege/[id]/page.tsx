@@ -61,6 +61,15 @@ export default async function AntragDetailPage({ params }: { params: Promise<{ i
           <div className="grid grid-cols-2 gap-2 text-muted-foreground">
             <span>Ersteller</span>
             <span>{antrag.ersteller.name}</span>
+            {antrag.plzOrt && (
+              <>
+                <span>Ort</span>
+                <span>
+                  {antrag.plzOrt}
+                  {antrag.kanton && <span className="ml-1">({antrag.kanton})</span>}
+                </span>
+              </>
+            )}
             <span>Erstellt am</span>
             <span>{format(new Date(antrag.erstelltAm), 'dd.MM.yyyy HH:mm', { locale: de })}</span>
             <span>Aktualisiert</span>

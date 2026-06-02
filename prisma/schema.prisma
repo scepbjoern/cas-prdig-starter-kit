@@ -103,6 +103,9 @@ model Antrag {
 
   kiAnalyse   String?
 
+  plzOrt      String?  // Ortsname (z.B. "Zürich") – aus PLZ-Lookup
+  kanton      String?  // Kantonskürzel (z.B. "ZH") – aus PLZ-Lookup
+
   @@map("antraege")
 }
 

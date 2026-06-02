@@ -39,7 +39,12 @@ export default async function BearbeitenPage({ params }: { params: Promise<{ id:
       <div className="rounded-lg border bg-card p-6">
         <AntragForm
           mode="edit"
-          defaultValues={{ titel: antrag.titel, beschreibung: antrag.beschreibung ?? '' }}
+          defaultValues={{
+            titel: antrag.titel,
+            beschreibung: antrag.beschreibung ?? '',
+            plzOrt: antrag.plzOrt ?? '',
+            kanton: antrag.kanton ?? '',
+          }}
           action={action}
         />
       </div>

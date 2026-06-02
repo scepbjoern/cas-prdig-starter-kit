@@ -16,6 +16,8 @@ export async function createAntrag(formData: FormData) {
   const raw = {
     titel: formData.get('titel'),
     beschreibung: formData.get('beschreibung') || undefined,
+    plzOrt: formData.get('plzOrt') || undefined,
+    kanton: formData.get('kanton') || undefined,
   }
   const parsed = antragCreateSchema.safeParse(raw)
   if (!parsed.success) throw new Error(parsed.error.message)
@@ -43,6 +45,8 @@ export async function updateAntrag(id: string, formData: FormData) {
   const raw = {
     titel: formData.get('titel'),
     beschreibung: formData.get('beschreibung') || undefined,
+    plzOrt: formData.get('plzOrt') || undefined,
+    kanton: formData.get('kanton') || undefined,
   }
   const parsed = antragUpdateSchema.safeParse(raw)
   if (!parsed.success) throw new Error(parsed.error.message)

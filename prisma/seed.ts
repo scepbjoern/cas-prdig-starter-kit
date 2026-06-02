@@ -45,9 +45,9 @@ async function main() {
   console.log('Erstelle Demo-Anträge...')
   await prisma.antrag.createMany({
     data: [
-      { titel: 'Urlaubsantrag Juli', beschreibung: 'Urlaub vom 1.–14. Juli', status: 'EINGEREICHT', erstellerId: applicant.id },
-      { titel: 'Weiterbildungsantrag', beschreibung: 'CAS Kurs ZHAW', status: 'GENEHMIGT', erstellerId: applicant.id },
-      { titel: 'Materialbestellung', status: 'ENTWURF', erstellerId: applicant.id },
+      { titel: 'Urlaubsantrag Juli', beschreibung: 'Urlaub vom 1.–14. Juli', status: 'EINGEREICHT', erstellerId: applicant.id, plzOrt: 'Zürich', kanton: 'ZH' },
+      { titel: 'Weiterbildungsantrag', beschreibung: 'CAS Kurs ZHAW', status: 'GENEHMIGT', erstellerId: applicant.id, plzOrt: 'Winterthur', kanton: 'ZH' },
+      { titel: 'Materialbestellung', status: 'ENTWURF', erstellerId: applicant.id, plzOrt: null, kanton: null },
     ]
   })
 
