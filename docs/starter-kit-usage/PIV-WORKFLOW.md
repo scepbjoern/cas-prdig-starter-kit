@@ -34,61 +34,8 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
 
-```text
-Einmal pro Starter-Kit-Projekt / IT-System:
-
-  Neue Agent-Session starten
-          |
-          v
-       /prime
-          |
-          v
-     /create-prd  --> docs/project/prds/[system].md
-          |              optional: Gesamtarchitektur.md + architecture.dsl
-          |
-          v
-      Mensch prüft und bestätigt PRD
-          |
-          v
-  /adapt-to-project  --> Demo-Seiten durch Platzhalter ersetzen
-          |              --> irrelevante Prisma-Modelle entfernen
-          |              --> npm run build validiert (muss grün sein)
-          |
-          v
-   Mensch prüft: npm run dev läuft noch?
-
-
-Danach pro Feature aus dem PRD wiederholen:
-
-  Neue Agent-Session starten
-          |
-          v
-       /prime
-          |
-          v
-     /plan-feature  --> ein Feature aus PRD auswählen
-          |              --> docs/project/features/[feature-name]/plan.md
-          |              --> TASKS.md Eintrag
-          v
-     Mensch prüft und bestätigt Feature-Plan
-          |
-          v
-     /execute  --> Task 1 --> Validierung --> Stopp --> optional /commit
-          |             |
-          |             v
-          |          Task 2 --> Validierung --> Stopp --> optional /commit
-          v
-       /document  --> finale Feature-Dokumentation
-          |
-          v
-      /reflect-rules --> bei Verdacht Agent-Regeln und Skill-Verbesserungen prüfen
-          |
-          v
-       /commit  --> finaler Feature-Abschluss
-          |
-          v
-     Für nächstes Feature: neue Agent-Session starten
-```
+![PIV-Workflow Übersicht](PIV-Workflow_UEBERSICHT.png)
+*Erstellt mit OpenAI gpt-image-2, Thinking Mode (ChatGPT GPT-5.5)*
 
 ## 3. Wie starte ich einen Skill in meinem Tool?
 
@@ -204,7 +151,17 @@ Lies den Plan. Achte besonders auf:
 
 Bestätige den Feature-Plan erst, wenn er fachlich und technisch zum PRD passt.
 
-### Schritt 7: Feature-Plan ausführen
+### Schritt 7: Neue Session für die Umsetzung starten
+
+Nach dem bestätigten Feature-Plan startest du bewusst eine neue Session. So beginnt `/execute` mit frischem Kontext – ohne die Planungsgeschichte, Rückfragen und Zwischenentscheide aus der Planungs-Session.
+
+```text
+/prime
+```
+
+Der Agent liest erneut Projektregeln, aktuellen Stand und den soeben bestätigten Feature-Plan in `docs/project/features/[feature-name]/plan.md`.
+
+### Schritt 8: Feature-Plan ausführen
 
 ```text
 /execute docs/project/features/antrag-formular/plan.md
@@ -212,7 +169,7 @@ Bestätige den Feature-Plan erst, wenn er fachlich und technisch zum PRD passt.
 
 Der Agent arbeitet Task für Task. Nach jedem Task stoppt er, zeigt das Ergebnis und wartet auf Bestätigung. Der Status wird direkt in der Plan-Datei aktualisiert.
 
-### Schritt 8: Validieren
+### Schritt 9: Validieren
 
 Nach jedem Task prüfst du oder der Agent:
 
@@ -228,7 +185,7 @@ npm run dev
 
 Prüfe im Browser, ob das Feature für die vorgesehenen Rollen funktioniert. Bei grösseren Änderungen wird zusätzlich `npm run build` verwendet. E2E-Tests laufen mit `npm run test:e2e`, wenn der Plan es verlangt oder du es ausdrücklich willst.
 
-### Schritt 9: Optionalen Zwischencommit erstellen
+### Schritt 10: Optionalen Zwischencommit erstellen
 
 Wenn ein Task oder eine kohärente Phase validiert ist, darfst du einen Zwischencommit erstellen:
 
@@ -240,7 +197,7 @@ Der Agent prüft die Änderungen, schlägt eine Conventional-Commit-Message vor 
 
 Zwischencommits sind besonders sinnvoll bei längeren Features, Schema-Änderungen, abgeschlossenen UI-/Backend-Phasen oder bevor du den Branch mit anderen teilst. Sie ersetzen aber nicht den Feature-Abschluss: Erst wenn alle Tasks `done` sind, die Validierung dokumentiert ist, `/document` gelaufen ist und ein allfälliger `/reflect-rules`-Bedarf geprüft wurde, gilt das Feature als fertig.
 
-### Schritt 10: Feature dokumentieren
+### Schritt 11: Feature dokumentieren
 
 Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
 
@@ -250,7 +207,7 @@ Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
 
 `/document` erstellt `user-guide.md` und `developer-notes.md` im Feature-Ordner. Am Ende weist der Skill darauf hin, dass `/reflect-rules` bei Verdacht auf regelbezogene Probleme direkt in derselben Session genutzt werden soll.
 
-### Schritt 11: Agent-Regeln reflektieren und final committen
+### Schritt 12: Agent-Regeln reflektieren und final committen
 
 Nach `/document` prüfst du, ob aus der Umsetzung dauerhafte Regel- oder Skill-Verbesserungen entstehen sollen. Nutze `/reflect-rules` vor allem dann, wenn es während Umsetzung oder Dokumentation auffällig viele Korrekturen, Nacharbeiten, Planabweichungen oder regelbezogene Missverständnisse gab:
 
@@ -269,16 +226,23 @@ Der Skill schlägt Änderungen zuerst vor und setzt sie erst nach Bestätigung u
 
 Der anschliessende finale Commit enthält typischerweise die Feature-Dokumentation, Plan-Nachführung, bestätigte Regelanpassungen und letzte Cleanup-Änderungen.
 
-### Schritt 12: Für das nächste Feature neu starten
+### Schritt 13: Für das nächste Feature neu starten
 
-Wenn das nächste Feature aus dem PRD umgesetzt werden soll, starte wieder eine neue Agent- oder Chat-Session:
+Für jedes weitere Feature aus dem PRD startest du zweimal eine neue Session – einmal für die Planung, einmal für die Umsetzung:
 
+**Session A – Planung:**
 ```text
 /prime
 /plan-feature "Aus docs/project/prds/antragssystem.md das nächste Feature <Name> planen"
 ```
+Plan prüfen und bestätigen. Danach Session beenden.
 
-Danach wiederholst du denselben Zyklus: Plan prüfen, `/execute`, pro Task oder Phase validieren, bei Bedarf Zwischencommits erstellen, am Ende `/document`, bei Verdacht `/reflect-rules` in derselben Session und final `/commit`.
+**Session B – Umsetzung:**
+```text
+/prime
+/execute docs/project/features/<feature-name>/plan.md
+```
+Pro Task validieren, bei Bedarf Zwischencommits erstellen, am Ende `/document`, bei Verdacht `/reflect-rules` in derselben Session, dann `/commit`.
 
 ## 5. Task-Status verstehen
 
