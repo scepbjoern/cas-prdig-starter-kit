@@ -1,113 +1,79 @@
 # Getting Started – Starter Kit für eigenes Projekt anpassen
 
-Dieses Dokument erklärt, welche Teile des Starter Kits angepasst werden müssen,
-um es für euren eigenen Digitalisierungsprozess zu nutzen.
+Dieses Dokument erklärt die ersten Schritte, um das Starter Kit für euer eigenes IT-System vorzubereiten.
 
 ---
 
 ## 1. Projektkontext definieren
 
-### `AGENTS.md` anpassen
 Öffne `AGENTS.md` im Wurzelverzeichnis und ersetze alle `[TODO]`-Einträge:
-- Projektbeschreibung: Was digitalisiert dieses Projekt? Welcher Prozess? Welches System wird gemockt?, usw.
-- Rollen anpassen: Eigene Rollenbezeichnungen eintragen (oder bei `admin`/`user_applicant`/`user_reviewer` bleiben)
-- Scope definieren: Was ist im / ausserhalb des Scope?
-- Team-Info ergänzen
+
+- **Projektbeschreibung:** Was digitalisiert dieses Projekt? Welcher Prozess wird abgebildet? Welches IT-System wird gebaut oder gemockt?
+- **Rollen:** Eigene Rollenbezeichnungen eintragen oder bei `admin`/`user_applicant`/`user_reviewer` bleiben
+- **Scope:** Was ist im / ausserhalb des Scope?
+- **Team-Info:** Gruppenname, Mitglieder, Kursjahrgang
 
 ---
 
-## 2. Datenmodell anpassen
+## 2. Umgebungsvariablen setzen
 
-Die Demo-Entitäten `Antrag` und `Person` sind Platzhalter. Ihr könnt euren AI Agent bitten, eine der folgenden Optionen durchzuführen (D ist für die meisten empfohlen):
+Befülle `.env` mit den benötigten Werten. Welche Dienste euer IT-System nutzt, klärt ihr im nächsten Schritt beim PRD.
 
-### Option A: Bestehende Entitäten umbenennen
-Beispiel: `Antrag` → `Bestellung`, `Person` → `Lieferant`
-1. In `prisma/schema.prisma` umbenennen
-2. Alle Vorkommen in `src/` suchen und ersetzen (`Antrag` → `Bestellung`, etc.)
-3. `npm run db:reset` ausführen
-
-### Option B: Neue Entitäten hinzufügen
-1. Neues Model in `prisma/schema.prisma` definieren
-2. `npm run db:reset` ausführen
-3. Schema `src/lib/schemas/[entitaet].ts` erstellen
-4. Server Actions `src/app/(app)/[entitaet]/actions.ts` erstellen
-5. Seiten `src/app/(app)/[entitaet]/` erstellen
-6. Navigation `src/lib/navigation.ts` ergänzen
-
-### Option C: Bestehende Entitäten erweitern
-Neue Felder zu `Antrag` oder `Person` hinzufügen:
-1. In `prisma/schema.prisma` Feld ergänzen
-2. Zod-Schema in `src/lib/schemas/` anpassen
-3. Formular-Komponente anpassen
-4. `npm run db:reset`
-
-### Option D: Bestehende Entitäten löschen
-Damit es zu keiner Verwirrung kommt, lässt ihr die KI sowohl die Entitäten als auch zugehörigen Schemas, Server Actions, Seiten und Navigation löschen. In diesem Fall müssen auch die Status-Workflows gelöscht werden (siehe nächstes Kapitel).
-
----
-
-## 3. Status-Workflow anpassen
-
-Der `AntragStatus`-Enum definiert die möglichen Zustände:
-- Standard: `ENTWURF → EINGEREICHT → GENEHMIGT/ABGELEHNT`
-- Anpassen in `prisma/schema.prisma` (Enum `AntragStatus`)
-- Übergänge anpassen in `src/lib/antrag-status.ts`
-
-Auch hier ist es vermutlich sinnvoll den Enum ganz zu löschen.
-
----
-
-## 4. Rollen anpassen
-
-Die 3 Standardrollen sind: `admin`, `user_applicant`, `user_reviewer`
-
-Wenn ihr andere Rollennamen möchtet:
-1. `prisma/schema.prisma` – Default-Wert bei `User.role` ändern
-2. `src/lib/auth.ts` – `defaultValue` ändern
-3. `src/middleware.ts` und `src/lib/auth-helpers.ts` – Rollennamen aktualisieren
-4. `prisma/seed.ts` – Seed-Nutzer anpassen
-
-> **Achtung:** Rollen-String-Werte müssen in allen Dateien konsistent sein.
-
----
-
-## 5. UI anpassen
-
-### Farben
-`src/app/globals.css` – CSS-Variablen für shadcn/ui Farben anpassen.
-
-### Sprache / Texte
-Alle UI-Texte sind auf Deutsch. Suchen und Ersetzen in `src/` für Textanpassungen.
-
-### Navigation
-`src/lib/navigation.ts` – Nav-Items hinzufügen/entfernen/umbenennen.
-
----
-
-## 6. Umgebungsvariablen setzen
-
-`.env` befüllen:
 ```env
-BETTER_AUTH_SECRET="zufälliger-32-zeichen-string"  # openssl rand -hex 16
-RESEND_API_KEY="re_..."                              # https://resend.com
-OPENAI_API_KEY="sk-..."                              # optional: https://openai.com
-TOGETHERAI_API_KEY="..."                             # optional: https://api.together.ai
+BETTER_AUTH_SECRET="zufälliger-32-zeichen-string"  # openssl rand -hex 16 (immer nötig)
+RESEND_API_KEY="re_..."                              # nur wenn E-Mail genutzt → Anleitung: EMAIL_INTEGRATION.md
+OPENAI_API_KEY="sk-..."                              # nur wenn LLM genutzt → Anleitung: LLM_INTEGRATION.md
+TOGETHERAI_API_KEY="..."                             # Alternative zu OpenAI → Anleitung: LLM_INTEGRATION.md
 ```
 
+Die Anleitungen für API-Keys und Konfiguration der einzelnen Dienste findet ihr in `docs/starter-kit-usage/`:
+
+- E-Mail: [`EMAIL_INTEGRATION.md`](EMAIL_INTEGRATION.md)
+- LLM: [`LLM_INTEGRATION.md`](LLM_INTEGRATION.md)
+
 ---
 
-## 7. Erstes Feature mit PIV bauen
+## 3. PRD erstellen
 
-Nutze für neue Features den PIV-Ablauf: Plan → Implement → Validate. Die ausführliche Anleitung steht in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md).
+Das PRD (Product Requirements Document) beschreibt euer IT-System: Rollen, Scope, Datenmodell, Features und Ausbaustufen. Es ist die fachliche Grundlage für alle späteren Feature-Pläne.
 
-Kurzablauf:
+```text
+/create-prd docs/project/prds/[systemname].md
+```
 
-1. `/prime` ausführen, um Projektkontext zu laden.
-2. `/plan-feature "[Feature-Beschreibung]"` ausführen.
-3. Die erzeugte Datei `docs/project/features/[feature-name]/plan.md` prüfen und bestätigen.
-4. In einer neuen Agent-Session erneut  `/prime` ausführen, dann `/execute docs/project/features/[feature-name]/plan.md` ausführen.
-5. Nach jedem Task validieren: `npm run test` und manuelle Prüfung mit `npm run dev`.
-6. Optional nach validierten Tasks oder Phasen mit `/commit` Zwischencommits erstellen.
-7. Wenn alle Tasks `done` sind: `/document docs/project/features/[feature-name]/plan.md` ausführen und danach final mit `/commit` abschliessen.
+Der Skill führt euch durch einen Dialog und schreibt das PRD. Falls eine Gesamtarchitektur vorhanden ist, könnt ihr diese als Kontext mitgeben.
+
+Prüft das PRD sorgfältig – insbesondere den Abschnitt **"Starter Kit Nutzung"**, der auflistet, welche Starter-Kit-Bausteine genutzt werden und welche Demo-Inhalte irrelevant sind. Bestätigt das PRD erst, wenn es als Grundlage für die Feature-Planung taugt.
+
+Die vollständige Anleitung steht in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md).
+
+---
+
+## 4. Starter Kit bereinigen
+
+Nach PRD-Bestätigung bereinigt `/adapt-to-project` den Workspace automatisch: Demo-Seiten werden durch minimale Platzhalter ersetzt und irrelevante Demo-Entitäten aus dem Prisma-Schema entfernt. Der Skill validiert am Ende den Build und repariert TypeScript-Fehler selbst.
+
+```text
+/adapt-to-project docs/project/prds/[systemname].md
+```
+
+Startet nach der Bereinigung `npm run dev` und prüft kurz, ob die App noch läuft. Danach habt ihr eine saubere Ausgangslage für die Feature-Entwicklung.
+
+> **Bereits ein PRD ohne "Starter Kit Nutzung"?** Lest zuerst den Retrofit-Hinweis in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md) (Schritt 3).
+
+---
+
+## 5. Features bauen
+
+Ab jetzt wiederholt ihr für jedes Feature aus dem PRD denselben Zyklus. Die vollständige Anleitung mit allen Schritten und Hintergründen steht in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md).
+
+Kurzablauf pro Feature:
+
+1. Neue Agent-Session starten, `/prime` ausführen
+2. `/plan-feature "[Feature aus PRD]"` – Agent erstellt `docs/project/features/[feature-name]/plan.md`
+3. Plan prüfen und bestätigen
+4. `/execute docs/project/features/[feature-name]/plan.md` – Task für Task umsetzen
+5. Nach jedem Task: `npm run test` und manuelle Prüfung mit `npm run dev`
+6. Wenn alle Tasks `done`: `/document` ausführen, bei Verdacht auf wiederholbare Fehler `/reflect-rules`, dann `/commit`
 
 `TASKS.md` ist nur ein Feature-Index. Detailtasks und Validierung liegen immer in der jeweiligen Datei `docs/project/features/[feature-name]/plan.md`.
