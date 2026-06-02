@@ -12,7 +12,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import type { PlzSuggestion } from '@/app/api/plz-lookup/route'
+import type { PlzSuggestion } from '@/lib/services/plzService'
 
 interface AntragFormProps {
   mode: 'create' | 'edit'

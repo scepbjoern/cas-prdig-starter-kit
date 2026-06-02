@@ -39,8 +39,11 @@ Das Starter Kit nutzt die öffentliche [OpenPLZ-API](https://openplzapi.org) fü
 ## Wo im Repository
 
 ```
+src/lib/services/
+  plzService.ts         # Externer API-Call: fetch() zur OpenPLZ-API, Typ PlzSuggestion
+
 src/app/api/plz-lookup/
-  route.ts              # Proxy-Endpunkt: nimmt ?q=... entgegen, ruft OpenPLZ-API auf
+  route.ts              # Proxy-Endpunkt: nimmt ?q=... entgegen, ruft plzService auf
 
 src/components/antraege/
   antrag-form.tsx       # Formular: PLZ-Suchfeld mit Dropdown und 300ms Verzögerung
