@@ -191,6 +191,30 @@ Beschreibe nur komponentenspezifische technische Leitplanken, zum Beispiel:
 
 Wichtig für Prototypen: Wenn das gewählte System keine Benutzeroberfläche, keine E-Mail-Funktion oder andere im Starter Kit vorhandene Komponenten benötigt, ist das akzeptabel. Vorhandene Komponenten müssen nicht gelöscht werden, solange sie nicht stören oder falsches Verhalten erzeugen. Unnötiges Entfernen kann im Prototyp mehr Aufwand erzeugen als Nutzen bringen.
 
+#### Starter Kit Nutzung
+
+Erstelle eine strukturierte Inventarliste der vorhandenen Starter-Kit-Bausteine. Diese Liste dient als Eingabe für `/adapt-to-project`, das vor dem ersten `/plan-feature` den Workspace bereinigt.
+
+**Genutzte Bausteine:**
+
+| Baustein | Status | Bemerkung |
+|---|---|---|
+| Auth (Better Auth, Rollen) | genutzt / nicht genutzt / teilweise | z.B. welche Rollen werden verwendet |
+| Prisma DB + SQLite | genutzt / nicht genutzt / teilweise | |
+| UI (shadcn/ui, Tailwind) | genutzt / nicht genutzt / teilweise | |
+| E-Mail (Resend) | genutzt / nicht genutzt / teilweise | |
+| LLM-Integration | genutzt / nicht genutzt / teilweise | |
+| REST API Route Handlers | genutzt / nicht genutzt / teilweise | |
+| File Upload | genutzt / nicht genutzt / teilweise | |
+
+**Demo-Inhalte, die für dieses Projekt nicht relevant sind:**
+
+- [ ] Demo-Entitäten im Prisma-Schema (z.B. `Antrag`, `Person`)
+- [ ] Demo-Seiten (z.B. `/antraege`, `/personen`)
+- [ ] Demo-API-Endpunkte
+- [ ] Demo-Seed-Daten
+- [ ] Demo-Tests
+
 ### Greenfield
 
 Bei Greenfield-Projekten muss das PRD den technischen Stack und die zentralen Architekturentscheidungen explizit beschreiben:
@@ -283,3 +307,4 @@ Prüfe vor dem Speichern:
 - [ ] Falls Gesamtarchitektur genutzt wurde: Markdown und, falls vorhanden, `architecture.dsl` wurden berücksichtigt.
 - [ ] SVG-/PNG-Diagramme wurden nicht als fachliche Quelle analysiert.
 - [ ] Bei Brownfield-/Starter-Kit-Projekten wurden bestehende technische Vorgaben referenziert statt neu entschieden.
+- [ ] Bei Brownfield: Abschnitt "Starter Kit Nutzung" ist ausgefüllt (Bausteine-Tabelle + Liste irrelevanter Demo-Inhalte) und bereit als Eingabe für `/adapt-to-project`.

@@ -105,6 +105,8 @@ Stelle nach der Kontextphase maximal 4-6 gezielte Rückfragen, jeweils einzeln. 
 - Welche externen Systeme, Mocks oder APIs sind relevant?
 - Welche Demo- oder Erfolgsszenarien müssen später funktionieren?
 
+Im Brownfield-/Starter-Kit-Kontext zusätzlich ableiten oder erfragen, welche Starter-Kit-Bausteine genutzt werden (Auth, DB, UI, E-Mail, LLM, REST API, File Upload) und welche Demo-Inhalte für dieses Projekt nicht relevant sind. Diese Information fliesst in den Abschnitt "Starter Kit Nutzung" im PRD.
+
 Dokumentiere bekannte spätere Ausbaustufen auch dann, wenn sie nicht Teil des MVP sind. So kann die spätere Feature-Planung Datenmodell, Schnittstellen und Architektur besser vorbereiten, ohne Medium- oder Extended-Funktionen als zugesagte MVP-Lieferung zu behandeln.
 
 Vermeide Detailfragen, die erst in `plan-feature` gehören, zum Beispiel konkrete Dateinamen, UI-Komponenten oder vollständige API-Schemas, sofern sie für das PRD nicht zwingend sind.
@@ -131,6 +133,8 @@ Nach dem Schreiben des PRD:
 4. Weise darauf hin, dass das PRD vor `plan-feature` fachlich geprüft werden muss.
 5. Im Mehrpersonen-Fall: Weise darauf hin, dass alle beteiligten Personen das gemeinsame PRD bestätigen sollen, bevor einzelne Features in `TASKS.md` Personen und Branches zugewiesen werden.
 6. Im Kurskontext: Empfiehl, Umfang und Ausbaustufen bei Bedarf mit dem Dozenten zu besprechen.
+
+7. Im Brownfield-/Starter-Kit-Kontext: Weise darauf hin, dass nach der PRD-Bestätigung `/adapt-to-project [PRD-Pfad]` ausgeführt werden soll, bevor die erste neue Feature-Session gestartet wird. Dieser Skill bereinigt Demo-Code auf Basis des PRDs und stellt sicher, dass die App danach noch lauffähig ist.
 
 Abschlussfrage:
 

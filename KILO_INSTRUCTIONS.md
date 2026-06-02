@@ -146,6 +146,7 @@ Skills liegen in `.agents/skills/`. Aufruf per `/skill-name` im Chat, sofern das
 | reflect-rules | `/reflect-rules [Pfad-zum-Plan]` | Validate/Retro: Agent-Regeln und Skills verbessern |
 | commit | `/commit` | Commit: Konventionellen Commit erstellen |
 | create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD generieren (Skeleton) |
+| adapt-to-project | `/adapt-to-project [Pfad-zum-PRD]` | Setup: Demo-Code bereinigen, Build validieren |
 | create-rules | `/create-rules` | Setup: Instructions-Dateien aktualisieren |
 | init-project | `/init-project` | Setup: Projekt initialisieren |
 

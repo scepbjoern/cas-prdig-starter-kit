@@ -25,6 +25,7 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 |---|---|---|
 | `prime` | Zu Beginn einer Session, um Projektkontext zu laden | `/prime` |
 | `create-prd` | Am Anfang eines Starter-Kit-Projekts, um das konkrete IT-System, seine Ausbaustufen und dessen MVP-Scope zu beschreiben | `/create-prd docs/project/prds/antragssystem.md` plus Gesamtarchitektur-Markdown und `architecture.dsl`, falls vorhanden |
+| `adapt-to-project` | Einmalig nach PRD-Bestätigung, vor dem ersten `plan-feature`: bereinigt Demo-Code auf Basis des PRDs und validiert den Build | `/adapt-to-project docs/project/prds/antragssystem.md` |
 | `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird | `/plan-feature "PRD Kapitel Antrag einreichen"` |
 | `execute` | Wenn ein Feature-Plan geprüft und bestätigt wurde | `/execute docs/project/features/antrag-formular/plan.md` |
 | `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan.md` |
@@ -47,6 +48,14 @@ Einmal pro Starter-Kit-Projekt / IT-System:
           |
           v
       Mensch prüft und bestätigt PRD
+          |
+          v
+  /adapt-to-project  --> Demo-Seiten durch Platzhalter ersetzen
+          |              --> irrelevante Prisma-Modelle entfernen
+          |              --> npm run build validiert (muss grün sein)
+          |
+          v
+   Mensch prüft: npm run dev läuft noch?
 
 
 Danach pro Feature aus dem PRD wiederholen:
@@ -134,18 +143,44 @@ Prüfe das PRD sorgfältig:
 - Verweisen User Stories und Demo-Szenarien nachvollziehbar aufeinander?
 - Referenziert das PRD im Brownfield-/Starter-Kit-Kontext die bestehenden technischen Vorgaben statt neue Stack-Entscheide zu erfinden?
 - Sind Architekturunterlagen anonymisiert, falls sie vertrauliche Informationen enthalten?
+- Enthält das PRD den Abschnitt "Starter Kit Nutzung" mit ausgefüllter Bausteine-Tabelle und Liste irrelevanter Demo-Inhalte?
 
 Bestätige das PRD erst, wenn es als Grundlage für die Feature-Planung taugt.
 
-### Schritt 3: Neue Session für das erste Feature starten
+### Schritt 3: Starter Kit bereinigen
 
-Beende nach dem bestätigten PRD die PRD-Session oder starte mindestens einen neuen Chat. Öffne eine neue Agent-Session für das erste konkrete Feature und lade den Kontext erneut:
+```text
+/adapt-to-project docs/project/prds/antragssystem.md
+```
+
+Dieser Schritt läuft **einmalig**, direkt nach PRD-Bestätigung und noch in derselben oder einer neuen Session – jedenfalls bevor die erste Feature-Session gestartet wird.
+
+Der Skill liest den Abschnitt "Starter Kit Nutzung" aus dem bestätigten PRD, schlägt vor, welche Demo-Seiten durch Platzhalter ersetzt und welche Demo-Prisma-Modelle entfernt werden, und führt die Bereinigung nach deiner Bestätigung durch. Am Ende validiert er den Build automatisch: `npm run build` muss grün sein, bevor der Skill abschliesst.
+
+Nach der Bereinigung: Starte kurz `npm run dev` und prüfe, ob die App noch läuft.
+
+> **Du hast bereits ein PRD ohne den Abschnitt "Starter Kit Nutzung"?**
+> Führe zuerst diesen Prompt in einem normalen Chat aus, bevor du `/adapt-to-project` aufrufst:
+>
+> ```
+> Lies mein bestehendes PRD in docs/project/prds/[name].md vollständig.
+> Ergänze einen Abschnitt "Starter Kit Nutzung" mit einer Tabelle der genutzten
+> Starter-Kit-Bausteine (Auth, DB, UI, E-Mail, LLM, REST API, File Upload) und
+> einer Liste der Demo-Inhalte, die für dieses Projekt nicht relevant sind. Orientiere Dich am Kapitel "Starter Kit Nutzung" in .agents/skills/create-prd/references/prd-template.md.
+> Speichere das aktualisierte PRD.
+> ```
+>
+> Prüfe das Ergebnis kurz und bestätige, dass die Liste korrekt ist.
+
+### Schritt 4: Neue Session für das erste Feature starten
+
+Beende nach dem bestätigten PRD und der Bereinigung die Session oder starte mindestens einen neuen Chat. Öffne eine neue Agent-Session für das erste konkrete Feature und lade den Kontext erneut:
 
 ```text
 /prime
 ```
 
-### Schritt 4: Einzelnes Feature aus dem PRD planen
+### Schritt 5: Einzelnes Feature aus dem PRD planen
 
 ```text
 /plan-feature "Aus docs/project/prds/antragssystem.md das Feature Antrag-Formular mit Statusänderung planen"
@@ -156,7 +191,7 @@ Der Agent recherchiert im PRD und im Repo, stellt gezielte Rückfragen und erste
 - `docs/project/features/antrag-formular/plan.md`
 - einen Eintrag in `TASKS.md`
 
-### Schritt 5: Feature-Plan prüfen
+### Schritt 6: Feature-Plan prüfen
 
 Lies den Plan. Achte besonders auf:
 
@@ -169,7 +204,7 @@ Lies den Plan. Achte besonders auf:
 
 Bestätige den Feature-Plan erst, wenn er fachlich und technisch zum PRD passt.
 
-### Schritt 6: Feature-Plan ausführen
+### Schritt 7: Feature-Plan ausführen
 
 ```text
 /execute docs/project/features/antrag-formular/plan.md
@@ -177,7 +212,7 @@ Bestätige den Feature-Plan erst, wenn er fachlich und technisch zum PRD passt.
 
 Der Agent arbeitet Task für Task. Nach jedem Task stoppt er, zeigt das Ergebnis und wartet auf Bestätigung. Der Status wird direkt in der Plan-Datei aktualisiert.
 
-### Schritt 7: Validieren
+### Schritt 8: Validieren
 
 Nach jedem Task prüfst du oder der Agent:
 
@@ -193,7 +228,7 @@ npm run dev
 
 Prüfe im Browser, ob das Feature für die vorgesehenen Rollen funktioniert. Bei grösseren Änderungen wird zusätzlich `npm run build` verwendet. E2E-Tests laufen mit `npm run test:e2e`, wenn der Plan es verlangt oder du es ausdrücklich willst.
 
-### Schritt 8: Optionalen Zwischencommit erstellen
+### Schritt 9: Optionalen Zwischencommit erstellen
 
 Wenn ein Task oder eine kohärente Phase validiert ist, darfst du einen Zwischencommit erstellen:
 
@@ -205,7 +240,7 @@ Der Agent prüft die Änderungen, schlägt eine Conventional-Commit-Message vor 
 
 Zwischencommits sind besonders sinnvoll bei längeren Features, Schema-Änderungen, abgeschlossenen UI-/Backend-Phasen oder bevor du den Branch mit anderen teilst. Sie ersetzen aber nicht den Feature-Abschluss: Erst wenn alle Tasks `done` sind, die Validierung dokumentiert ist, `/document` gelaufen ist und ein allfälliger `/reflect-rules`-Bedarf geprüft wurde, gilt das Feature als fertig.
 
-### Schritt 9: Feature dokumentieren
+### Schritt 10: Feature dokumentieren
 
 Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
 
@@ -215,7 +250,7 @@ Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
 
 `/document` erstellt `user-guide.md` und `developer-notes.md` im Feature-Ordner. Am Ende weist der Skill darauf hin, dass `/reflect-rules` bei Verdacht auf regelbezogene Probleme direkt in derselben Session genutzt werden soll.
 
-### Schritt 10: Agent-Regeln reflektieren und final committen
+### Schritt 11: Agent-Regeln reflektieren und final committen
 
 Nach `/document` prüfst du, ob aus der Umsetzung dauerhafte Regel- oder Skill-Verbesserungen entstehen sollen. Nutze `/reflect-rules` vor allem dann, wenn es während Umsetzung oder Dokumentation auffällig viele Korrekturen, Nacharbeiten, Planabweichungen oder regelbezogene Missverständnisse gab:
 
@@ -234,7 +269,7 @@ Der Skill schlägt Änderungen zuerst vor und setzt sie erst nach Bestätigung u
 
 Der anschliessende finale Commit enthält typischerweise die Feature-Dokumentation, Plan-Nachführung, bestätigte Regelanpassungen und letzte Cleanup-Änderungen.
 
-### Schritt 11: Für das nächste Feature neu starten
+### Schritt 12: Für das nächste Feature neu starten
 
 Wenn das nächste Feature aus dem PRD umgesetzt werden soll, starte wieder eine neue Agent- oder Chat-Session:
 
