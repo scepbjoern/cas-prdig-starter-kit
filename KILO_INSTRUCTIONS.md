@@ -13,7 +13,8 @@
 | Formulare | React Hook Form + Zod (zodResolver) |
 | ORM | Prisma 7.8 + SQLite lokal (Singleton: `src/lib/prisma.ts`) |
 | Auth | Better Auth 1.6 (Prisma-Adapter, 3 Rollen: `admin`/`user_applicant`/`user_reviewer`) |
-| REST API | Native Next.js Route Handlers + Zod (Pizzeria-Analogie: URL = Speisekarte, Handler = Kellner, Zod = Bestellprüfung) |
+| REST API (Server) | Native Next.js Route Handlers + Zod (Pizzeria-Analogie: URL = Speisekarte, Handler = Kellner, Zod = Bestellprüfung) |
+| REST API (Client) | Nativer `fetch()` in Route Handlers (kein Axios); externe Calls immer serverseitig über Proxy-Endpunkt, nie direkt aus dem Browser |
 | LLM | OpenAI SDK, OpenRouter oder together.ai (`src/lib/ai.ts`, kein LangChain, kein RAG) |
 | E-Mail | Resend + HTML-Template-Strings (`src/lib/services/emailService.ts`, kein React Email) |
 | File Upload | `public/uploads/` + Node.js `fs` (lokal), optional UploadThing |
@@ -29,6 +30,11 @@
 - Kommentare: **Deutsch**, laienverständlich; jede neue Datei mit 1–2 Sätzen Kopf-Kommentar
 - Namen: ausführlich und selbsterklärend (`createAntragAction`, `validateFormData`)
 - Keine Emojis, ausser explizit gewünscht
+
+## Dokumentationsstruktur (docs/)
+
+- `docs/starter-kit-usage/` – Anleitungen für Studierende: Was tut ein Feature, wie nutze ich es? Kein tiefer Code, keine Implementierungsdetails.
+- `docs/starter-kit-erstellung/` – Implementierungsanleitungen für Agents und technisch Interessierte: Vollständiger Code, Schritt-für-Schritt, Architekturentscheide.
 
 ## Projektstruktur (src/-Layout)
 
@@ -69,10 +75,12 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 - Import immer: `import { prisma } from '@/lib/prisma'`
 - **NIE** `new PrismaClient()` direkt aufrufen – immer den Singleton verwenden
 - Prisma 7: PrismaClient benötigt Adapter (bereits in `lib/prisma.ts` konfiguriert)
-- Nach Schema-Änderungen **Benutzer auffordern**, den Reset auszuführen:
+- Nach Schema-Änderungen zuerst `npx prisma generate` ausführen, dann den Reset:
   ```
+  npx prisma generate
   npm run db:reset
   ```
+  Ohne `prisma generate` schlägt der Seed mit «Unknown argument» fehl, weil der Client die neuen Felder noch nicht kennt.
 - Keine Prisma Migrations verwenden.
 
 ## Auth (Better Auth)
@@ -90,6 +98,7 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 - Zod-Schema für Body: `const result = schema.safeParse(await req.json())`
 - Antwort: `NextResponse.json(data)` oder `NextResponse.json({ error }, { status: 400 })`
 - Next.js 16: `params` ist ein Promise → `const { id } = await params`
+- Auth-Prüfung: `getSession()` nur wenn der Endpunkt private Daten zurückgibt oder schreibt. Öffentliche Proxy-Endpunkte (z.B. PLZ-Lookup, öffentliche Stammdaten) brauchen keine Session-Prüfung.
 - Erklärung für Studierende: URL = Speisekarte, Handler = Kellner, Zod = Bestellprüfung, Prisma = Küche
 
 ## LLM Integration (OpenAI / OpenRouter / together.ai)
