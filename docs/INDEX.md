@@ -35,6 +35,7 @@ Die Ordner unter `docs/project/` enthalten teilweise `.gitkeep`-Platzhalter. Die
 | [`starter-kit-usage/SCHEMA_RESET_WORKFLOW.md`](starter-kit-usage/SCHEMA_RESET_WORKFLOW.md) | Datenbank-Schema ändern |
 | [`starter-kit-usage/TESTING.md`](starter-kit-usage/TESTING.md) | Unit Tests und E2E Tests: was, warum, wie ausführen |
 | [`starter-kit-usage/VSCODE_PORT_FORWARDING.md`](starter-kit-usage/VSCODE_PORT_FORWARDING.md) | App für Demos öffentlich zugänglich machen |
+| [`starter-kit-usage/FILE_UPLOAD_GUIDE.md`](starter-kit-usage/FILE_UPLOAD_GUIDE.md) | PDF hochladen, anzeigen und herunterladen |
 | [`starter-kit-usage/LLM_INTEGRATION.md`](starter-kit-usage/LLM_INTEGRATION.md) | KI-Features nutzen mit OpenAI oder Together.ai |
 | [`starter-kit-usage/EMAIL_INTEGRATION.md`](starter-kit-usage/EMAIL_INTEGRATION.md) | E-Mails senden und empfangen mit Resend |
 
