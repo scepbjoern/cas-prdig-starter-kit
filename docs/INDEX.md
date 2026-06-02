@@ -21,6 +21,7 @@ Die Ordner unter `docs/project/` enthalten teilweise `.gitkeep`-Platzhalter. Die
 | Dokument | Inhalt |
 |---|---|
 | [`../README.md`](../README.md) | Setup in 5 Schritten |
+| [`starter-kit-usage/TECH_STACK_OVERVIEW.md`](starter-kit-usage/TECH_STACK_OVERVIEW.md) | **Technischer Wegweiser:** Welche Bausteine hat das Starter Kit und wann schaue ich wo nach? |
 | [`starter-kit-usage/GETTING_STARTED.md`](starter-kit-usage/GETTING_STARTED.md) | Starter Kit für eigenes Projekt anpassen |
 | [`starter-kit-usage/PIV-WORKFLOW.md`](starter-kit-usage/PIV-WORKFLOW.md) | Plan -> Implement -> Validate mit Agent Skills |
 | [`starter-kit-usage/COLLABORATION.md`](starter-kit-usage/COLLABORATION.md) | Zusammenarbeit mehrerer Personen im selben Repository |
@@ -38,6 +39,7 @@ Die Ordner unter `docs/project/` enthalten teilweise `.gitkeep`-Platzhalter. Die
 | [`starter-kit-usage/FILE_UPLOAD_GUIDE.md`](starter-kit-usage/FILE_UPLOAD_GUIDE.md) | PDF hochladen, anzeigen und herunterladen |
 | [`starter-kit-usage/LLM_INTEGRATION.md`](starter-kit-usage/LLM_INTEGRATION.md) | KI-Features nutzen mit OpenAI oder Together.ai |
 | [`starter-kit-usage/EMAIL_INTEGRATION.md`](starter-kit-usage/EMAIL_INTEGRATION.md) | E-Mails senden und empfangen mit Resend |
+| [`starter-kit-usage/REST_CLIENT_GUIDE.md`](starter-kit-usage/REST_CLIENT_GUIDE.md) | Externe REST-APIs aufrufen: PLZ-Lookup als Muster-Beispiel |
 
 ## Optionale Cloud-Variante
 
@@ -63,6 +65,7 @@ Diese Anleitungen sind primär für AI Agents und interessierte Studierende geda
 | [`starter-kit-erstellung/impl-06-email.md`](starter-kit-erstellung/impl-06-email.md) | E-Mail Outbound und Inbound mit Resend | Umgesetzt |
 | [`starter-kit-erstellung/impl-07-ai.md`](starter-kit-erstellung/impl-07-ai.md) | LLM-Chat und Dokumentenanalyse | Umgesetzt |
 | [`starter-kit-erstellung/impl-08-documentation.md`](starter-kit-erstellung/impl-08-documentation.md) | Dokumentationsstruktur | Umgesetzt |
+| [`starter-kit-erstellung/impl-09-rest-client.md`](starter-kit-erstellung/impl-09-rest-client.md) | REST-Client: externe APIs aufrufen (PLZ-Lookup) | Umgesetzt |
 
 ## Projektdokumentation
 
