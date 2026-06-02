@@ -109,8 +109,9 @@ npm run db:studio  # Datenbankinhalt visuell im Browser ansehen
 
 | Rolle | E-Mail | Passwort |
 |---|---|---|
-| Antragsteller | `demo@example.com` | `demo1234` |
-| Reviewer | `review@example.com` | `review1234` |
+| Admin | `admin@example.com` | `a` |
+| Antragsteller | `applicant@example.com` | `a` |
+| Prüfer | `reviewer@example.com` | `a` |
 
 **Wann schaust du hier nach:** Wenn du Rollen anpassen, neue Demo-Nutzer anlegen oder rollenbasierte Sichten verstehen möchtest.
 

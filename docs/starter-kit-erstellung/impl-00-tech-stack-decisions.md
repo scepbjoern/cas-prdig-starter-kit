@@ -92,8 +92,9 @@ Wie in Abschnitt 1 beschrieben, ist die `prisma/seed.ts` das zentrale Mittel zur
 ```typescript
 // prisma/seed.ts – Beispielstruktur
 const users = [
-  { email: 'demo@example.com',  name: 'Demo User',  role: 'antragsteller' },
-  { email: 'review@example.com', name: 'Review User', role: 'reviewer'      },
+  { email: 'admin@example.com',     name: 'Admin Benutzer',     role: 'admin'         },
+  { email: 'applicant@example.com', name: 'Test Antragsteller', role: 'user_applicant'},
+  { email: 'reviewer@example.com',  name: 'Test Prüfer',        role: 'user_reviewer' },
 ];
 ```
 
@@ -184,12 +185,13 @@ Auth.js v5 ist eine solide Alternative, wenn eine Gruppe das vorzieht (bessere L
 
 ### Vordefinierte Demo-Nutzer via Seed-Datei
 
-Im Starter-Repo sind zwei Demo-Nutzer per Seed vorgesehen:
+Im Starter-Repo sind drei Demo-Nutzer per Seed vorgesehen:
 
 | Nutzer | E-Mail | Passwort | Rolle |
 |---|---|---|---|
-| Demo (Antragsteller) | `demo@example.com` | `demo1234` | `antragsteller` |
-| Review (Reviewer) | `review@example.com` | `review1234` | `reviewer` |
+| Admin | `admin@example.com` | `a` | `admin` |
+| Antragsteller | `applicant@example.com` | `a` | `user_applicant` |
+| Prüfer | `reviewer@example.com` | `a` | `user_reviewer` |
 
 Diese Accounts werden bei `npm run db:seed` automatisch angelegt. Jedes Gruppenmitglied kann nach dem Seeding sofort mit beiden Rollen arbeiten.
 
