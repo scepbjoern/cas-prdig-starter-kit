@@ -58,6 +58,7 @@ Diese Datei ist der ausführliche Coding-Guide. Sie soll enthalten:
 - Testing mit Vitest und Playwright
 - PIV-Loop mit `TASKS.md` als Feature-Index und `docs/project/features/[feature-name]/plan.md` als Arbeitsgrundlage
 - Verfügbare PIV-Skills aus `.agents/skills/`
+- Verdachtsbasierte Abschluss-Reflexion mit `/reflect-rules`, damit wiederholbare Agent-Fehler, Planlücken und wiederholte Nutzerkorrekturen in derselben Session in Regelvorschläge überführt werden können
 - Stop-and-ask-Regeln
 - Commit-Konventionen
 
@@ -94,6 +95,8 @@ Nie automatisch aktivieren – immer nur auf expliziten Aufruf.
 | prime | `/prime` | Session-Start: Projekt-Kontext laden |
 | plan-feature | `/plan-feature [Feature]` | Plan: Granularen Task-Plan erstellen |
 | execute | `/execute [Pfad-zum-Plan]` | Implement: Task-by-Task umsetzen |
+| document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen |
+| reflect-rules | `/reflect-rules [Pfad-zum-Plan]` | Validate/Retro: Agent-Regeln und Skills verbessern |
 | commit | `/commit` | Commit: Konventionellen Commit erstellen |
 | create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD generieren |
 | create-rules | `/create-rules` | Setup: Instructions-Dateien aktualisieren |

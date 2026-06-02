@@ -28,6 +28,7 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird | `/plan-feature "PRD Kapitel Antrag einreichen"` |
 | `execute` | Wenn ein Feature-Plan geprüft und bestätigt wurde | `/execute docs/project/features/antrag-formular/plan.md` |
 | `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan.md` |
+| `reflect-rules` | Nach `/document` bei Verdacht auf wiederholbare Agent-Fehler, Nacharbeiten, Planlücken oder wiederholte Nutzerkorrekturen | `/reflect-rules docs/project/features/antrag-formular/plan.md` |
 | `commit` | Nach einem validierten Task, einer kohärenten Phase oder am finalen Feature-Abschluss | `/commit` |
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
@@ -69,6 +70,9 @@ Danach pro Feature aus dem PRD wiederholen:
           |          Task 2 --> Validierung --> Stopp --> optional /commit
           v
        /document  --> finale Feature-Dokumentation
+          |
+          v
+      /reflect-rules --> bei Verdacht Agent-Regeln und Skill-Verbesserungen prüfen
           |
           v
        /commit  --> finaler Feature-Abschluss
@@ -199,20 +203,38 @@ Wenn ein Task oder eine kohärente Phase validiert ist, darfst du einen Zwischen
 
 Der Agent prüft die Änderungen, schlägt eine Conventional-Commit-Message vor und committed erst nach deiner Bestätigung. Ein Zwischencommit soll nur einen logisch zusammengehörenden, geprüften Stand enthalten. Committe keine bekannten roten Tests, keine undokumentierten Planabweichungen und keine fremden parallelen Änderungen.
 
-Zwischencommits sind besonders sinnvoll bei längeren Features, Schema-Änderungen, abgeschlossenen UI-/Backend-Phasen oder bevor du den Branch mit anderen teilst. Sie ersetzen aber nicht den Feature-Abschluss: Erst wenn alle Tasks `done` sind, die Validierung dokumentiert ist und `/document` gelaufen ist, gilt das Feature als fertig.
+Zwischencommits sind besonders sinnvoll bei längeren Features, Schema-Änderungen, abgeschlossenen UI-/Backend-Phasen oder bevor du den Branch mit anderen teilst. Sie ersetzen aber nicht den Feature-Abschluss: Erst wenn alle Tasks `done` sind, die Validierung dokumentiert ist, `/document` gelaufen ist und ein allfälliger `/reflect-rules`-Bedarf geprüft wurde, gilt das Feature als fertig.
 
-### Schritt 9: Feature dokumentieren und final committen
+### Schritt 9: Feature dokumentieren
 
 Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
 
 ```text
 /document docs/project/features/antrag-formular/plan.md
+```
+
+`/document` erstellt `user-guide.md` und `developer-notes.md` im Feature-Ordner. Am Ende weist der Skill darauf hin, dass `/reflect-rules` bei Verdacht auf regelbezogene Probleme direkt in derselben Session genutzt werden soll.
+
+### Schritt 10: Agent-Regeln reflektieren und final committen
+
+Nach `/document` prüfst du, ob aus der Umsetzung dauerhafte Regel- oder Skill-Verbesserungen entstehen sollen. Nutze `/reflect-rules` vor allem dann, wenn es während Umsetzung oder Dokumentation auffällig viele Korrekturen, Nacharbeiten, Planabweichungen oder regelbezogene Missverständnisse gab:
+
+```text
+/reflect-rules docs/project/features/antrag-formular/plan.md
 /commit
 ```
 
-`/document` erstellt `user-guide.md` und `developer-notes.md` im Feature-Ordner. Der anschliessende finale Commit enthält typischerweise die Dokumentation, Plan-Nachführung und letzte Cleanup-Änderungen.
+`/reflect-rules` betrachtet nicht nur technische Fehler, Planabweichungen und Nacharbeiten. Der Skill prüft auch, ob der Nutzer wiederholt Dinge aktiv vermitteln oder korrigieren musste, die durch bessere Projektregeln, Pflichtlektüre, Plan-Templates oder Skill-Schritte hätten klar sein sollen.
 
-### Schritt 10: Für das nächste Feature neu starten
+Führe `/reflect-rules` möglichst direkt in derselben Session nach `/document` aus, weil der Chatverlauf die wichtigste Quelle für Nutzerkorrekturen und Agent-Nacharbeiten ist. Der Skill arbeitet zuerst mit einer sparsamen Triage, kann bei vertiefter Analyse aber zusätzliche Input-Tokens brauchen.
+
+Mögliche Zielorte für bestätigte Anpassungen sind zum Beispiel `KILO_INSTRUCTIONS.md`, `AGENTS.md`, `CLAUDE.md`, `.agents/skills/prime/SKILL.md`, `.agents/skills/plan-feature/SKILL.md`, `.agents/skills/execute/SKILL.md`, `.agents/skills/document/SKILL.md` oder `docs/starter-kit-usage/PIV-WORKFLOW.md`.
+
+Der Skill schlägt Änderungen zuerst vor und setzt sie erst nach Bestätigung um. Informiere deinen Dozierenden über vorgenommene Regelvorschläge und Änderungen, damit auch das Starter-Kit-Repo mit der Zeit besser wird.
+
+Der anschliessende finale Commit enthält typischerweise die Feature-Dokumentation, Plan-Nachführung, bestätigte Regelanpassungen und letzte Cleanup-Änderungen.
+
+### Schritt 11: Für das nächste Feature neu starten
 
 Wenn das nächste Feature aus dem PRD umgesetzt werden soll, starte wieder eine neue Agent- oder Chat-Session:
 
@@ -221,7 +243,7 @@ Wenn das nächste Feature aus dem PRD umgesetzt werden soll, starte wieder eine 
 /plan-feature "Aus docs/project/prds/antragssystem.md das nächste Feature <Name> planen"
 ```
 
-Danach wiederholst du denselben Zyklus: Plan prüfen, `/execute`, pro Task oder Phase validieren, bei Bedarf Zwischencommits erstellen, am Ende `/document` und final `/commit`.
+Danach wiederholst du denselben Zyklus: Plan prüfen, `/execute`, pro Task oder Phase validieren, bei Bedarf Zwischencommits erstellen, am Ende `/document`, bei Verdacht `/reflect-rules` in derselben Session und final `/commit`.
 
 ## 5. Task-Status verstehen
 

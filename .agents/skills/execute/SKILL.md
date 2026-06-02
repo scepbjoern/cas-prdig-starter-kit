@@ -31,7 +31,7 @@ Beispiel:
 - Lösche keine Dateien ohne explizite Bestätigung.
 - Setze einen Task nie auf `done`, ohne Validierung in der Plan-Datei zu dokumentieren.
 - Nach einem validierten Task oder einer kohärenten validierten Phase darf ein optionaler Zwischencommit über `/commit` vorgeschlagen werden.
-- Ein Feature gilt erst nach allen `done`-Tasks, vollständiger Validierung und `/document` als abgeschlossen, auch wenn es bereits Zwischencommits gibt.
+- Ein Feature gilt erst nach allen `done`-Tasks, vollständiger Validierung und `/document` als fachlich dokumentiert. Wenn es während Umsetzung oder Dokumentation Verdacht auf wiederholbare Agent-Fehler, Planlücken oder wiederholte Nutzerkorrekturen gab, soll vor dem finalen Commit zusätzlich `/reflect-rules` laufen.
 - Im Mehrpersonen-Fall: Arbeite nur am eigenen bestätigten Feature und überschreibe keine Änderungen anderer Personen oder Branches.
 
 ## Pflichtlektüre vor Umsetzung
@@ -140,7 +140,7 @@ Am Ende der Umsetzung soll nach vollständiger Validierung der Dokumentations-Sk
 
 Der Skill erstellt Endanwender- und Entwicklerdokumentation im selben Feature-Unterordner, z.B. `docs/project/features/[feature-name]/user-guide.md` und `docs/project/features/[feature-name]/developer-notes.md`.
 
-Zwischencommits vor `/document` sind erlaubt, wenn der jeweilige Stand validiert und plan-konform ist. `/document` bleibt die finale Abschlussstufe für das gesamte Feature und wird danach normalerweise mit einem finalen `/commit` festgehalten.
+Zwischencommits vor `/document` sind erlaubt, wenn der jeweilige Stand validiert und plan-konform ist. Nach `/document` soll der Nutzer prüfen, ob `/reflect-rules` direkt in derselben Session sinnvoll ist. Das ist besonders wichtig, wenn der Chatverlauf Hinweise auf wiederholbare Agent-Fehler, Planlücken, ungewöhnliche Nacharbeiten oder wiederholte Nutzerkorrekturen enthält. Danach wird der Feature-Abschluss normalerweise mit einem finalen `/commit` festgehalten.
 
 ## Prisma-Regel
 
@@ -163,7 +163,7 @@ Wenn alle Tasks `done` sind:
 - Manuelle Test-Anleitung geben.
 - Hinweis auf den nächsten Workflow `/document docs/project/features/[feature-name]/plan.md` ausgeben.
 - Ready-for-Feature-Abschluss-Abschnitt ausgeben: Änderungen vollständig, Validierungen erfolgreich oder dokumentiert, offene Risiken genannt.
-- Auf `/document` und danach einen finalen `/commit` als nächste Workflows hinweisen, ohne selbst zu committen.
+- Auf `/document` als nächsten Workflow hinweisen.
 
 ## Unerwartete Issues und Planabweichungen
 

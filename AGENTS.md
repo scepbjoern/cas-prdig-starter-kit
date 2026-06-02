@@ -48,7 +48,7 @@ Kerntechnologien: Next.js 16 · shadcn/ui · Prisma 7 + SQLite · Better Auth ·
 
 - **Vitest** für Unit Tests (Zod-Schemas, Validierungslogik)
 - **Playwright** für E2E Tests (Login, CRUD-Flows)
-- PIV-Loop: Plan → Implement → **du führst `npm run test` aus** → Commit
+- PIV-Loop: Plan → Implement → **du führst `npm run test` aus** → Document → bei Verdacht Reflect Rules → Commit
   - Unit Tests laufen automatisch als Teil des Validate-Schritts
   - E2E Tests (`npm run test:e2e`) werden nur auf explizite Anfrage ausgeführt (benötigen laufenden Dev-Server)
 

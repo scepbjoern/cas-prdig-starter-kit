@@ -1,7 +1,7 @@
 ---
 name: document
 description: >
-  Creates end-user and developer documentation for an implemented and validated feature based on its confirmed plan, implementation results, and validation evidence. ONLY activate when the user explicitly runs /document or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
+  Creates end-user and developer documentation for an implemented and validated feature based on its confirmed plan, implementation results, and validation evidence, then points to /reflect-rules when there is suspicion of repeated agent mistakes, plan gaps, unusual rework, or repeated user corrections before the final /commit. ONLY activate when the user explicitly runs /document or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: validate
@@ -24,7 +24,7 @@ Beispiel:
 
 ## Ziel
 
-Erstelle die abschliessende Feature-Dokumentation als letzte Stufe vor `/commit`. Die Dokumentation beschreibt nur den bestätigten, umgesetzten und validierten Stand eines einzelnen Features.
+Erstelle die abschliessende Feature-Dokumentation als letzte Dokumentationsstufe vor dem finalen `/commit`. Wenn es Verdacht auf wiederholbare Agent-Fehler, Planlücken, ungewöhnliche Nacharbeiten oder wiederholte Nutzerkorrekturen gibt, soll vorher in derselben Session `/reflect-rules` empfohlen werden. Die Dokumentation beschreibt nur den bestätigten, umgesetzten und validierten Stand eines einzelnen Features.
 
 Der Skill trennt konsequent zwischen:
 
@@ -280,6 +280,8 @@ Gib nach dem Schreiben aus:
 - kurze Zusammenfassung pro Datei
 - dokumentierte Validierungsbasis
 - offene Annahmen, Risiken oder nicht ausführbare Prüfungen
-- Hinweis, dass danach `/commit` der nächste Workflow ist, ohne selbst zu committen
+- Hinweis, dass bei Verdacht auf Agent-Fehler, Planabweichungen, ungewöhnliche Nacharbeiten oder wiederholte Nutzerkorrekturen jetzt in derselben Session `/reflect-rules docs/project/features/[feature-name]/plan.md` genutzt werden soll, solange der Chatverlauf noch verfügbar ist
+- Hinweis, dass `/reflect-rules` zusätzliche Input-Tokens brauchen kann und deshalb vor allem bei solchen Verdachtsmomenten sinnvoll ist
+- Hinweis, dass der finale `/commit` nach der Entscheidung für oder gegen `/reflect-rules` folgen soll
 
 Wenn keine Dateien geschrieben wurden, erkläre knapp den Blocker und den konkreten nächsten Schritt.
