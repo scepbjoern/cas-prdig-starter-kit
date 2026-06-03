@@ -33,7 +33,7 @@ Die Anleitungen für API-Keys und Konfiguration der einzelnen Dienste findet ihr
 
 ---
 
-## 3. PRD erstellen
+## 3. PRD erstellen und reviewen
 
 Das PRD (Product Requirements Document) beschreibt euer IT-System: Rollen, Scope, Datenmodell, Features und Ausbaustufen. Es ist die fachliche Grundlage für alle späteren Feature-Pläne.
 
@@ -43,7 +43,19 @@ Das PRD (Product Requirements Document) beschreibt euer IT-System: Rollen, Scope
 
 Der Skill führt euch durch einen Dialog und schreibt das PRD. Falls eine Gesamtarchitektur vorhanden ist, könnt ihr diese als Kontext mitgeben.
 
-Prüft das PRD sorgfältig – insbesondere den Abschnitt **"Starter Kit Nutzung"**, der auflistet, welche Starter-Kit-Bausteine genutzt werden und welche Demo-Inhalte irrelevant sind. Bestätigt das PRD erst, wenn es als Grundlage für die Feature-Planung taugt.
+Der erste Entwurf wird als `v001` gespeichert und soll committed werden, bevor ihr den Review startet. Danach folgt mindestens eine kritische Review-Runde in einer frischen Agent-Session:
+
+```text
+/review-prd docs/project/prds/[systemname]-v001.md
+```
+
+Zurück in der Autor-Session integriert ihr den Review. Dabei entsteht eine neue PRD-Version, typischerweise `v002`:
+
+```text
+/integrate-prd-review docs/project/prds/[systemname]-v001.md docs/project/prd-reviews/[systemname]-v001-r01-review.md
+```
+
+Prüft die neue PRD-Version sorgfältig – insbesondere den Abschnitt **"Starter Kit Nutzung"**, der auflistet, welche Starter-Kit-Bausteine genutzt werden und welche Demo-Inhalte irrelevant sind. Bestätigt die neueste PRD-Version erst, wenn sie als Grundlage für die Feature-Planung taugt, und committed sie danach separat inklusive Review-/Integration-Dateien.
 
 Die vollständige Anleitung steht in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md).
 
@@ -51,15 +63,15 @@ Die vollständige Anleitung steht in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md).
 
 ## 4. Starter Kit bereinigen
 
-Nach PRD-Bestätigung bereinigt `/adapt-to-project` den Workspace automatisch: Demo-Seiten werden durch minimale Platzhalter ersetzt und irrelevante Demo-Entitäten aus dem Prisma-Schema entfernt. Der Skill validiert am Ende den Build und repariert TypeScript-Fehler selbst.
+Nach PRD-Review, Review-Integration und fachlicher Bestätigung der neuesten PRD-Version bereinigt `/adapt-to-project` den Workspace automatisch: Demo-Seiten werden durch minimale Platzhalter ersetzt und irrelevante Demo-Entitäten aus dem Prisma-Schema entfernt. Der Skill validiert am Ende den Build und repariert TypeScript-Fehler selbst.
 
 ```text
-/adapt-to-project docs/project/prds/[systemname].md
+/adapt-to-project docs/project/prds/[systemname]-v002.md
 ```
 
 Startet nach der Bereinigung `npm run dev` und prüft kurz, ob die App noch läuft. Danach habt ihr eine saubere Ausgangslage für die Feature-Entwicklung.
 
-> **Bereits ein PRD ohne "Starter Kit Nutzung"?** Lest zuerst den Retrofit-Hinweis in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md) (Schritt 3).
+> **Bereits ein PRD ohne "Starter Kit Nutzung"?** Lest zuerst den Retrofit-Hinweis in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md) (Schritt 5).
 
 ---
 

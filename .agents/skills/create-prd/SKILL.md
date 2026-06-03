@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: plan
-  version: "2.1"
+  version: "2.3"
 disable-model-invocation: true
 argument-hint: "[output-filename]"
 ---
@@ -145,11 +145,13 @@ Nach dem Schreiben des PRD:
 5. Im Mehrpersonen-Fall: Weise darauf hin, dass alle beteiligten Personen das gemeinsame PRD bestätigen sollen, bevor einzelne Features in `TASKS.md` Personen und Branches zugewiesen werden.
 6. Im Kurskontext: Empfiehl, Umfang und Ausbaustufen bei Bedarf mit dem Dozenten zu besprechen.
 
-7. Im Brownfield-/Starter-Kit-Kontext: Weise darauf hin, dass nach der PRD-Bestätigung `/adapt-to-project [PRD-Pfad]` ausgeführt werden soll, bevor die erste neue Feature-Session gestartet wird. Dieser Skill bereinigt Demo-Code auf Basis des PRDs und stellt sicher, dass die App danach noch lauffähig ist.
-8. Weise darauf hin, dass nach fachlicher Bestätigung des PRDs ein Commit erstellt werden soll. Dafür kann der Nutzer entweder `/commit` verwenden oder in VS Code Source Control die Änderungen committen und sich dort eine Commit Message vorschlagen lassen.
+7. Weise darauf hin, dass dieser erste PRD-Entwurf als `v001` committed werden soll, bevor der Review startet. Dafür kann der Nutzer entweder `/commit` verwenden oder in VS Code Source Control die Änderungen committen und sich dort eine Commit Message vorschlagen lassen.
+8. Weise darauf hin, dass als nächster Schritt eine neue Reviewer-Session gestartet werden soll: zuerst `/prime`, danach `/review-prd [PRD-Pfad]`.
+9. Weise darauf hin, dass die Review-Ergebnisse danach in der ursprünglichen Autor-Session mit `/integrate-prd-review [PRD-Pfad] [Review-Datei]` geprüft und in eine neue PRD-Version, z.B. `v002`, eingearbeitet werden sollen.
+10. Im Brownfield-/Starter-Kit-Kontext: Weise darauf hin, dass `/adapt-to-project [PRD-Pfad]` erst nach Review, Integration, neuer PRD-Version und fachlicher PRD-Bestätigung ausgeführt werden soll. Dieser Skill bereinigt Demo-Code auf Basis des bestätigten PRDs und stellt sicher, dass die App danach noch lauffähig ist.
 
 Abschlussfrage:
 
 ```text
-Ist das PRD vollständig und fachlich korrekt genug, um danach mit plan-feature einzelne Features zu planen?
+Ist dieser PRD-Entwurf vollständig genug, um ihn in einer frischen Session mit /review-prd kritisch prüfen zu lassen?
 ```

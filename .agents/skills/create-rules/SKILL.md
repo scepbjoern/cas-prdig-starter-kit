@@ -4,7 +4,7 @@ description: >
   Creates or updates project instruction files by analyzing the stack, repository structure, conventions, and available PIV skills. Use it when the project rules need to be generated or refreshed. ONLY activate when the user explicitly runs /create-rules or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
-  version: "1.0"
+  version: "1.1"
 disable-model-invocation: true
 ---
 
@@ -93,12 +93,15 @@ Nie automatisch aktivieren – immer nur auf expliziten Aufruf.
 | Skill | Aufruf | PIV-Phase |
 |---|---|---|
 | prime | `/prime` | Session-Start: Projekt-Kontext laden |
+| create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD-Entwurf als `v001` generieren |
+| review-prd | `/review-prd [Pfad-zum-PRD]` | Setup/Plan: PRD in frischer Reviewer-Session kritisch prüfen |
+| integrate-prd-review | `/integrate-prd-review [Pfad-zum-PRD] [Pfad-zum-Review]` | Setup/Plan: Review bewerten, PRD überarbeiten und Integration dokumentieren |
+| adapt-to-project | `/adapt-to-project [Pfad-zum-PRD]` | Setup: Demo-Code nach bestätigtem PRD bereinigen, Build validieren |
 | plan-feature | `/plan-feature [Feature]` | Plan: Granularen Task-Plan erstellen |
 | execute | `/execute [Pfad-zum-Plan]` | Implement: Task-by-Task umsetzen |
 | document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen |
 | reflect-rules | `/reflect-rules [Pfad-zum-Plan]` | Validate/Retro: Agent-Regeln und Skills verbessern |
 | commit | `/commit` | Commit: Konventionellen Commit erstellen |
-| create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD generieren |
 | create-rules | `/create-rules` | Setup: Instructions-Dateien aktualisieren |
 | init-project | `/init-project` | Setup: Projekt initialisieren |
 ```

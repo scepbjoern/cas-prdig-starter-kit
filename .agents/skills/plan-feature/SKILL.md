@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: plan
-  version: "1.1"
+  version: "1.2"
 disable-model-invocation: true
 argument-hint: "[feature-description-or-prd-reference]"
 ---
@@ -19,7 +19,7 @@ Feature-Beschreibung oder Referenz auf bestehende Datei: `$ARGUMENTS`
 Beispiele:
 
 - `/plan-feature Antrag-Formular mit Statusänderung`
-- `/plan-feature docs/project/prds/antrag-workflow-v001.md Kapitel Einreichung`
+- `/plan-feature docs/project/prds/antrag-workflow-v002.md Kapitel Einreichung`
 
 ## Grundregel
 

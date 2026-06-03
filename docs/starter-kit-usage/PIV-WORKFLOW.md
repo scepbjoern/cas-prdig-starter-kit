@@ -25,12 +25,14 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 |---|---|---|
 | `prime` | Zu Beginn einer Session, um Projektkontext zu laden | `/prime` |
 | `create-prd` | Am Anfang eines Starter-Kit-Projekts, um das konkrete IT-System, seine Ausbaustufen und dessen MVP-Scope zu beschreiben | `/create-prd docs/project/prds/antragssystem.md` plus Gesamtarchitektur-Markdown und `architecture.dsl`, falls vorhanden. Der Skill speichert das initiale PRD als `v001`, z.B. `antragssystem-v001.md`. |
-| `adapt-to-project` | Einmalig nach PRD-Bestätigung, vor dem ersten `plan-feature`: bereinigt Demo-Code auf Basis des PRDs und validiert den Build | `/adapt-to-project docs/project/prds/antragssystem-v001.md` |
+| `review-prd` | In einer frischen Reviewer-Session nach `/prime`, idealerweise mit anderem Modell: prüft das PRD kritisch und schreibt eine Review-Datei, ohne das PRD zu ändern | `/review-prd docs/project/prds/antragssystem-v001.md` |
+| `integrate-prd-review` | Zurück in der Autor-Session: bewertet Review-Vorschläge, holt Entscheidungen ein, erstellt die nächste PRD-Version und schreibt eine Integration-Datei | `/integrate-prd-review docs/project/prds/antragssystem-v001.md docs/project/prd-reviews/antragssystem-v001-r01-review.md` |
+| `adapt-to-project` | Einmalig nach PRD-Review, Review-Integration und fachlicher PRD-Bestätigung, vor dem ersten `plan-feature`: bereinigt Demo-Code auf Basis des PRDs und validiert den Build | `/adapt-to-project docs/project/prds/antragssystem-v002.md` |
 | `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird | `/plan-feature "PRD Kapitel Antrag einreichen"` |
 | `execute` | Wenn ein Feature-Plan geprüft und bestätigt wurde | `/execute docs/project/features/antrag-formular/plan.md` |
 | `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan.md` |
 | `reflect-rules` | Nach `/document` bei Verdacht auf wiederholbare Agent-Fehler, Nacharbeiten, Planlücken oder wiederholte Nutzerkorrekturen | `/reflect-rules docs/project/features/antrag-formular/plan.md` |
-| `commit` | Nach bestätigtem PRD, erfolgreicher Starter-Kit-Bereinigung, bestätigtem Feature-Plan, validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
+| `commit` | Nach initialem PRD-Entwurf `v001`, nach Review-Integration einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, bestätigtem Feature-Plan, validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
 
@@ -96,9 +98,79 @@ Prüfe das PRD sorgfältig:
 - Sind Architekturunterlagen anonymisiert, falls sie vertrauliche Informationen enthalten?
 - Enthält das PRD den Abschnitt "Starter Kit Nutzung" mit ausgefüllter Bausteine-Tabelle und Liste irrelevanter Demo-Inhalte?
 
-Bestätige das PRD erst, wenn es als Grundlage für die Feature-Planung taugt.
+Bestätige das PRD noch nicht final, bevor mindestens eine kritische Review-Runde gelaufen ist. Der erste Entwurf ist die Grundlage für den Review.
 
-Nach der fachlichen Bestätigung des PRDs sollst du den Stand committen. Nutze dafür entweder:
+Committe den ersten PRD-Entwurf, bevor du in die Review-Session wechselst. Dieser Commit hält die ungeprüfte Ausgangsversion `v001` fest:
+
+```text
+/commit
+```
+
+Alternativ kannst du den Commit in VS Code Source Control erstellen und dir dort eine Commit Message vorschlagen lassen.
+
+### Schritt 3: PRD in frischer Session reviewen
+
+Starte eine neue Agent- oder Chat-Session, idealerweise mit einem anderen Modell. Lade zuerst den aktuellen Projektkontext:
+
+```text
+/prime
+```
+
+Führe danach den Review aus:
+
+```text
+/review-prd docs/project/prds/antragssystem-v001.md
+```
+
+Der Reviewer prüft das PRD kritisch gegen PRD-Template, Projektregeln und PIV-Workflow. Er ändert das PRD nicht, sondern schreibt eine Datei unter:
+
+```text
+docs/project/prd-reviews/antragssystem-v001-r01-review.md
+```
+
+Diese frische Session ist wichtig: Der Reviewer soll nicht die Entstehungsgeschichte des PRDs kennen, sondern beurteilen, ob das Dokument selbst tragfähig genug ist.
+
+### Schritt 4: Review in Autor-Session integrieren
+
+Gehe zurück in die ursprüngliche Autor-Session, in der das PRD erstellt wurde. Dort kann der Agent frühere Überlegungen aus dem PRD-Dialog berücksichtigen. Führe aus:
+
+```text
+/integrate-prd-review docs/project/prds/antragssystem-v001.md docs/project/prd-reviews/antragssystem-v001-r01-review.md
+```
+
+Der Integrations-Skill:
+
+- liest PRD und Review
+- bewertet jeden Review-Punkt kritisch
+- fragt dich vor PRD-Änderungen nach Bestätigung
+- erstellt danach eine neue PRD-Version, z.B. `docs/project/prds/antragssystem-v002.md`
+- schreibt eine verpflichtende Integration-Datei, z.B.:
+
+```text
+docs/project/prd-reviews/antragssystem-v001-r01-integration.md
+```
+
+Wenn ein Review-Punkt wegen Autor-Kontext abgelehnt wird, muss die Begründung in der Integration-Datei stehen; wenn sie für spätere Planung wichtig ist, gehört sie auch in die neue PRD-Version.
+
+Die Begriffe Version und Runde sind bewusst getrennt: Die Review-Runde bezieht sich auf eine konkrete PRD-Version. Im Normalfall hat jede Version nur `r01`: Aus `v001-r01-review` entsteht durch Integration `v002`; eine weitere Review prüft dann `v002-r01-review` und die Integration erzeugt `v003`. `r02` wird nur benötigt, wenn dieselbe PRD-Version nochmals reviewed wird, ohne dass vorher eine neue Version entstanden ist.
+
+Eine weitere Review ist optional. Sie ist sinnvoll, wenn nach der Integration kritische Punkte offen bleiben, grosse PRD-Abschnitte neu geschrieben wurden oder der Scope weiterhin unscharf ist:
+
+```text
+/review-prd docs/project/prds/antragssystem-v002.md docs/project/prd-reviews/antragssystem-v001-r01-integration.md
+```
+
+Danach folgt wieder die Integration in der Autor-Session:
+
+```text
+/integrate-prd-review docs/project/prds/antragssystem-v002.md docs/project/prd-reviews/antragssystem-v002-r01-review.md
+```
+
+Mehr als zwei Review-/Integrationszyklen sind normalerweise nicht nötig. Wenn danach noch grundlegende Unsicherheit besteht, sollte der Scope mit dem Dozenten oder der Gruppe geklärt werden.
+
+Bestätige die neueste PRD-Version erst nach Review und Integration, wenn sie als Grundlage für `/adapt-to-project` und spätere Feature-Planung taugt.
+
+Nach der fachlichen Bestätigung der neuen PRD-Version sollst du den Stand committen. Der Commit enthält typischerweise die neue PRD-Version und die zugehörigen Review-/Integration-Dateien. Nutze dafür entweder:
 
 ```text
 /commit
@@ -106,13 +178,15 @@ Nach der fachlichen Bestätigung des PRDs sollst du den Stand committen. Nutze d
 
 Oder erstelle den Commit in VS Code Source Control. Dort kannst du dir bei Bedarf eine Commit Message vorschlagen lassen.
 
-### Schritt 3: Starter Kit bereinigen
+### Schritt 5: Starter Kit bereinigen
+
+Verwende hier die neueste fachlich bestätigte PRD-Version, im Normalfall nach einer Review-Integration also z.B.:
 
 ```text
-/adapt-to-project docs/project/prds/antragssystem-v001.md
+/adapt-to-project docs/project/prds/antragssystem-v002.md
 ```
 
-Dieser Schritt läuft **einmalig**, direkt nach PRD-Bestätigung und noch in derselben oder einer neuen Session – jedenfalls bevor die erste Feature-Session gestartet wird.
+Dieser Schritt läuft **einmalig**, direkt nach Review, Integration und PRD-Bestätigung – jedenfalls bevor die erste Feature-Session gestartet wird.
 
 Der Skill liest den Abschnitt "Starter Kit Nutzung" aus dem bestätigten PRD, schlägt vor, welche Demo-Seiten durch Platzhalter ersetzt und welche Demo-Prisma-Modelle entfernt werden, und führt die Bereinigung nach deiner Bestätigung durch. Am Ende validiert er den Build automatisch: `npm run build` muss grün sein, bevor der Skill abschliesst.
 
@@ -135,7 +209,7 @@ Wenn Bereinigung und Prüfung erfolgreich sind, erstelle auch für diesen abgesc
 >
 > Prüfe das Ergebnis kurz und bestätige, dass die Liste korrekt ist.
 
-### Schritt 4: Neue Session für das erste Feature starten
+### Schritt 6: Neue Session für das erste Feature starten
 
 Beende nach dem bestätigten PRD und der Bereinigung die Session oder starte mindestens einen neuen Chat. Öffne eine neue Agent-Session für das erste konkrete Feature und lade den Kontext erneut:
 
@@ -143,10 +217,10 @@ Beende nach dem bestätigten PRD und der Bereinigung die Session oder starte min
 /prime
 ```
 
-### Schritt 5: Einzelnes Feature aus dem PRD planen
+### Schritt 7: Einzelnes Feature aus dem PRD planen
 
 ```text
-/plan-feature "Aus docs/project/prds/antragssystem-v001.md das Feature Antrag-Formular mit Statusänderung planen"
+/plan-feature "Aus docs/project/prds/antragssystem-v002.md das Feature Antrag-Formular mit Statusänderung planen"
 ```
 
 Der Agent recherchiert im PRD und im Repo, stellt gezielte Rückfragen und erstellt danach:
@@ -154,7 +228,7 @@ Der Agent recherchiert im PRD und im Repo, stellt gezielte Rückfragen und erste
 - `docs/project/features/antrag-formular/plan.md`
 - einen Eintrag in `TASKS.md`
 
-### Schritt 6: Feature-Plan prüfen
+### Schritt 8: Feature-Plan prüfen
 
 Lies den Plan. Achte besonders auf:
 
@@ -169,7 +243,7 @@ Bestätige den Feature-Plan erst, wenn er fachlich und technisch zum PRD passt.
 
 Nach der Bestätigung des Feature-Plans sollst du die Plan-Datei und den aktualisierten Eintrag in `TASKS.md` committen. Dadurch startet `/execute` später von einem klar bestätigten Planstand. Nutze dafür `/commit` oder VS Code Source Control mit vorgeschlagener Commit Message.
 
-### Schritt 7: Neue Session für die Umsetzung starten
+### Schritt 9: Neue Session für die Umsetzung starten
 
 Nach dem bestätigten Feature-Plan startest du bewusst eine neue Session. So beginnt `/execute` mit frischem Kontext – ohne die Planungsgeschichte, Rückfragen und Zwischenentscheide aus der Planungs-Session.
 
@@ -179,7 +253,7 @@ Nach dem bestätigten Feature-Plan startest du bewusst eine neue Session. So beg
 
 Der Agent liest erneut Projektregeln, aktuellen Stand und den soeben bestätigten Feature-Plan in `docs/project/features/[feature-name]/plan.md`.
 
-### Schritt 8: Feature-Plan ausführen
+### Schritt 10: Feature-Plan ausführen
 
 ```text
 /execute docs/project/features/antrag-formular/plan.md
@@ -187,7 +261,7 @@ Der Agent liest erneut Projektregeln, aktuellen Stand und den soeben bestätigte
 
 Der Agent arbeitet Task für Task. Nach jedem Task stoppt er, zeigt das Ergebnis und wartet auf Bestätigung. Der Status wird direkt in der Plan-Datei aktualisiert.
 
-### Schritt 9: Validieren
+### Schritt 11: Validieren
 
 Nach jedem Task prüfst du oder der Agent:
 
@@ -203,7 +277,7 @@ npm run dev
 
 Prüfe im Browser, ob das Feature für die vorgesehenen Rollen funktioniert. Bei grösseren Änderungen wird zusätzlich `npm run build` verwendet. E2E-Tests laufen mit `npm run test:e2e`, wenn der Plan es verlangt oder du es ausdrücklich willst.
 
-### Schritt 10: Optionalen Zwischencommit erstellen
+### Schritt 12: Optionalen Zwischencommit erstellen
 
 Wenn ein Task oder eine kohärente Phase validiert ist, darfst du einen Zwischencommit erstellen:
 
@@ -217,7 +291,7 @@ Zwischencommits sind besonders sinnvoll bei längeren Features, Schema-Änderung
 
 Alternativ zu `/commit` kannst du auch in VS Code Source Control committen und dir dort eine Commit Message vorschlagen lassen. Wichtig ist nicht das Tool, sondern dass der Commit klein, nachvollziehbar und validiert ist.
 
-### Schritt 11: Feature dokumentieren
+### Schritt 13: Feature dokumentieren
 
 Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
 
@@ -227,7 +301,7 @@ Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
 
 `/document` erstellt `user-guide.md` und `developer-notes.md` im Feature-Ordner. Am Ende weist der Skill darauf hin, dass `/reflect-rules` bei Verdacht auf regelbezogene Probleme direkt in derselben Session genutzt werden soll.
 
-### Schritt 12: Agent-Regeln reflektieren und final committen
+### Schritt 14: Agent-Regeln reflektieren und final committen
 
 Nach `/document` prüfst du, ob aus der Umsetzung dauerhafte Regel- oder Skill-Verbesserungen entstehen sollen. Nutze `/reflect-rules` vor allem dann, wenn es während Umsetzung oder Dokumentation auffällig viele Korrekturen, Nacharbeiten, Planabweichungen oder regelbezogene Missverständnisse gab:
 
@@ -246,14 +320,14 @@ Der Skill schlägt Änderungen zuerst vor und setzt sie erst nach Bestätigung u
 
 Der anschliessende finale Commit enthält typischerweise die Feature-Dokumentation, Plan-Nachführung, bestätigte Regelanpassungen und letzte Cleanup-Änderungen. Du kannst dafür `/commit` nutzen oder den Commit in VS Code Source Control mit vorgeschlagener Commit Message erstellen.
 
-### Schritt 13: Für das nächste Feature neu starten
+### Schritt 15: Für das nächste Feature neu starten
 
 Für jedes weitere Feature aus dem PRD startest du zweimal eine neue Session – einmal für die Planung, einmal für die Umsetzung:
 
 **Session A – Planung:**
 ```text
 /prime
-/plan-feature "Aus docs/project/prds/antragssystem-v001.md das nächste Feature <Name> planen"
+/plan-feature "Aus docs/project/prds/antragssystem-v002.md das nächste Feature <Name> planen"
 ```
 Plan prüfen und bestätigen. Danach Session beenden.
 

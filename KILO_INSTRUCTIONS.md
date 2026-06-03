@@ -140,13 +140,15 @@ Skills liegen in `.agents/skills/`. Aufruf per `/skill-name` im Chat, sofern das
 | Skill | Aufruf | PIV-Phase |
 |---|---|---|
 | prime | `/prime` | Session-Start: Projekt-Kontext laden |
+| create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD-Entwurf als `v001` generieren |
+| review-prd | `/review-prd [Pfad-zum-PRD]` | Setup/Plan: PRD in frischer Reviewer-Session kritisch prüfen |
+| integrate-prd-review | `/integrate-prd-review [Pfad-zum-PRD] [Pfad-zum-Review]` | Setup/Plan: Review bewerten, PRD überarbeiten und Integration dokumentieren |
+| adapt-to-project | `/adapt-to-project [Pfad-zum-PRD]` | Setup: Demo-Code nach bestätigtem PRD bereinigen, Build validieren |
 | plan-feature | `/plan-feature [Feature]` | Plan: Granularen Feature-Plan erstellen |
 | execute | `/execute [Pfad-zum-Plan]` | Implement: Task-by-Task umsetzen |
 | document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen |
 | reflect-rules | `/reflect-rules [Pfad-zum-Plan]` | Validate/Retro: Agent-Regeln und Skills verbessern |
 | commit | `/commit` | Commit: Konventionellen Commit erstellen |
-| create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD generieren (Skeleton) |
-| adapt-to-project | `/adapt-to-project [Pfad-zum-PRD]` | Setup: Demo-Code bereinigen, Build validieren |
 | create-rules | `/create-rules` | Setup: Instructions-Dateien aktualisieren |
 | init-project | `/init-project` | Setup: Projekt initialisieren |
 

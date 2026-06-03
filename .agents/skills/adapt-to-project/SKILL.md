@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: setup
-  version: "1.0"
+  version: "1.2"
 disable-model-invocation: true
 argument-hint: "[path-to-prd]"
 ---
@@ -19,14 +19,14 @@ Pfad zum bestätigten PRD: `$ARGUMENTS`
 Beispiel:
 
 ```text
-/adapt-to-project docs/project/prds/antragssystem.md
+/adapt-to-project docs/project/prds/antragssystem-v002.md
 ```
 
 ## Zweck
 
 Der Starter Kit enthält Demo-Seiten, Demo-Entitäten und Demo-Code, der für die meisten konkreten Projekte nicht relevant ist. Dieser Skill bereinigt den Workspace gezielt auf Basis des PRDs und hinterlässt eine lauffähige Applikation als saubere Ausgangslage für die Feature-Entwicklung.
 
-Dieser Skill läuft **genau einmal pro Projekt**, nach PRD-Bestätigung und vor dem ersten `/plan-feature`.
+Dieser Skill läuft **genau einmal pro Projekt**, nach PRD-Review, Review-Integration, fachlicher PRD-Bestätigung und vor dem ersten `/plan-feature`.
 
 ## Grundregeln
 

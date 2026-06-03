@@ -15,7 +15,7 @@ Das PRD ist der gemeinsame Konsens über:
 - welche Rollen, Daten, Schnittstellen und Ausbaustufen relevant sind
 - was im MVP, in der Medium-Version, in der Extended-/Luxus-Version und ausserhalb des Scopes liegt
 
-Alle beteiligten Personen bestätigen dieses PRD fachlich, bevor die Arbeit aufgeteilt wird. Es gibt keine konkurrierenden Sub-PRDs pro Person.
+Alle beteiligten Personen bestätigen die neueste reviewte PRD-Version fachlich, bevor die Arbeit aufgeteilt wird. Es gibt keine konkurrierenden Sub-PRDs pro Person.
 
 Die Aufteilung erfolgt erst danach auf Feature-Ebene. Jede Person übernimmt ganze Features vertikal durch den Stack, zum Beispiel UI, Server Actions, Datenmodell, Rollenprüfung und Tests für ein konkretes Feature. Eine Aufteilung nach Schichten wie "Person A nur Frontend" und "Person B nur Backend" wird vermieden, weil sie mehr Abstimmung, Blockaden und Merge-Konflikte erzeugt.
 
@@ -29,10 +29,27 @@ Einmal gemeinsam pro IT-System:
   /prime
     |
     v
-  /create-prd  --> docs/project/prds/[system].md
+  /create-prd  --> docs/project/prds/[system]-v001.md
     |
     v
-  Alle beteiligten Personen prüfen und bestätigen das PRD
+  Commit: PRD-Erstentwurf v001
+    |
+    v
+  Neue Reviewer-Session:
+  /prime
+    |
+    v
+  /review-prd  --> docs/project/prd-reviews/[system]-v001-r01-review.md
+    |
+    v
+  Zurück in Autor-Session:
+  /integrate-prd-review  --> docs/project/prds/[system]-v002.md
+    |
+    v
+  Alle beteiligten Personen prüfen und bestätigen die neueste PRD-Version
+    |
+    v
+  Commit: PRD-Version + Review-/Integrationsdateien
 
 
 Danach pro Feature und Person:
@@ -61,7 +78,7 @@ Danach pro Feature und Person:
   validieren, optional Zwischencommits, dokumentieren, final committen
 ```
 
-Wichtig: Jede Person plant und implementiert ihr Feature auf Basis des gemeinsamen PRD und der aktuellen `TASKS.md`.
+Wichtig: Jede Person plant und implementiert ihr Feature auf Basis der neuesten bestätigten PRD-Version und der aktuellen `TASKS.md`.
 
 ## 3. TASKS.md als Koordinationsübersicht
 
@@ -142,7 +159,7 @@ Deshalb gilt diese einfache Konvention:
 Empfohlene Reihenfolge bei mehreren DB-nahen Features:
 
 ```text
-1. Gemeinsame PRD-Bestätigung
+1. Gemeinsame Bestätigung der neuesten reviewten PRD-Version
 2. Feature-Kandidaten mit Datenmodellbedarf markieren
 3. Foundation-Feature für Datenmodell planen
 4. Foundation-Feature umsetzen und validieren
@@ -186,6 +203,8 @@ Der Agent soll nur Dateien stagen, die zur bestätigten logischen Einheit gehör
 
 Typische Commit-Zeitpunkte:
 
+- nach dem initialen PRD-Entwurf `v001`
+- nach Review-Integration und fachlicher Bestätigung einer neuen PRD-Version
 - nach einem validierten Task als Zwischencommit
 - nach einer abgeschlossenen validierten Phase, z.B. Datenmodell oder UI-Grundgerüst
 - nach `/document` als finaler Feature-Commit

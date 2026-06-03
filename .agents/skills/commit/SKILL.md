@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: validate
-  version: "1.1"
+  version: "1.3"
 disable-model-invocation: true
 ---
 
@@ -23,7 +23,8 @@ Der Skill darf sowohl für validierte Zwischenstände während eines Features al
 
 Erlaubte Zeitpunkte:
 
-- Nach fachlicher Bestätigung eines initialen PRDs oder einer PRD-Aktualisierung.
+- Nach Erstellung des initialen PRD-Entwurfs `v001`, bevor die Review-Session startet.
+- Nach Review-Integration und fachlicher Bestätigung einer neuen PRD-Version, inklusive zugehöriger Review-/Integration-Artefakte.
 - Nach erfolgreicher `/adapt-to-project`-Bereinigung inklusive dokumentierter Build-Validierung.
 - Nach menschlicher Bestätigung eines Feature-Plans, um Plan-Datei und `TASKS.md` vor `/execute` zu sichern.
 - Nach einem einzelnen Task, wenn der Task validiert ist und der Status im Plan auf `done` steht.
