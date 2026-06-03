@@ -88,7 +88,7 @@ Format:
 ```text
 <type>(optional-scope): <short description>
 
-[optional body]
+<body>
 
 [optional footer]
 ```
@@ -106,14 +106,25 @@ Erlaubte Typen:
 - `ci`
 - `perf`
 
-Regeln:
+Regeln Subject:
 
 - Imperativ verwenden: `add`, nicht `added`
 - Subject ohne Punkt am Ende
 - Subject maximal 72 Zeichen
 - Scope verwenden, wenn sinnvoll
-- Body erklärt das Warum, nicht nur das Was
 - Breaking Changes mit `!` und `BREAKING CHANGE:` markieren
+
+Regeln Body:
+
+- Der Body ist verpflichtend, ausser bei trivialen Einzel-Datei-Änderungen ohne erklärungsbedürftigen Kontext (z.B. Tippfehler korrigieren).
+- Leerzeile zwischen Subject und Body.
+- Zeilen im Body maximal 72 Zeichen breit.
+- 2–5 Stichpunkte oder kurze Sätze – nicht erschöpfend, aber ausreichend, um ohne Diff-Lektüre zu verstehen, was sich verändert hat.
+- Inhalt des Bodys:
+  - Welche Bereiche oder Dateien sind betroffen (z.B. Prisma-Schema, Server Action, Formularkomponente, Tests)?
+  - Was genau wurde geändert oder hinzugefügt – nicht nur das Schlagwort aus dem Subject, sondern die konkreten Teile?
+  - Warum diese Entscheidung, wenn es nicht offensichtlich ist?
+- Nicht enthalten: Implementierungsdetails auf Zeilenebene, Redundanzen zum Subject, allgemeine Aussagen ohne Informationswert.
 
 ## Schritt 4: Bestätigung Einholen
 
