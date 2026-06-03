@@ -40,6 +40,10 @@ Findings, die vor `/execute` geklärt oder im Plan verbessert werden sollten.
 
 <Prüfung, ob der Plan zur referenzierten PRD-Version passt und keinen versteckten Zusatzscope plant.>
 
+## Versionierung und Plan-Änderungshistorie
+
+<Prüfung, ob Plan-Version und Plan-Änderungshistorie vorhanden, konsistent und nachvollziehbar sind.>
+
 ## Implementation Plan und Task-Qualität
 
 <Prüfung von Phasen, Reihenfolge, Abhängigkeiten, Task-Atomarität, IMPLEMENT/PATTERN/GOTCHA/ACCEPTANCE CRITERIA/VALIDATE.>
@@ -98,5 +102,6 @@ Prüfe vor dem Speichern:
 - [ ] Kritische Findings sind konkret und handlungsorientiert.
 - [ ] Architektur, Task-Reihenfolge, betroffene Dateien, Tests und Validierung wurden geprüft.
 - [ ] PRD-Abgleich und Scope-Grenzen wurden betrachtet.
+- [ ] Plan-Version und Plan-Änderungshistorie wurden geprüft.
 - [ ] Verbesserungsvorschläge sind so formuliert, dass `/integrate-feature-plan-review` sie einzeln bewerten kann.
 - [ ] Der nächste Schritt verweist zurück in die Autor-Session mit `/integrate-feature-plan-review`.

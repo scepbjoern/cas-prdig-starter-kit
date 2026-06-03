@@ -63,7 +63,7 @@ Wenn sich später fachlich etwas am PRD ändert, bearbeitet die bestehende Datei
 /update-prd docs/project/prds/[systemname]-v002.md
 ```
 
-Der Skill erstellt eine neue PRD-Version, ergänzt die Änderungshistorie und schreibt eine Update-Datei. Wenn dadurch bestehende Feature-Pläne betroffen sind, werden sie nicht automatisch geändert; dafür ist ein separater `/update-feature-plan`-Workflow vorgesehen.
+Der Skill erstellt eine neue PRD-Version, ergänzt die Änderungshistorie und schreibt eine Update-Datei. Wenn dadurch bestehende Feature-Pläne betroffen sind, werden sie nicht automatisch geändert; dafür nutzt ihr `/update-feature-plan`.
 
 Die vollständige Anleitung steht in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md).
 
@@ -98,5 +98,7 @@ Kurzablauf pro Feature:
 7. `/execute docs/project/features/[feature-name]/plan-v002.md` – Task für Task umsetzen
 8. Nach jedem Task: `npm run test` und manuelle Prüfung mit `npm run dev`
 9. Wenn alle Tasks `done`: `/document` ausführen, bei Verdacht auf wiederholbare Fehler `/reflect-rules`, dann `/commit`
+
+Wenn ein PRD-Update, Dozentenfeedback oder ein Befund während `/execute` einen bestehenden Feature-Plan betrifft, nutzt `/update-feature-plan docs/project/features/[feature-name]/plan-vNNN.md`. Der Skill erstellt eine neue Plan-Version, aktualisiert `TASKS.md` und schreibt eine Update-Datei im Feature-Ordner.
 
 `TASKS.md` ist nur ein Feature-Index. Detailtasks und Validierung liegen immer in der jeweiligen Datei `docs/project/features/[feature-name]/plan-vNNN.md`.

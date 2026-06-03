@@ -30,6 +30,10 @@ Dieses Template beschreibt die Struktur der verpflichtenden Integration-Datei. E
 
 - <Konkrete Änderung>
 
+## Plan-Änderungshistorie
+
+<Welche Zeile wurde in der Plan-Änderungshistorie der neuen Plan-Version ergänzt oder aktualisiert?>
+
 ## Teilweise übernommene Punkte
 
 - <Punkt und Begründung>
@@ -54,6 +58,7 @@ Prüfe vor dem Speichern:
 - [ ] Jede relevante Review-Empfehlung ist als übernommen, teilweise übernommen, abgelehnt oder offen dokumentiert.
 - [ ] Ablehnungen sind nachvollziehbar begründet, insbesondere wenn Autor-Session-Kontext eine Rolle spielt.
 - [ ] Die neue Plan-Version ist genannt und bleibt von der Ausgangsversion unterscheidbar.
+- [ ] Die Plan-Änderungshistorie der neuen Plan-Version enthält einen Eintrag für die Review-Integration.
 - [ ] `TASKS.md` zeigt auf die neue Plan-Version oder eine Abweichung ist begründet.
 - [ ] Offene Punkte enthalten einen konkreten nächsten Klärungsschritt.
 - [ ] Die Empfehlung für den nächsten Schritt nennt entweder eine weitere Review der neuen Plan-Version oder `/execute` mit dem neuen Plan-Pfad.

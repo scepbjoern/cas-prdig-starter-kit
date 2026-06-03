@@ -32,10 +32,11 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird: erstellt den initialen Plan `plan-v001.md` | `/plan-feature "PRD Kapitel Antrag einreichen"` |
 | `review-feature-plan` | In einer frischen Reviewer-Session nach `/prime`: prüft Architektur, Tasks, Reihenfolge und Validierung des Feature-Plans | `/review-feature-plan docs/project/features/antrag-formular/plan-v001.md` |
 | `integrate-feature-plan-review` | Zurück in der Autor-Session: bewertet Plan-Review-Vorschläge, erstellt die nächste Plan-Version und schreibt eine Integration-Datei | `/integrate-feature-plan-review docs/project/features/antrag-formular/plan-v001.md docs/project/features/antrag-formular/plan-reviews/plan-v001-r01-review.md` |
+| `update-feature-plan` | Bei PRD-Updates, Planfehlern, Execute-Befunden oder technischen Klärungen: erstellt eine neue Plan-Version und dokumentiert die Änderung | `/update-feature-plan docs/project/features/antrag-formular/plan-v002.md` |
 | `execute` | Wenn eine reviewte und bestätigte Feature-Plan-Version vorliegt | `/execute docs/project/features/antrag-formular/plan-v002.md` |
 | `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan-v002.md` |
 | `reflect-rules` | Nach `/document` bei Verdacht auf wiederholbare Agent-Fehler, Nacharbeiten, Planlücken oder wiederholte Nutzerkorrekturen | `/reflect-rules docs/project/features/antrag-formular/plan-v002.md` |
-| `commit` | Nach initialem PRD-Entwurf `v001`, nach Review-Integration oder Update einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, nach initialem Feature-Plan `plan-v001`, nach Review-Integration einer neuen Plan-Version, nach validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
+| `commit` | Nach initialem PRD-Entwurf `v001`, nach Review-Integration oder Update einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, nach initialem Feature-Plan `plan-v001`, nach Review-Integration oder Update einer neuen Plan-Version, nach validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
 
@@ -207,7 +208,13 @@ Committe die neue PRD-Version und die Update-Datei, bevor du die nächste Featur
 /commit
 ```
 
-Wenn vorhandene Feature-Pläne betroffen sind, ändere sie nicht nebenbei. Dafür ist ein separater `/update-feature-plan`-Workflow vorgesehen. Bis ein betroffener Plan aktualisiert wurde, soll er nicht als Grundlage für `/execute` verwendet werden.
+Wenn vorhandene Feature-Pläne betroffen sind, ändere sie nicht nebenbei. Nutze dafür:
+
+```text
+/update-feature-plan docs/project/features/antrag-formular/plan-v002.md docs/project/prd-updates/antragssystem-v002-to-v003-update.md
+```
+
+Bis ein betroffener Plan aktualisiert wurde, soll er nicht als Grundlage für `/execute` verwendet werden.
 
 ### Schritt 5: Starter Kit bereinigen
 
@@ -331,6 +338,34 @@ Bestätige die neueste Plan-Version erst nach Review und Integration, wenn sie a
 
 Nach der fachlichen Bestätigung der neuen Plan-Version sollst du den Stand committen. Der Commit enthält typischerweise die neue Plan-Version, den aktualisierten `TASKS.md`-Eintrag und die zugehörigen Plan-Review-/Integration-Dateien.
 
+### Feature-Plan bei Bedarf aktualisieren
+
+Wenn sich nach der Plan-Bestätigung etwas ändert, bearbeite die bestehende Plan-Datei nicht von Hand. Nutze stattdessen:
+
+```text
+/update-feature-plan docs/project/features/antrag-formular/plan-v002.md
+```
+
+Typische Auslöser:
+
+- Eine neue PRD-Version betrifft diesen Feature-Plan.
+- Während `/execute` stellt der Agent fest, dass der Plan widersprüchlich, unvollständig oder technisch nicht mehr passend ist.
+- Die Gruppe oder der Dozent klärt Scope, Architektur, Datenmodell, Rollen, Tests oder Validierung neu.
+
+`/update-feature-plan` fragt nach dem Änderungsanlass, zeigt vor dem Schreiben eine konkrete Änderungsvorschau, erstellt danach eine neue Plan-Version, z.B. `plan-v003.md`, ergänzt die `Plan-Änderungshistorie`, aktualisiert `TASKS.md` und schreibt eine Update-Datei unter:
+
+```text
+docs/project/features/antrag-formular/plan-updates/plan-v002-to-v003-update.md
+```
+
+Committe die neue Plan-Version, `TASKS.md` und die Update-Datei:
+
+```text
+/commit
+```
+
+Wenn Scope, Architektur, Datenmodell, Task-Struktur oder Validierungsstrategie wesentlich geändert wurden, ist danach eine erneute `/review-feature-plan`-Runde sinnvoll. Kleinere Korrekturen können nach fachlicher Bestätigung direkt wieder Grundlage für `/execute` sein.
+
 ### Schritt 10: Feature-Plan prüfen
 
 Lies die neueste Plan-Version. Achte besonders auf:
@@ -361,6 +396,8 @@ Der Agent liest erneut Projektregeln, aktuellen Stand und den soeben bestätigte
 ```
 
 Der Agent arbeitet Task für Task. Nach jedem Task stoppt er, zeigt das Ergebnis und wartet auf Bestätigung. Der Status wird direkt in der Plan-Datei aktualisiert.
+
+Wenn der Agent während der Umsetzung erkennt, dass der bestätigte Plan nicht mehr tragfähig ist, stoppt er. Er erklärt den Widerspruch und fordert dich auf, zuerst `/update-feature-plan [Plan-Pfad]` auszuführen. Wenn das zugrunde liegende PRD betroffen ist, muss vorher `/update-prd [PRD-Pfad]` laufen.
 
 ### Schritt 13: Validieren
 
@@ -470,9 +507,9 @@ Stoppe die Umsetzung sofort, wenn der Agent fachlich oder technisch vom bestäti
 Konkretes Vorgehen:
 
 1. Schreibe dem Agenten: `Stopp. Lies den Plan erneut und erkläre die Abweichung.`
-2. Verlange einen Vorschlag, wie `docs/project/features/[feature-name]/plan-vNNN.md` angepasst werden müsste.
-3. Genehmige Planänderungen erst, wenn du sie verstanden hast.
-4. Starte `/execute` erst wieder, wenn der Plan aktualisiert oder die ursprüngliche Umsetzung bestätigt ist.
+2. Verlange einen Vorschlag, welche Plan- oder PRD-Stelle nicht mehr tragfähig ist.
+3. Führe bei bestätigtem Änderungsbedarf `/update-feature-plan [Plan-Pfad]` aus; falls das PRD betroffen ist, zuerst `/update-prd [PRD-Pfad]`.
+4. Starte `/execute` erst wieder mit der neuen bestätigten und committeten Plan-Version.
 
 Ein neuer Chat-Kontext ist sinnvoll, wenn:
 

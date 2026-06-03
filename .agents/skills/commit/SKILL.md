@@ -29,6 +29,7 @@ Erlaubte Zeitpunkte:
 - Nach erfolgreicher `/adapt-to-project`-Bereinigung inklusive dokumentierter Build-Validierung.
 - Nach Erstellung des initialen Feature-Plans `plan-v001.md`, bevor die Feature-Plan-Review-Session startet.
 - Nach Review-Integration und fachlicher Bestätigung einer neuen Feature-Plan-Version, inklusive zugehöriger Plan-Review-/Integration-Artefakte.
+- Nach `/update-feature-plan` und fachlicher Bestätigung einer neuen Feature-Plan-Version, inklusive zugehöriger Update-Datei und `TASKS.md`.
 - Nach einem einzelnen Task, wenn der Task validiert ist und der Status im Plan auf `done` steht.
 - Nach einer kohärenten Phase, wenn alle enthaltenen Tasks validiert und dokumentiert sind.
 - Nach `/document`, um den finalen Feature-Abschluss inklusive `user-guide.md`, `developer-notes.md`, Plan-Nachführung und letzter Cleanup-Änderungen festzuhalten.

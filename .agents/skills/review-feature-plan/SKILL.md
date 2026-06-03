@@ -99,6 +99,7 @@ Fülle alle relevanten Abschnitte konkret aus. Entferne keine Qualitätsabschnit
 Prüfe insbesondere:
 
 - Passt der Feature-Plan zur referenzierten PRD-Version und plant er keinen versteckten Zusatzscope?
+- Ist die Plan-Version klar und gibt es eine nachvollziehbare Plan-Änderungshistorie?
 - Sind Architekturentscheidungen plausibel und passend zum Starter-Kit?
 - Sind Server Components, Client Components, Server Actions, Route Handler, Prisma, Auth, E-Mail, LLM oder Upload sinnvoll abgegrenzt?
 - Sind bestehende Patterns und Pflichtlektüre konkret genug referenziert?

@@ -99,7 +99,7 @@ Danach pro Feature und Person:
 
 Wichtig: Jede Person plant und implementiert ihr Feature auf Basis der neuesten bestätigten PRD-Version und der aktuellen `TASKS.md`.
 
-Wenn eine PRD-Aktualisierung bereits vorhandene Feature-Pläne betrifft, werden diese Pläne nicht nebenbei geändert. Dafür ist ein separater `/update-feature-plan`-Workflow vorgesehen; bis der betroffene Plan aktualisiert ist, soll er nicht für `/execute` verwendet werden.
+Wenn eine PRD-Aktualisierung bereits vorhandene Feature-Pläne betrifft, werden diese Pläne nicht nebenbei geändert. Dafür wird `/update-feature-plan [Plan-Pfad]` genutzt; bis der betroffene Plan aktualisiert ist, soll er nicht für `/execute` verwendet werden.
 
 ## 3. TASKS.md als Koordinationsübersicht
 
@@ -229,6 +229,7 @@ Typische Commit-Zeitpunkte:
 - nach `/update-prd` und fachlicher Bestätigung einer neuen PRD-Version
 - nach dem initialen Feature-Plan `plan-v001.md`
 - nach Review-Integration und fachlicher Bestätigung einer neuen Feature-Plan-Version
+- nach `/update-feature-plan` und fachlicher Bestätigung einer neuen Feature-Plan-Version
 - nach einem validierten Task als Zwischencommit
 - nach einer abgeschlossenen validierten Phase, z.B. Datenmodell oder UI-Grundgerüst
 - nach `/document` als finaler Feature-Commit

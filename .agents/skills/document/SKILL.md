@@ -48,7 +48,7 @@ Der Skill darf finale Dokumentation nur erstellen, wenn alle Bedingungen erfüll
 
 - `$ARGUMENTS` zeigt auf `docs/project/features/[feature-name]/plan-vNNN.md`.
 - Die Plan-Datei existiert und gehört zu genau einem Feature.
-- Die Feature-Plan-Version wurde vor `/execute` reviewed, integriert, fachlich bestätigt und committed.
+- Die Feature-Plan-Version wurde vor `/execute` reviewed und integriert oder mit `/update-feature-plan` versioniert aktualisiert, danach fachlich bestätigt und committed.
 - Alle relevanten Tasks im Plan stehen auf `done` oder begründete Ausnahmen sind im Plan dokumentiert.
 - Validierungsergebnisse sind im Plan dokumentiert, z.B. `npm run test`, `npm run build`, relevante E2E-Tests oder manuelle Prüfung.
 - Plan-/PRD-Abweichungen sind genehmigt und im Plan dokumentiert.

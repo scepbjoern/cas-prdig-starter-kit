@@ -127,10 +127,11 @@ Nach jedem Task soll der Nutzer `npm run dev` prüfen, falls ein UI- oder Laufze
 Wenn sich während der Implementierung ergibt, dass der bestätigte Plan oder ein zugrunde liegendes PRD nicht mehr korrekt ist:
 
 - Setze den betroffenen Task auf `needs_human`, wenn die Abweichung eine fachliche oder architektonische Entscheidung erfordert.
-- Erstelle einen konkreten Vorschlag, wie die aktuelle `docs/project/features/[feature-name]/plan-vNNN.md` aktualisiert werden soll.
-- Erstelle, falls ein PRD betroffen ist, einen konkreten Vorschlag, wie das PRD aktualisiert werden soll.
-- Zeige beide Vorschläge zur Genehmigung, bevor du Plan oder PRD inhaltlich änderst.
-- Dokumentiere nach Genehmigung in der Plan-Datei, welche Abweichung beschlossen wurde und warum.
+- Führe keine stille Korrektur im Produktivcode und keine direkte Änderung der bestehenden Plan-Version durch.
+- Erkläre konkret, welche Plan- oder PRD-Stelle nicht mehr tragfähig ist und warum daraus keine plan-konforme Umsetzung möglich ist.
+- Wenn das PRD betroffen ist, fordere den Nutzer auf, zuerst `/update-prd [PRD-Pfad]` auszuführen.
+- Wenn der Feature-Plan betroffen ist, fordere den Nutzer auf, danach oder direkt `/update-feature-plan [Plan-Pfad]` auszuführen.
+- Fahre erst mit `/execute [neuer Plan-Pfad]` fort, wenn die neue Plan-Version fachlich und technisch bestätigt sowie committed wurde.
 
 ## Dokumentation nach Umsetzung
 

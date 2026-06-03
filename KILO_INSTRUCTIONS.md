@@ -129,7 +129,7 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 1. **Plan** – Feature mit `/plan-feature [Feature]` planen. Root-`TASKS.md` bleibt nur Feature-Index; Details, Tasks und Akzeptanzkriterien liegen in `docs/project/features/[feature-name]/plan-v001.md`.
    - Wenn beim Planen ein PRD-Widerspruch oder eine fehlende fachliche Grundlage auffällt, stoppt der Agent und fordert zuerst `/update-prd [PRD-Pfad]` an. Die Feature-Planung wird danach mit der neuen PRD-Version fortgesetzt.
 2. **Review Plan** – Initialen Plan committen, dann in frischer Session mit `/review-feature-plan` prüfen und in der Autor-Session mit `/integrate-feature-plan-review` in eine neue Plan-Version überführen, typischerweise `plan-v002.md`.
-3. **Implement** – Mit `/execute docs/project/features/[feature-name]/plan-v002.md` genau einen Task nach dem anderen umsetzen. Task-Status und Validierung werden in der Plan-Datei dokumentiert.
+3. **Implement** – Mit `/execute docs/project/features/[feature-name]/plan-v002.md` genau einen Task nach dem anderen umsetzen. Task-Status und Validierung werden in der Plan-Datei dokumentiert. Wenn während der Umsetzung der Plan nicht mehr tragfähig ist, stoppt der Agent und fordert `/update-feature-plan [Plan-Pfad]` an.
 4. **Validate** – `npm run test` ausführen, Ergebnis auswerten und Fehler beheben. Bei grösseren Änderungen `npm run build`; E2E nur wenn relevant oder explizit angefragt. `npm run dev` wird vom Nutzer zur manuellen Prüfung gestartet.
 5. **Document** – Nach vollständiger Umsetzung und Validierung mit `/document` Endanwender- und Entwicklerdokumentation erstellen.
 6. **Reflect bei Verdacht** – Nach `/document` möglichst in derselben Session mit `/reflect-rules` prüfen, ob Agent-Fehler, Planlücken, Nacharbeiten oder wiederholte Nutzerkorrekturen dauerhafte Regel- oder Skill-Anpassungen erfordern. Dieser Schritt kann zusätzliche Input-Tokens brauchen und ist vor allem bei konkreten Verdachtsmomenten sinnvoll.
@@ -150,6 +150,7 @@ Skills liegen in `.agents/skills/`. Aufruf per `/skill-name` im Chat, sofern das
 | plan-feature | `/plan-feature [Feature]` | Plan: initialen Feature-Plan `plan-v001.md` erstellen |
 | review-feature-plan | `/review-feature-plan [Pfad-zum-Plan]` | Plan: Feature-Plan in frischer Reviewer-Session kritisch prüfen |
 | integrate-feature-plan-review | `/integrate-feature-plan-review [Pfad-zum-Plan] [Pfad-zum-Review]` | Plan: Review bewerten und neue Plan-Version erstellen |
+| update-feature-plan | `/update-feature-plan [Pfad-zum-Plan]` | Plan: Feature-Plan aufgrund PRD-Update, Planfehler oder technischer Klärung versioniert aktualisieren |
 | execute | `/execute [Pfad-zum-Plan]` | Implement: Task-by-Task umsetzen |
 | document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen |
 | reflect-rules | `/reflect-rules [Pfad-zum-Plan]` | Validate/Retro: Agent-Regeln und Skills verbessern |

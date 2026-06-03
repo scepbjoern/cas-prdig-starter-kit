@@ -141,7 +141,7 @@ Erkläre dem Nutzer konkret:
 
 Fordere den Nutzer auf, zuerst `/update-prd [PRD-Pfad]` auszuführen. Danach soll `/plan-feature` mit der neuen PRD-Version erneut gestartet werden.
 
-Wenn durch die PRD-Aktualisierung bereits vorhandene Feature-Pläne betroffen sind, weise darauf hin, dass dafür ein separater `/update-feature-plan`-Workflow vorgesehen ist. Dieser wird später genutzt, um betroffene Plan-Versionen nachzuziehen; bis dahin sollen sie nicht als Grundlage für `/execute` verwendet werden.
+Wenn durch die PRD-Aktualisierung bereits vorhandene Feature-Pläne betroffen sind, weise darauf hin, dass dafür `/update-feature-plan [Plan-Pfad]` genutzt werden soll. Bis dahin sollen betroffene Plan-Versionen nicht als Grundlage für `/execute` verwendet werden.
 
 ## Phase 5: Strategisches Durchdenken
 
@@ -186,7 +186,7 @@ Nutze kebab-case für `[feature-name]`, z.B. `docs/project/features/antrag-formu
 
 Die Datei ist kombinierter Spec+Plan+Tasks-Container. Verwende `references/plan-template.md` als Ausgangspunkt und fülle alle relevanten Abschnitte konkret aus. Entferne keine Qualitätsabschnitte nur deshalb, weil sie Arbeit machen; schreibe stattdessen `Nicht relevant` mit kurzer Begründung.
 
-Dokumentiere im Plan selbst die Plan-Version `v001`. Wenn ein Feature-Ordner bereits eine `plan-v001.md` enthält, stoppe und frage, ob eine neue Feature-Planung, eine Review-Integration oder eine Aktualisierung gemeint ist.
+Dokumentiere im Plan selbst die Plan-Version `v001` und fülle im Abschnitt `## Plan-Änderungshistorie` mindestens den Eintrag für `v001` aus. Wenn ein Feature-Ordner bereits eine `plan-v001.md` enthält, stoppe und frage, ob eine neue Feature-Planung, eine Review-Integration oder eine Aktualisierung gemeint ist.
 
 Task-Format:
 

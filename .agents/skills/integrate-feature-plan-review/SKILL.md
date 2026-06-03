@@ -48,6 +48,7 @@ Die Integration soll in der ursprünglichen Autor-Session laufen. Fahre erst for
 - Führe keine Produktivcode-Änderungen durch.
 - Wenn ein älterer Plan noch `plan.md` heisst, behandle ihn logisch als `plan-v001.md`.
 - Wenn die Ausgangsversion `plan-v001.md` ist, schreibe den integrierten Plan als `plan-v002.md`. Bei `plan-v002.md` schreibe `plan-v003.md` usw.
+- Ergänze in der neuen Plan-Version immer die Plan-Änderungshistorie. Lege sie an, falls die Ausgangsversion sie noch nicht enthält.
 
 ## Pflichtlektüre
 
@@ -127,10 +128,13 @@ Nach Bestätigung:
 1. Erstelle eine neue Plan-Datei mit der nächsten Versionsnummer.
 2. Kopiere den bestätigten Inhalt der Ausgangsversion als Basis und arbeite die bestätigten Review-Entscheidungen dort ein.
 3. Aktualisiere die Plan-Version im Plan selbst auf die neue Version, z.B. `v002`.
-4. Ergänze oder präzisiere nur Inhalte, die durch Review und menschliche Entscheidung gedeckt sind.
-5. Entferne keine fachlichen oder technischen Planinhalte, ausser die Entfernung wurde bestätigt oder ist eine direkte Korrektur eines Widerspruchs.
-6. Halte Tasks weiterhin atomar, top-to-bottom ausführbar und einzeln validierbar.
-7. Aktualisiere `TASKS.md`, damit der Feature-Eintrag auf die neue Plan-Version zeigt.
+4. Ergänze oder aktualisiere den Abschnitt `## Plan-Änderungshistorie` mit einer Zeile für die neue Version.
+5. Ergänze oder präzisiere nur Inhalte, die durch Review und menschliche Entscheidung gedeckt sind.
+6. Entferne keine fachlichen oder technischen Planinhalte, ausser die Entfernung wurde bestätigt oder ist eine direkte Korrektur eines Widerspruchs.
+7. Halte Tasks weiterhin atomar, top-to-bottom ausführbar und einzeln validierbar.
+8. Aktualisiere `TASKS.md`, damit der Feature-Eintrag auf die neue Plan-Version zeigt.
+
+Wenn die Ausgangsversion noch keine `## Plan-Änderungshistorie` enthält, lege den Abschnitt an. Dokumentiere darin mindestens `v001` als initiale Planung, soweit aus dem Dokument ableitbar, und die neue Zielversion als Review-Integration.
 
 ## Phase 4: Integration-Datei schreiben
 

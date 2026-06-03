@@ -175,7 +175,7 @@ Eine Warnung ist nötig, wenn:
 - die PRD-Änderung Scope, Rollen, Datenmodell, Statuswerte, Schnittstellen, Demo-Szenarien oder Feature-Kandidaten betrifft
 - ein aktiver oder geplanter Feature-Plan laut `TASKS.md` fachlich auf dem geänderten Bereich aufbaut
 
-Ändere keine Feature-Pläne automatisch. Weise stattdessen darauf hin, dass ein separater `/update-feature-plan`-Workflow vorgesehen ist und als nächster Schritt genutzt werden soll, sobald dieser Skill verfügbar ist. Bis dahin soll der betroffene Plan nicht als autoritative Grundlage für `/execute` verwendet werden.
+Ändere keine Feature-Pläne automatisch. Weise stattdessen darauf hin, dass als nächster Schritt `/update-feature-plan [Plan-Pfad]` genutzt werden soll. Bis dahin soll der betroffene Plan nicht als autoritative Grundlage für `/execute` verwendet werden.
 
 ## Phase 7: Abschluss
 

@@ -108,7 +108,7 @@ Erwartung:
 - Bei Prisma-Schema-Änderungen immer `npm run db:reset` ausführen.
 - Nie Prisma Migrations verwenden.
 - PRD-Änderungen nach fachlicher Klärung oder Dozentenfeedback mit `/update-prd` als neue PRD-Version dokumentieren und committen.
-- Neue Features mit `/plan-feature` planen, `plan-v001.md` committen, in frischer Session mit `/review-feature-plan` prüfen, in der Autor-Session mit `/integrate-feature-plan-review` in eine neue Plan-Version überführen, dann mit `/execute` umsetzen.
+- Neue Features mit `/plan-feature` planen, `plan-v001.md` committen, in frischer Session mit `/review-feature-plan` prüfen, in der Autor-Session mit `/integrate-feature-plan-review` in eine neue Plan-Version überführen, bei späterem Änderungsbedarf `/update-feature-plan` nutzen, dann mit `/execute` umsetzen.
 - Root-`TASKS.md` bleibt Feature-Index; Detailtasks liegen in `docs/project/features/[feature-name]/plan-vNNN.md`.
 
 ## Output

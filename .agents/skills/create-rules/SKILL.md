@@ -58,6 +58,7 @@ Diese Datei ist der ausführliche Coding-Guide. Sie soll enthalten:
 - Testing mit Vitest und Playwright
 - PIV-Loop mit `TASKS.md` als Feature-Index, `docs/project/features/[feature-name]/plan-v001.md` als initialem Plan, Feature-Plan-Review, Review-Integration und `docs/project/features/[feature-name]/plan-vNNN.md` als versionierter Arbeitsgrundlage für `/execute`
 - Versionierte PRD-Updates mit `/update-prd`, wenn fachliche Klärungen, Dozentenfeedback oder beim Planen erkannte PRD-Widersprüche eine neue PRD-Version erfordern
+- Versionierte Feature-Plan-Updates mit `/update-feature-plan`, wenn PRD-Updates, Planfehler, Ausführungsbefunde oder technische Klärungen eine neue Plan-Version erfordern
 - Verfügbare PIV-Skills aus `.agents/skills/`
 - Verdachtsbasierte Abschluss-Reflexion mit `/reflect-rules`, damit wiederholbare Agent-Fehler, Planlücken und wiederholte Nutzerkorrekturen in derselben Session in Regelvorschläge überführt werden können
 - Stop-and-ask-Regeln
@@ -102,6 +103,7 @@ Nie automatisch aktivieren – immer nur auf expliziten Aufruf.
 | plan-feature | `/plan-feature [Feature]` | Plan: initialen Feature-Plan `plan-v001.md` erstellen |
 | review-feature-plan | `/review-feature-plan [Pfad-zum-Plan]` | Plan: Feature-Plan in frischer Reviewer-Session kritisch prüfen |
 | integrate-feature-plan-review | `/integrate-feature-plan-review [Pfad-zum-Plan] [Pfad-zum-Review]` | Plan: Review bewerten und neue Plan-Version erstellen |
+| update-feature-plan | `/update-feature-plan [Pfad-zum-Plan]` | Plan: Feature-Plan aufgrund PRD-Update, Planfehler oder technischer Klärung versioniert aktualisieren |
 | execute | `/execute [Pfad-zum-Plan]` | Implement: Task-by-Task umsetzen |
 | document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen |
 | reflect-rules | `/reflect-rules [Pfad-zum-Plan]` | Validate/Retro: Agent-Regeln und Skills verbessern |

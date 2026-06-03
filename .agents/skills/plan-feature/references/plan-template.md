@@ -18,6 +18,14 @@
 | Primär betroffene Systeme | UI / Server Actions / Route Handler / Prisma / Auth / E-Mail / LLM / Tests |
 | Abhängigkeiten | <Libraries, ENV-Werte, Daten, Entscheidungen> |
 
+## Plan-Änderungshistorie
+
+| Version | Datum | Anlass | Kurzbeschreibung |
+|---|---|---|---|
+| v001 | YYYY-MM-DD | Initiale Planung | Erster Feature-Plan erstellt |
+
+Bei späteren Änderungen ergänzen `/integrate-feature-plan-review` oder `/update-feature-plan` neue Zeilen, ohne alte Einträge zu entfernen.
+
 ## Feature Description
 
 <Detaillierte Beschreibung des Features, Zweck und Nutzen für Nutzer.>

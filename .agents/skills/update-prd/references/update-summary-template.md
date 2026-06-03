@@ -43,11 +43,11 @@ Passe die Tiefe der Abschnitte an Umfang und Risiko der PRD-Änderung an. Markie
 
 | Feature-Plan | Betroffenheit | Begründung | Empfohlener nächster Schritt |
 |---|---|---|---|
-| `<Pfad oder Nicht relevant>` | `<ja / möglich / nein>` | `<Begründung>` | `<z.B. später /update-feature-plan ausführen>` |
+| `<Pfad oder Nicht relevant>` | `<ja / möglich / nein>` | `<Begründung>` | `<z.B. /update-feature-plan ausführen>` |
 
 ## Empfehlung für den nächsten Schritt
 
-<Neue PRD-Version fachlich bestätigen, committen und danach entweder mit dem nächsten Feature fortfahren oder betroffene Feature-Pläne mit dem vorgesehenen /update-feature-plan-Workflow nachziehen.>
+<Neue PRD-Version fachlich bestätigen, committen und danach entweder mit dem nächsten Feature fortfahren oder betroffene Feature-Pläne mit `/update-feature-plan` nachziehen.>
 
 ## Qualitätscheck vor Abschluss
 
@@ -60,4 +60,4 @@ Prüfe vor dem Speichern:
 - [ ] Auswirkungen auf vorhandene Feature-Pläne wurden geprüft.
 - [ ] Betroffene Feature-Pläne wurden nicht automatisch geändert.
 - [ ] Offene Fragen enthalten einen konkreten nächsten Klärungsschritt.
-- [ ] Die Empfehlung für den nächsten Schritt nennt Commit und, falls nötig, den späteren `/update-feature-plan`-Workflow.
+- [ ] Die Empfehlung für den nächsten Schritt nennt Commit und, falls nötig, `/update-feature-plan`.
