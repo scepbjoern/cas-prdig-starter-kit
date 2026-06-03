@@ -28,11 +28,13 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `review-prd` | In einer frischen Reviewer-Session nach `/prime`, idealerweise mit anderem Modell: prüft das PRD kritisch und schreibt eine Review-Datei, ohne das PRD zu ändern | `/review-prd docs/project/prds/antragssystem-v001.md` |
 | `integrate-prd-review` | Zurück in der Autor-Session: bewertet Review-Vorschläge, holt Entscheidungen ein, erstellt die nächste PRD-Version und schreibt eine Integration-Datei | `/integrate-prd-review docs/project/prds/antragssystem-v001.md docs/project/prd-reviews/antragssystem-v001-r01-review.md` |
 | `adapt-to-project` | Einmalig nach PRD-Review, Review-Integration und fachlicher PRD-Bestätigung, vor dem ersten `plan-feature`: bereinigt Demo-Code auf Basis des PRDs und validiert den Build | `/adapt-to-project docs/project/prds/antragssystem-v002.md` |
-| `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird | `/plan-feature "PRD Kapitel Antrag einreichen"` |
-| `execute` | Wenn ein Feature-Plan geprüft und bestätigt wurde | `/execute docs/project/features/antrag-formular/plan.md` |
-| `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan.md` |
-| `reflect-rules` | Nach `/document` bei Verdacht auf wiederholbare Agent-Fehler, Nacharbeiten, Planlücken oder wiederholte Nutzerkorrekturen | `/reflect-rules docs/project/features/antrag-formular/plan.md` |
-| `commit` | Nach initialem PRD-Entwurf `v001`, nach Review-Integration einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, bestätigtem Feature-Plan, validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
+| `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird: erstellt den initialen Plan `plan-v001.md` | `/plan-feature "PRD Kapitel Antrag einreichen"` |
+| `review-feature-plan` | In einer frischen Reviewer-Session nach `/prime`: prüft Architektur, Tasks, Reihenfolge und Validierung des Feature-Plans | `/review-feature-plan docs/project/features/antrag-formular/plan-v001.md` |
+| `integrate-feature-plan-review` | Zurück in der Autor-Session: bewertet Plan-Review-Vorschläge, erstellt die nächste Plan-Version und schreibt eine Integration-Datei | `/integrate-feature-plan-review docs/project/features/antrag-formular/plan-v001.md docs/project/features/antrag-formular/plan-reviews/plan-v001-r01-review.md` |
+| `execute` | Wenn eine reviewte und bestätigte Feature-Plan-Version vorliegt | `/execute docs/project/features/antrag-formular/plan-v002.md` |
+| `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan-v002.md` |
+| `reflect-rules` | Nach `/document` bei Verdacht auf wiederholbare Agent-Fehler, Nacharbeiten, Planlücken oder wiederholte Nutzerkorrekturen | `/reflect-rules docs/project/features/antrag-formular/plan-v002.md` |
+| `commit` | Nach initialem PRD-Entwurf `v001`, nach Review-Integration einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, nach initialem Feature-Plan `plan-v001`, nach Review-Integration einer neuen Plan-Version, nach validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
 
@@ -225,12 +227,76 @@ Beende nach dem bestätigten PRD und der Bereinigung die Session oder starte min
 
 Der Agent recherchiert im PRD und im Repo, stellt gezielte Rückfragen und erstellt danach:
 
-- `docs/project/features/antrag-formular/plan.md`
+- `docs/project/features/antrag-formular/plan-v001.md`
 - einen Eintrag in `TASKS.md`
 
-### Schritt 8: Feature-Plan prüfen
+Committe den initialen Feature-Plan `plan-v001.md` und den aktualisierten `TASKS.md`-Eintrag, bevor du in die Plan-Review-Session wechselst:
 
-Lies den Plan. Achte besonders auf:
+```text
+/commit
+```
+
+Alternativ kannst du den Commit in VS Code Source Control erstellen und dir dort eine Commit Message vorschlagen lassen.
+
+### Schritt 8: Feature-Plan in frischer Session reviewen
+
+Starte eine neue Agent- oder Chat-Session, idealerweise mit einem anderen Modell. Lade zuerst den aktuellen Projektkontext:
+
+```text
+/prime
+```
+
+Führe danach den Plan-Review aus:
+
+```text
+/review-feature-plan docs/project/features/antrag-formular/plan-v001.md
+```
+
+Der Reviewer prüft nicht den PRD-Scope im Grossen, sondern vor allem:
+
+- Architekturentscheidungen und Codebase-Fit
+- betroffene Dateien und Pflichtlektüre
+- Task-Reihenfolge und Task-Atomarität
+- Rollen, Datenmodell, Schnittstellen und Gotchas
+- Test- und Validierungsstrategie
+- Übergabereife für `/execute`
+
+Er ändert den Feature-Plan nicht, sondern schreibt eine Review-Datei, z.B.:
+
+```text
+docs/project/features/antrag-formular/plan-reviews/plan-v001-r01-review.md
+```
+
+### Schritt 9: Feature-Plan-Review in Autor-Session integrieren
+
+Gehe zurück in die ursprüngliche Autor-Session, in der der Feature-Plan erstellt wurde. Führe aus:
+
+```text
+/integrate-feature-plan-review docs/project/features/antrag-formular/plan-v001.md docs/project/features/antrag-formular/plan-reviews/plan-v001-r01-review.md
+```
+
+Der Integrations-Skill:
+
+- liest Feature-Plan und Review
+- bewertet jeden Review-Punkt kritisch
+- fragt dich vor Plan-Änderungen nach Bestätigung
+- erstellt danach eine neue Plan-Version, z.B. `docs/project/features/antrag-formular/plan-v002.md`
+- aktualisiert `TASKS.md` auf die neue Plan-Version
+- schreibt eine verpflichtende Integration-Datei, z.B.:
+
+```text
+docs/project/features/antrag-formular/plan-reviews/plan-v001-r01-integration.md
+```
+
+Auch hier sind Version und Runde getrennt: Im Normalfall hat jede Plan-Version nur `r01`. Aus `plan-v001-r01-review` entsteht durch Integration `plan-v002`; eine weitere Review prüft dann `plan-v002-r01-review` und die Integration erzeugt `plan-v003`.
+
+Bestätige die neueste Plan-Version erst nach Review und Integration, wenn sie als Grundlage für `/execute` taugt.
+
+Nach der fachlichen Bestätigung der neuen Plan-Version sollst du den Stand committen. Der Commit enthält typischerweise die neue Plan-Version, den aktualisierten `TASKS.md`-Eintrag und die zugehörigen Plan-Review-/Integration-Dateien.
+
+### Schritt 10: Feature-Plan prüfen
+
+Lies die neueste Plan-Version. Achte besonders auf:
 
 - Scope und Non-Scope
 - Etappe: MVP / Minimalversion, Medium-Version oder Extended-/Luxus-Version
@@ -239,29 +305,27 @@ Lies den Plan. Achte besonders auf:
 - Tasks und Akzeptanzkriterien
 - Validierungsschritte
 
-Bestätige den Feature-Plan erst, wenn er fachlich und technisch zum PRD passt.
+Bestätige die neueste Feature-Plan-Version erst, wenn sie fachlich und technisch zum PRD passt.
 
-Nach der Bestätigung des Feature-Plans sollst du die Plan-Datei und den aktualisierten Eintrag in `TASKS.md` committen. Dadurch startet `/execute` später von einem klar bestätigten Planstand. Nutze dafür `/commit` oder VS Code Source Control mit vorgeschlagener Commit Message.
+### Schritt 11: Neue Session für die Umsetzung starten
 
-### Schritt 9: Neue Session für die Umsetzung starten
-
-Nach dem bestätigten Feature-Plan startest du bewusst eine neue Session. So beginnt `/execute` mit frischem Kontext – ohne die Planungsgeschichte, Rückfragen und Zwischenentscheide aus der Planungs-Session.
+Nach dem bestätigten und reviewten Feature-Plan startest du bewusst eine neue Session. So beginnt `/execute` mit frischem Kontext – ohne die Planungsgeschichte, Rückfragen und Zwischenentscheide aus der Planungs-Session.
 
 ```text
 /prime
 ```
 
-Der Agent liest erneut Projektregeln, aktuellen Stand und den soeben bestätigten Feature-Plan in `docs/project/features/[feature-name]/plan.md`.
+Der Agent liest erneut Projektregeln, aktuellen Stand und den soeben bestätigten Feature-Plan in `docs/project/features/[feature-name]/plan-vNNN.md`.
 
-### Schritt 10: Feature-Plan ausführen
+### Schritt 12: Feature-Plan ausführen
 
 ```text
-/execute docs/project/features/antrag-formular/plan.md
+/execute docs/project/features/antrag-formular/plan-v002.md
 ```
 
 Der Agent arbeitet Task für Task. Nach jedem Task stoppt er, zeigt das Ergebnis und wartet auf Bestätigung. Der Status wird direkt in der Plan-Datei aktualisiert.
 
-### Schritt 11: Validieren
+### Schritt 13: Validieren
 
 Nach jedem Task prüfst du oder der Agent:
 
@@ -277,7 +341,7 @@ npm run dev
 
 Prüfe im Browser, ob das Feature für die vorgesehenen Rollen funktioniert. Bei grösseren Änderungen wird zusätzlich `npm run build` verwendet. E2E-Tests laufen mit `npm run test:e2e`, wenn der Plan es verlangt oder du es ausdrücklich willst.
 
-### Schritt 12: Optionalen Zwischencommit erstellen
+### Schritt 14: Optionalen Zwischencommit erstellen
 
 Wenn ein Task oder eine kohärente Phase validiert ist, darfst du einen Zwischencommit erstellen:
 
@@ -291,22 +355,22 @@ Zwischencommits sind besonders sinnvoll bei längeren Features, Schema-Änderung
 
 Alternativ zu `/commit` kannst du auch in VS Code Source Control committen und dir dort eine Commit Message vorschlagen lassen. Wichtig ist nicht das Tool, sondern dass der Commit klein, nachvollziehbar und validiert ist.
 
-### Schritt 13: Feature dokumentieren
+### Schritt 15: Feature dokumentieren
 
 Wenn alle Tasks `done` sind und die Validierung vollständig dokumentiert ist:
 
 ```text
-/document docs/project/features/antrag-formular/plan.md
+/document docs/project/features/antrag-formular/plan-v002.md
 ```
 
 `/document` erstellt `user-guide.md` und `developer-notes.md` im Feature-Ordner. Am Ende weist der Skill darauf hin, dass `/reflect-rules` bei Verdacht auf regelbezogene Probleme direkt in derselben Session genutzt werden soll.
 
-### Schritt 14: Agent-Regeln reflektieren und final committen
+### Schritt 16: Agent-Regeln reflektieren und final committen
 
 Nach `/document` prüfst du, ob aus der Umsetzung dauerhafte Regel- oder Skill-Verbesserungen entstehen sollen. Nutze `/reflect-rules` vor allem dann, wenn es während Umsetzung oder Dokumentation auffällig viele Korrekturen, Nacharbeiten, Planabweichungen oder regelbezogene Missverständnisse gab:
 
 ```text
-/reflect-rules docs/project/features/antrag-formular/plan.md
+/reflect-rules docs/project/features/antrag-formular/plan-v002.md
 /commit
 ```
 
@@ -320,7 +384,7 @@ Der Skill schlägt Änderungen zuerst vor und setzt sie erst nach Bestätigung u
 
 Der anschliessende finale Commit enthält typischerweise die Feature-Dokumentation, Plan-Nachführung, bestätigte Regelanpassungen und letzte Cleanup-Änderungen. Du kannst dafür `/commit` nutzen oder den Commit in VS Code Source Control mit vorgeschlagener Commit Message erstellen.
 
-### Schritt 15: Für das nächste Feature neu starten
+### Schritt 17: Für das nächste Feature neu starten
 
 Für jedes weitere Feature aus dem PRD startest du zweimal eine neue Session – einmal für die Planung, einmal für die Umsetzung:
 
@@ -329,12 +393,12 @@ Für jedes weitere Feature aus dem PRD startest du zweimal eine neue Session –
 /prime
 /plan-feature "Aus docs/project/prds/antragssystem-v002.md das nächste Feature <Name> planen"
 ```
-Plan prüfen und bestätigen. Danach Session beenden.
+Initialen Plan `plan-v001.md` committen, in frischer Session mit `/review-feature-plan` reviewen, in der Autor-Session mit `/integrate-feature-plan-review` integrieren und die neue Plan-Version bestätigen. Danach Session beenden.
 
 **Session B – Umsetzung:**
 ```text
 /prime
-/execute docs/project/features/<feature-name>/plan.md
+/execute docs/project/features/<feature-name>/plan-v002.md
 ```
 Pro Task validieren, bei Bedarf Zwischencommits erstellen, am Ende `/document`, bei Verdacht `/reflect-rules` in derselben Session, dann `/commit`.
 
@@ -360,7 +424,7 @@ Wenn etwas unklar ist:
 planned -> in_progress -> needs_human
 ```
 
-Du siehst den detaillierten Status in `docs/project/features/[feature-name]/plan.md`. Im Root-`TASKS.md` steht nur der grobe Feature-Status als Index.
+Du siehst den detaillierten Status in `docs/project/features/[feature-name]/plan-vNNN.md`. Im Root-`TASKS.md` steht nur der grobe Feature-Status als Index.
 
 ## 6. Was tue ich, wenn der Agent vom Plan abweicht?
 
@@ -369,7 +433,7 @@ Stoppe die Umsetzung sofort, wenn der Agent fachlich oder technisch vom bestäti
 Konkretes Vorgehen:
 
 1. Schreibe dem Agenten: `Stopp. Lies den Plan erneut und erkläre die Abweichung.`
-2. Verlange einen Vorschlag, wie `docs/project/features/[feature-name]/plan.md` angepasst werden müsste.
+2. Verlange einen Vorschlag, wie `docs/project/features/[feature-name]/plan-vNNN.md` angepasst werden müsste.
 3. Genehmige Planänderungen erst, wenn du sie verstanden hast.
 4. Starte `/execute` erst wieder, wenn der Plan aktualisiert oder die ursprüngliche Umsetzung bestätigt ist.
 

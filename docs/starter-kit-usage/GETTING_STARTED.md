@@ -82,10 +82,13 @@ Ab jetzt wiederholt ihr für jedes Feature aus dem PRD denselben Zyklus. Die vol
 Kurzablauf pro Feature:
 
 1. Neue Agent-Session starten, `/prime` ausführen
-2. `/plan-feature "[Feature aus PRD]"` – Agent erstellt `docs/project/features/[feature-name]/plan.md`
-3. Plan prüfen und bestätigen
-4. `/execute docs/project/features/[feature-name]/plan.md` – Task für Task umsetzen
-5. Nach jedem Task: `npm run test` und manuelle Prüfung mit `npm run dev`
-6. Wenn alle Tasks `done`: `/document` ausführen, bei Verdacht auf wiederholbare Fehler `/reflect-rules`, dann `/commit`
+2. `/plan-feature "[Feature aus PRD]"` – Agent erstellt `docs/project/features/[feature-name]/plan-v001.md`
+3. Initialen Plan und `TASKS.md` committen
+4. Neue Reviewer-Session starten, `/prime`, dann `/review-feature-plan docs/project/features/[feature-name]/plan-v001.md`
+5. Zurück in die Autor-Session, `/integrate-feature-plan-review ...` – Agent erstellt typischerweise `plan-v002.md` und aktualisiert `TASKS.md`
+6. Neue Plan-Version prüfen, bestätigen und committen
+7. `/execute docs/project/features/[feature-name]/plan-v002.md` – Task für Task umsetzen
+8. Nach jedem Task: `npm run test` und manuelle Prüfung mit `npm run dev`
+9. Wenn alle Tasks `done`: `/document` ausführen, bei Verdacht auf wiederholbare Fehler `/reflect-rules`, dann `/commit`
 
-`TASKS.md` ist nur ein Feature-Index. Detailtasks und Validierung liegen immer in der jeweiligen Datei `docs/project/features/[feature-name]/plan.md`.
+`TASKS.md` ist nur ein Feature-Index. Detailtasks und Validierung liegen immer in der jeweiligen Datei `docs/project/features/[feature-name]/plan-vNNN.md`.

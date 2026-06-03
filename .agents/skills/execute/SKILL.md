@@ -1,11 +1,11 @@
 ---
 name: execute
 description: >
-  Implements a confirmed feature plan one task at a time while updating task status and validation evidence in the plan file. Use it only after a docs/project/features/[feature-name]/plan.md file has been reviewed and approved. ONLY activate when the user explicitly runs /execute or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
+  Implements a confirmed, reviewed, versioned feature plan one task at a time while updating task status and validation evidence in the plan file. Use it only after a docs/project/features/[feature-name]/plan-vNNN.md file has been reviewed, integrated, approved, and committed. ONLY activate when the user explicitly runs /execute or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: implement
-  version: "1.0"
+  version: "2.0"
 disable-model-invocation: true
 argument-hint: "[path-to-plan]"
 ---
@@ -19,12 +19,14 @@ Pfad zur bestätigten Plan-Datei: `$ARGUMENTS`
 Beispiel:
 
 ```text
-/execute docs/project/features/antrag-formular/plan.md
+/execute docs/project/features/antrag-formular/plan-v002.md
 ```
 
 ## Grundregeln
 
 - Implementiere nur auf Basis einer bestätigten Plan-Datei.
+- Verwende eine versionierte Plan-Datei `plan-vNNN.md`. Neue Projekte sollen nicht mehr mit `plan.md` arbeiten.
+- Starte nicht mit `plan-v001.md`, wenn noch kein Review und keine Integration gelaufen sind. Der Normalfall nach einer Review-Integration ist `plan-v002.md`.
 - Arbeite genau einen Task nach dem anderen ab.
 - Stoppe nach jedem Task, zeige das Ergebnis und warte auf Bestätigung.
 - Ändere keine Dateien, die nicht zum aktuellen Task gehören.
@@ -125,7 +127,7 @@ Nach jedem Task soll der Nutzer `npm run dev` prüfen, falls ein UI- oder Laufze
 Wenn sich während der Implementierung ergibt, dass der bestätigte Plan oder ein zugrunde liegendes PRD nicht mehr korrekt ist:
 
 - Setze den betroffenen Task auf `needs_human`, wenn die Abweichung eine fachliche oder architektonische Entscheidung erfordert.
-- Erstelle einen konkreten Vorschlag, wie `docs/project/features/[feature-name]/plan.md` aktualisiert werden soll.
+- Erstelle einen konkreten Vorschlag, wie die aktuelle `docs/project/features/[feature-name]/plan-vNNN.md` aktualisiert werden soll.
 - Erstelle, falls ein PRD betroffen ist, einen konkreten Vorschlag, wie das PRD aktualisiert werden soll.
 - Zeige beide Vorschläge zur Genehmigung, bevor du Plan oder PRD inhaltlich änderst.
 - Dokumentiere nach Genehmigung in der Plan-Datei, welche Abweichung beschlossen wurde und warum.
@@ -135,7 +137,7 @@ Wenn sich während der Implementierung ergibt, dass der bestätigte Plan oder ei
 Am Ende der Umsetzung soll nach vollständiger Validierung der Dokumentations-Skill aufgerufen werden:
 
 ```text
-/document docs/project/features/[feature-name]/plan.md
+/document docs/project/features/[feature-name]/plan-vNNN.md
 ```
 
 Der Skill erstellt Endanwender- und Entwicklerdokumentation im selben Feature-Unterordner, z.B. `docs/project/features/[feature-name]/user-guide.md` und `docs/project/features/[feature-name]/developer-notes.md`.
@@ -161,7 +163,7 @@ Wenn alle Tasks `done` sind:
 - Dateien mit Änderungen auflisten.
 - Validierungsergebnisse zusammenfassen.
 - Manuelle Test-Anleitung geben.
-- Hinweis auf den nächsten Workflow `/document docs/project/features/[feature-name]/plan.md` ausgeben.
+- Hinweis auf den nächsten Workflow `/document docs/project/features/[feature-name]/plan-vNNN.md` ausgeben.
 - Ready-for-Feature-Abschluss-Abschnitt ausgeben: Änderungen vollständig, Validierungen erfolgreich oder dokumentiert, offene Risiken genannt.
 - Auf `/document` als nächsten Workflow hinweisen.
 

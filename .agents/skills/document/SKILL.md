@@ -1,11 +1,11 @@
 ---
 name: document
 description: >
-  Creates end-user and developer documentation for an implemented and validated feature based on its confirmed plan, implementation results, and validation evidence, then points to /reflect-rules when there is suspicion of repeated agent mistakes, plan gaps, unusual rework, or repeated user corrections before the final /commit. ONLY activate when the user explicitly runs /document or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
+  Creates end-user and developer documentation for an implemented and validated feature based on its confirmed versioned plan, implementation results, and validation evidence, then points to /reflect-rules when there is suspicion of repeated agent mistakes, plan gaps, unusual rework, or repeated user corrections before the final /commit. ONLY activate when the user explicitly runs /document or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: validate
-  version: "2.1"
+  version: "3.0"
 disable-model-invocation: true
 argument-hint: "[path-to-plan]"
 ---
@@ -19,7 +19,7 @@ Pfad zur vollständig umgesetzten und validierten Plan-Datei: `$ARGUMENTS`
 Beispiel:
 
 ```text
-/document docs/project/features/antrag-formular/plan.md
+/document docs/project/features/antrag-formular/plan-v002.md
 ```
 
 ## Ziel
@@ -46,9 +46,9 @@ Der Skill trennt konsequent zwischen:
 
 Der Skill darf finale Dokumentation nur erstellen, wenn alle Bedingungen erfüllt sind:
 
-- `$ARGUMENTS` zeigt auf `docs/project/features/[feature-name]/plan.md`.
+- `$ARGUMENTS` zeigt auf `docs/project/features/[feature-name]/plan-vNNN.md`.
 - Die Plan-Datei existiert und gehört zu genau einem Feature.
-- Der Feature-Plan wurde vor `/execute` fachlich bestätigt.
+- Die Feature-Plan-Version wurde vor `/execute` reviewed, integriert, fachlich bestätigt und committed.
 - Alle relevanten Tasks im Plan stehen auf `done` oder begründete Ausnahmen sind im Plan dokumentiert.
 - Validierungsergebnisse sind im Plan dokumentiert, z.B. `npm run test`, `npm run build`, relevante E2E-Tests oder manuelle Prüfung.
 - Plan-/PRD-Abweichungen sind genehmigt und im Plan dokumentiert.
@@ -57,7 +57,7 @@ Wenn diese Bedingungen nicht erfüllt sind:
 
 - Erstelle keine finale `user-guide.md` oder `developer-notes.md`.
 - Erkläre kurz, welche Voraussetzung fehlt.
-- Empfiehl den passenden nächsten Workflow, meistens `/execute docs/project/features/[feature-name]/plan.md` oder Nachdokumentation der Validierung im Plan.
+- Empfiehl den passenden nächsten Workflow, meistens `/execute docs/project/features/[feature-name]/plan-vNNN.md` oder Nachdokumentation der Validierung im Plan.
 
 ## Output-Artefakte
 
@@ -95,7 +95,7 @@ Nutze `git status` und `git diff HEAD --name-only`, um die dokumentierten Änder
 
 1. Prüfe, ob `$ARGUMENTS` gesetzt ist.
 2. Normalisiere den Pfad relativ zum Repository.
-3. Prüfe, ob der Pfad dem Muster `docs/project/features/[feature-name]/plan.md` entspricht.
+3. Prüfe, ob der Pfad dem Muster `docs/project/features/[feature-name]/plan-vNNN.md` entspricht.
 4. Leite `[feature-name]` aus dem Ordnernamen ab.
 5. Prüfe, ob der Feature-Ordner existiert.
 6. Prüfe, ob bestehende Dokumentationsdateien vorhanden sind und gelesen werden müssen.
@@ -195,7 +195,7 @@ Struktur:
 
 ## Referenzen
 
-- Plan: `docs/project/features/<feature-name>/plan.md`
+- Plan: `docs/project/features/<feature-name>/plan-vNNN.md`
 - PRD: `<Pfad oder Nicht relevant>`
 - Relevante Guides: `<Pfade oder Nicht relevant>`
 
@@ -280,7 +280,7 @@ Gib nach dem Schreiben aus:
 - kurze Zusammenfassung pro Datei
 - dokumentierte Validierungsbasis
 - offene Annahmen, Risiken oder nicht ausführbare Prüfungen
-- Hinweis, dass bei Verdacht auf Agent-Fehler, Planabweichungen, ungewöhnliche Nacharbeiten oder wiederholte Nutzerkorrekturen jetzt in derselben Session `/reflect-rules docs/project/features/[feature-name]/plan.md` genutzt werden soll, solange der Chatverlauf noch verfügbar ist
+- Hinweis, dass bei Verdacht auf Agent-Fehler, Planabweichungen, ungewöhnliche Nacharbeiten oder wiederholte Nutzerkorrekturen jetzt in derselben Session `/reflect-rules docs/project/features/[feature-name]/plan-vNNN.md` genutzt werden soll, solange der Chatverlauf noch verfügbar ist
 - Hinweis, dass `/reflect-rules` zusätzliche Input-Tokens brauchen kann und deshalb vor allem bei solchen Verdachtsmomenten sinnvoll ist
 - Hinweis, dass nach der Entscheidung für oder gegen `/reflect-rules` der finale Commit folgen soll. Dafür kann der Nutzer `/commit` verwenden oder in VS Code Source Control die Änderungen committen und sich dort eine Commit Message vorschlagen lassen.
 

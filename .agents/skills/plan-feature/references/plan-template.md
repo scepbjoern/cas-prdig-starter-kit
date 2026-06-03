@@ -4,6 +4,7 @@
 
 **Feature-Status:** planned  
 **Erstellt:** YYYY-MM-DD  
+**Plan-Version:** v001
 **Quelle:** <User Request, PRD oder Datei>  
 **Confidence Score:** <#/10 mit kurzer Begründung>
 
@@ -12,6 +13,7 @@
 | Feld | Wert |
 |---|---|
 | Feature-Typ | New Capability / Enhancement / Refactor / Bug Fix |
+| Plan-Version | v001 |
 | Komplexität | Low / Medium / High |
 | Primär betroffene Systeme | UI / Server Actions / Route Handler / Prisma / Auth / E-Mail / LLM / Tests |
 | Abhängigkeiten | <Libraries, ENV-Werte, Daten, Entscheidungen> |
@@ -247,3 +249,7 @@ npm run build
 ## Offene Fragen
 
 - Keine oder konkrete Fragen
+
+## Plan Review Notes
+
+<Wird durch `/integrate-feature-plan-review` in späteren Plan-Versionen ergänzt. Beim initialen `plan-v001.md`: Nicht relevant.>

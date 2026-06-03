@@ -4,7 +4,7 @@ description: >
   Guides a new team through initializing a project from cas-prdig-starter-kit, including skills setup, dependencies, environment variables, database reset, and first login checks. Use it when setting up a fresh project from this starter kit. ONLY activate when the user explicitly runs /init-project or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
-  version: "1.0"
+  version: "1.1"
 disable-model-invocation: true
 ---
 
@@ -107,8 +107,8 @@ Erwartung:
 
 - Bei Prisma-Schema-Änderungen immer `npm run db:reset` ausführen.
 - Nie Prisma Migrations verwenden.
-- Neue Features mit `/plan-feature` planen, Plan prüfen, dann mit `/execute` umsetzen.
-- Root-`TASKS.md` bleibt Feature-Index; Detailtasks liegen in `docs/project/features/[feature-name]/plan.md`.
+- Neue Features mit `/plan-feature` planen, `plan-v001.md` committen, in frischer Session mit `/review-feature-plan` prüfen, in der Autor-Session mit `/integrate-feature-plan-review` in eine neue Plan-Version überführen, dann mit `/execute` umsetzen.
+- Root-`TASKS.md` bleibt Feature-Index; Detailtasks liegen in `docs/project/features/[feature-name]/plan-vNNN.md`.
 
 ## Output
 

@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: validate
-  version: "1.3"
+  version: "2.0"
 disable-model-invocation: true
 ---
 
@@ -26,7 +26,8 @@ Erlaubte Zeitpunkte:
 - Nach Erstellung des initialen PRD-Entwurfs `v001`, bevor die Review-Session startet.
 - Nach Review-Integration und fachlicher Bestätigung einer neuen PRD-Version, inklusive zugehöriger Review-/Integration-Artefakte.
 - Nach erfolgreicher `/adapt-to-project`-Bereinigung inklusive dokumentierter Build-Validierung.
-- Nach menschlicher Bestätigung eines Feature-Plans, um Plan-Datei und `TASKS.md` vor `/execute` zu sichern.
+- Nach Erstellung des initialen Feature-Plans `plan-v001.md`, bevor die Feature-Plan-Review-Session startet.
+- Nach Review-Integration und fachlicher Bestätigung einer neuen Feature-Plan-Version, inklusive zugehöriger Plan-Review-/Integration-Artefakte.
 - Nach einem einzelnen Task, wenn der Task validiert ist und der Status im Plan auf `done` steht.
 - Nach einer kohärenten Phase, wenn alle enthaltenen Tasks validiert und dokumentiert sind.
 - Nach `/document`, um den finalen Feature-Abschluss inklusive `user-guide.md`, `developer-notes.md`, Plan-Nachführung und letzter Cleanup-Änderungen festzuhalten.
@@ -54,7 +55,7 @@ Bewerte:
 - Ob Änderungen zu einer einzigen logischen Einheit gehören
 - Ob mehrere Atomic Commits nötig sind
 - Ob es sich um einen Zwischencommit oder den finalen Feature-Abschluss handelt
-- Ob der zugehörige Task, die zugehörige Phase, das PRD oder der Feature-Plan fachlich bestätigt, validiert oder dokumentiert ist
+- Ob der zugehörige Task, die zugehörige Phase, das PRD, die Feature-Plan-Version oder die Review-/Integration-Artefakte fachlich bestätigt, validiert oder dokumentiert sind
 - Ob sensible Dateien wie `.env` oder Credentials betroffen sind
 - Im Mehrpersonen-Fall: ob die Änderungen zum eigenen Feature, zur eigenen Plan-Datei und zum vorgesehenen Branch laut `TASKS.md` gehören
 

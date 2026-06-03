@@ -66,10 +66,27 @@ Danach pro Feature und Person:
   /prime
     |
     v
-  /plan-feature  --> docs/project/features/[feature-name]/plan.md
+  /plan-feature  --> docs/project/features/[feature-name]/plan-v001.md
     |
     v
-  Mensch prüft und bestätigt Feature-Plan
+  Commit: initialer Feature-Plan v001
+    |
+    v
+  Neue Reviewer-Session:
+  /prime
+    |
+    v
+  /review-feature-plan  --> docs/project/features/[feature-name]/plan-reviews/plan-v001-r01-review.md
+    |
+    v
+  Zurück in Autor-Session:
+  /integrate-feature-plan-review  --> docs/project/features/[feature-name]/plan-v002.md
+    |
+    v
+  Mensch prüft und bestätigt neueste Feature-Plan-Version
+    |
+    v
+  Commit: Plan-Version + Plan-Review-/Integrationsdateien
     |
     v
   /execute
@@ -82,7 +99,7 @@ Wichtig: Jede Person plant und implementiert ihr Feature auf Basis der neuesten 
 
 ## 3. TASKS.md als Koordinationsübersicht
 
-`TASKS.md` bleibt ein Feature-Index. Detailtasks gehören weiterhin in `docs/project/features/[feature-name]/plan.md`.
+`TASKS.md` bleibt ein Feature-Index. Detailtasks gehören weiterhin in die neueste versionierte Plan-Datei, z.B. `docs/project/features/[feature-name]/plan-v002.md`.
 
 Im Mehrpersonen-Fall wird `TASKS.md` zusätzlich zur Koordinationsschicht:
 
@@ -91,16 +108,16 @@ Im Mehrpersonen-Fall wird `TASKS.md` zusätzlich zur Koordinationsschicht:
 
 | Feature | Status | Verantwortlich | Branch | Schema | Datei | Erstellt |
 |---|---|---|---|---|---|---|
-| Datenmodell Basis | in_progress | Lea | feature/datenmodell-basis-lea | ja | [plan](docs/project/features/datenmodell-basis/plan.md) | 2026-05-30 |
-| Antrag erfassen | planned | Lea | feature/antrag-erfassen-lea | geplant | [plan](docs/project/features/antrag-erfassen/plan.md) | 2026-05-30 |
-| Anträge prüfen | planned | Marco | feature/antraege-pruefen-marco | geplant | [plan](docs/project/features/antraege-pruefen/plan.md) | 2026-05-30 |
-| E-Mail-Benachrichtigung | in_progress | Marco | feature/email-benachrichtigung-marco | nein | [plan](docs/project/features/email-benachrichtigung/plan.md) | 2026-05-30 |
+| Datenmodell Basis | in_progress | Lea | feature/datenmodell-basis-lea | ja | [plan](docs/project/features/datenmodell-basis/plan-v002.md) | 2026-05-30 |
+| Antrag erfassen | planned | Lea | feature/antrag-erfassen-lea | geplant | [plan](docs/project/features/antrag-erfassen/plan-v001.md) | 2026-05-30 |
+| Anträge prüfen | planned | Marco | feature/antraege-pruefen-marco | geplant | [plan](docs/project/features/antraege-pruefen/plan-v001.md) | 2026-05-30 |
+| E-Mail-Benachrichtigung | in_progress | Marco | feature/email-benachrichtigung-marco | nein | [plan](docs/project/features/email-benachrichtigung/plan-v002.md) | 2026-05-30 |
 
 ## Abgeschlossene Features
 
 | Feature | Verantwortlich | Branch | Schema | Datei | Abgeschlossen |
 |---|---|---|---|---|---|
-| Login-Rollenprüfung | Marco | feature/login-rollenpruefung-marco | nein | [plan](docs/project/features/login-rollenpruefung/plan.md) | 2026-05-29 |
+| Login-Rollenprüfung | Marco | feature/login-rollenpruefung-marco | nein | [plan](docs/project/features/login-rollenpruefung/plan-v002.md) | 2026-05-29 |
 ```
 
 Die Spalten bedeuten:
@@ -205,6 +222,8 @@ Typische Commit-Zeitpunkte:
 
 - nach dem initialen PRD-Entwurf `v001`
 - nach Review-Integration und fachlicher Bestätigung einer neuen PRD-Version
+- nach dem initialen Feature-Plan `plan-v001.md`
+- nach Review-Integration und fachlicher Bestätigung einer neuen Feature-Plan-Version
 - nach einem validierten Task als Zwischencommit
 - nach einer abgeschlossenen validierten Phase, z.B. Datenmodell oder UI-Grundgerüst
 - nach `/document` als finaler Feature-Commit

@@ -1,11 +1,11 @@
 ---
 name: plan-feature
 description: >
-  Turns a feature idea or PRD reference into a granular, reviewable implementation plan for this starter kit. Use it when a new feature needs a confirmed plan before code is written. ONLY activate when the user explicitly runs /plan-feature or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
+  Turns a feature idea or PRD reference into a granular, reviewable, versioned implementation plan for this starter kit. Use it when a new feature needs an initial plan before review and before code is written. ONLY activate when the user explicitly runs /plan-feature or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: plan
-  version: "1.2"
+  version: "2.0"
 disable-model-invocation: true
 argument-hint: "[feature-description-or-prd-reference]"
 ---
@@ -23,9 +23,9 @@ Beispiele:
 
 ## Grundregel
 
-Schreibe in dieser Phase keinen Produktivcode. Ziel ist ein bestätigbarer, kontextreicher Plan als autoritative Arbeitsgrundlage für `/execute`.
+Schreibe in dieser Phase keinen Produktivcode. Ziel ist ein reviewbarer, kontextreicher initialer Plan als Grundlage für `/review-feature-plan`.
 
-Qualitätsziel: Der Plan soll so vollständig sein, dass ein Umsetzungsagent das Feature mit minimalen Rückfragen taskweise implementieren kann. Context is King: Der Plan muss relevante Patterns, Pflichtlektüre, Dokumentation, Gotchas, Validierungsbefehle und Akzeptanzkriterien enthalten.
+Qualitätsziel: Der initiale Plan `plan-v001.md` soll so vollständig sein, dass er in einer frischen Reviewer-Session kritisch geprüft werden kann. Nach Review und Integration entsteht mindestens `plan-v002.md`; erst eine fachlich bestätigte, reviewte Plan-Version ist autoritative Arbeitsgrundlage für `/execute`.
 
 ## Mehrpersonen-Fall
 
@@ -162,12 +162,14 @@ Im Mehrpersonen-Fall zusätzlich prüfen, ob andere aktive Features laut `TASKS.
 Erstelle eine Markdown-Datei unter:
 
 ```text
-docs/project/features/[feature-name]/plan.md
+docs/project/features/[feature-name]/plan-v001.md
 ```
 
-Nutze kebab-case für `[feature-name]`, z.B. `docs/project/features/antrag-formular/plan.md`.
+Nutze kebab-case für `[feature-name]`, z.B. `docs/project/features/antrag-formular/plan-v001.md`.
 
 Die Datei ist kombinierter Spec+Plan+Tasks-Container. Verwende `references/plan-template.md` als Ausgangspunkt und fülle alle relevanten Abschnitte konkret aus. Entferne keine Qualitätsabschnitte nur deshalb, weil sie Arbeit machen; schreibe stattdessen `Nicht relevant` mit kurzer Begründung.
+
+Dokumentiere im Plan selbst die Plan-Version `v001`. Wenn ein Feature-Ordner bereits eine `plan-v001.md` enthält, stoppe und frage, ob eine neue Feature-Planung, eine Review-Integration oder eine Aktualisierung gemeint ist.
 
 Task-Format:
 
@@ -222,5 +224,7 @@ Zeige danach:
 - wichtigste Risiken, Gotchas oder offenen Entscheidungen
 - Confidence Score für die Umsetzung
 - Offene Fragen oder Annahmen
-- Hinweis: Erst nach menschlicher Bestätigung darf `/execute` implementieren
-- Hinweis: Nach menschlicher Bestätigung des Feature-Plans soll ein Commit erstellt werden, damit Plan-Datei und `TASKS.md` als bestätigter Ausgangspunkt für `/execute` gesichert sind. Dafür kann der Nutzer `/commit` verwenden oder in VS Code Source Control die Änderungen committen und sich dort eine Commit Message vorschlagen lassen.
+- Hinweis: Committe den initialen Feature-Plan `v001` und den aktualisierten `TASKS.md`-Eintrag, bevor die Review-Session startet. Dafür kann der Nutzer `/commit` verwenden oder in VS Code Source Control die Änderungen committen und sich dort eine Commit Message vorschlagen lassen.
+- Hinweis: Als nächster Schritt soll eine neue Reviewer-Session gestartet werden: zuerst `/prime`, danach `/review-feature-plan [Plan-Pfad]`.
+- Hinweis: Die Review-Ergebnisse sollen danach in der ursprünglichen Autor-Session mit `/integrate-feature-plan-review [Plan-Pfad] [Review-Datei]` geprüft und in eine neue Plan-Version, z.B. `plan-v002.md`, eingearbeitet werden.
+- Hinweis: Erst nach Review, Integration, fachlicher Bestätigung und Commit der neuesten Plan-Version darf `/execute [Plan-Pfad]` implementieren.

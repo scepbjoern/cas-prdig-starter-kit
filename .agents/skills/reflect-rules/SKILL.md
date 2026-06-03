@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: validate
-  version: "1.0"
+  version: "2.0"
 disable-model-invocation: true
 argument-hint: "[path-to-plan]"
 ---
@@ -19,7 +19,7 @@ Pfad zur vollständig umgesetzten, validierten und dokumentierten Plan-Datei: `$
 Beispiel:
 
 ```text
-/reflect-rules docs/project/features/antrag-formular/plan.md
+/reflect-rules docs/project/features/antrag-formular/plan-v002.md
 ```
 
 ## Ziel
@@ -101,7 +101,7 @@ Prüfe:
 Wenn `/document` noch nicht gelaufen ist, stoppe und empfehle zuerst:
 
 ```text
-/document docs/project/features/[feature-name]/plan.md
+/document docs/project/features/[feature-name]/plan-vNNN.md
 ```
 
 ## Phase 2: Lernpunkte Sammeln

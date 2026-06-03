@@ -4,7 +4,7 @@ description: >
   Creates or updates project instruction files by analyzing the stack, repository structure, conventions, and available PIV skills. Use it when the project rules need to be generated or refreshed. ONLY activate when the user explicitly runs /create-rules or directly requests this specific workflow by name. Do NOT activate during normal development, planning, or implementation conversations.
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
-  version: "1.1"
+  version: "2.0"
 disable-model-invocation: true
 ---
 
@@ -56,7 +56,7 @@ Diese Datei ist der ausführliche Coding-Guide. Sie soll enthalten:
 - Prisma- und Better-Auth-Regeln
 - REST API, LLM, E-Mail und Upload-Konventionen, falls im Projekt vorhanden
 - Testing mit Vitest und Playwright
-- PIV-Loop mit `TASKS.md` als Feature-Index und `docs/project/features/[feature-name]/plan.md` als Arbeitsgrundlage
+- PIV-Loop mit `TASKS.md` als Feature-Index, `docs/project/features/[feature-name]/plan-v001.md` als initialem Plan, Feature-Plan-Review, Review-Integration und `docs/project/features/[feature-name]/plan-vNNN.md` als versionierter Arbeitsgrundlage für `/execute`
 - Verfügbare PIV-Skills aus `.agents/skills/`
 - Verdachtsbasierte Abschluss-Reflexion mit `/reflect-rules`, damit wiederholbare Agent-Fehler, Planlücken und wiederholte Nutzerkorrekturen in derselben Session in Regelvorschläge überführt werden können
 - Stop-and-ask-Regeln
@@ -97,7 +97,9 @@ Nie automatisch aktivieren – immer nur auf expliziten Aufruf.
 | review-prd | `/review-prd [Pfad-zum-PRD]` | Setup/Plan: PRD in frischer Reviewer-Session kritisch prüfen |
 | integrate-prd-review | `/integrate-prd-review [Pfad-zum-PRD] [Pfad-zum-Review]` | Setup/Plan: Review bewerten, PRD überarbeiten und Integration dokumentieren |
 | adapt-to-project | `/adapt-to-project [Pfad-zum-PRD]` | Setup: Demo-Code nach bestätigtem PRD bereinigen, Build validieren |
-| plan-feature | `/plan-feature [Feature]` | Plan: Granularen Task-Plan erstellen |
+| plan-feature | `/plan-feature [Feature]` | Plan: initialen Feature-Plan `plan-v001.md` erstellen |
+| review-feature-plan | `/review-feature-plan [Pfad-zum-Plan]` | Plan: Feature-Plan in frischer Reviewer-Session kritisch prüfen |
+| integrate-feature-plan-review | `/integrate-feature-plan-review [Pfad-zum-Plan] [Pfad-zum-Review]` | Plan: Review bewerten und neue Plan-Version erstellen |
 | execute | `/execute [Pfad-zum-Plan]` | Implement: Task-by-Task umsetzen |
 | document | `/document [Pfad-zum-Plan]` | Validate/Docs: Feature-Dokumentation erstellen |
 | reflect-rules | `/reflect-rules [Pfad-zum-Plan]` | Validate/Retro: Agent-Regeln und Skills verbessern |

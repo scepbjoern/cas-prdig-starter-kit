@@ -6,7 +6,7 @@
 
 ## Regeln
 
-- Keine Tasks direkt hier eintragen – Details immer in docs/project/features/[feature-name]/plan.md
+- Keine Tasks direkt hier eintragen – Details immer in docs/project/features/[feature-name]/plan-vNNN.md
 - Kein Feature gilt als done ohne dokumentierte Validierung in der Feature-Datei
 - Status-Werte: planned | in_progress | needs_human | validating | done
 
@@ -14,7 +14,7 @@
 
 | Feature | Status | Datei | Erstellt |
 |---|---|---|---|
-| _(Beispiel: Antrag-Formular)_ | planned | [plan](docs/project/features/antrag-formular/plan.md) | 2026-05-30 |
+| _(Beispiel: Antrag-Formular)_ | planned | [plan](docs/project/features/antrag-formular/plan-v001.md) | 2026-05-30 |
 
 ## Abgeschlossene Features
 
