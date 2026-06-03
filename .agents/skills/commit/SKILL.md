@@ -25,6 +25,7 @@ Erlaubte Zeitpunkte:
 
 - Nach Erstellung des initialen PRD-Entwurfs `v001`, bevor die Review-Session startet.
 - Nach Review-Integration und fachlicher Bestätigung einer neuen PRD-Version, inklusive zugehöriger Review-/Integration-Artefakte.
+- Nach `/update-prd` und fachlicher Bestätigung einer neuen PRD-Version, inklusive zugehöriger Update-Datei.
 - Nach erfolgreicher `/adapt-to-project`-Bereinigung inklusive dokumentierter Build-Validierung.
 - Nach Erstellung des initialen Feature-Plans `plan-v001.md`, bevor die Feature-Plan-Review-Session startet.
 - Nach Review-Integration und fachlicher Bestätigung einer neuen Feature-Plan-Version, inklusive zugehöriger Plan-Review-/Integration-Artefakte.

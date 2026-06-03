@@ -17,6 +17,8 @@ Das PRD ist der gemeinsame Konsens über:
 
 Alle beteiligten Personen bestätigen die neueste reviewte PRD-Version fachlich, bevor die Arbeit aufgeteilt wird. Es gibt keine konkurrierenden Sub-PRDs pro Person.
 
+Wenn sich der gemeinsame fachliche Stand später ändert, wird nicht die bestehende PRD-Datei von Hand angepasst. Stattdessen erstellt `/update-prd [PRD-Pfad]` eine neue PRD-Version und eine Update-Datei. Die Gruppe bestätigt und committet diese neue Version, bevor weitere Feature-Sessions darauf aufbauen.
+
 Die Aufteilung erfolgt erst danach auf Feature-Ebene. Jede Person übernimmt ganze Features vertikal durch den Stack, zum Beispiel UI, Server Actions, Datenmodell, Rollenprüfung und Tests für ein konkretes Feature. Eine Aufteilung nach Schichten wie "Person A nur Frontend" und "Person B nur Backend" wird vermieden, weil sie mehr Abstimmung, Blockaden und Merge-Konflikte erzeugt.
 
 ## 2. Ablauf im Mehrpersonen-Fall
@@ -96,6 +98,8 @@ Danach pro Feature und Person:
 ```
 
 Wichtig: Jede Person plant und implementiert ihr Feature auf Basis der neuesten bestätigten PRD-Version und der aktuellen `TASKS.md`.
+
+Wenn eine PRD-Aktualisierung bereits vorhandene Feature-Pläne betrifft, werden diese Pläne nicht nebenbei geändert. Dafür ist ein separater `/update-feature-plan`-Workflow vorgesehen; bis der betroffene Plan aktualisiert ist, soll er nicht für `/execute` verwendet werden.
 
 ## 3. TASKS.md als Koordinationsübersicht
 
@@ -222,6 +226,7 @@ Typische Commit-Zeitpunkte:
 
 - nach dem initialen PRD-Entwurf `v001`
 - nach Review-Integration und fachlicher Bestätigung einer neuen PRD-Version
+- nach `/update-prd` und fachlicher Bestätigung einer neuen PRD-Version
 - nach dem initialen Feature-Plan `plan-v001.md`
 - nach Review-Integration und fachlicher Bestätigung einer neuen Feature-Plan-Version
 - nach einem validierten Task als Zwischencommit

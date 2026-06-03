@@ -26,6 +26,7 @@ Erstelle ein Product Requirements Document (PRD) für genau ein IT-System oder e
 - Unterscheide im PRD explizit zwischen MVP / Minimalversion, Medium-Version und Extended-/Luxus-Version.
 - Beurteile nicht eigenständig, ob der Scope für ein Kursprojekt zu groß oder zu klein ist. Dokumentiere die Ausbaustufen sauber und verweise im Kurskontext darauf, dass Studierende den Umfang mit dem Dozenten validieren sollen.
 - Erzeuge das initiale PRD immer als Dokumentversion `v001`.
+- Füge im initialen PRD eine Änderungshistorie mit einem Eintrag für `v001` an.
 - Wenn der Nutzer einen Zielpfad ohne Versionssuffix nennt, ergänze `-v001` vor `.md`, z.B. aus `docs/project/prds/antragssystem.md` wird `docs/project/prds/antragssystem-v001.md`.
 - Wenn der Zielpfad bereits ein Versionssuffix wie `-v001.md` enthält, verwende diesen Pfad unverändert.
 
@@ -133,6 +134,12 @@ docs/project/prds/prozessportal.md -> docs/project/prds/prozessportal-v001.md
 ```
 
 Dokumentiere im PRD selbst die Dokumentversion `v001`, damit spätere Review- und Update-Workflows eindeutig darauf referenzieren können.
+
+Fülle im Abschnitt `## Änderungshistorie` mindestens den Eintrag für `v001` aus:
+
+```text
+v001 | YYYY-MM-DD | Initiale Erstellung | Erstes PRD erstellt
+```
 
 ### 6. Abschluss
 

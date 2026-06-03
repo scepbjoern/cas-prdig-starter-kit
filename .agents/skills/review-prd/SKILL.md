@@ -116,6 +116,7 @@ Prüfe insbesondere:
 
 - Beschreibt das PRD genau ein IT-System oder eine Komponente?
 - Sind Zielgruppen, Rollen und Berechtigungen verständlich und konsistent?
+- Ist die Dokumentversion klar und gibt es eine nachvollziehbare Änderungshistorie?
 - Sind MVP / Minimalversion, Medium-Version, Extended-/Luxus-Version und Out of Scope klar getrennt?
 - Sind User Stories, Kernfunktionen, Demo-Szenarien und Erfolgskriterien nachvollziehbar verbunden?
 - Sind Datenobjekte, Statuswerte, Beziehungen und spätere Datenbedürfnisse ausreichend beschrieben?

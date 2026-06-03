@@ -126,6 +126,23 @@ Nachdem der Mensch Präzisierungsfragen beantwortet hat, prüfe, ob eine erneute
 
 Plane nicht auf Basis kritischer Annahmen. Dokumentiere nichtkritische Annahmen ausdrücklich im Plan.
 
+## PRD-Inkonsistenz erkannt
+
+Wenn du beim Planen feststellst, dass das PRD widersprüchlich, unvollständig oder fachlich nicht mehr aktuell ist, stoppe die Feature-Planung.
+
+Führe keine stille Korrektur im Feature-Plan durch und plane nicht um das Problem herum.
+
+Erkläre dem Nutzer konkret:
+
+- welche PRD-Stelle problematisch ist
+- warum daraus kein belastbarer Feature-Plan entstehen kann
+- welche Entscheidung, Ergänzung oder Korrektur im PRD nötig ist
+- ob bereits bestehende Feature-Pläne dadurch möglicherweise betroffen sind
+
+Fordere den Nutzer auf, zuerst `/update-prd [PRD-Pfad]` auszuführen. Danach soll `/plan-feature` mit der neuen PRD-Version erneut gestartet werden.
+
+Wenn durch die PRD-Aktualisierung bereits vorhandene Feature-Pläne betroffen sind, weise darauf hin, dass dafür ein separater `/update-feature-plan`-Workflow vorgesehen ist. Dieser wird später genutzt, um betroffene Plan-Versionen nachzuziehen; bis dahin sollen sie nicht als Grundlage für `/execute` verwendet werden.
+
 ## Phase 5: Strategisches Durchdenken
 
 Denke vor der Plan-Datei explizit durch:

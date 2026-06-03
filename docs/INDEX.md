@@ -11,6 +11,7 @@ Diese Seite ist der zentrale Einstieg in die Dokumentation. Sie trennt zwischen 
 | Projektarchitektur | `docs/project/architecture/` | Gesamtarchitektur, Prozessübersichten, `architecture.dsl` und Kontextdokumente |
 | PRDs | `docs/project/prds/` | Product Requirements Documents für einzelne IT-Systeme oder Komponenten |
 | PRD-Reviews | `docs/project/prd-reviews/` | Review- und Integrationsdateien zu PRD-Versionen und Review-Runden |
+| PRD-Updates | `docs/project/prd-updates/` | Update-Dateien zu manuellen oder fachlich ausgelösten PRD-Versionen |
 | Feature-Artefakte | `docs/project/features/` | Pro Feature ein Unterordner mit versionierten Plänen (`plan-v001.md`, `plan-v002.md`), Plan-Reviews, später `user-guide.md` und `developer-notes.md` |
 | Entscheidungen | `docs/project/decisions/` | Architektur- oder Fachentscheide, z.B. Rollenmodell, Statusworkflow oder Integrationsentscheide |
 | Betrieb und Demo | `docs/project/operations/` | Projektspezifische Demo-, Setup-, ENV-, Reset- oder Betriebsnotizen |
@@ -77,6 +78,7 @@ Diese Ordner sind am Anfang bewusst leer und werden im Projektverlauf gefüllt.
 | `docs/project/architecture/` | `Gesamtarchitektur.md`, `architecture.dsl`, Prozess- oder Systemübersichten |
 | `docs/project/prds/` | z.B. `antragssystem-v001.md`; erstellt mit `/create-prd docs/project/prds/antragssystem.md` |
 | `docs/project/prd-reviews/` | z.B. `antragssystem-v001-r01-review.md` und `antragssystem-v001-r01-integration.md`; erstellt mit `/review-prd` und `/integrate-prd-review` |
+| `docs/project/prd-updates/` | z.B. `antragssystem-v002-to-v003-update.md`; erstellt mit `/update-prd` |
 | `docs/project/features/[feature-name]/` | `plan-v001.md`, `plan-v002.md`, `plan-reviews/`; später `user-guide.md`, `developer-notes.md` und ggf. Validierungsnotizen |
 | `docs/project/decisions/` | z.B. `adr-0001-rollenmodell.md` oder `adr-0002-statusworkflow.md` |
 | `docs/project/operations/` | z.B. `demo-checklist.md`, `env-setup.md`, `reset-and-seed.md` |

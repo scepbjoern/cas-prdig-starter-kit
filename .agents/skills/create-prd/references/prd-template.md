@@ -13,7 +13,19 @@ Passe die Tiefe der Abschnitte an den Informationsstand an. Markiere Annahmen un
 - MVP-Ziel in einem klaren Satz
 - Kurzüberblick über mögliche spätere Ausbaustufen, falls bekannt
 
-## 2. Kontext und Einordnung
+## 2. Änderungshistorie
+
+Dokumentiere jede PRD-Version nachvollziehbar.
+
+Empfohlenes Format:
+
+| Version | Datum | Anlass | Kurzbeschreibung |
+|---|---|---|---|
+| v001 | YYYY-MM-DD | Initiale Erstellung | Erstes PRD erstellt |
+
+Bei späteren Änderungen ergänzen `/integrate-prd-review` oder `/update-prd` neue Zeilen, ohne alte Einträge zu entfernen.
+
+## 3. Kontext und Einordnung
 
 Wenn eine Gesamtarchitektur vorhanden ist:
 
@@ -28,7 +40,7 @@ Wenn keine Gesamtarchitektur vorhanden ist:
 - erklärte Annahmen zum Prozessumfeld
 - relevante bekannte Nachbarsysteme oder organisatorische Grenzen
 
-## 3. Zielgruppen und Rollen
+## 4. Zielgruppen und Rollen
 
 Beschreibe die Nutzergruppen und ihre Bedürfnisse.
 
@@ -40,7 +52,7 @@ Empfohlenes Format:
 
 Wenn das System keine Benutzeroberfläche hat, beschreibe statt menschlicher Rollen die technischen Konsumenten oder Nachbarsysteme.
 
-## 4. Problemstellung und Ziele
+## 5. Problemstellung und Ziele
 
 - Welches Problem wird gelöst?
 - Warum braucht es dieses System oder diesen Mock?
@@ -55,7 +67,7 @@ Beispiele für Produktprinzipien:
 - keine echten produktiven Daten
 - MVP zuerst, Erweiterungen bewusst als Medium oder Extended dokumentieren
 
-## 5. Scope und Ausbaustufen
+## 6. Scope und Ausbaustufen
 
 Gliedere den Funktionsumfang explizit in Etappen. Das hilft, Unsicherheit über Projektumfang sichtbar zu machen, ohne dass der Agent eigenständig beurteilt, ob der Scope für ein Kursprojekt angemessen ist.
 
@@ -100,7 +112,7 @@ Gruppiere Scope bei Bedarf nach:
 - Betrieb / Deployment
 - Security / Compliance
 
-## 6. User Stories
+## 7. User Stories
 
 Formuliere 5-8 zentrale User Stories. Jede zentrale User Story soll nach Möglichkeit auf ein Demo-Szenario oder Erfolgskriterium verweisen.
 
@@ -122,7 +134,7 @@ Pro User Story nach Möglichkeit ergänzen:
 - Akzeptanzhinweis auf PRD-Ebene
 - relevante Rolle oder Berechtigung
 
-## 7. Kernfunktionen
+## 8. Kernfunktionen
 
 Beschreibe die wichtigsten Funktionsbereiche des Systems.
 
@@ -134,7 +146,7 @@ Empfohlenes Format:
 
 Keine Implementierungsdetails auf Dateiebene aufnehmen. Diese gehören in spätere Feature-Pläne.
 
-## 8. Daten und Statusmodell
+## 9. Daten und Statusmodell
 
 Beschreibe die fachlichen Datenobjekte, die für das MVP wichtig sind. Berücksichtige bekannte Medium- und Extended-Erweiterungen so weit, dass Datenmodell und Architektur nicht unnötig in technische Sackgassen laufen. Medium- und Extended-Funktionen bleiben trotzdem optionale spätere Ausbaustufen.
 
@@ -154,7 +166,7 @@ Empfohlenes Format:
 |---|---|---|---|---|
 | Objekt 1 | Warum existiert es? | Feld A, Feld B | gehört zu..., Status... | MVP / Medium / Extended |
 
-## 9. Schnittstellen und Umsysteme
+## 10. Schnittstellen und Umsysteme
 
 Liste alle relevanten Nachbarsysteme, Mocks und Integrationen.
 
@@ -166,7 +178,7 @@ Empfohlenes Format:
 
 Wenn API-Endpunkte bereits klar sind, grob beschreiben. Vollständige Request-/Response-Schemas nur aufnehmen, wenn sie für das PRD bereits bekannt und stabil sind.
 
-## 10. Architektur und technische Leitplanken
+## 11. Architektur und technische Leitplanken
 
 Unterscheide explizit zwischen Brownfield und Greenfield.
 
@@ -228,7 +240,7 @@ Bei Greenfield-Projekten muss das PRD den technischen Stack und die zentralen Ar
 - Teststrategie
 - relevante Libraries oder externe Dienste
 
-## 11. Security, Datenschutz und Compliance
+## 12. Security, Datenschutz und Compliance
 
 Beschreibe den MVP-Umgang mit:
 
@@ -241,7 +253,7 @@ Beschreibe den MVP-Umgang mit:
 
 Wenn das PRD auf anonymisierter Gesamtarchitektur basiert, halte dies fest.
 
-## 12. Demo-Szenarien und Erfolgskriterien
+## 13. Demo-Szenarien und Erfolgskriterien
 
 Beschreibe die wichtigsten Szenarien, die in Demo oder Abnahme funktionieren müssen. Verweise dabei auf die relevanten User Stories, damit die Beziehung `User Story -> Demo-Szenario -> Erfolgskriterium` nachvollziehbar bleibt.
 
@@ -258,7 +270,7 @@ Ergänze messbare oder beobachtbare Erfolgskriterien:
 - [ ] System sendet oder simuliert Benachrichtigung Z
 - [ ] Mock-System antwortet nachvollziehbar
 
-## 13. Risiken, Annahmen und offene Fragen
+## 14. Risiken, Annahmen und offene Fragen
 
 Trenne klar zwischen bestätigten Risiken, Annahmen und offenen Fragen.
 
@@ -272,7 +284,7 @@ Empfohlenes Format:
 
 Nimm im Kurskontext eine offene Frage auf, wenn die Angemessenheit des Umfangs noch mit dem Dozenten validiert werden soll.
 
-## 14. Feature-Kandidaten für plan-feature
+## 15. Feature-Kandidaten für plan-feature
 
 Liste die groben Features, die später einzeln geplant werden sollen. Die Reihenfolge soll sichtbar machen, welche Funktionen zuerst umgesetzt werden müssen und welche schrittweise ergänzt werden können.
 
@@ -284,7 +296,7 @@ Empfohlenes Format:
 
 Diese Liste hilft, den nächsten PIV-Schritt vorzubereiten. Sie ist noch kein detaillierter Implementierungsplan.
 
-## 15. Appendix
+## 16. Appendix
 
 Optional:
 
@@ -306,6 +318,7 @@ Prüfe vor dem Speichern:
 - [ ] Offene Fragen und Annahmen sind markiert.
 - [ ] Das PRD enthält genug Substanz, um danach einzelne Features mit `plan-feature` zu planen.
 - [ ] Das initiale PRD ist als Dokumentversion `v001` gekennzeichnet.
+- [ ] Das PRD enthält eine Änderungshistorie mit einem Eintrag für `v001`.
 - [ ] Falls Gesamtarchitektur genutzt wurde: Markdown und, falls vorhanden, `architecture.dsl` wurden berücksichtigt.
 - [ ] SVG-/PNG-Diagramme wurden nicht als fachliche Quelle analysiert.
 - [ ] Bei Brownfield-/Starter-Kit-Projekten wurden bestehende technische Vorgaben referenziert statt neu entschieden.

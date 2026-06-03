@@ -52,6 +52,7 @@ Wichtig: Wenn du einen Review-Punkt wegen Kontext aus der Autor-Session ablehnst
 - Führe keine Feature-Planung und keine Code-Änderungen durch.
 - Wenn ein älteres PRD keinen Versionssuffix im Dateinamen hat, behandle es logisch als `v001`.
 - Wenn die Ausgangsversion `v001` ist, schreibe das integrierte PRD als `v002`. Bei `v002` schreibe `v003` usw.
+- Ergänze in der neuen PRD-Version immer die Änderungshistorie. Lege sie an, falls die Ausgangsversion sie noch nicht enthält.
 
 ## Pflichtlektüre
 
@@ -150,11 +151,14 @@ Nach Bestätigung:
 1. Erstelle eine neue PRD-Datei mit der nächsten Versionsnummer.
 2. Kopiere den bestätigten Inhalt der Ausgangsversion als Basis und arbeite die bestätigten Review-Entscheidungen dort ein.
 3. Aktualisiere die Dokumentversion im PRD selbst auf die neue Version, z.B. `v002`.
-4. Ergänze oder präzisiere nur Inhalte, die durch Review und menschliche Entscheidung gedeckt sind.
-5. Entferne keine fachlichen Inhalte, ausser die Entfernung wurde bestätigt oder ist eine direkte Korrektur eines Widerspruchs.
-6. Halte MVP / Medium / Extended / Out of Scope klar getrennt.
-7. Halte "Starter Kit Nutzung" bereit für `/adapt-to-project`.
-8. Wenn ein Review-Punkt wegen Autor-Kontext abgelehnt wurde, dokumentiere die Begründung im neuen PRD, falls sie für spätere Agenten relevant ist.
+4. Ergänze oder aktualisiere den Abschnitt `## Änderungshistorie` mit einer Zeile für die neue Version.
+5. Ergänze oder präzisiere nur Inhalte, die durch Review und menschliche Entscheidung gedeckt sind.
+6. Entferne keine fachlichen Inhalte, ausser die Entfernung wurde bestätigt oder ist eine direkte Korrektur eines Widerspruchs.
+7. Halte MVP / Medium / Extended / Out of Scope klar getrennt.
+8. Halte "Starter Kit Nutzung" bereit für `/adapt-to-project`.
+9. Wenn ein Review-Punkt wegen Autor-Kontext abgelehnt wurde, dokumentiere die Begründung im neuen PRD, falls sie für spätere Agenten relevant ist.
+
+Wenn die Ausgangsversion noch keine `## Änderungshistorie` enthält, lege den Abschnitt an. Dokumentiere darin mindestens `v001` als initiale Erstellung, soweit aus dem Dokument ableitbar, und die neue Zielversion als Review-Integration.
 
 ## Phase 5: Integration-Datei schreiben
 

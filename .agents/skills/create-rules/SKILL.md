@@ -57,6 +57,7 @@ Diese Datei ist der ausführliche Coding-Guide. Sie soll enthalten:
 - REST API, LLM, E-Mail und Upload-Konventionen, falls im Projekt vorhanden
 - Testing mit Vitest und Playwright
 - PIV-Loop mit `TASKS.md` als Feature-Index, `docs/project/features/[feature-name]/plan-v001.md` als initialem Plan, Feature-Plan-Review, Review-Integration und `docs/project/features/[feature-name]/plan-vNNN.md` als versionierter Arbeitsgrundlage für `/execute`
+- Versionierte PRD-Updates mit `/update-prd`, wenn fachliche Klärungen, Dozentenfeedback oder beim Planen erkannte PRD-Widersprüche eine neue PRD-Version erfordern
 - Verfügbare PIV-Skills aus `.agents/skills/`
 - Verdachtsbasierte Abschluss-Reflexion mit `/reflect-rules`, damit wiederholbare Agent-Fehler, Planlücken und wiederholte Nutzerkorrekturen in derselben Session in Regelvorschläge überführt werden können
 - Stop-and-ask-Regeln
@@ -96,6 +97,7 @@ Nie automatisch aktivieren – immer nur auf expliziten Aufruf.
 | create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD-Entwurf als `v001` generieren |
 | review-prd | `/review-prd [Pfad-zum-PRD]` | Setup/Plan: PRD in frischer Reviewer-Session kritisch prüfen |
 | integrate-prd-review | `/integrate-prd-review [Pfad-zum-PRD] [Pfad-zum-Review]` | Setup/Plan: Review bewerten, PRD überarbeiten und Integration dokumentieren |
+| update-prd | `/update-prd [Pfad-zum-PRD]` | Setup/Plan: PRD aufgrund fachlicher Klärung versioniert aktualisieren |
 | adapt-to-project | `/adapt-to-project [Pfad-zum-PRD]` | Setup: Demo-Code nach bestätigtem PRD bereinigen, Build validieren |
 | plan-feature | `/plan-feature [Feature]` | Plan: initialen Feature-Plan `plan-v001.md` erstellen |
 | review-feature-plan | `/review-feature-plan [Pfad-zum-Plan]` | Plan: Feature-Plan in frischer Reviewer-Session kritisch prüfen |

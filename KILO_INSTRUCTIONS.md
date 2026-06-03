@@ -127,6 +127,7 @@ This version (16) has breaking changes — APIs, conventions, and file structure
 
 ### PIV-Loop (vollständig)
 1. **Plan** – Feature mit `/plan-feature [Feature]` planen. Root-`TASKS.md` bleibt nur Feature-Index; Details, Tasks und Akzeptanzkriterien liegen in `docs/project/features/[feature-name]/plan-v001.md`.
+   - Wenn beim Planen ein PRD-Widerspruch oder eine fehlende fachliche Grundlage auffällt, stoppt der Agent und fordert zuerst `/update-prd [PRD-Pfad]` an. Die Feature-Planung wird danach mit der neuen PRD-Version fortgesetzt.
 2. **Review Plan** – Initialen Plan committen, dann in frischer Session mit `/review-feature-plan` prüfen und in der Autor-Session mit `/integrate-feature-plan-review` in eine neue Plan-Version überführen, typischerweise `plan-v002.md`.
 3. **Implement** – Mit `/execute docs/project/features/[feature-name]/plan-v002.md` genau einen Task nach dem anderen umsetzen. Task-Status und Validierung werden in der Plan-Datei dokumentiert.
 4. **Validate** – `npm run test` ausführen, Ergebnis auswerten und Fehler beheben. Bei grösseren Änderungen `npm run build`; E2E nur wenn relevant oder explizit angefragt. `npm run dev` wird vom Nutzer zur manuellen Prüfung gestartet.
@@ -144,6 +145,7 @@ Skills liegen in `.agents/skills/`. Aufruf per `/skill-name` im Chat, sofern das
 | create-prd | `/create-prd [Dateiname]` | Setup/Plan: PRD-Entwurf als `v001` generieren |
 | review-prd | `/review-prd [Pfad-zum-PRD]` | Setup/Plan: PRD in frischer Reviewer-Session kritisch prüfen |
 | integrate-prd-review | `/integrate-prd-review [Pfad-zum-PRD] [Pfad-zum-Review]` | Setup/Plan: Review bewerten, PRD überarbeiten und Integration dokumentieren |
+| update-prd | `/update-prd [Pfad-zum-PRD]` | Setup/Plan: PRD aufgrund fachlicher Klärung versioniert aktualisieren |
 | adapt-to-project | `/adapt-to-project [Pfad-zum-PRD]` | Setup: Demo-Code nach bestätigtem PRD bereinigen, Build validieren |
 | plan-feature | `/plan-feature [Feature]` | Plan: initialen Feature-Plan `plan-v001.md` erstellen |
 | review-feature-plan | `/review-feature-plan [Pfad-zum-Plan]` | Plan: Feature-Plan in frischer Reviewer-Session kritisch prüfen |

@@ -27,6 +27,7 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `create-prd` | Am Anfang eines Starter-Kit-Projekts, um das konkrete IT-System, seine Ausbaustufen und dessen MVP-Scope zu beschreiben | `/create-prd docs/project/prds/antragssystem.md` plus Gesamtarchitektur-Markdown und `architecture.dsl`, falls vorhanden. Der Skill speichert das initiale PRD als `v001`, z.B. `antragssystem-v001.md`. |
 | `review-prd` | In einer frischen Reviewer-Session nach `/prime`, idealerweise mit anderem Modell: prüft das PRD kritisch und schreibt eine Review-Datei, ohne das PRD zu ändern | `/review-prd docs/project/prds/antragssystem-v001.md` |
 | `integrate-prd-review` | Zurück in der Autor-Session: bewertet Review-Vorschläge, holt Entscheidungen ein, erstellt die nächste PRD-Version und schreibt eine Integration-Datei | `/integrate-prd-review docs/project/prds/antragssystem-v001.md docs/project/prd-reviews/antragssystem-v001-r01-review.md` |
+| `update-prd` | Bei fachlichen Änderungen, Dozentenfeedback oder beim Planen erkannten PRD-Widersprüchen: erstellt eine neue PRD-Version und dokumentiert die Änderung | `/update-prd docs/project/prds/antragssystem-v002.md` |
 | `adapt-to-project` | Einmalig nach PRD-Review, Review-Integration und fachlicher PRD-Bestätigung, vor dem ersten `plan-feature`: bereinigt Demo-Code auf Basis des PRDs und validiert den Build | `/adapt-to-project docs/project/prds/antragssystem-v002.md` |
 | `plan-feature` | Für ein einzelnes Feature aus dem PRD, bevor Code geschrieben wird: erstellt den initialen Plan `plan-v001.md` | `/plan-feature "PRD Kapitel Antrag einreichen"` |
 | `review-feature-plan` | In einer frischen Reviewer-Session nach `/prime`: prüft Architektur, Tasks, Reihenfolge und Validierung des Feature-Plans | `/review-feature-plan docs/project/features/antrag-formular/plan-v001.md` |
@@ -34,7 +35,7 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `execute` | Wenn eine reviewte und bestätigte Feature-Plan-Version vorliegt | `/execute docs/project/features/antrag-formular/plan-v002.md` |
 | `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan-v002.md` |
 | `reflect-rules` | Nach `/document` bei Verdacht auf wiederholbare Agent-Fehler, Nacharbeiten, Planlücken oder wiederholte Nutzerkorrekturen | `/reflect-rules docs/project/features/antrag-formular/plan-v002.md` |
-| `commit` | Nach initialem PRD-Entwurf `v001`, nach Review-Integration einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, nach initialem Feature-Plan `plan-v001`, nach Review-Integration einer neuen Plan-Version, nach validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
+| `commit` | Nach initialem PRD-Entwurf `v001`, nach Review-Integration oder Update einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, nach initialem Feature-Plan `plan-v001`, nach Review-Integration einer neuen Plan-Version, nach validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
 
@@ -180,6 +181,34 @@ Nach der fachlichen Bestätigung der neuen PRD-Version sollst du den Stand commi
 
 Oder erstelle den Commit in VS Code Source Control. Dort kannst du dir bei Bedarf eine Commit Message vorschlagen lassen.
 
+### PRD bei Bedarf aktualisieren
+
+Wenn sich der fachliche Stand nach der PRD-Bestätigung ändert, erstelle keine manuelle Änderung in der bestehenden PRD-Datei. Nutze stattdessen:
+
+```text
+/update-prd docs/project/prds/antragssystem-v002.md
+```
+
+Typische Auslöser:
+
+- Du hast mit dem Dozenten gesprochen und Scope, Rollen, Datenmodell oder Demo-Szenarien ändern sich.
+- Die Gruppe entscheidet bewusst, ein neues Feature aufzunehmen oder etwas aus dem MVP herauszunehmen.
+- `/plan-feature` erkennt, dass das PRD widersprüchlich, unvollständig oder nicht mehr aktuell ist.
+
+`/update-prd` fragt nach dem Änderungsanlass, zeigt vor dem Schreiben eine konkrete Änderungsvorschau, erstellt danach eine neue PRD-Version, z.B. `antragssystem-v003.md`, ergänzt die `Änderungshistorie` im PRD und schreibt eine Update-Datei unter:
+
+```text
+docs/project/prd-updates/antragssystem-v002-to-v003-update.md
+```
+
+Committe die neue PRD-Version und die Update-Datei, bevor du die nächste Feature-Session startest:
+
+```text
+/commit
+```
+
+Wenn vorhandene Feature-Pläne betroffen sind, ändere sie nicht nebenbei. Dafür ist ein separater `/update-feature-plan`-Workflow vorgesehen. Bis ein betroffener Plan aktualisiert wurde, soll er nicht als Grundlage für `/execute` verwendet werden.
+
 ### Schritt 5: Starter Kit bereinigen
 
 Verwende hier die neueste fachlich bestätigte PRD-Version, im Normalfall nach einer Review-Integration also z.B.:
@@ -197,7 +226,13 @@ Nach der Bereinigung: Starte kurz `npm run dev` und prüfe, ob die App noch läu
 Wenn Bereinigung und Prüfung erfolgreich sind, erstelle auch für diesen abgeschlossenen Bereinigungsschritt einen Commit. So bleibt der PRD-Stand getrennt von der technischen Starter-Kit-Anpassung nachvollziehbar.
 
 > **Du hast bereits ein PRD ohne den Abschnitt "Starter Kit Nutzung"?**
-> Führe zuerst diesen Prompt in einem normalen Chat aus, bevor du `/adapt-to-project` aufrufst:
+> Führe zuerst `/update-prd` aus, bevor du `/adapt-to-project` aufrufst:
+>
+> ```text
+> /update-prd docs/project/prds/[name]-v001.md
+> ```
+>
+> Beschreibe als gewünschte Änderung:
 >
 > ```
 > Lies mein bestehendes PRD in docs/project/prds/[name]-v001.md vollständig.
@@ -206,10 +241,10 @@ Wenn Bereinigung und Prüfung erfolgreich sind, erstelle auch für diesen abgesc
 > Ergänze einen Abschnitt "Starter Kit Nutzung" mit einer Tabelle der genutzten
 > Starter-Kit-Bausteine (Auth, DB, UI, E-Mail, LLM, REST API, File Upload) und
 > einer Liste der Demo-Inhalte, die für dieses Projekt nicht relevant sind. Orientiere Dich am Kapitel "Starter Kit Nutzung" in .agents/skills/create-prd/references/prd-template.md.
-> Speichere das aktualisierte PRD.
+> Erstelle dafür eine neue PRD-Version und dokumentiere die Änderung.
 > ```
 >
-> Prüfe das Ergebnis kurz und bestätige, dass die Liste korrekt ist.
+> Prüfe das Ergebnis kurz, bestätige die neue PRD-Version und committe sie mit der Update-Datei.
 
 ### Schritt 6: Neue Session für das erste Feature starten
 
@@ -229,6 +264,8 @@ Der Agent recherchiert im PRD und im Repo, stellt gezielte Rückfragen und erste
 
 - `docs/project/features/antrag-formular/plan-v001.md`
 - einen Eintrag in `TASKS.md`
+
+Wenn der Agent beim Planen erkennt, dass das referenzierte PRD widersprüchlich, unvollständig oder fachlich veraltet ist, muss er stoppen. Er erklärt den Widerspruch und fordert dich auf, zuerst `/update-prd [PRD-Pfad]` auszuführen. Danach wird die Feature-Planung mit der neuen PRD-Version erneut gestartet.
 
 Committe den initialen Feature-Plan `plan-v001.md` und den aktualisierten `TASKS.md`-Eintrag, bevor du in die Plan-Review-Session wechselst:
 

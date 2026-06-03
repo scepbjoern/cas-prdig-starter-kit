@@ -57,6 +57,14 @@ Zurück in der Autor-Session integriert ihr den Review. Dabei entsteht eine neue
 
 Prüft die neue PRD-Version sorgfältig – insbesondere den Abschnitt **"Starter Kit Nutzung"**, der auflistet, welche Starter-Kit-Bausteine genutzt werden und welche Demo-Inhalte irrelevant sind. Bestätigt die neueste PRD-Version erst, wenn sie als Grundlage für die Feature-Planung taugt, und committed sie danach separat inklusive Review-/Integration-Dateien.
 
+Wenn sich später fachlich etwas am PRD ändert, bearbeitet die bestehende Datei nicht von Hand. Nutzt stattdessen:
+
+```text
+/update-prd docs/project/prds/[systemname]-v002.md
+```
+
+Der Skill erstellt eine neue PRD-Version, ergänzt die Änderungshistorie und schreibt eine Update-Datei. Wenn dadurch bestehende Feature-Pläne betroffen sind, werden sie nicht automatisch geändert; dafür ist ein separater `/update-feature-plan`-Workflow vorgesehen.
+
 Die vollständige Anleitung steht in [`PIV-WORKFLOW.md`](PIV-WORKFLOW.md).
 
 ---

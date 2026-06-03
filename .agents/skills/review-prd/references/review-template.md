@@ -41,6 +41,10 @@ Findings, die vor `/adapt-to-project` oder `/plan-feature` geklärt werden sollt
 | Template-Bereich | Befund | Vorschlag |
 |---|---|---|
 
+## Versionierung und Änderungshistorie
+
+<Prüfung, ob Dokumentversion und Änderungshistorie vorhanden, konsistent und nachvollziehbar sind.>
+
 ## Scope und Ausbaustufen
 
 <Prüfung von MVP / Medium / Extended / Out of Scope, ohne selbst über Kursangemessenheit zu entscheiden.>
@@ -98,6 +102,7 @@ Prüfe vor dem Speichern:
 - [ ] Das Review ändert das PRD nicht.
 - [ ] Kritische Findings sind konkret und handlungsorientiert.
 - [ ] Verbesserungsvorschläge sind so formuliert, dass `/integrate-prd-review` sie einzeln bewerten kann.
+- [ ] Dokumentversion und Änderungshistorie wurden geprüft.
 - [ ] MVP / Medium / Extended / Out of Scope wurden geprüft.
 - [ ] Rollen, Berechtigungen, Datenmodell, Schnittstellen, Demo-Szenarien und Starter-Kit-Nutzung wurden betrachtet.
 - [ ] Prototypen-Grenzen und sensible Daten wurden bewusst kurz geprüft oder als nicht relevant markiert.

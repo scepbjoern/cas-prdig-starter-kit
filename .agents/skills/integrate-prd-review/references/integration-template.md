@@ -31,6 +31,10 @@ Passe die Tiefe der Abschnitte an Review-Umfang und PRD-Änderungen an. Markiere
 
 - <Konkrete Änderung>
 
+## Änderungshistorie im PRD
+
+<Welche Zeile wurde in der Änderungshistorie der neuen PRD-Version ergänzt oder aktualisiert?>
+
 ## Teilweise übernommene Punkte
 
 - <Punkt und Begründung>
@@ -55,5 +59,6 @@ Prüfe vor dem Speichern:
 - [ ] Jede relevante Review-Empfehlung ist als übernommen, teilweise übernommen, abgelehnt oder offen dokumentiert.
 - [ ] Ablehnungen sind nachvollziehbar begründet, insbesondere wenn Autor-Session-Kontext eine Rolle spielt.
 - [ ] Die neue PRD-Version ist genannt und bleibt von der Ausgangsversion unterscheidbar.
+- [ ] Die Änderungshistorie der neuen PRD-Version enthält einen Eintrag für die Review-Integration.
 - [ ] Offene Punkte enthalten einen konkreten nächsten Klärungsschritt.
 - [ ] Die Empfehlung für den nächsten Schritt nennt entweder eine weitere Review der neuen PRD-Version oder `/adapt-to-project` mit dem neuen PRD-Pfad.
