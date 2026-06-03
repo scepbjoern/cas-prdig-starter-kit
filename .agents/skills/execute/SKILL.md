@@ -88,10 +88,12 @@ Für jeden Task:
 11. Tests oder Validierung gemäss Task ergänzen.
 12. Prüfen, ob Typdefinitionen, Imports und Schnittstellen konsistent sind.
 13. Status auf `validating` setzen.
-14. Validierung durchführen oder, falls der Nutzer sie ausführen muss, genaue Anleitung dokumentieren.
-15. Validierungsergebnis in der Plan-Datei festhalten.
-16. Bei erfolgreicher Validierung Status auf `done` setzen.
-17. Stoppen, Ergebnis zeigen und bei sinnvoller logischer Einheit optional auf `/commit` als Zwischencommit hinweisen.
+14. Automatisierte Validierung durchführen (z.B. `npm run test`, `npm run build`) und dem Nutzer explizit berichten, welche Befehle ausgeführt wurden und was das Ergebnis war. Keine Validierung stillschweigend überspringen.
+15. Nutzer zur manuellen Prüfung auffordern: Falls UI- oder Laufzeitverhalten betroffen ist, den Nutzer explizit bitten, `npm run dev` zu starten und das Ergebnis im Browser zu prüfen. Warten, bis der Nutzer die manuelle Prüfung bestätigt hat.
+16. Validierungsergebnis (automatisiert und manuell) in der Plan-Datei festhalten.
+17. Status erst auf `done` setzen, nachdem der Nutzer die Validierung bestätigt hat.
+18. Zusammenfassung des abgeschlossenen Tasks ausgeben: Was wurde umgesetzt, welche Validierungen liefen, welches Ergebnis.
+19. `/commit` als Zwischencommit vorschlagen. Dieser Schritt ist nach jedem abgeschlossenen Task verpflichtend – nicht optional. Der Nutzer entscheidet, ob er den Commit jetzt macht oder erst nach mehreren Tasks.
 
 ## Validierung
 
