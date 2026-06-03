@@ -73,6 +73,8 @@ planned | in_progress | needs_human | validating | done
 
 ## Umsetzung pro Task
 
+Wenn ein Task im Plan erkennbar nur ein technischer Folgeschritt des vorherigen Tasks ist und keine eigenständige fachliche Validierung erlaubt (z.B. ein isolierter „`npx prisma generate`"-Task nach einem Schema-Task), führe beide zusammen aus und behandle sie als eine Einheit für Validierung und Commit. Dokumentiere das kurz in der Plan-Datei. Dies ist die Ausnahme – im Normalfall wird jeder Task einzeln abgearbeitet.
+
 Für jeden Task:
 
 1. Task aus der Plan-Datei identifizieren.

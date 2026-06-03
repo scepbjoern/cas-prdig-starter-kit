@@ -191,7 +191,10 @@ Dokumentiere im Plan selbst die Plan-Version `v001` und fülle im Abschnitt `## 
 Task-Format:
 
 - Nutze Aktionskeywords wie `CREATE`, `UPDATE`, `ADD`, `REMOVE`, `REFACTOR`, `MIRROR`.
-- Jeder Task muss atomic und einzeln validierbar sein.
+- Jeder Task muss aus Nutzersicht sinnvoll validierbar sein: Er enthält eine fachlich oder technisch eigenständige Änderung, bei der ein Mensch nach der Umsetzung sagen kann, ob sie korrekt ist. Technische Folgeschritte, die immer zwingend auf einen anderen Task folgen, sind kein eigenständiger Task – sie gehören in denselben Task.
+- Gegenbeispiel schlechte Granularität: Task 1 „Prisma-Schema anpassen", Task 2 „`npx prisma generate` ausführen". `prisma generate` ist eine technische Konsequenz der Schema-Änderung, keine eigenständig validierbare Einheit. Korrekt: Ein Task „Prisma-Schema erweitern und Client generieren".
+- Weitere Gegenbeispiele: „Datei erstellen" ohne Inhalt als eigener Task; „Import ergänzen" ohne die zugehörige Nutzung; „ENV-Variable eintragen" ohne die dazugehörige Service-Anbindung.
+- Richtige Granularität: Ein Task deckt eine zusammenhängende, in sich vollständige Änderung ab – z.B. „Prisma-Modell und zugehörige Server Action erstellen" oder „Formularkomponente mit Validierung und Fehleranzeige implementieren".
 - Jeder Task muss `IMPLEMENT`, `PATTERN`, `IMPORTS`, `GOTCHA`, `ACCEPTANCE CRITERIA` und `VALIDATE` enthalten, sofern anwendbar.
 - Jeder Task startet mit Status `planned`.
 
