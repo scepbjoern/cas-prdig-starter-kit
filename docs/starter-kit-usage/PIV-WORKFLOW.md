@@ -40,8 +40,11 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
 
-![PIV-Workflow Übersicht](PIV-Workflow_UEBERSICHT.png)
-*Erstellt mit OpenAI gpt-image-2, Thinking Mode (ChatGPT GPT-5.5)*
+![PIV-Workflow PRD-Erstellung](PIV-Workflow_PRD-Erstellung.png)
+*PRD-Erstellung, Review, Integration und Starter-Kit-Anpassung. Erstellt mit OpenAI gpt-image-2, Thinking Mode (ChatGPT GPT-5.5).*
+
+![PIV-Workflow pro Feature](PIV-Workflow_Pro%20Feature.png)
+*Feature-Zyklus mit Planung, Plan-Review, Integration, Umsetzung und Validierung. Erstellt mit OpenAI gpt-image-2, Thinking Mode (ChatGPT GPT-5.5).*
 
 ## 3. Wie starte ich einen Skill in meinem Tool?
 
