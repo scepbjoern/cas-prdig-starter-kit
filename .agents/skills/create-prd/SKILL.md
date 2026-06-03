@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: plan
-  version: "2.0"
+  version: "2.1"
 disable-model-invocation: true
 argument-hint: "[output-filename]"
 ---
@@ -25,6 +25,9 @@ Erstelle ein Product Requirements Document (PRD) für genau ein IT-System oder e
 - Schreibe das PRD auf Deutsch. Technische Begriffe wie API, Mock, Backend, Frontend, Authentication oder User Story dürfen Englisch bleiben.
 - Unterscheide im PRD explizit zwischen MVP / Minimalversion, Medium-Version und Extended-/Luxus-Version.
 - Beurteile nicht eigenständig, ob der Scope für ein Kursprojekt zu groß oder zu klein ist. Dokumentiere die Ausbaustufen sauber und verweise im Kurskontext darauf, dass Studierende den Umfang mit dem Dozenten validieren sollen.
+- Erzeuge das initiale PRD immer als Dokumentversion `v001`.
+- Wenn der Nutzer einen Zielpfad ohne Versionssuffix nennt, ergänze `-v001` vor `.md`, z.B. aus `docs/project/prds/antragssystem.md` wird `docs/project/prds/antragssystem-v001.md`.
+- Wenn der Zielpfad bereits ein Versionssuffix wie `-v001.md` enthält, verwende diesen Pfad unverändert.
 
 ## Datenschutz-Hinweis
 
@@ -115,13 +118,21 @@ Vermeide Detailfragen, die erst in `plan-feature` gehören, zum Beispiel konkret
 
 Erzeuge das PRD gemäß `references/prd-template.md`.
 
-Wenn ein Zielpfad als Argument genannt wurde, speichere dorthin. Wenn kein Zielpfad genannt wurde, verwende:
+Wenn ein Zielpfad als Argument genannt wurde, normalisiere ihn zuerst auf ein `-v001.md`-Suffix. Wenn kein Zielpfad genannt wurde, verwende:
 
 ```text
-docs/project/prds/[systemname].md
+docs/project/prds/[systemname]-v001.md
 ```
 
-Normalisiere den Dateinamen kleingeschrieben und mit Bindestrichen, zum Beispiel `docs/project/prds/prozessportal.md`.
+Normalisiere den Dateinamen kleingeschrieben und mit Bindestrichen, zum Beispiel `docs/project/prds/prozessportal-v001.md`.
+
+Wenn der Nutzer einen Zielpfad ohne Versionssuffix übergibt, ändere nur den Dateinamen und behalte das Verzeichnis bei:
+
+```text
+docs/project/prds/prozessportal.md -> docs/project/prds/prozessportal-v001.md
+```
+
+Dokumentiere im PRD selbst die Dokumentversion `v001`, damit spätere Review- und Update-Workflows eindeutig darauf referenzieren können.
 
 ### 6. Abschluss
 
@@ -135,6 +146,7 @@ Nach dem Schreiben des PRD:
 6. Im Kurskontext: Empfiehl, Umfang und Ausbaustufen bei Bedarf mit dem Dozenten zu besprechen.
 
 7. Im Brownfield-/Starter-Kit-Kontext: Weise darauf hin, dass nach der PRD-Bestätigung `/adapt-to-project [PRD-Pfad]` ausgeführt werden soll, bevor die erste neue Feature-Session gestartet wird. Dieser Skill bereinigt Demo-Code auf Basis des PRDs und stellt sicher, dass die App danach noch lauffähig ist.
+8. Weise darauf hin, dass nach fachlicher Bestätigung des PRDs ein Commit erstellt werden soll. Dafür kann der Nutzer entweder `/commit` verwenden oder in VS Code Source Control die Änderungen committen und sich dort eine Commit Message vorschlagen lassen.
 
 Abschlussfrage:
 

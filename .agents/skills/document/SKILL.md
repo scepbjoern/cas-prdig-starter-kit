@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: validate
-  version: "2.0"
+  version: "2.1"
 disable-model-invocation: true
 argument-hint: "[path-to-plan]"
 ---
@@ -282,6 +282,6 @@ Gib nach dem Schreiben aus:
 - offene Annahmen, Risiken oder nicht ausführbare Prüfungen
 - Hinweis, dass bei Verdacht auf Agent-Fehler, Planabweichungen, ungewöhnliche Nacharbeiten oder wiederholte Nutzerkorrekturen jetzt in derselben Session `/reflect-rules docs/project/features/[feature-name]/plan.md` genutzt werden soll, solange der Chatverlauf noch verfügbar ist
 - Hinweis, dass `/reflect-rules` zusätzliche Input-Tokens brauchen kann und deshalb vor allem bei solchen Verdachtsmomenten sinnvoll ist
-- Hinweis, dass der finale `/commit` nach der Entscheidung für oder gegen `/reflect-rules` folgen soll
+- Hinweis, dass nach der Entscheidung für oder gegen `/reflect-rules` der finale Commit folgen soll. Dafür kann der Nutzer `/commit` verwenden oder in VS Code Source Control die Änderungen committen und sich dort eine Commit Message vorschlagen lassen.
 
 Wenn keine Dateien geschrieben wurden, erkläre knapp den Blocker und den konkreten nächsten Schritt.

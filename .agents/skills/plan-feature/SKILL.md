@@ -5,7 +5,7 @@ description: >
 compatibility: Next.js 16, Prisma 7, Better Auth, SQLite
 metadata:
   piv-phase: plan
-  version: "1.0"
+  version: "1.1"
 disable-model-invocation: true
 argument-hint: "[feature-description-or-prd-reference]"
 ---
@@ -19,7 +19,7 @@ Feature-Beschreibung oder Referenz auf bestehende Datei: `$ARGUMENTS`
 Beispiele:
 
 - `/plan-feature Antrag-Formular mit Statusänderung`
-- `/plan-feature docs/project/prds/antrag-workflow.md Kapitel Einreichung`
+- `/plan-feature docs/project/prds/antrag-workflow-v001.md Kapitel Einreichung`
 
 ## Grundregel
 
@@ -223,3 +223,4 @@ Zeige danach:
 - Confidence Score für die Umsetzung
 - Offene Fragen oder Annahmen
 - Hinweis: Erst nach menschlicher Bestätigung darf `/execute` implementieren
+- Hinweis: Nach menschlicher Bestätigung des Feature-Plans soll ein Commit erstellt werden, damit Plan-Datei und `TASKS.md` als bestätigter Ausgangspunkt für `/execute` gesichert sind. Dafür kann der Nutzer `/commit` verwenden oder in VS Code Source Control die Änderungen committen und sich dort eine Commit Message vorschlagen lassen.

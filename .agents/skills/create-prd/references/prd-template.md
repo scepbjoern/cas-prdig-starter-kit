@@ -7,6 +7,7 @@ Passe die Tiefe der Abschnitte an den Informationsstand an. Markiere Annahmen un
 ## 1. Executive Summary
 
 - Name des IT-Systems oder der Komponente
+- Dokumentversion, beim initialen PRD immer `v001`
 - Kurzbeschreibung in 2-3 Absätzen
 - fachlicher Zweck und Nutzen
 - MVP-Ziel in einem klaren Satz
@@ -304,6 +305,7 @@ Prüfe vor dem Speichern:
 - [ ] User Stories und Demo-Szenarien verweisen nachvollziehbar aufeinander.
 - [ ] Offene Fragen und Annahmen sind markiert.
 - [ ] Das PRD enthält genug Substanz, um danach einzelne Features mit `plan-feature` zu planen.
+- [ ] Das initiale PRD ist als Dokumentversion `v001` gekennzeichnet.
 - [ ] Falls Gesamtarchitektur genutzt wurde: Markdown und, falls vorhanden, `architecture.dsl` wurden berücksichtigt.
 - [ ] SVG-/PNG-Diagramme wurden nicht als fachliche Quelle analysiert.
 - [ ] Bei Brownfield-/Starter-Kit-Projekten wurden bestehende technische Vorgaben referenziert statt neu entschieden.
