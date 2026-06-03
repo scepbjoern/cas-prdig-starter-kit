@@ -121,8 +121,9 @@ Zeige vor dem Commit:
 - Dateien pro Commit
 - Commit-Message(s)
 - Kurzbegründung
+- Hinweis, dass nach dem Commit automatisch `git push origin <current-branch>` ausgeführt wird
 
-Warte auf menschliche Bestätigung, bevor du commitest.
+Warte auf menschliche Bestätigung, bevor du commitest und pushst.
 
 ## Schritt 5: Committen
 
@@ -135,15 +136,15 @@ Nach jedem Commit:
 git status
 ```
 
-## Schritt 6: Push Nur Anbieten
+## Schritt 6: Auf Remote Pushen
 
-Nach erfolgreichem Commit darfst du anbieten:
+Nach erfolgreichem Commit pushe die Änderungen auf den Remote:
 
 ```bash
 git push origin <current-branch>
 ```
 
-Führe den Push nur nach expliziter Bestätigung aus.
+Der Push ist fester Bestandteil des Commit-Workflows und erfolgt automatisch nach der Bestätigung in Schritt 4. Nur wenn der Push explizit abgelehnt wurde oder kein Remote konfiguriert ist, wird er übersprungen.
 
 ## Qualitätsregeln
 
