@@ -24,10 +24,12 @@ Der Skill darf sowohl für validierte Zwischenstände während eines Features al
 Erlaubte Zeitpunkte:
 
 - Nach Erstellung des initialen PRD-Entwurfs `v001`, bevor die Review-Session startet.
+- Nach `/review-prd`, wenn das Review-Dokument abgeschlossen und in sich konsistent ist.
 - Nach Review-Integration und fachlicher Bestätigung einer neuen PRD-Version, inklusive zugehöriger Review-/Integration-Artefakte.
 - Nach `/update-prd` und fachlicher Bestätigung einer neuen PRD-Version, inklusive zugehöriger Update-Datei.
 - Nach erfolgreicher `/adapt-to-project`-Bereinigung inklusive dokumentierter Build-Validierung.
 - Nach Erstellung des initialen Feature-Plans `plan-v001.md`, bevor die Feature-Plan-Review-Session startet.
+- Nach `/review-feature-plan`, wenn das Review-Dokument abgeschlossen und in sich konsistent ist.
 - Nach Review-Integration und fachlicher Bestätigung einer neuen Feature-Plan-Version, inklusive zugehöriger Plan-Review-/Integration-Artefakte.
 - Nach `/update-feature-plan` und fachlicher Bestätigung einer neuen Feature-Plan-Version, inklusive zugehöriger Update-Datei und `TASKS.md`.
 - Nach einem einzelnen Task, wenn der Task validiert ist und der Status im Plan auf `done` steht.

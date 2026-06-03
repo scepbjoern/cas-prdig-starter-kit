@@ -36,7 +36,7 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 | `execute` | Wenn eine reviewte und bestätigte Feature-Plan-Version vorliegt | `/execute docs/project/features/antrag-formular/plan-v002.md` |
 | `document` | Nach Umsetzung und Validierung, um Feature-Dokumentation zu erstellen | `/document docs/project/features/antrag-formular/plan-v002.md` |
 | `reflect-rules` | Nach `/document` bei Verdacht auf wiederholbare Agent-Fehler, Nacharbeiten, Planlücken oder wiederholte Nutzerkorrekturen | `/reflect-rules docs/project/features/antrag-formular/plan-v002.md` |
-| `commit` | Nach initialem PRD-Entwurf `v001`, nach Review-Integration oder Update einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, nach initialem Feature-Plan `plan-v001`, nach Review-Integration oder Update einer neuen Plan-Version, nach validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
+| `commit` | Nach initialem PRD-Entwurf `v001`, nach `/review-prd`, nach Review-Integration oder Update einer neuen PRD-Version, nach erfolgreicher Starter-Kit-Bereinigung, nach initialem Feature-Plan `plan-v001`, nach `/review-feature-plan`, nach Review-Integration oder Update einer neuen Plan-Version, nach validiertem Task, kohärenter Phase oder finalem Feature-Abschluss | `/commit` |
 | `create-rules` | Wenn Projekt-Instructions aktualisiert werden sollen | `/create-rules` |
 | `init-project` | Bei einem frisch geklonten Starter-Kit-Projekt | `/init-project` |
 
@@ -136,6 +136,12 @@ docs/project/prd-reviews/antragssystem-v001-r01-review.md
 ```
 
 Diese frische Session ist wichtig: Der Reviewer soll nicht die Entstehungsgeschichte des PRDs kennen, sondern beurteilen, ob das Dokument selbst tragfähig genug ist.
+
+Committe die Review-Datei, bevor du in die Integrations-Session wechselst:
+
+```text
+/commit
+```
 
 ### Schritt 4: Review in Autor-Session integrieren
 
@@ -312,6 +318,12 @@ Er ändert den Feature-Plan nicht, sondern schreibt eine Review-Datei, z.B.:
 
 ```text
 docs/project/features/antrag-formular/plan-reviews/plan-v001-r01-review.md
+```
+
+Committe die Review-Datei, bevor du in die Integrations-Session wechselst:
+
+```text
+/commit
 ```
 
 ### Schritt 9: Feature-Plan-Review in Autor-Session integrieren
