@@ -176,7 +176,9 @@ E2E-Tests benötigen einen laufenden Dev-Server. Gehe wie folgt vor:
 
    1. Terminal öffnen und ausführen: npm run dev
    2. Warten, bis "Ready" erscheint (typisch: http://localhost:3000)
-   3. In einem zweiten Terminal ausführen: npm run test:e2e
+   3. In einem zweiten Terminal eine der folgenden Varianten ausführen:
+      - `npm run test:e2e` – headless (schneller, Ergebnis im Terminal)
+      - `npm run test:e2e:ui` – visuell (Playwright öffnet Chromium, Tests live verfolgbar)
    4. Ergebnis hier melden (Anzahl Tests bestanden/fehlgeschlagen)
    5. Dev-Server mit Ctrl+C stoppen
 
