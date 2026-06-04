@@ -19,6 +19,11 @@ Für euer Starter-Kit-Projekt ist Git aus zwei Gründen wichtig:
 
 ---
 
+![Git und GitHub – Grundlagen für das Starter-Kit-Projekt](GIT_GRUNDLAGEN.png)
+*Git und GitHub im Überblick: Repository, Commit, Push, Branches und Git-History als KI-Kontext auf einen Blick. Erstellt mit OpenAI gpt-image-2, Thinking Mode (ChatGPT GPT-5.5).*
+
+---
+
 ## 2. Repository: Der Projektordner mit Geschichte
 
 Ein **Repository** (kurz: Repo) ist euer Projektordner – aber nicht nur der aktuelle Inhalt, sondern auch die komplette Änderungshistorie. Das Repository existiert an zwei Orten gleichzeitig:
