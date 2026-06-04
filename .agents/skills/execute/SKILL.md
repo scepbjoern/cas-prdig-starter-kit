@@ -139,7 +139,7 @@ Für jeden Task:
 Nutze projektkonforme Checks:
 
 - Unit Tests: `npm run test`
-- E2E Tests, falls betroffen: `npm run test:e2e`
+- E2E Tests, falls betroffen: `npm run test:e2e` (siehe Sonderregel unten)
 - Build nach grösseren Änderungen oder spätestens nach 3 Tasks: `npm run build`
 - Manuelle Prüfung in der laufenden App
 
@@ -154,14 +154,38 @@ Wenn eine Validierung fehlschlägt:
 
 Überspringe keine Validierungsschritte. Falls ein Schritt nicht ausführbar ist, dokumentiere den Grund und die manuelle Alternative in der Plan-Datei.
 
+**Kritische Regel: E2E-Tests hinzugefügt ≠ E2E-Tests validiert.**
+Ein Task, dessen VALIDATE-Abschnitt E2E-Tests vorsieht, darf nie auf `done` gesetzt werden, nur weil der Testcode korrekt geschrieben wurde. Die Tests müssen tatsächlich ausgeführt worden sein und bestanden haben.
+
+### Sonderregel E2E-Tests (Playwright)
+
+E2E-Tests benötigen einen laufenden Dev-Server. Gehe wie folgt vor:
+
+1. Prüfe, ob `localhost:3000` bereits erreichbar ist:
+   ```bash
+   curl -s -o /dev/null -w "%{http_code}" http://localhost:3000
+   ```
+2. **Wenn der Server läuft (HTTP-Statuscode zurückgegeben):** Führe `npm run test:e2e` direkt aus. Berichte vollständig über Ergebnis und etwaige Fehler.
+3. **Wenn der Server nicht läuft:** Starte den Dev-Server nicht automatisch. Setze den Task auf `needs_human` und gib folgende Anleitung aus:
+
+   ```
+   E2E-Tests können nicht automatisch ausgeführt werden, weil kein Dev-Server läuft.
+   Bitte folgende Schritte manuell ausführen:
+
+   1. Terminal öffnen und ausführen: npm run dev
+   2. Warten, bis "Ready" erscheint (typisch: http://localhost:3000)
+   3. In einem zweiten Terminal ausführen: npm run test:e2e
+   4. Ergebnis hier melden (Anzahl Tests bestanden/fehlgeschlagen)
+
+   Erst nach Meldung des Ergebnisses wird der Task auf "done" gesetzt.
+   ```
+
 Prüfe Regressionen stack-spezifisch:
 
 - Bestehende Vitest-Tests für betroffene Schemas, Utilities und Statuslogik erweitern, wenn ein Kernverhalten stabil bleiben muss.
 - Bestehende Playwright-Flows erweitern oder neue E2E-Schritte ergänzen, wenn Login, CRUD, Rollen, Navigation oder Statusworkflow betroffen sind.
 - Bei reinen Dokumentations- oder Konfigurationsänderungen reicht eine begründete manuelle Regressionseinschätzung.
 - Keine Python-, pytest- oder separate `tests/test_regression.py`-Regeln verwenden.
-
-Nach jedem Task soll der Nutzer `npm run dev` prüfen, falls ein UI- oder Laufzeitverhalten betroffen ist. Der Agent soll den Nutzer dazu auffordern, den Dev-Server zu prüfen, statt automatisch langfristige Dev-Server-Prozesse zu erzwingen.
 
 ## Plan- und PRD-Abweichungen
 
