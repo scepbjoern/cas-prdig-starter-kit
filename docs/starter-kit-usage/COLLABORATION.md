@@ -1,8 +1,8 @@
 # Zusammenarbeit im gemeinsamen Repository
 
-Diese Anleitung beschreibt den Mehrpersonen-Fall im PIV-Workflow: Mehrere Personen arbeiten im selben Repository an einem gemeinsamen IT-System. Sie ergänzt `PIV-WORKFLOW.md` und erklärt nur die PIV- und Repository-Konventionen. Git-Grundlagen werden hier nicht wiederholt.
+Diese Anleitung beschreibt den Mehrpersonen-Fall im PIV-Workflow: Mehrere Personen arbeiten im selben Repository an einem gemeinsamen IT-System. Sie ergänzt `PIV-WORKFLOW.md` und erklärt nur die PIV- und Repository-Konventionen, die speziell für die Gruppenarbeit gelten.
 
-> Für die Git-Grundlagen (Branching, Merging, Merge-Konflikte) siehe Github-Materialien auf Moodle
+> Git-Grundbegriffe (Repository, Commit, Push, Branch) sind in [`GIT_GRUNDLAGEN.md`](GIT_GRUNDLAGEN.md) erklärt.
 
 ## 1. Grundprinzip
 
@@ -190,7 +190,30 @@ Empfohlene Reihenfolge bei mehreren DB-nahen Features:
 
 Wenn während `/execute` auffällt, dass ein anderes aktives Feature ebenfalls `prisma/schema.prisma` verändert, soll der Agent stoppen, den Task auf `needs_human` setzen und die Reihenfolge klären lassen.
 
-## 6. Session-Start im geteilten Repo
+## 6. Synchronisieren im Team (Pull/Sync)
+
+Im geteilten Repository gibt es konkrete Momente, an denen ihr sicherstellen müsst, dass euer lokaler Stand dem aktuellen Zustand des gemeinsamen Branches entspricht. Wer veraltet arbeitet, baut auf einem Stand auf, den andere längst überholt haben.
+
+**Wann muss ich synchronisieren?**
+
+| Zeitpunkt | Warum |
+|---|---|
+| Zu Beginn jeder Arbeitssession, vor `/prime` | Stellt sicher, dass `TASKS.md`, PRDs, Feature-Pläne und Code dem aktuellen Stand entsprechen. |
+| Nachdem ein Feature als `done` in `TASKS.md` markiert und in den gemeinsamen Branch gemergt wurde | Die Änderungen eurer Kollegin/eures Kollegen sind jetzt in `main`. Ohne Sync baut ihr auf einem veralteten Stand auf. |
+| Bevor ihr euren Feature-Branch in den gemeinsamen Branch mergt | Verhindert unnötige Konflikte und stellt sicher, dass ihr alle aktuellen Änderungen der anderen integriert. |
+| Nach Abschluss eines Foundation-Features mit `Schema = ja` | Das Prisma-Schema hat sich geändert. Ohne Sync arbeitet ihr mit einem inkonsistenten Datenmodell. Danach gilt: `npx prisma generate && npm run db:reset` ausführen. |
+
+Die genauen Git-Befehle für Fetch, Pull und Branch-Update findet ihr in der GitHub-Dokumentation oder über die VS Code-Befehlspalette (`Ctrl+Shift+P` → `Git: Pull`).
+
+**TASKS.md als Frühwarnsystem**
+
+`TASKS.md` zeigt euch, ob jemand ein Feature gerade abgeschlossen hat. Wenn ein Feature in die Tabelle „Abgeschlossene Features" wechselt oder auf `done` gesetzt wird, ist das ein Signal: Es gibt wahrscheinlich neue Commits im gemeinsamen Branch, die ihr noch nicht lokal habt.
+
+**Wie erkennt der Agent den Mehrpersonen-Fall?**
+
+`/prime` liest `TASKS.md` und prüft automatisch, ob mehrere Personen als Verantwortliche oder mehrere Feature-Branches eingetragen sind. Falls ja, weist es aktiv darauf hin, dass ihr vor Planung oder Umsetzung synchronisieren solltet. Ihr müsst dem Agenten also nicht extra mitteilen, ob ihr allein oder im Team arbeitet – das ergibt sich aus `TASKS.md`.
+
+## 7. Session-Start im geteilten Repo
 
 Startet für jedes Feature bewusst eine neue Agent-Session. Ladet den aktuellen Kontext neu:
 
@@ -209,7 +232,7 @@ Vor Planung oder Umsetzung im geteilten Repository prüft ihr:
 
 `prime` soll euch dabei helfen, den aktuellen Projektstand, `TASKS.md`, Git-Status und mögliche Kollaborationsrisiken kompakt sichtbar zu machen. Es ersetzt aber nicht die Teamabstimmung bei parallelen Schema-Änderungen oder fachlichen Abhängigkeiten.
 
-## 7. Commit-Regel
+## 8. Commit-Regel
 
 Commits bleiben klein und featurebezogen. Bei längeren Features sind Zwischencommits ausdrücklich sinnvoll, sobald ein Task oder eine kohärente Phase validiert und in der Plan-Datei dokumentiert ist.
 

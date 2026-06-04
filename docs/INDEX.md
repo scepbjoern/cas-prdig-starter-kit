@@ -26,6 +26,7 @@ Die Ordner unter `docs/project/` enthalten teilweise `.gitkeep`-Platzhalter. Die
 | [`starter-kit-usage/TECH_STACK_OVERVIEW.md`](starter-kit-usage/TECH_STACK_OVERVIEW.md) | **Technischer Wegweiser:** Welche Bausteine hat das Starter Kit und wann schaue ich wo nach? |
 | [`starter-kit-usage/GETTING_STARTED.md`](starter-kit-usage/GETTING_STARTED.md) | Starter Kit für eigenes Projekt anpassen |
 | [`starter-kit-usage/PIV-WORKFLOW.md`](starter-kit-usage/PIV-WORKFLOW.md) | Plan -> Implement -> Validate mit Agent Skills |
+| [`starter-kit-usage/GIT_GRUNDLAGEN.md`](starter-kit-usage/GIT_GRUNDLAGEN.md) | Git und GitHub: Grundbegriffe, Commits, Push, Branches – was alle Studierenden wissen müssen |
 | [`starter-kit-usage/COLLABORATION.md`](starter-kit-usage/COLLABORATION.md) | Zusammenarbeit mehrerer Personen im selben Repository |
 | [`../KILO_INSTRUCTIONS.md`](../KILO_INSTRUCTIONS.md) | Coding-Guide für Kilo Code |
 | [`../AGENTS.md`](../AGENTS.md) | Projektkontext |
