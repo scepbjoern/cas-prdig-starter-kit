@@ -36,7 +36,11 @@ Ermittle zusätzlich:
 - Letzte Änderungen mit `git log --oneline -10`
 - Aktuellen Branch, Arbeitsbaumstatus und uncommitted changes mit `git status`
 
-Wenn im Team mehrere Personen im selben Repository arbeiten, weise neutral darauf hin, dass der lokale Stand vor Planung oder Umsetzung gemäß Git-/GitHub-Material aktualisiert werden sollte. Erkläre keine Git-Grundlagen.
+**Mehrpersonen-Erkennung:** Prüfe in `TASKS.md`, ob mehrere unterschiedliche Namen in der Spalte `Verantwortlich` oder mehrere unterschiedliche Feature-Branches eingetragen sind. Falls ja, ist dies ein kollaboratives Repository. Weise in diesem Fall im Output-Abschnitt „Kollaborationsstatus" aktiv und konkret darauf hin:
+- ob der aktuelle lokale Stand vor Planung oder Umsetzung synchronisiert werden sollte (Pull von `main` oder dem gemeinsamen Branch)
+- ob ein Feature mit `Schema = ja` oder `Schema = geplant` aktiv ist, das einen Sync vor DB-nahen Änderungen erfordert
+
+Erkläre keine Git-Grundlagen. Verweise bei Bedarf auf `docs/starter-kit-usage/COLLABORATION.md`, Abschnitt 6.
 
 ## Analysefokus
 
