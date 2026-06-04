@@ -163,10 +163,15 @@ Ein Task, dessen VALIDATE-Abschnitt E2E-Tests vorsieht, darf nie auf `done` gese
 
 E2E-Tests benötigen einen laufenden Dev-Server. Gehe wie folgt vor:
 
-1. Prüfe, ob `localhost:3000` bereits erreichbar ist:
-   ```bash
-   curl -s -o /dev/null -w "%{http_code}" http://localhost:3000
-   ```
+1. Prüfe, ob `localhost:3000` bereits erreichbar ist. Wähle den passenden Befehl je nach Betriebssystem:
+   - **Windows (PowerShell):** `curl.exe` explizit verwenden, da `curl` in PowerShell ein Alias für `Invoke-WebRequest` ist und die Parameter nicht unterstützt:
+     ```powershell
+     curl.exe -s -o NUL -w "%{http_code}" http://localhost:3000
+     ```
+   - **macOS / Linux:**
+     ```bash
+     curl -s -o /dev/null -w "%{http_code}" http://localhost:3000
+     ```
 2. **Wenn der Server läuft (HTTP-Statuscode zurückgegeben):** Führe `npm run test:e2e` direkt aus. Berichte vollständig über Ergebnis und etwaige Fehler.
 3. **Wenn der Server nicht läuft:** Starte den Dev-Server nicht automatisch. Setze den Task auf `needs_human` und gib folgende Anleitung aus:
 
