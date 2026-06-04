@@ -38,6 +38,12 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
    ```
    → http://localhost:3000
 
+6. **Agent-Skills einrichten** (einmalig, für KI-Coding-Assistent):
+   ```bash
+   npm run setup:skills
+   ```
+   → Legt Symlinks an, damit Kilo Code und Claude Code die Skills unter `.agents/skills/` finden und Slash Commands wie `/create-prd`, `/plan-feature` oder `/execute` funktionieren. **Danach VS Code neu starten**, damit die Skills erkannt werden.
+
 ---
 
 ## Testlogins
@@ -62,6 +68,7 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 | `npm run test:watch` | Unit Tests im Watch-Modus |
 | `npm run test:e2e` | E2E Tests (Playwright, headless) |
 | `npm run test:e2e:ui` | E2E Tests visuell |
+| `npm run setup:skills` | Agent-Skills einrichten (einmalig nach git clone) |
 
 ---
 
@@ -78,4 +85,5 @@ Starter-Repo für den CAS Prozessdigitalisierung, ZHAW.
 
 1. [`docs/INDEX.md`](docs/INDEX.md) lesen: Dokumentationsstruktur und Starter-Kit-Anleitungen verstehen
 2. `AGENTS.md` öffnen und alle `[TODO]`-Einträge ausfüllen
-3. Mit Kilo Code Features implementieren (PIV-Loop: Plan → Implement → Validate)
+3. `npm run setup:skills` ausführen, damit Slash Commands im KI-Assistenten verfügbar sind
+4. Mit Kilo Code Features implementieren (PIV-Loop: Plan → Implement → Validate)

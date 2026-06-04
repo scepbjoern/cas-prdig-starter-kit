@@ -50,10 +50,10 @@ Wenn mehrere Personen im selben Repository an einem gemeinsamen IT-System arbeit
 
 | Tool | Wie Skill aufrufen |
 |---|---|
-| Kilo Code | Einmal `npm run setup:skills` ausführen, dann `/prime`, `/create-prd`, `/plan-feature`, `/execute` usw. im Chat verwenden. |
-| Codex Extension in VS Code | Einmal `npm run setup:skills` ausführen, dann Skills per Slash Command im Chat verwenden. |
-| Claude Extension in VS Code | Einmal `npm run setup:skills` ausführen, dann Skills per Slash Command im Chat verwenden. |
-| Antigravity | Einmal `npm run setup:skills` ausführen, dann Skills per Slash Command im Agent-Panel verwenden. |
+| Kilo Code | Einmal `npm run setup:skills` ausführen, **VS Code neu starten**, dann `/prime`, `/create-prd`, `/plan-feature`, `/execute` usw. im Chat verwenden. |
+| Codex Extension in VS Code | Einmal `npm run setup:skills` ausführen, **VS Code neu starten**, dann Skills per Slash Command im Chat verwenden. |
+| Claude Extension in VS Code | Einmal `npm run setup:skills` ausführen, **VS Code neu starten**, dann Skills per Slash Command im Chat verwenden. |
+| Antigravity | Einmal `npm run setup:skills` ausführen, **VS Code neu starten**, dann Skills per Slash Command im Agent-Panel verwenden. |
 
 ## 4. Typischer Ablauf für ein IT-System
 
