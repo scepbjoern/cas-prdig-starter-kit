@@ -200,6 +200,12 @@ Task-Format:
 - Jeder Task muss `IMPLEMENT`, `PATTERN`, `IMPORTS`, `GOTCHA`, `ACCEPTANCE CRITERIA` und `VALIDATE` enthalten, sofern anwendbar.
 - Jeder Task startet mit Status `planned`.
 
+VALIDATE-Abschnitt: Unterscheide explizit zwischen automatisierten und manuellen Prüfungen:
+
+- **Automatisiert:** Nenne den genauen Befehl (z.B. `npm run test`, `npm run build`) und das erwartete Ergebnis (z.B. „alle Tests grün", „Build ohne Fehler").
+- **Manuell:** Beschreibe Schritt für Schritt, was der Mensch tun muss: welcher Befehl zu starten ist, welche URL aufzurufen ist, welche Rolle einzuloggen ist, was genau zu klicken oder einzugeben ist und was konkret zu sehen sein muss. Dieser Text wird vom Agent während `/execute` wörtlich als Prüfanleitung an den Menschen ausgegeben – er muss daher präzise und vollständig sein, nicht nur ein Stichwort.
+- Enthält ein Task keine UI- oder Laufzeitänderung, genügt die automatisierte Validierung; schreibe dennoch explizit „Keine manuelle Prüfung erforderlich", damit der Agent das nicht ambig interpretiert.
+
 Validierung stack-spezifisch:
 
 - TypeScript/React/Zod/Prisma-Logik: `npm run test`

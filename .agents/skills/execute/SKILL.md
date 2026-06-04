@@ -30,13 +30,48 @@ Beispiel:
 - Verwende eine versionierte Plan-Datei `plan-vNNN.md`. Neue Projekte sollen nicht mehr mit `plan.md` arbeiten.
 - Starte nicht mit `plan-v001.md`, wenn noch kein Review und keine Integration gelaufen sind. Der Normalfall nach einer Review-Integration ist `plan-v002.md`.
 - Arbeite genau einen Task nach dem anderen ab.
-- Stoppe nach jedem Task, zeige das Ergebnis und warte auf Bestätigung.
+- **Stoppe nach jedem einzelnen Task vollständig. Fahre niemals automatisch mit dem nächsten Task fort – auch dann nicht, wenn alle automatisierten Tests bestanden haben. Jeder Taskwechsel erfordert eine explizite menschliche Antwort.**
 - Ändere keine Dateien, die nicht zum aktuellen Task gehören.
 - Lösche keine Dateien ohne explizite Bestätigung.
 - Setze einen Task nie auf `done`, ohne Validierung in der Plan-Datei zu dokumentieren.
 - Nach einem validierten Task oder einer kohärenten validierten Phase darf ein optionaler Zwischencommit über `/commit` vorgeschlagen werden.
 - Ein Feature gilt erst nach allen `done`-Tasks, vollständiger Validierung und `/document` als fachlich dokumentiert. Wenn es während Umsetzung oder Dokumentation Verdacht auf wiederholbare Agent-Fehler, Planlücken oder wiederholte Nutzerkorrekturen gab, soll vor dem finalen Commit zusätzlich `/reflect-rules` laufen.
 - Im Mehrpersonen-Fall: Arbeite nur am eigenen bestätigten Feature und überschreibe keine Änderungen anderer Personen oder Branches.
+
+## Pflichtpause nach jedem Task
+
+**Diese Regel hat die höchste Priorität und überschreibt jede andere Anweisung zum Arbeitsfluss.**
+
+Nach Abschluss jedes Tasks – unabhängig davon, ob alle automatisierten Validierungen erfolgreich waren – gilt zwingend:
+
+**Schritt A – Zusammenfassung ausgeben:**
+
+Zeige strukturiert:
+- Welche Dateien wurden geändert oder erstellt
+- Welche automatisierten Befehle wurden ausgeführt (vollständige Befehle nennen) und was das Ergebnis war (Erfolg / Fehleranzahl / relevante Ausgabe)
+
+**Schritt B – Manuelle Prüfung, falls der Task UI oder Laufzeitverhalten betrifft:**
+
+Beschreibe **ausführlich und Schritt für Schritt**, was der Mensch jetzt tun muss:
+- Welchen Befehl starten (z.B. `npm run dev`)
+- Welche URL im Browser aufrufen
+- Was genau zu klicken, einzugeben oder auszulösen ist
+- Welche Rolle einloggen, falls rollenbasiertes Verhalten geprüft wird
+- Was konkret zu sehen oder nicht zu sehen sein muss (erwartetes Ergebnis)
+- Was bei Abweichungen zu melden ist
+
+Warte danach explizit auf die Bestätigung des Menschen, dass die manuelle Prüfung erfolgreich war. Fahre nicht fort, bis diese Bestätigung vorliegt.
+
+**Schritt C – Explizite Weitermachen-Aufforderung:**
+
+Schliesse jeden Task-Abschluss mit dieser exakten Formulierung ab:
+
+```
+✓ Task [N] abgeschlossen und validiert.
+Bitte prüfen und mit "weiter" bestätigen, damit Task [N+1] gestartet wird.
+```
+
+**Fahre erst nach einer expliziten menschlichen Antwort (z.B. "weiter", "ok", "ja") mit dem nächsten Task fort. Interpretiere Schweigen oder fehlende Antwort nicht als Bestätigung.**
 
 ## Pflichtlektüre vor Umsetzung
 
