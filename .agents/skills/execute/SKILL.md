@@ -60,7 +60,9 @@ Beschreibe **ausführlich und Schritt für Schritt**, was der Mensch jetzt tun m
 - Was konkret zu sehen oder nicht zu sehen sein muss (erwartetes Ergebnis)
 - Was bei Abweichungen zu melden ist
 
-Warte danach explizit auf die Bestätigung des Menschen, dass die manuelle Prüfung erfolgreich war. Fahre nicht fort, bis diese Bestätigung vorliegt.
+Schliesse die manuelle Prüfanleitung immer mit dem Hinweis ab, den Dev-Server nach der Prüfung mit **Ctrl+C** zu stoppen, bevor der nächste Task gestartet wird.
+
+Warte danach explizit auf die Bestätigung des Menschen, dass die manuelle Prüfung erfolgreich war und der Server gestoppt wurde. Fahre nicht fort, bis diese Bestätigung vorliegt.
 
 **Schritt C – Explizite Weitermachen-Aufforderung:**
 
@@ -176,6 +178,7 @@ E2E-Tests benötigen einen laufenden Dev-Server. Gehe wie folgt vor:
    2. Warten, bis "Ready" erscheint (typisch: http://localhost:3000)
    3. In einem zweiten Terminal ausführen: npm run test:e2e
    4. Ergebnis hier melden (Anzahl Tests bestanden/fehlgeschlagen)
+   5. Dev-Server mit Ctrl+C stoppen
 
    Erst nach Meldung des Ergebnisses wird der Task auf "done" gesetzt.
    ```
