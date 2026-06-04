@@ -10,6 +10,8 @@ disable-model-invocation: true
 argument-hint: "[feature-description-or-prd-reference]"
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus beschränkt KiloCode Schreibrechte auf `.kilo/`-Ordner – Dateien würden dort abgelegt statt in den korrekten Projektverzeichnissen (`docs/`, `TASKS.md`). Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Plan Feature: Feature Planen
 
 ## Input

@@ -10,6 +10,8 @@ disable-model-invocation: true
 argument-hint: "[path-to-plan] [path-to-review]"
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus beschränkt KiloCode Schreibrechte auf `.kilo/`-Ordner – neue Plan-Versionen und Integrationsdateien würden dort abgelegt statt in `docs/`. Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Integrate Feature Plan Review: Review in Feature-Plan einarbeiten
 
 ## Input

@@ -9,6 +9,8 @@ metadata:
 disable-model-invocation: true
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus kann KiloCode Git-Operationen einschränken. Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Commit: Sauberen Commit Erstellen
 
 ## Ziel

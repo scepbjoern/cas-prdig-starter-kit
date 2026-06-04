@@ -10,6 +10,8 @@ disable-model-invocation: true
 argument-hint: "[output-filename]"
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus beschränkt KiloCode Schreibrechte auf `.kilo/`-Ordner – Dateien würden dort abgelegt statt in den korrekten Projektverzeichnissen (`docs/`). Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Create PRD
 
 Erstelle ein Product Requirements Document (PRD) für genau ein IT-System oder eine Komponente. Das PRD ist die fachliche Grundlage für spätere `plan-feature`-Schritte und ist noch kein Implementierungsplan auf Dateiebene.

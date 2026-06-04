@@ -10,6 +10,8 @@ disable-model-invocation: true
 argument-hint: "[path-to-prd]"
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus beschränkt KiloCode Schreibrechte auf `.kilo/`-Ordner – das Bereinigen von Projektdateien und der Build-Check wären nicht möglich. Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Adapt to Project: Starter Kit bereinigen
 
 ## Input

@@ -8,6 +8,8 @@ metadata:
 disable-model-invocation: true
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus beschränkt KiloCode Schreibrechte auf `.kilo/`-Ordner – Änderungen an `CLAUDE.md`, `KILO_INSTRUCTIONS.md` und `AGENTS.md` wären nicht möglich. Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Create Rules: Instructions Aktualisieren
 
 ## Ziel

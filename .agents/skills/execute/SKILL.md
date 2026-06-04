@@ -10,6 +10,8 @@ disable-model-invocation: true
 argument-hint: "[path-to-plan]"
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus beschränkt KiloCode Schreibrechte auf `.kilo/`-Ordner – Änderungen an Projektdateien und Statusupdates in der Plan-Datei wären nicht möglich. Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Execute: Plan Umsetzen
 
 ## Input

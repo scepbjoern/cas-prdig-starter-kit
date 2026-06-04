@@ -10,6 +10,8 @@ disable-model-invocation: true
 argument-hint: "[path-to-plan] [optional-prd-update-or-context-file]"
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus beschränkt KiloCode Schreibrechte auf `.kilo/`-Ordner – neue Plan-Versionen und TASKS.md-Updates würden dort abgelegt statt in den korrekten Projektverzeichnissen. Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Update Feature Plan: Feature-Plan versioniert aktualisieren
 
 ## Input

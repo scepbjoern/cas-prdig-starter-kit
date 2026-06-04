@@ -10,6 +10,8 @@ disable-model-invocation: true
 argument-hint: "[path-to-prd] [optional-previous-review-or-integration]"
 ---
 
+> **KiloCode-Modus:** Dieser Skill muss im **Code-Modus** ausgeführt werden. Im Architect- oder Plan-Modus beschränkt KiloCode Schreibrechte auf `.kilo/`-Ordner – die Review-Datei würde dort abgelegt statt neben dem PRD in `docs/`. Wechsle in KiloCode vor der Ausführung auf den **Code-Modus**.
+
 # Review PRD: PRD kritisch prüfen
 
 ## Input
