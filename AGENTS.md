@@ -112,3 +112,5 @@ Siehe `TASKS.md` für laufende Tasks und Priorisierung. Die Architektur‑Dokume
 - Ernat Zoric — Benachrichtigungssystem, Finnova‑Mock
 
 Reviewer / Mentor: Björn (Architektur‑Review)
+
+PR: follow-up commit to create a pull request branch.
