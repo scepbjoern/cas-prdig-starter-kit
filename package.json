@@ -9,7 +9,7 @@
     "lint": "eslint",
     "db:push": "prisma db push && prisma generate",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma db push --force-reset && tsx prisma/seed.ts",
+    "db:reset": "prisma db push --force-reset && prisma generate && tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "test": "vitest run",
     "test:watch": "vitest",
