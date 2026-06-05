@@ -6,11 +6,16 @@
 
 ## Projektbeschreibung
 
-[TODO: 2–3 Sätze – was digitalisiert dieser Prototyp, welcher Prozess wird abgebildet?]
+Gruppe: 02 - KESB-Entscheid-Umsetzung bei der Zuger Kantonalbank (ZugerKB)
+Version: v2.0 (31.05.2026)
 
-Beispiel: «Dieses System digitalisiert den Antrags- und Genehmigungsprozess der Abteilung X.
-Mitarbeitende (user_applicant) können Anträge erfassen; Vorgesetzte (user_reviewer) können
-genehmigen oder ablehnen; Admins verwalten Benutzer und Einstellungen.»
+Dieses System digitalisiert den KESB‑Entscheidungs‑ und Kontoeröffnungsprozess für Bestandeskunden
+der ZugerKB: KESB‑Mitarbeitende erfassen Verfügungen und laden begleitende Dokumente hoch; ein
+prüfender PD16-/VEBK‑Workflow visualisiert, analysiert (LLM‑gestützt) und entscheidet über die
+Eröffnung von Banking‑Produkten. Admins verwalten Benutzer und Systemkonfigurationen.
+
+Ziel des Prototyps ist ein lokal lauffähiger, demonstrierbarer Ablauf (CRUD, Status‑Workflow,
+E‑Mail‑Benachrichtigungen, PDF‑Generierung und eine LLM‑gestützte Dokumentanalyse). (Quelle: Gesamtarchitektur-Dokument, v2.0)
 
 ## Stack-Entscheidungen
 
@@ -25,25 +30,35 @@ Kerntechnologien: Next.js 16 · shadcn/ui · Prisma 7 + SQLite · Better Auth ·
 | Rolle | Bezeichnung | Beschreibung |
 |---|---|---|
 | `admin` | Administrator | Benutzerverwaltung, Systemkonfiguration, volle Rechte |
-| `user_applicant` | Antragsteller | Kann Prozessobjekte erstellen und bearbeiten (eigene) |
-| `user_reviewer` | Prüfer/Genehmiger | Kann Prozessobjekte prüfen und Status ändern |
+| `user_applicant` | KESB‑Mitarbeitende (z. B. "Jonas") | Erfassen von Verfügungen/Anträgen, Upload von Dokumenten |
+| `user_reviewer` | PD16 / VEBK‑Prüfer (z. B. "Ivan", "Sandra") | Prüfen, Analyse anstossen, Genehmigen / Ablehnen |
 
-[TODO: Rollen an den eigenen Prozess anpassen]
+Hinweis: Im Prototyp sind die Rollen als einfache Strings implementiert (Standard: `admin`, `user_applicant`, `user_reviewer`). Die Team‑Rollen (KESB, PD16, VEBK, optional Compliance) sind konzeptionelle Zuordnungen, die in `prisma/schema.prisma` und den Seed‑Testnutzern abgebildet sind. (Quelle: Gesamtarchitektur-Dokument)
 
 ## Scope des Prototypen
 
+
 **Im Scope:**
-- [TODO: Prozessschritte und Entitäten des digitalisierten Prozesses]
-- CRUD für Prozessobjekte mit Statusworkflow
-- Rollenbasierter Zugriff
-- E-Mail-Benachrichtigungen bei Statuswechseln
-- LLM-Unterstützung für [TODO: konkreter Use Case]
-- Lokaler Betrieb via VS Code Port Forwarding
+- Abbildung des KESB‑Verfügungsprozesses für Bestandeskunden (Erfassung → Prüfung → Entscheidung)
+- CRUD für `Antrag`‑Objekte mit Statusworkflow (`ENTWURF`, `EINGEREICHT`, `GENEHMIGT`, `ABGELEHNT`)
+- Rollenbasierte Zugriffssteuerung (Test‑Logins / statische Seed‑User)
+- E‑Mail‑Benachrichtigungen bei relevanten Statuswechseln (Dashboard + Mail)
+- PDF‑Generierung (Basisvertragsdokumente) und Upload/Download
+- LLM‑gestützte Dokumentanalyse: Analyse hochgeladener PDFs, Speicherung strukturierter JSON‑Ergebnisse in `Antrag.kiAnalyse`
+- Lokaler Betrieb / Demo‑Bereitstellung (VS Code Port Forwarding)
 
 **Ausserhalb des Scope:**
 - Mobile-Optimierung
 - Produktions-Deployment mit echten Benutzerdaten
 - Komplexe externe API-Integrationen
+
+Weitere explizite Ausschlüsse (siehe Architektur‑Dokument):
+- eDossier / revisionssichere Dokumentenarchivierung (wird weggelassen)
+- Vollwertiges IAM (Fidentity) — Login über statische, vordefinierte Test‑User
+- Vollständige Finnova‑Integration (Kernbank API nur als Mock mit simulierten Antworten)
+- Compliance‑Involvierung in Ausbaustufe 1 (ggf. Ausbaustufe 2)
+- Mehrsprachigkeit (nur Deutsch)
+- Revisionssichere Protokollierung, DSGVO/Datenschutz‑Produkte (nur Testdaten verwenden)
 
 ## Testing-Ansatz
 
@@ -51,18 +66,49 @@ Kerntechnologien: Next.js 16 · shadcn/ui · Prisma 7 + SQLite · Better Auth ·
 - **Playwright** für E2E Tests (Login, CRUD-Flows)
 - PIV-Loop: Plan → Implement → `npm run test` → Commit
 
+Zusätzlich: Test‑Logins und Seed‑Daten unterstützen Demo‑Szenarien (siehe `README.md` Testlogins). E‑2‑E Tests sind vorgesehen, aber nicht alle Demo‑Szenarien müssen vollständig automatisiert sein.
+
 ## Datenmodell
 
-[TODO: Entitäten und Relationen des eigenen Prozesses hier eintragen]
 
-Demo-Entitäten im Starter-Kit (als Muster, anpassen/ersetzen):
-- `Antrag`: id, titel, beschreibung, status (ENTWURF/EINGEREICHT/GENEHMIGT/ABGELEHNT), ersteller
-- `Person`: id, vorname, nachname, email, telefon, adresse
+Hauptentitäten (aktuell im Code / Prisma):
+
+- `Antrag` (Prozessobjekt)
+	- `id: String (cuid)`
+	- `titel: String`
+	- `beschreibung: String?`
+	- `status: AntragStatus (ENTWURF | EINGEREICHT | GENEHMIGT | ABGELEHNT)`
+	- `erstellerId -> User` (Relation)
+	- `dateiPfad: String?`, `dateiName: String?`
+	- `notizen: String?`
+	- `kiAnalyse: String?` (speichert JSON‑Analysen der LLM‑Funktion)
+
+- `Person` (Stammdaten)
+	- `id: String (cuid)`
+	- `vorname, nachname, email, telefon?, adresse?`
+
+Weitere technische Modelle (Better Auth): `User`, `Session`, `Account`, `Verification` — siehe `prisma/schema.prisma`.
+
+Hinweis: Die Zod‑Schemas in `src/lib/schemas/` spiegeln die Validierung für `Antrag` und `Person` wider (z.B. `antragCreateSchema`, `personSchema`).
 
 ## Entwicklungsstand
 
-[TODO: Wird via TASKS.md verwaltet]
+
+Siehe `TASKS.md` für laufende Tasks und Priorisierung. Die Architektur‑Dokumentation (v2.0) enthält bereits Abnahmeszenarien, Demo‑Szenarien und offene Fragen, die in Tasks überführt werden sollten.
 
 ## Team
 
-[TODO: Gruppenname, Mitglieder, Kursjahrgang]
+
+**Gruppe:** 02 - KESB‑Entscheid‑Umsetzung bei der Zuger Kantonalbank (ZugerKB)
+**Version:** v2.0 – 31.05.2026
+
+**Team:** Ivan Besmer, Urs Hüniger, Stefan Sommer, Ernat Zoric
+**Kursjahrgang:** 2026
+
+**Kernteam / Verantwortlichkeiten:**
+- Urs Hüniger — Lead UI / Prozessportal
+- Stefan Sommer — Backend / Datenbank, API
+- Ivan Besmer — PDF‑Generierung, Dokumentenlogik
+- Ernat Zoric — Benachrichtigungssystem, Finnova‑Mock
+
+Reviewer / Mentor: Björn (Architektur‑Review)
