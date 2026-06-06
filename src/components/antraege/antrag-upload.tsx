@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Upload, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
@@ -13,6 +14,7 @@ interface AntragUploadProps {
 export function AntragUpload({ antragId }: AntragUploadProps) {
   const [uploading, setUploading] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   async function handleDateiAusgewaehlt(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
@@ -26,16 +28,22 @@ export function AntragUpload({ antragId }: AntragUploadProps) {
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
+        credentials: 'same-origin',
       })
 
+      const data = await response.json().catch(() => null)
       if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || 'Upload fehlgeschlagen')
+        throw new Error(data?.error || response.statusText || 'Upload fehlgeschlagen')
       }
 
-      const { dateiPfad, dateiName } = await response.json()
+      const { dateiPfad, dateiName } = data ?? {}
+      if (!dateiPfad || !dateiName) {
+        throw new Error('Ungültige Antwort vom Upload-Server')
+      }
+
       await uploadAntragDokument(antragId, dateiPfad, dateiName)
       toast.success('Dokument erfolgreich hochgeladen')
+      router.refresh()
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Upload fehlgeschlagen')
     } finally {

@@ -42,4 +42,26 @@ Kopiere diesen Block und fülle ihn aus:
 - [x] Dashboard zeigt rollenspezifische KPIs
 - [x] Antrag-Workflow (ENTWURF → EINGEREICHT → GENEHMIGT/ABGELEHNT) funktioniert
 - [x] `npm run build` fehlerfrei
+
+## Task: PDF-Generierung und Pflichtdokument-Parsing
+
+**Status:** [ ] Offen
+**Erstellt:** 05.06.2026
+
+**Ziel:** PDF-Pflichtdokumente für einen Antrag automatisch generieren und ein hochgeladenes Pflichtdokument validieren/auslesen, damit der Prozess die notwendigen Vertragsdaten erkennt und dokumentiert.
+
+**Akzeptanzkriterien:**
+- [ ] Eine PDF-Generierungskomponente erstellt mindestens ein Pflichtdokument (z. B. Basisvertrag) aus Eingabedaten
+- [ ] Hochgeladene PDF-Dateien werden serverseitig ausgelesen und auf das Vorhandensein des Pflichtdokuments geprüft
+- [ ] Bei fehlendem Pflichtdokument wird eine verständliche Fehlernachricht angezeigt
+- [ ] `npm run dev` startet fehlerfrei
+- [ ] `npm run build` fehlerfrei
+- [ ] Manueller Test: Ein Antrag wird erfasst, das Pflichtdokument wird generiert oder hochgeladen und die Validierung / Auslesung wird erfolgreich durchgeführt
+
+**Betroffene Dateien:**
+- `src/app/(app)/antraege/...`
+- `src/components/antraege/antrag-upload.tsx`
+- `src/lib/ai.ts`
+- `src/lib/schemas/antrag.ts`
+- `src/app/api/ai/analyze-document/route.ts`
 ```

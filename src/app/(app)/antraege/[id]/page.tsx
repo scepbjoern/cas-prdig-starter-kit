@@ -12,6 +12,7 @@ import { ANTRAG_STATUS_LABEL, ANTRAG_STATUS_VARIANT } from '@/lib/antrag-status'
 import { SubmitButton, DecideButton, DeleteButton } from './antrag-actions'
 import { AntragUpload } from '@/components/antraege/antrag-upload'
 import { AntragAnalyseButton } from '@/components/antraege/antrag-analyse-button'
+import { AntragPdfExtractButton } from '@/components/antraege/antrag-pdf-extract-button'
 import { PdfViewer } from '@/components/pdf-viewer'
 import type { Role } from '@/lib/auth-helpers'
 import type { AntragStatus } from '@/generated/prisma/enums'
@@ -84,6 +85,86 @@ export default async function AntragDetailPage({ params }: { params: Promise<{ i
           )}
         </CardContent>
       </Card>
+
+      {(isAdmin || isReviewer || isOwner) && antrag.dateiPfad && (() => {
+        const extractedData = antrag.kiAnalyse ? JSON.parse(antrag.kiAnalyse) : null
+        const hasExtraction = extractedData?.verbeistandetePerson
+
+        return (
+          <Card>
+            <CardHeader>
+              <CardTitle>PDF-Auslesung</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {hasExtraction ? (
+                <div className="space-y-3 text-sm">
+                  {extractedData.fehlendeAngaben?.length === 0 ? (
+                    <p className="text-sm text-muted-foreground">
+                      Pflichtdokument erkannt und die strukturierten Angaben wurden erfasst.
+                    </p>
+                  ) : (
+                    <div className="rounded border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
+                      <p className="font-medium">Unvollständiges Pflichtdokument</p>
+                      <p>
+                        Das Dokument wurde eingelesen, aber es fehlen noch wichtige Pflichtangaben.
+                        Bitte prüfen Sie das hochgeladene PDF.
+                      </p>
+                    </div>
+                  )}
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                    <div>
+                      <p className="font-medium">Verbeiständete Person</p>
+                      <p>{`${extractedData.verbeistandetePerson.vorname} ${extractedData.verbeistandetePerson.nachname}`.trim() || 'Keine Angabe'}</p>
+                    </div>
+                    <div>
+                      <p className="font-medium">Adresse</p>
+                      <p>{extractedData.adresse || 'Keine Angabe'}</p>
+                    </div>
+                    <div>
+                      <p className="font-medium">Domiziladresse</p>
+                      <p>{extractedData.domiziladresse || 'Keine Angabe'}</p>
+                    </div>
+                    <div>
+                      <p className="font-medium">Beistand</p>
+                      <p>{`${extractedData.beistand.vorname} ${extractedData.beistand.nachname}`.trim() || 'Keine Angabe'}</p>
+                      <p className="text-muted-foreground">{extractedData.beistand.telefon || 'Keine Telefonnummer'}</p>
+                    </div>
+                    <div>
+                      <p className="font-medium">Verfügung vom</p>
+                      <p>{extractedData.verfuegungsdatum || 'Keine Angabe'}</p>
+                    </div>
+                    <div>
+                      <p className="font-medium">Gesetzesartikel</p>
+                      <p>{extractedData.gesetzesartikel || 'Keine Angabe'}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-medium">Verfügung</p>
+                    <pre className="whitespace-pre-wrap rounded border border-muted p-3 text-sm">{extractedData.verfuegung || 'Keine Angabe'}</pre>
+                  </div>
+                  <div>
+                    <p className="font-medium">Anlageprofil</p>
+                    <p>{extractedData.anlageprofil || 'Keine Angabe'}</p>
+                  </div>
+                  {extractedData.fehlendeAngaben?.length > 0 && (
+                    <div className="rounded border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
+                      <p className="font-medium">Fehlende Angaben</p>
+                      <ul className="list-disc pl-5">
+                        {extractedData.fehlendeAngaben.map((item: string, index: number) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground">Noch keine PDF-Auslesung vorhanden.</p>
+              )}
+              <AntragPdfExtractButton antragId={antrag.id} />
+            </CardContent>
+          </Card>
+        )
+      })()}
 
       {antrag.notizen && (
         <Card>

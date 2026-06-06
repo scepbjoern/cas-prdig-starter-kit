@@ -23,7 +23,10 @@ test.describe('Antrag CRUD', () => {
 
     await page.fill('input[name="titel"]', 'Test-Antrag E2E')
     await page.fill('textarea[name="beschreibung"]', 'Automatisch erstellt')
-    await page.click('button[type="submit"]')
+    await Promise.all([
+      page.waitForURL(/\/antraege\/[^/]+/),
+      page.click('button[type="submit"]'),
+    ])
 
     await expect(page.locator('text=Test-Antrag E2E')).toBeVisible()
   })
